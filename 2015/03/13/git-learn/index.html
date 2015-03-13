@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git的学习笔记 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的学习笔记">
+<meta property="og:url" content="http://hexo.trity.cc/2015/03/13/git-learn/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/git_status.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/branch_testing.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/head.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/checkou_testing.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/branch_move.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/branch_move1.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/branch_move2.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect1.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect2.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect3.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect4.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect5.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect6.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect7.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect8.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/conflect9.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitlab1.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitlab2.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitlab3.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitlab4.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise1.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise2.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise3.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise4.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise5.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise6.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise7.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/tortoise8.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitmember1.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitmember2.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitmember3.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git的学习笔记">
+<meta name="twitter:description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 20px;">git</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-git-learn" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/13/git-learn/" class="article-date">
+  	<time datetime="2015-03-13T04:05:27.000Z" itemprop="datePublished">2015-03-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git的学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置用户信息">配置用户信息</h2><p>$ git config —global user.name “John Doe”<br>$ git config —global user.email johndoe@example.com  </p>
+<h2 id="如何从一个项目中建立git版本控制？">如何从一个项目中建立git版本控制？</h2><p>$ mkdir mysite  //创建一个名为mysite的目录<br>$ cd mysite //进入mysite的目录<br>$ git init   //git始化<br><a id="more"></a></p>
+<h2 id="让git来跟踪">让git来跟踪</h2><p>$git add index.html // 把目录下的index.hmtl，让git来跟踪它<br><strong>或者</strong><br>$ git add Documentation/*.txt  //把Documentation目录下的所有txt文件添加</p>
+<h2 id="把已经跟踪好的文件提交到版本库中去">把已经跟踪好的文件提交到版本库中去</h2><p>$git commit -m “add hello world HTML” </p>
+<h2 id="跟踪并且提交">跟踪并且提交</h2><p>$git commit -am “add and commit”<br><strong>相当于</strong><br>$git add .<br>$git commit -m “add and commit”</p>
+<h2 id="查看提交记录">查看提交记录</h2><p>$git log </p>
+<h2 id="查看项目目前的状态">查看项目目前的状态</h2><p>$git status<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/git_status.jpg" alt=""></p>
+<h2 id="git分支">git分支</h2><p>Git 中的分支，其实本质上仅仅是个指向commit 对象的可变指针。Git<br>会使用master 作为分支的默认名字。在若干次提交后，你其实已经有了一个指向最后一次提交对象commit的master 分支，它在每次提交的时候都会自动向前移动。</p>
+<h3 id="如何创建分支">如何创建分支</h3><p><strong>$git branch testing</strong> //这会在当前commit 对象上新建一个分支指针<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_testing.png" alt=""></p>
+<h3 id="Git_是如何知道你当前在哪个分支上工作的呢？">Git 是如何知道你当前在哪个分支上工作的呢？</h3><p>Git保存着一个名为HEAD 的特别指针。<strong>请注意它的HEAD是一个指向你正在工作中的本地分支的指针。</strong>  <strong>运行git branch 命令，仅仅是建立了一个新的分支，但不会自动切换到这个分支中去，</strong>所以在这个例子中，我们依然还在master 分支里工作。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/head.png" alt=""></p>
+<h3 id="如何切换到其他分支">如何切换到其他分支</h3><p><strong>$ git checkout testing</strong>//转换到新建的testing分支<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/checkou_testing.png" alt=""></p>
+<h3 id="分支演示">分支演示</h3><p><strong>1.</strong><br>修改 index.html 内容<br>$ git commit -a -m ‘在index.html中增加No.4功能‘<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move.png" alt=""><br><strong>2.</strong><br><strong>$ git checkout master</strong><br>该命令把HEAD 指针移回到master 分支，并把工作目录中的文件换成<br>了master 分支所指向的快照内容。也就是说，现在开始所做的改动，将始于本项目中一个较老的版本。它的主要作用是将testing 分支里作出的修改暂时取消，这样你就可以向另一个方向进行开发。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move1.png" alt=""><br><strong>3.</strong><br>修改 index.html 内容<br>$ git commit -a -m ‘在index.html中增加No.5功能’<br>现在我们的项目提交历史产生了分叉（如图3.9 所示），因为刚才我们创建了一个分支，转换到其中进行了一些工作，然后又回到原来的主分支进行了另外一些工作。这些改变分别孤立在不同的分支里：我们可以在不同分支里反复切换，并在时机成熟时把它们合并到一起。而所有这些工作，仅仅需要branch 和checkout 这两条命令就可以完成。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move2.png" alt=""></p>
+<h2 id="分支的合并，解决合并分支的冲突—案例">分支的合并，解决合并分支的冲突—案例</h2><p><strong>1.孙悟空在项目中愉快地工作，并且提交了几次更新</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect1.png" alt=""><br><strong>2.孙悟空要修补错误跟踪系统上的编号为53号错误</strong><br><code>$ git checkout -b iss53</code><br><code>Switched to a new branch &quot;iss53&quot;</code><br><code>相当于下面这两条命令：</code><br><code>$ git branch iss53</code><br><code>$ git checkout iss53</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect2.png" alt=""><br><strong>3.孙悟空要修补问题跟踪系统上的#53问题</strong><br><code>修改 index.html //孙悟空修补了index.html代码</code><br><code>$ git commit -a -m “fix issue53”</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect3.png" alt=""><br><strong>4.孙悟空接到项目负责人唐僧的电话，要求修补已经发布的项目错误，也就是C2版本的出现的突然发现的错误。这个错误不是错误跟踪系统编号为53号的已知错误。孙悟空要从iss53分支切换到master分支。切换之前，注意工作区的暂存区或者工作目录里，那些还没有提交的修改，它会和你即将检出的分支产生冲突从而阻止Git 为你转换分支。</strong><br><strong>目前已经提交了所有的修改，所以接下来可以正常转换到master 分支：</strong><br><code>$git checkout master</code><br><strong>接下来，你得进行紧急修补。我们创建一个紧急修补分支（hotfix）来开展工作，直到搞定。</strong><br><code>$ git checkout -b hotfix</code><br><code>Switched to a new branch &quot;hotfix&quot;</code><br><code>$ nano index.html</code><br><code>$ git commit -a -m &#39;fixed the broken email address&#39;</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect4.png" alt=""><br><strong>5.合并分支</strong><br><code>$ git checkout master</code><br><code>$ git merge hotfix</code><br><strong>Updating f42c576..3a0874c</strong><br><strong>Fast forward</strong><br><strong>README | 1 -</strong><br><strong>1 files changed, 0 insertions(+), 1 deletions(-)</strong>  </p>
+<blockquote>
+<p>请注意，合并时出现了“Fast forward”（快进）提示。由于当前master 分支所在的commit 是要并入的hotfix 分支的直接上游，Git 只需把指针直接右移。换句话说，如果顺着一个分支走下去可以到达另一个分支，那么Git 在合并两者时，只会简单地把指针前移，因为没有什么分歧需要解决，所以这个过程叫做快进（Fast forward）。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect5.png" alt="">  </p>
+</blockquote>
+<p><strong>6.删除分支</strong>  </p>
+<blockquote>
+<p>在那个超级重要的修补发布以后，孙悟空想要回到被打扰之前的工作。因为现在hotfix 分支和master 指向相同的提交，现在没什么用了，可以先删掉它。使用git branch 的-d 选项表示删除：<br><code>$ git branch -d hotfix</code><br>现在可以回到未完成的问题#53 分支继续工作了（图3-15）：</p>
+</blockquote>
+<p><strong><code>$ git checkout iss53</code><br><code>Switched to branch &quot;iss53&quot;</code><br><code>$ nano index.html</code><br><code>$ git commit -a -m &#39;finished the new footer [issue 53]&#39;</code></strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect6.png" alt=""><br><strong>7.</strong><br><strong><code>$ git checkout master</code></strong><br><strong><code>$ git merge iss53</code></strong>  </p>
+<blockquote>
+<p>这次合并的实现，并不同于之前hotfix 的并入方式。这一次，你的开发历史是从更早的地方开始分叉的。由于当前master 分支所指向的commit (C4)并非想要并入分支（iss53）的直接祖先，Git 不得不进行一些处理。就此例而言，Git 会用两个分支的末端（C4 和C5）和它们的共同祖先（C2）进行一次简单的三方合并计算。图3.16 标出了Git在用于合并的三个更新快照：Git 没有简单地把分支指针右移，而是对三方合并的结果作一新的快照，并自动创建一个指向它的commit（C6）（见图3.17）。我们把这个特殊的commit 称作合并提交（mergecommit），因为它的祖先不止一个.<br><strong>执行前</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect7.png" alt=""><br><strong>执行后</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect8.png" alt="">  </p>
+</blockquote>
+<p><strong>8.解决合并中发生的冲突</strong></p>
+<blockquote>
+<p>$git checkout –b feature1<br>$nano index.html<br>$git commit –am “feature1 update index.html”<br>$git checkout master<br>$git checkout –b feature2<br>$nano index.html<br>$git commit –am “feature1 update index.html”<br>(两个分支有相同的文件，而且内容不相同，如果feature1和feature2合并,git会提示合并冲突)<br>在feature1上先合并feature2,这个时候Git提示合并冲突，</p>
+<p><strong>Auto-merging index.html<br>CONFLICT (content): Merge conflict in index.html<br>Automatic merge failed; fix conflicts and then commit the result</strong>.  </p>
+</blockquote>
+<p><strong>这个时候请手动修改index.html后，把文件用git add 文件名来表示修改冲突成功，加入暂存区</strong>  </p>
+<blockquote>
+<p>$git status<br>可以看到git提示<br>Unmerged paths<br>$git add index.html //用git add命令来表示冲突已经解决<br>$git commit –m “分支feature1和feature2冲突已经解决”<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect9.png" alt=""></p>
+</blockquote>
+<p><strong>请注意两个分支的同一个文件的不同地方合并，git会自动合并，不会产生冲突。</strong>  </p>
+<p><strong>9.git stash用法</strong></p>
+<p>情况：</p>
+<p>在分支上工作到一半，不想提交，又要切换到另外一个分支上，git会组织切换。</p>
+<blockquote>
+<p>修改index.html—在分支feature1上，现在想切换到feature2<br>git checkout feature2—会报错   </p>
+<p>git stash<br>git checkout feature2 —正确</p>
+</blockquote>
+<p>回到原先的工作状态</p>
+<blockquote>
+<p>git stash list (查看储藏状态的列表)—进行查看暂存的状态<br>显示为：<br><strong>stash{0}</strong>:WIP on …:….</p>
+<p>git stash apply <strong>stash{0}</strong> —此命令就回到了</p>
+</blockquote>
+<p><strong>什么是协议？</strong></p>
+<p>协议就是一套规则<br><strong>哑协议</strong>（传输速度非常慢，传输进度不可见，不知道什么时候数据传输完成）：FTP,RSYNC<br><strong>智能协议</strong>（传输速度快，可以看到传输进度）：SSH和GIT协议  </p>
+<p><strong>1.第一个打开git bash</strong></p>
+<blockquote>
+<p><strong>ssh-keygen -t rsa -C “你配置的电子邮件”</strong></p>
+</blockquote>
+<p>在<code>c/users/tryit/.ssh/id_rsa</code>和<code>c/users/tryit/.ssh/id_rsa.pub</code>两个文件，一个为<strong>私钥</strong>，一个为<strong>公钥</strong></p>
+<p><strong>2.登录到gitlab，点击</strong></p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitlab1.png" alt=""></p>
+<p><strong>3.点击SSH KEY</strong></p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitlab2.png" alt=""></p>
+<p><strong>4.用文本编辑器将id_rsa.pub的内容填入key的内容框，</strong></p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitlab3.png" alt=""><br><strong>TITLE的输入框是会自动识别的。</strong></p>
+<p><strong>5.确定后，是这样的模样</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitlab4.png" alt=""></p>
+<p><strong>6.配置乌龟客户端—&gt;tortoiseGit的ssh key:</strong><br><strong>打开TortoiseGit目录下的puttygen:</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise1.png" alt=""><br><strong>点击按键——&gt;load:</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise2.png" alt=""><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise3.png" alt=""><br><strong>选择id_rsa:</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise4.png" alt=""><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise5.png" alt=""><br><strong>选择save private key:</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise6.png" alt=""><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise7.png" alt=""><br><strong>进行命名：</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/tortoise8.png" alt=""></p>
+<p><strong>进行测试ssh公钥是否成功：</strong><br><strong>ssh git@git服务器地址</strong></p>
+<blockquote>
+<p> <strong>ssh git@gitlab.hclab.cn</strong><br> yes—(按提示信息操作)<br> welcome to gitlab 你的用户名—配置成功  </p>
+</blockquote>
+<h2 id="多人协作">多人协作</h2><p>首先在gitlab上，增加共同开发的人员</p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitmember1.png" alt=""><br><strong>点击add users</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitmember2.png" alt=""><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/gitmember3.png" alt="">  </p>
+<blockquote>
+<p>git push origin master<br>提示reject—-即：被拒绝，因为对方已经提交了。<br>需要：<br>git fetch —先捉取远程的数据，但对本身仓库的没有影响<br>git merge origin/master —当前分支对远程分支进行合并<br>提示：Automatic merge failed; …表示合并失败，需要人工解决。<br>当人工进行解决后：<br>git add .<br>git commit -m “”<br>git push origin master</p>
+</blockquote>
+<pre><code>git pull  
+相当于：  
+git fetch  
+git <span class="operator"><span class="keyword">commit</span> <span class="keyword">merge</span> 远程仓库名/分支名</span>
+</code></pre><p><strong>本地分支与远程分支的联系</strong></p>
+<p>git branch 查看本地分支</p>
+<p>git branch -r 查看远程分支</p>
+<p>git branch -vv 查看远程与本地分支的联系</p>
+<p>git branch —set-upstream master origin/origin—将刚创建的分支，与远程建立联系</p>
+<p>查看远程仓库信息：<br>git remote show [remote-name]</p>
+<p>远程仓库的重命名：<br>git remote rename 原名 新名字</p>
+<p>远程仓库的删除：<br>git remote rm 远程仓库名</p>
+<p>跟踪远程分支：<br>git checkout –b [本地分支名] [远程仓库名]/[分支名]</p>
+<p>git branch —track [本地分支名] [远程仓库名]/[分支名]<br>注意这个是新建一个本地分支，然后跟踪关联远程分支，如果对已经存在的本地分支，关联某一个远程分支，请使用<br>git branch —set-upstream [本地分支名] [远程仓库名]/[分支名]</p>
+<p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751/" target="_blank" rel="external">gitlab多人协作</a></p>
+<p><a href="http://www.cnblogs.com/mengdd/p/3585038.html" target="_blank" rel="external">Git 分支管理和冲突解决</a></p>
+<h2 id="git_错误合集">git 错误合集</h2><p>问题一： </p>
+<blockquote>
+<p>To git@git.oschina.net:yangzhi/hello.git<br>! [rejected]        master -&gt; master (fetch first)<br>error: failed to push some refs to ‘git@git.oschina.net:yangzhi/hello.git’<br>hint: Updates were rejected because the remote contains work that you do<br>hint: not have locally. This is usually caused by another repository pushin<br>hint: to the same ref. You may want to first merge the remote changes (e.g.<br>hint: ‘git pull’) before pushing again.<br>hint: See the ‘Note about fast-forwards’ in ‘git push —help’ for details.<br><strong>解决：git push -f</strong></p>
+</blockquote>
+<p>问题二：</p>
+<pre><code>fatal: early EOF  
+fatal: index-pack failed
+First, turn off compression:
+
+git config <span class="comment">--global core.compression 0</span>
+Next, let's <span class="operator"><span class="keyword">do</span> a <span class="keyword">partial</span> clone <span class="keyword">to</span> <span class="keyword">truncate</span> the amount <span class="keyword">of</span> info coming down:
+
+git clone <span class="comment">--depth 1 </span>
+<span class="keyword">When</span> that works, retrieve the rest <span class="keyword">of</span> the clone:
+
+git <span class="keyword">fetch</span> <span class="comment">--unshallow </span>
+<span class="keyword">or</span>, alternately,
+
+git <span class="keyword">fetch</span> –-depth=<span class="number">2147483647</span>
+<span class="keyword">Now</span>, <span class="keyword">do</span> a regular pull:
+
+git pull <span class="comment">--all</span></span>
+</code></pre><p>解决：</p>
+<p><a href="http://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed" target="_blank" rel="external">fatal: early EOF fatal: index-pack failed</a><br><a href="http://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed" target="_blank" rel="external">Git 遇到了 early EOF index-pack failed 问题</a></p>
+<p>问题三：</p>
+<blockquote>
+<p>The remote end hung up unexpectedly</p>
+</blockquote>
+<p>解决：<br><a href="https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9-Git-%E6%93%8D%E4%BD%9C%E6%97%B6%E5%80%99%E7%9A%84-HTTP-%E9%94%99%E8%AF%AF" target="_blank" rel="external">如何应对 Git 操作时候的 HTTP 错误</a></p>
+<p>问题四：</p>
+<blockquote>
+<p>Git push won’t do anything (Everything up-to-date)<br>解决：<br><a href="http://stackoverflow.com/questions/2936652/git-push-wont-do-anything-everything-up-to-date" target="_blank" rel="external">Git push won’t do anything (Everything up-to-date)</a></p>
+</blockquote>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/13/android-wifi-debug-program/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android通过Wifi来调试应用（win7版+局域网）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/13/git-ignore/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ignore学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="git-learn" data-title="git的学习笔记" data-url="http://hexo.trity.cc/2015/03/13/git-learn/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

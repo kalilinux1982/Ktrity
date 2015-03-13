@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android通过Wifi来调试应用（win7版+局域网） | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我两部手机，一部开发者选项没有网络ADB试调，一部有网络ADB调试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android通过Wifi来调试应用（win7版+局域网）">
+<meta property="og:url" content="http://hexo.trity.cc/2015/03/13/android-wifi-debug-program/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="我两部手机，一部开发者选项没有网络ADB试调，一部有网络ADB调试。">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1422183006262.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1422184651287.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android通过Wifi来调试应用（win7版+局域网）">
+<meta name="twitter:description" content="我两部手机，一部开发者选项没有网络ADB试调，一部有网络ADB调试。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 20px;">git</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android-wifi-debug-program" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/13/android-wifi-debug-program/" class="article-date">
+  	<time datetime="2015-03-13T04:07:16.000Z" itemprop="datePublished">2015-03-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android通过Wifi来调试应用（win7版+局域网）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wifi/">wifi</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我两部手机，一部<strong>开发者选项</strong>没有<strong>网络ADB试调</strong>，一部有<strong>网络ADB调试</strong>。<br><a id="more"></a></p>
+<h3 id="前提：杀死使用ADB的程序，同一个局域网">前提：杀死使用ADB的程序，同一个局域网</h3><ul>
+<li>手机和电脑在同一个局域网</li>
+<li>断掉并杀死所有电脑程序能自动检测连接手机的，会提示要你装应用，帮你手机清理等等。因为，这些程序，原理就是通过<code>ADB</code>来进行连接，而我们将要通过<code>ADB</code>来完成效果。我就开着<strong>酷狗</strong>听歌，导致一直实现不成功，正是纳闷，后面想了下，才知道是这个原因。</li>
+</ul>
+<h3 id="开发者选项没有网络ADB调试的系统">开发者选项没有网络ADB调试的系统</h3><ul>
+<li>1.手机连接电脑，并且手机启用<code>usb</code>调试的模式，跟平常使用usb调试程序一样的步骤。</li>
+<li><p>2.进入android-sdk的文件夹，就是平时要你重启<code>adb</code>的地方，即：<code>platform-tools</code>，我的地址为</p>
+<blockquote>
+<p>d/adt-bundle-windows-x86_64-20131030/sdk/platform-tools</p>
+</blockquote>
+</li>
+<li><p>3.打开命令行（win+r，输入cmd）</p>
+<blockquote>
+<p>adb tcpip 5555<br>以上这一句话的意思是<code>adb</code>从<code>usb</code>模式转化成<code>adb</code>网络模式（<code>wifi</code>）<br>命令行相应出现：<code>restarting in TCP mode port: 5555</code>，代表执行成功<br>你会发现，手机顶端不在出现原先有的图标  </p>
+</blockquote>
+</li>
+<li><p>4.使电脑连接手机的wifi的地址</p>
+<blockquote>
+<p>打开手机连接wifi的地方，并得到wifi的地址。我的为：<code>192.168.1.129</code><br>接着在上次一个步骤的命令行中输入<br>adb connect 192.168.1.129<br>出现：<code>connected to 192.168.1.129:5555</code> 代表执行成功  </p>
+</blockquote>
+</li>
+<li><p>5.现在你可以断开<code>usb</code>线了（其实在第三步后，就可以断开了），然后像往常<code>run</code>一个应用程序，即可。</p>
+</li>
+</ul>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/1422183006262.png" alt="Alt text"></p>
+<ul>
+<li>6.此时你的usb对于此手机已经作废，那么如何变成<code>usb</code>试调模式呢？也就是还原呢。<br>很简单，usb数据线连接，在同一个命令行。输入<blockquote>
+<p>adb usb<br>出现：restarting in USB mode 说明成功。<br>还原原来的状态。  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="开发者选项有网络ADB调试的系统">开发者选项有网络ADB调试的系统</h3><ul>
+<li><p>同<strong>开发者选项没有网络ADB调试的系统</strong>一样的操作。你会发现</p>
+<blockquote>
+<p>adb tcpip 5555<br>error: more than one device and emulator<br>和<br>adb connect 192.168.1.106<br>unable to connect to 192.168.1.106:5555  </p>
+</blockquote>
+</li>
+<li><p>原因是你没有启动<strong>网络ADB调试</strong>。启动<strong>网络ADB调试</strong>，再试一遍即可。</p>
+<blockquote>
+<p>  adb tcpip 5555<br>restarting in TCP mode port: 5555<br>和<br>adb connect 192.168.1.106<br>connected to 192.168.1.106:5555  </p>
+</blockquote>
+</li>
+<li><p>最后，不必使用<code>adb usb</code>将模式调回来，只需要关掉<strong>网络ADB调试</strong>即可。</p>
+</li>
+</ul>
+<h3 id="错误">错误</h3><blockquote>
+<p> adb tcpip 5555<br>error:<br>和<br>adb connect 192.168.1.106<br>error:  </p>
+</blockquote>
+<p>这些情况是<code>adb</code>被占用了，你需要将他杀掉，然后重启</p>
+<blockquote>
+<p>adb.exe kill-server<br>adb start-server</p>
+</blockquote>
+<p>或者，情况比较悲剧，你的android系统没有安装一些必要的属性。下载<a href="http://msysgit.github.io/" target="_blank" rel="external">msysgit</a>，这个有什么好处呢？能用<code>git</code>，另外是<strong>能执行一些<code>linux</code>的命令来运行Linux shell</strong>。然后运行脚本来<strong>配置属性</strong>。</p>
+<h3 id="脚本内容">脚本内容</h3><p><strong>E盘</strong>新建一个文件命名为<code>adbTowifi.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line">   </span></span><br><span class="line"><span class="comment">#Modify this with your IP range</span></span><br><span class="line"><span class="comment">#这里的ip要注意，我的是MY_IP_RANGE="192\.168\.1",这里要看你的具体ip地址决定</span></span><br><span class="line">MY_IP_RANGE=<span class="string">"192\.168\.43"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#You usually wouldn't have to modify this</span></span><br><span class="line">PORT_BASE=<span class="number">5555</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#List the devices on the screen for your viewing pleasure</span></span><br><span class="line">adb devices</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Find USB devices only (no emulators, genymotion or connected devices</span></span><br><span class="line"><span class="built_in">declare</span> <span class="operator">-a</span> deviceArray=(`adb devices <span class="operator">-l</span> | grep -v emulator | grep -v vbox | grep -v <span class="string">"<span class="variable">$&#123;MY_IP_RANGE&#125;</span>"</span> | grep <span class="string">" device "</span> | awk <span class="string">'&#123;print $1&#125;'</span>`)  </span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"found <span class="variable">$&#123;#deviceArray[@]&#125;</span> device(s)"</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="variable">$&#123;!deviceArray[*]&#125;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"finding IP address for device <span class="variable">$&#123;deviceArray[index]&#125;</span>"</span></span><br><span class="line">IP_ADDRESS=$(adb <span class="operator">-s</span> <span class="variable">$&#123;deviceArray[index]&#125;</span> shell ifconfig wlan0 | awk <span class="string">'&#123;print $3&#125;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"IP address found : <span class="variable">$IP_ADDRESS</span> "</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Connecting..."</span></span><br><span class="line">adb <span class="operator">-s</span> <span class="variable">$&#123;deviceArray[index]&#125;</span> tcpip $((<span class="variable">$PORT_BASE</span> + <span class="variable">$index</span>))</span><br><span class="line">adb <span class="operator">-s</span> <span class="variable">$&#123;deviceArray[index]&#125;</span> connect <span class="string">"<span class="variable">$IP_ADDRESS</span>:<span class="variable">$(($PORT_BASE + $index)</span>)"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="operator">-l</span></span><br><span class="line"><span class="comment">#exit</span></span><br></pre></td></tr></table></figure>
+<p>在<code>E</code>盘，鼠标右键打开<code>Git Bash here</code>，然后输入</p>
+<blockquote>
+<p>sh adbwifi.sh</p>
+</blockquote>
+<p>出现以下效果：</p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/1422184651287.png" alt="Alt text"></p>
+<p>说明已经成功，这时你需要重复步骤进行配置就可以了。</p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.faceye.net/search/126679.html" target="_blank" rel="external">Android<em>ADB</em>通过WIFI或USB方式完成调试</a></p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/03/13/git-learn/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git的学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android-wifi-debug-program" data-title="Android通过Wifi来调试应用（win7版+局域网）" data-url="http://hexo.trity.cc/2015/03/13/android-wifi-debug-program/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

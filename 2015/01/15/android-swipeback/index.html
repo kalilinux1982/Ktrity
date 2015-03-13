@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android SwipeBack滑动返回 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="android SwipeBack滑动返回
+Gitub地址
+SwipeBackLayout
+SwipeBackLayout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android SwipeBack滑动返回">
+<meta property="og:url" content="http://hexo.trity.cc/2015/01/15/android-swipeback/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="android SwipeBack滑动返回
+Gitub地址
+SwipeBackLayout
+SwipeBackLayout">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/package.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/shadow.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android SwipeBack滑动返回">
+<meta name="twitter:description" content="android SwipeBack滑动返回
+Gitub地址
+SwipeBackLayout
+SwipeBackLayout">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 20px;">git</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android-swipeback" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/15/android-swipeback/" class="article-date">
+  	<time datetime="2015-01-15T04:07:16.000Z" itemprop="datePublished">2015-01-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android SwipeBack滑动返回
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swipeback/">swipeback</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="android_SwipeBack滑动返回">android SwipeBack滑动返回</h2><ul>
+<li><h3 id="Gitub地址"><code>Gitub</code>地址</h3><ul>
+<li><a href="https://github.com/way1989/SwipeBackLayout" target="_blank" rel="external">SwipeBackLayout</a></li>
+<li><a href="https://github.com/ikew0ng/SwipeBackLayout" target="_blank" rel="external">SwipeBackLayout</a><a id="more"></a></li>
+</ul>
+</li>
+<li><h3 id="实战">实战</h3><ul>
+<li><p>实现步骤：</p>
+<ul>
+<li><p>把相应的包给导入</p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/package.png" alt="Alt text"></p>
+</li>
+<li><p>在<code>res</code>—&gt;<code>values</code>—&gt;新建<code>attrs.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- SwipeBackLayout的xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">declare-styleable</span> <span class="attribute">name</span>=<span class="value">"SwipeBackLayout"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"edge_size"</span> <span class="attribute">format</span>=<span class="value">"dimension"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"edge_flag"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">enum</span> <span class="attribute">name</span>=<span class="value">"left"</span> <span class="attribute">value</span>=<span class="value">"0"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">enum</span> <span class="attribute">name</span>=<span class="value">"right"</span> <span class="attribute">value</span>=<span class="value">"1"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">enum</span> <span class="attribute">name</span>=<span class="value">"bottom"</span> <span class="attribute">value</span>=<span class="value">"2"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">enum</span> <span class="attribute">name</span>=<span class="value">"all"</span> <span class="attribute">value</span>=<span class="value">"3"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">attr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"shadow_left"</span> <span class="attribute">format</span>=<span class="value">"reference"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"shadow_right"</span> <span class="attribute">format</span>=<span class="value">"reference"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"shadow_bottom"</span> <span class="attribute">format</span>=<span class="value">"reference"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">declare-styleable</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"SwipeBackLayoutStyle"</span> <span class="attribute">format</span>=<span class="value">"reference"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>导入图片在<code>xhbpi</code>：相应的<strong>阴影</strong></li>
+</ul>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/shadow.png" alt="Alt text"></p>
+<ul>
+<li>复制或者新建<code>swipeback_layout.xml</code>在文件夹<code>layout</code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">me.imid.swipebacklayout.lib.SwipeBackLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:id</span>=<span class="value">"@+id/swipe"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在<code>styles.xml</code>的主题里面添加<code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code>，否则会出现下面问题的情况。</p>
+</li>
+<li>最后在每一个<code>activity</code>中，将要运用到<strong>滑动返回</strong>的地方，进行替换，将<code>extends</code>继承<code>Activity</code>替换成<code>SwipeBackActivity</code>即可（<strong>默认是从左往右滑是返回</strong>）。<br>或者自行设置，从左，从右，从下滑动：</li>
+</ul>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> SwipeBackLayout mSwipeBackLayout;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> initSwipeBack() &#123;</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	mSwipeBackLayout = getSwipeBackLayout();</span><br><span class="line">	<span class="comment">// 设置滑动左边关闭的模式</span></span><br><span class="line">	mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">`        </span><br><span class="line">其中`</span>SwipeBackLayout.EDGE_LEFT<span class="string">`有几个参数，分别：`</span>EDGE_LEFT,EDGE_RIGHT,EDGE_BOTTOM,EDGE_ALL<span class="string">`，即：从左，从右，从下，三个方向。</span><br><span class="line">    - #### android使用swipeBack滑动返回时为什么会出现黑屏现象?</span><br><span class="line">    **解决**：</span><br><span class="line">        1. 在Manifest中为App设置theme属性（我这叫APPTheme）</span><br><span class="line">        2. 该theme所有的parent里都要加item</span></span><br></pre></td></tr></table></figure>
+<p><item name="android:windowIsTranslucent">true</item><br>```</p>
+<ul>
+<li><h3 id="实现原理解析">实现原理解析</h3><ul>
+<li><a href="http://blog.csdn.net/xiaanming/article/details/20934541" target="_blank" rel="external">Android 向右滑动销毁（finish）Activity, 随着手势的滑动而滑动的效果</a></li>
+<li><a href="http://www.iseekfree.com/android/SwipeBackLayout/" target="_blank" rel="external">SwipeBackLayout</a>,其他的实现方式</li>
+</ul>
+</li>
+<li><h3 id="教程">教程</h3><ul>
+<li><a href="http://www.cnblogs.com/tianzhijiexian/p/4065069.html" target="_blank" rel="external">用SwipeBackLayout实现滑动关闭当前Activity</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/12/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/01/my-note/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">For you</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android-swipeback" data-title="android SwipeBack滑动返回" data-url="http://hexo.trity.cc/2015/01/15/android-swipeback/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
