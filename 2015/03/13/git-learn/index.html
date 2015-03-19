@@ -5,14 +5,20 @@
   
   <title>git的学习笔记 | Trity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
-如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+  <meta name="description" content="配置用户信息
+$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+
+如何从一个项目中建立git版本控制？
+$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git的学习笔记">
 <meta property="og:url" content="http://hexo.trity.cc/2015/03/13/git-learn/index.html">
 <meta property="og:site_name" content="Trity">
-<meta property="og:description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
-如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+<meta property="og:description" content="配置用户信息
+$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+
+如何从一个项目中建立git版本控制？
+$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
 <meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/git_status.jpg">
 <meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/branch_testing.png">
 <meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/head.png">
@@ -46,8 +52,11 @@
 <meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/gitmember3.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git的学习笔记">
-<meta name="twitter:description" content="配置用户信息$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
-如何从一个项目中建立git版本控制？$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
+<meta name="twitter:description" content="配置用户信息
+$ git config —global user.name “John Doe”$ git config —global user.email johndoe@example.com  
+
+如何从一个项目中建立git版本控制？
+$ mkdir mysite  //创建一个名为mysite的目录$ cd mysite //进入mysite的目录$ git init   //git始化">
   
     <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
   
@@ -147,7 +156,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 20px;">git</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 20px;">git</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a>
 					</div>
 				</section>
 				
@@ -264,18 +273,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="配置用户信息">配置用户信息</h2><p>$ git config —global user.name “John Doe”<br>$ git config —global user.email johndoe@example.com  </p>
-<h2 id="如何从一个项目中建立git版本控制？">如何从一个项目中建立git版本控制？</h2><p>$ mkdir mysite  //创建一个名为mysite的目录<br>$ cd mysite //进入mysite的目录<br>$ git init   //git始化<br><a id="more"></a></p>
-<h2 id="让git来跟踪">让git来跟踪</h2><p>$git add index.html // 把目录下的index.hmtl，让git来跟踪它<br><strong>或者</strong><br>$ git add Documentation/*.txt  //把Documentation目录下的所有txt文件添加</p>
+        <h2 id="配置用户信息">配置用户信息</h2><blockquote>
+<p>$ git config —global user.name “John Doe”<br>$ git config —global user.email johndoe@example.com  </p>
+</blockquote>
+<h2 id="如何从一个项目中建立git版本控制？">如何从一个项目中建立git版本控制？</h2><blockquote>
+<p>$ mkdir mysite  //创建一个名为mysite的目录<br>$ cd mysite //进入mysite的目录<br>$ git init   //git始化  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="让git来跟踪">让git来跟踪</h2><blockquote>
+<p>$git add index.html // 把目录下的index.hmtl，让git来跟踪它<br><strong>或者</strong><br>$ git add Documentation/*.txt  //把Documentation目录下的所有txt文件添加</p>
 <h2 id="把已经跟踪好的文件提交到版本库中去">把已经跟踪好的文件提交到版本库中去</h2><p>$git commit -m “add hello world HTML” </p>
-<h2 id="跟踪并且提交">跟踪并且提交</h2><p>$git commit -am “add and commit”<br><strong>相当于</strong><br>$git add .<br>$git commit -m “add and commit”</p>
+<h2 id="跟踪并且提交">跟踪并且提交</h2><p>$git commit -am “add and commit”  </p>
+</blockquote>
+<p><strong>相当于</strong>  </p>
+<blockquote>
+<p>$git add .<br>$git commit -m “add and commit”</p>
 <h2 id="查看提交记录">查看提交记录</h2><p>$git log </p>
-<h2 id="查看项目目前的状态">查看项目目前的状态</h2><p>$git status<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/git_status.jpg" alt=""></p>
+<h2 id="查看项目目前的状态">查看项目目前的状态</h2><p>$git status  </p>
+</blockquote>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/git_status.jpg" alt=""></p>
 <h2 id="git分支">git分支</h2><p>Git 中的分支，其实本质上仅仅是个指向commit 对象的可变指针。Git<br>会使用master 作为分支的默认名字。在若干次提交后，你其实已经有了一个指向最后一次提交对象commit的master 分支，它在每次提交的时候都会自动向前移动。</p>
 <h3 id="如何创建分支">如何创建分支</h3><p><strong>$git branch testing</strong> //这会在当前commit 对象上新建一个分支指针<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_testing.png" alt=""></p>
 <h3 id="Git_是如何知道你当前在哪个分支上工作的呢？">Git 是如何知道你当前在哪个分支上工作的呢？</h3><p>Git保存着一个名为HEAD 的特别指针。<strong>请注意它的HEAD是一个指向你正在工作中的本地分支的指针。</strong>  <strong>运行git branch 命令，仅仅是建立了一个新的分支，但不会自动切换到这个分支中去，</strong>所以在这个例子中，我们依然还在master 分支里工作。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/head.png" alt=""></p>
 <h3 id="如何切换到其他分支">如何切换到其他分支</h3><p><strong>$ git checkout testing</strong>//转换到新建的testing分支<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/checkou_testing.png" alt=""></p>
-<h3 id="分支演示">分支演示</h3><p><strong>1.</strong><br>修改 index.html 内容<br>$ git commit -a -m ‘在index.html中增加No.4功能‘<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move.png" alt=""><br><strong>2.</strong><br><strong>$ git checkout master</strong><br>该命令把HEAD 指针移回到master 分支，并把工作目录中的文件换成<br>了master 分支所指向的快照内容。也就是说，现在开始所做的改动，将始于本项目中一个较老的版本。它的主要作用是将testing 分支里作出的修改暂时取消，这样你就可以向另一个方向进行开发。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move1.png" alt=""><br><strong>3.</strong><br>修改 index.html 内容<br>$ git commit -a -m ‘在index.html中增加No.5功能’<br>现在我们的项目提交历史产生了分叉（如图3.9 所示），因为刚才我们创建了一个分支，转换到其中进行了一些工作，然后又回到原来的主分支进行了另外一些工作。这些改变分别孤立在不同的分支里：我们可以在不同分支里反复切换，并在时机成熟时把它们合并到一起。而所有这些工作，仅仅需要branch 和checkout 这两条命令就可以完成。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move2.png" alt=""></p>
+<h3 id="分支演示">分支演示</h3><p><strong>1.</strong><br>修改 index.html 内容  </p>
+<blockquote>
+<p>$ git commit -a -m ‘在index.html中增加No.4功能‘</p>
+</blockquote>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move.png" alt=""><br><strong>2.</strong><br><strong>$ git checkout master</strong><br>该命令把HEAD 指针移回到master 分支，并把工作目录中的文件换成<br>了master 分支所指向的快照内容。也就是说，现在开始所做的改动，将始于本项目中一个较老的版本。它的主要作用是将testing 分支里作出的修改暂时取消，这样你就可以向另一个方向进行开发。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move1.png" alt=""><br><strong>3.</strong><br>修改 index.html 内容  </p>
+<blockquote>
+<p>$ git commit -a -m ‘在index.html中增加No.5功能’  </p>
+</blockquote>
+<p>现在我们的项目提交历史产生了分叉（如图3.9 所示），因为刚才我们创建了一个分支，转换到其中进行了一些工作，然后又回到原来的主分支进行了另外一些工作。这些改变分别孤立在不同的分支里：我们可以在不同分支里反复切换，并在时机成熟时把它们合并到一起。而所有这些工作，仅仅需要branch 和checkout 这两条命令就可以完成。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/branch_move2.png" alt=""></p>
 <h2 id="分支的合并，解决合并分支的冲突—案例">分支的合并，解决合并分支的冲突—案例</h2><p><strong>1.孙悟空在项目中愉快地工作，并且提交了几次更新</strong><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect1.png" alt=""><br><strong>2.孙悟空要修补错误跟踪系统上的编号为53号错误</strong><br><code>$ git checkout -b iss53</code><br><code>Switched to a new branch &quot;iss53&quot;</code><br><code>相当于下面这两条命令：</code><br><code>$ git branch iss53</code><br><code>$ git checkout iss53</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect2.png" alt=""><br><strong>3.孙悟空要修补问题跟踪系统上的#53问题</strong><br><code>修改 index.html //孙悟空修补了index.html代码</code><br><code>$ git commit -a -m “fix issue53”</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect3.png" alt=""><br><strong>4.孙悟空接到项目负责人唐僧的电话，要求修补已经发布的项目错误，也就是C2版本的出现的突然发现的错误。这个错误不是错误跟踪系统编号为53号的已知错误。孙悟空要从iss53分支切换到master分支。切换之前，注意工作区的暂存区或者工作目录里，那些还没有提交的修改，它会和你即将检出的分支产生冲突从而阻止Git 为你转换分支。</strong><br><strong>目前已经提交了所有的修改，所以接下来可以正常转换到master 分支：</strong><br><code>$git checkout master</code><br><strong>接下来，你得进行紧急修补。我们创建一个紧急修补分支（hotfix）来开展工作，直到搞定。</strong><br><code>$ git checkout -b hotfix</code><br><code>Switched to a new branch &quot;hotfix&quot;</code><br><code>$ nano index.html</code><br><code>$ git commit -a -m &#39;fixed the broken email address&#39;</code><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect4.png" alt=""><br><strong>5.合并分支</strong><br><code>$ git checkout master</code><br><code>$ git merge hotfix</code><br><strong>Updating f42c576..3a0874c</strong><br><strong>Fast forward</strong><br><strong>README | 1 -</strong><br><strong>1 files changed, 0 insertions(+), 1 deletions(-)</strong>  </p>
 <blockquote>
 <p>请注意，合并时出现了“Fast forward”（快进）提示。由于当前master 分支所在的commit 是要并入的hotfix 分支的直接上游，Git 只需把指针直接右移。换句话说，如果顺着一个分支走下去可以到达另一个分支，那么Git 在合并两者时，只会简单地把指针前移，因为没有什么分歧需要解决，所以这个过程叫做快进（Fast forward）。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect5.png" alt="">  </p>
@@ -295,8 +324,9 @@
 </blockquote>
 <p><strong>这个时候请手动修改index.html后，把文件用git add 文件名来表示修改冲突成功，加入暂存区</strong>  </p>
 <blockquote>
-<p>$git status<br>可以看到git提示<br>Unmerged paths<br>$git add index.html //用git add命令来表示冲突已经解决<br>$git commit –m “分支feature1和feature2冲突已经解决”<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect9.png" alt=""></p>
+<p>$git status<br>可以看到git提示<br>Unmerged paths<br>$git add index.html //用git add命令来表示冲突已经解决<br>$git commit –m “分支feature1和feature2冲突已经解决”  </p>
 </blockquote>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/conflect9.png" alt=""></p>
 <p><strong>请注意两个分支的同一个文件的不同地方合并，git会自动合并，不会产生冲突。</strong>  </p>
 <p><strong>9.git stash用法</strong></p>
 <p>情况：</p>
@@ -339,15 +369,33 @@
 git fetch  
 git <span class="operator"><span class="keyword">commit</span> <span class="keyword">merge</span> 远程仓库名/分支名</span>
 </code></pre><p><strong>本地分支与远程分支的联系</strong></p>
+<blockquote>
 <p>git branch 查看本地分支</p>
 <p>git branch -r 查看远程分支</p>
 <p>git branch -vv 查看远程与本地分支的联系</p>
 <p>git branch —set-upstream master origin/origin—将刚创建的分支，与远程建立联系</p>
-<p>查看远程仓库信息：<br>git remote show [remote-name]</p>
-<p>远程仓库的重命名：<br>git remote rename 原名 新名字</p>
-<p>远程仓库的删除：<br>git remote rm 远程仓库名</p>
-<p>跟踪远程分支：<br>git checkout –b [本地分支名] [远程仓库名]/[分支名]</p>
-<p>git branch —track [本地分支名] [远程仓库名]/[分支名]<br>注意这个是新建一个本地分支，然后跟踪关联远程分支，如果对已经存在的本地分支，关联某一个远程分支，请使用<br>git branch —set-upstream [本地分支名] [远程仓库名]/[分支名]</p>
+</blockquote>
+<p>查看远程仓库信息：</p>
+<blockquote>
+<p>git remote show [remote-name]</p>
+</blockquote>
+<p>远程仓库的重命名：</p>
+<blockquote>
+<p>git remote rename 原名 新名字</p>
+</blockquote>
+<p>远程仓库的删除：</p>
+<blockquote>
+<p>git remote rm 远程仓库名</p>
+</blockquote>
+<p>跟踪远程分支：</p>
+<blockquote>
+<p>git checkout –b [本地分支名] [远程仓库名]/[分支名]</p>
+<p>git branch —track [本地分支名] [远程仓库名]/[分支名]  </p>
+</blockquote>
+<p>注意这个是新建一个本地分支，然后跟踪关联远程分支，如果对已经存在的本地分支，关联某一个远程分支，请使用  </p>
+<blockquote>
+<p>git branch —set-upstream [本地分支名] [远程仓库名]/[分支名]</p>
+</blockquote>
 <p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751/" target="_blank" rel="external">gitlab多人协作</a></p>
 <p><a href="http://www.cnblogs.com/mengdd/p/3585038.html" target="_blank" rel="external">Git 分支管理和冲突解决</a></p>
 <h2 id="git_错误合集">git 错误合集</h2><p>问题一： </p>
