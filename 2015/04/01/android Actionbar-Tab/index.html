@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android Actionbar中实现Tab导航 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="步骤（三步走）前提：设置actionbar导航模式12//设置导航模式actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+实现ActionBar.TabListener接口，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android Actionbar中实现Tab导航">
+<meta property="og:url" content="http://hexo.trity.cc/2015/04/01/android Actionbar-Tab/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="步骤（三步走）前提：设置actionbar导航模式12//设置导航模式actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+实现ActionBar.TabListener接口，">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1423490026595.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1423492055239.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android Actionbar中实现Tab导航">
+<meta name="twitter:description" content="步骤（三步走）前提：设置actionbar导航模式12//设置导航模式actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+实现ActionBar.TabListener接口，">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android Actionbar-Tab" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/01/android Actionbar-Tab/" class="article-date">
+  	<time datetime="2015-04-01T12:30:27.000Z" itemprop="datePublished">2015-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android Actionbar中实现Tab导航
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActionBar/">ActionBar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tab/">Tab</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="步骤（三步走）">步骤（三步走）</h3><p>前提：设置actionbar导航模式<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置导航模式</span></span><br><span class="line">actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>实现<code>ActionBar.TabListener</code>接口，<a id="more"></a>这个接口提供了Tab事件的各种回调，比如当用户点击了一个Tab时，你就可以进行切换Tab的操作。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="literal">void</span> onTabSelected(Tab tab, FragmentTransaction <span class="literal">ft</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (mFragment <span class="subst">==</span> <span class="built_in">null</span>) &#123;  </span><br><span class="line">            mFragment <span class="subst">=</span> Fragment<span class="built_in">.</span>instantiate(mActivity, mClass<span class="built_in">.</span>getName());  </span><br><span class="line">            <span class="literal">ft</span><span class="built_in">.</span>add(android<span class="built_in">.</span>R<span class="built_in">.</span>id<span class="built_in">.</span>content, mFragment, mTag);  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="literal">ft</span><span class="built_in">.</span>attach(mFragment);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="literal">void</span> onTabUnselected(Tab tab, FragmentTransaction <span class="literal">ft</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (mFragment <span class="subst">!=</span> <span class="built_in">null</span>) &#123;  </span><br><span class="line">            <span class="literal">ft</span><span class="built_in">.</span>detach(mFragment); <span class="comment">//将UI资源释放掉</span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="literal">void</span> onTabReselected(Tab tab, FragmentTransaction <span class="literal">ft</span>) &#123;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为每一个你想添加的Tab<strong>创建一个ActionBar.Tab的实例</strong>，并且调用<strong>setTabListener()方法</strong>来设置ActionBar.TabListener。除此之外，还需要调用setText()方法来给当前<strong>Tab设置标题或者设置Icon</strong>。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ActionBar.<span class="keyword">Tab</span> <span class="keyword">tab</span> = actionBar.newTab().setIcon(R.drawable.club_icon_home);</span><br><span class="line"><span class="keyword">tab</span>.setTabListener(this);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后调用ActionBar的<strong>addTab()方法将创建好的Tab添加到ActionBar中</strong>。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">actionBar.addTab(<span class="constant">tab</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="学习资料">学习资料</h3><p><a href="http://segmentfault.com/blog/shiyongdanshuiyu/1190000000437984" target="_blank" rel="external">安卓开发文档学习笔记之实现ActionBar中Tab导航</a></p>
+<h3 id="实战错误">实战错误</h3><p><a href="http://stackoverflow.com/questions/15231489/action-bar-tab-must-have-a-callback" target="_blank" rel="external">Action Bar Tab must have a Callback</a>，加入<code>Tab</code>后，必须<strong>马上实现监听</strong>，否则就会报以上的错误。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ActionBar.<span class="keyword">Tab</span> <span class="keyword">tab</span> = actionBar.newTab()setIcon(R.drawable.club_detail_data);</span><br><span class="line"><span class="keyword">tab</span>.setTabListener(this);</span><br><span class="line">actionBar.addTab(<span class="keyword">tab</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Tab样式修改"><code>Tab</code>样式修改</h3><p>通过<code>style</code>来改变本身的固定样式，由三个属性来控制</p>
+<ul>
+<li><code>actionBarTabBarStyle</code> —This determines the style of the overall tab bar which contains the tabs. 个人理解是<code>TabBar</code>的背景的<code>style</code></li>
+<li><code>actionBarTabStyle</code> – This determines the style of the individual tabs themselves including the indicator. 个人理解是<code>TabBar</code>的<strong>前</strong>景的<code>style</code></li>
+<li><code>actionBarTabTextStyle</code> —This determines the style of the tab text. 字体<code>style</code></li>
+</ul>
+<h4 id="实战（如图的效果）：">实战（如图的效果）：</h4><p><img src="http://7tebhw.com1.z0.glb.clouddn.com/1423490026595.png" alt="Alt text"></p>
+<p>两种方式，一种是通过<code>TabBar</code>来修改，另外一种是通过<code>BarTabStyle</code>来修改,最后一种通过设置<code>TabBar</code>每一个<code>tab</code>子项的<code>selector</code>来设置。</p>
+<p><strong>通过<code>TabBar</code>来修改</strong>，首先我的本身的<code>indicator</code>（选中时的下划线）本身就是<strong>白色的</strong>，跟我情况相同的话，就比较简单修改</p>
+<p>修改<code>actionBarTabBarStyle</code>默认样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!-- Application theme. --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBarAppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light"</span>&gt;</span><span class="css"></span><br><span class="line"> &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:actionBarTabBarStyle"</span>&gt;<span class="at_rule">@<span class="keyword">style/ActionBarTabBar&lt;/item&gt;</span> </span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--custom ActionBar TabBar--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBarTabBar"</span> <span class="attribute">parent</span>=<span class="value">"Widget.AppCompat.ActionBar.TabBar"</span>&gt;</span><span class="css"></span><br><span class="line">&lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:background"</span>&gt;<span class="at_rule">@<span class="keyword">color/blue&lt;/item&gt;&lt;!--定义颜色为蓝色，搞定--&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>另一种是通过<code>actionBarTabStyle</code>来修改，比较靠谱。</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Application theme. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBarAppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light"</span>&gt;</span><span class="css"></span><br><span class="line">&lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:actionBarTabStyle"</span>&gt;<span class="at_rule">@<span class="keyword">style/ActionBarTabView&lt;/item&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--custom ActionBar tab--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBarTabView"</span> <span class="attribute">parent</span>=<span class="value">"Widget.AppCompat.ActionBar.TabView"</span>&gt;</span><span class="css"></span><br><span class="line">    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:background"</span>&gt;<span class="at_rule">@<span class="keyword">drawable/tab_bar_background&lt;/item&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来<code>tab_bar_background.xml</code>定义,设置选择的时候，和没有选择的时候<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- UNSELECTED TAB STATE --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_selected</span>=<span class="value">"false"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">layer-list</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Tab background color for the UNSELECTED tab state --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Bottom indicator color for the UNSELECTED tab state --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:top</span>=<span class="value">"-5dp"</span> <span class="attribute">android:left</span>=<span class="value">"-5dp"</span> <span class="attribute">android:right</span>=<span class="value">"-5dp"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">shape</span> <span class="attribute">android:shape</span>=<span class="value">"rectangle"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">solid</span> <span class="attribute">android:color</span>=<span class="value">"@color/blue_theme"</span>/&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">stroke</span> <span class="attribute">android:color</span>=<span class="value">"@color/blue_theme"</span> <span class="attribute">android:width</span>=<span class="value">"2dp"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">layer-list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- SELECTED TAB STATE --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_selected</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">layer-list</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Tab background color for the SELECTED tab state --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Bottom indicator color for the SELECTED tab state --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:top</span>=<span class="value">"-5dp"</span> <span class="attribute">android:left</span>=<span class="value">"-5dp"</span> <span class="attribute">android:right</span>=<span class="value">"-5dp"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">shape</span> <span class="attribute">android:shape</span>=<span class="value">"rectangle"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">solid</span> <span class="attribute">android:color</span>=<span class="value">"@color/blue_theme"</span>/&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">stroke</span> <span class="attribute">android:color</span>=<span class="value">"@android:color/white"</span> <span class="attribute">android:width</span>=<span class="value">"2dp"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">layer-list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这里的一篇讲解<code>actionbar</code>也是通过这种方式，不过是<strong>通过图片来替代xml</strong>：<a href="http://www.uml.org.cn/mobiledev/201410245.asp" target="_blank" rel="external">Android ActionBar完全解析，使用官方推荐的最佳导航栏</a><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1423492055239.png" alt="Alt text"></p>
+<p>对应的<code>actionbar_tab_indicator.xml</code>为<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;  </span><br><span class="line">&lt;selector xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;  </span><br><span class="line">  </span><br><span class="line">    &lt;item  android:<span class="variable">state_selected=</span><span class="string">"false"</span>  </span><br><span class="line">          android:<span class="variable">state_pressed=</span><span class="string">"false"</span>  </span><br><span class="line">          android:<span class="variable">drawable=</span><span class="string">"@drawable/tab_unselected"</span> /&gt;  </span><br><span class="line">    &lt;item android:<span class="variable">state_selected=</span><span class="string">"true"</span>  </span><br><span class="line">          android:<span class="variable">state_pressed=</span><span class="string">"false"</span>  </span><br><span class="line">          android:<span class="variable">drawable=</span><span class="string">"@drawable/tab_selected"</span> /&gt;  </span><br><span class="line">    &lt;item android:<span class="variable">state_selected=</span><span class="string">"false"</span>  </span><br><span class="line">          android:<span class="variable">state_pressed=</span><span class="string">"true"</span>  </span><br><span class="line">          android:<span class="variable">drawable=</span><span class="string">"@drawable/tab_unselected_pressed"</span> /&gt;  </span><br><span class="line">    &lt;item android:<span class="variable">state_selected=</span><span class="string">"true"</span>  </span><br><span class="line">          android:<span class="variable">state_pressed=</span><span class="string">"true"</span>  </span><br><span class="line">          android:<span class="variable">drawable=</span><span class="string">"@drawable/tab_selected_pressed"</span> /&gt;  </span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>通过设置<code>Tab</code>的<code>selector</code>来设置</strong><br><a href="http://stackoverflow.com/questions/18486571/is-it-possible-to-change-actionbar-tab-indicator-programmatically" target="_blank" rel="external">Is it possible to change actionbar tab indicator programmatically</a></p>
+<h3 id="actionbar去掉tab的中间分割线">actionbar去掉tab的中间分割线</h3><p>在<code>TabBar</code>进行修改<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style <span class="property">name</span>=<span class="string">"ActionBarTabStyle.Example"</span> parent=<span class="string">"Widget.Sherlock.ActionBar.TabBar"</span>&gt;</span><br><span class="line">    &lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:showDividers"</span>&gt;none&lt;/<span class="property">item</span>&gt;</span><br><span class="line">    &lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:paddingLeft"</span>&gt;<span class="number">0</span>dp&lt;/<span class="property">item</span>&gt;</span><br><span class="line">    &lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:paddingRight"</span>&gt;<span class="number">0</span>dp&lt;/<span class="property">item</span>&gt;</span><br><span class="line">    &lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:minWidth"</span>&gt;<span class="number">0</span>dp&lt;/<span class="property">item</span>&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://stackoverflow.com/questions/27834634/actionbar-tabs-remove-padding-and-divider" target="_blank" rel="external">ActionBar tabs remove padding and divider</a></p>
+<h4 id="修改Actionbar_Tab的字体颜色">修改Actionbar Tab的字体颜色</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBarAppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light"</span>&gt;</span><span class="css"></span><br><span class="line">	&lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:actionBarTabTextStyle"</span>&gt;<span class="at_rule">@<span class="keyword">style/MyActionBarTabText&lt;/item&gt;</span> </span><br><span class="line">    </span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ActionBar Tab text --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"MyActionBarTabText"</span> <span class="attribute">parent</span>=<span class="value">"@style/Widget.AppCompat.ActionBar.TabText"</span>&gt;</span><span class="css"></span><br><span class="line">        &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:textColor"</span>&gt;<span class="at_rule">@<span class="keyword">color/white&lt;/item&gt;</span></span><br><span class="line">    </span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="参考资料">参考资料</h3><p><a href="https://github.com/codepath/android_guides/wiki/ActionBar-Tabs-with-Fragments" target="_blank" rel="external">/ActionBar-Tabs-with-Fragments</a>，这里其中讲解修改<code>Tab style</code>的，有错误，反正我就无法实现它所说的修改，不知道为何，我是通过另一种方式解决的。<br><a href="http://www.uml.org.cn/mobiledev/201410245.asp" target="_blank" rel="external">Android ActionBar完全解析，使用官方推荐的最佳导航栏</a>，很清楚。</p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/09/Material-Design-Data/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Material Design学习资料
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/19/create-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hexo 博客搭建</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android Actionbar-Tab" data-title="android Actionbar中实现Tab导航" data-url="http://hexo.trity.cc/2015/04/01/android Actionbar-Tab/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
