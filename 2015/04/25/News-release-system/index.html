@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>三轮考题（新闻发布系统） | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="能用代码表示，尽可能使用代码表示（写出关键代码），以及相应的文字说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三轮考题（新闻发布系统）">
+<meta property="og:url" content="http://hexo.trity.cc/2015/04/25/News-release-system/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="能用代码表示，尽可能使用代码表示（写出关键代码），以及相应的文字说明">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1429929706478.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1429929565748.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三轮考题（新闻发布系统）">
+<meta name="twitter:description" content="能用代码表示，尽可能使用代码表示（写出关键代码），以及相应的文字说明">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 15px;">ActionBar</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-News-release-system" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/25/News-release-system/" class="article-date">
+  	<time datetime="2015-04-25T03:29:42.000Z" itemprop="datePublished">2015-04-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      三轮考题（新闻发布系统）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔试题/">笔试题</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>能用代码表示，尽可能使用代码表示（写出关键代码），以及相应的文字说明<br><a id="more"></a></p>
+<h3 id="Activity的生命周期，写出相应操作执行的方法及顺序（15）">Activity的生命周期，写出相应操作执行的方法及顺序（15）</h3><ol>
+<li>第一次启动时</li>
+<li>启动对话框是，Activity依然可见</li>
+<li>按下返回键，回到原来的Activity</li>
+<li>按下home键，返回到系统桌面</li>
+<li>从程序列表中找到引用程序并启动</li>
+<li>按“退出”，该Activity结束自己</li>
+</ol>
+<h3 id="如何检测editText所输入的内容是否正确">如何检测editText所输入的内容是否正确</h3><p>提示：尽可能多写出相应的方式</p>
+<ol>
+<li><a href="http://blog.csdn.net/chenxiaoning87/article/details/12971115" target="_blank" rel="external">EditText 检查输入是否正确</a></li>
+<li>使用<code>setOnKeyListener</code>监听内容的变化并做响应的处理</li>
+<li>使用<code>TextWatcher</code>类，实现<code>onTextChanged</code>方法，监听内容的变化并做出相应的处理。</li>
+</ol>
+<p>参考：<a href="http://yoyotota.iteye.com/blog/1110521" target="_blank" rel="external">EditText输入事件截获与监听</a></p>
+<h3 id="引用程序入口什么，请描述其作用">引用程序入口什么，请描述其作用</h3><p>application<br>单例<br>数据传递、数据共享和数据缓存等操作（不过要谨慎对空指针的处理）<br>处理Activity跳转间，频繁的数据处理操作。</p>
+<h3 id="SQL语句的考察">SQL语句的考察</h3><p>请写出符合条件的SQL语句</p>
+<ol>
+<li>将表里面的数据进行显示10条，并且为倒序进行排列。</li>
+<li>假设数据有100条，现在要进行分页显示，写出关键如何分页显示的sql语句<h3 id="Intent数据传递"><code>Intent</code>数据传递</h3>如何传递对象或者集合，如：传递类（person）或者ArrayList集合<blockquote>
+<p>相关的类(Person)进行实现接口：Serializable或者继承Parcelable</p>
+</blockquote>
+</li>
+</ol>
+<p>如何通过<code>Intent</code>达到关闭应用程序的操作</p>
+<blockquote>
+<p>intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//变成栈顶，就可以退出了</p>
+</blockquote>
+<p>使用<code>Intent</code>打开默认浏览器？</p>
+<blockquote>
+<p>Uri myBlogUri = Uri.parse(“<a href="http://kuikui.javaeye.com" target="_blank" rel="external">http://kuikui.javaeye.com</a>“);<br>returnIt = new Intent(Intent.ACTION_VIEW, myBlogUri);</p>
+</blockquote>
+<p>使用<code>Intent</code>进行页面跳转的几种方式（2种以上）</p>
+<ol>
+<li>直接使用<code>new Intent(this,A.class);</code></li>
+<li>使用<code>androidManifest.xml</code>当中<code>Activity</code>配置的<code>action</code><blockquote>
+<p>Intent intent =new Intent();<br>intent.setAction(“.ui.activities.ClubWallpaperActivity”);<br>startActivity(intent);</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="SQLite数据库及操作"><code>SQLite</code>数据库及操作</h3><p>SQLite只支持哪5种数据类型</p>
+<blockquote>
+<p>NULL，INTERGER,REAL(浮点数),TEXT(文本),BLOB(打二进制对象)</p>
+</blockquote>
+<p>对于varchar(n)等数据类型是否可以接受，为什么</p>
+<blockquote>
+<p>SQLite会在运算或保存是将他们转换成上面5中类型中相应的数据。它允许吧各种类型的数据保存到任何类型字段中。</p>
+</blockquote>
+<p>如何保存用户发表文章的时间？</p>
+<h3 id="SQLiteOpenHelper"><code>SQLiteOpenHelper</code></h3><p>当升级软件时需要更新数据库表结构，使用<code>SQLiteOpenHelper</code>的什么方法将会被调用。假设之前的版本为1，如今的版本为2，现在进行更新修改<code>person</code>表的字段，将添加一个属性职位：<code>work</code></p>
+<h3 id="SharedPreferences"><code>SharedPreferences</code></h3><p>应用领域：</p>
+<p>使用<code>SharedPreferences</code>进行存储，更改，获取，删除操作。<br>存储：姓名-李四，年龄-19<br>更改：年龄-20<br>获取：姓名和年龄的信息，使用Toast进行显示<br>删除：姓名-李四，年龄-20 进行删除。</p>
+<blockquote>
+<p>关键得分点：<br>主要是对：<code>SharedPreferences.Editor editor = settings.edit();</code>进行相应的操作<br><code>editor.commit();</code>进行提交</p>
+</blockquote>
+<h3 id="调试">调试</h3><p>写出几种常见的试调方式</p>
+<blockquote>
+<p>Toast，Log，自定输出（System.out.println）</p>
+</blockquote>
+<p>分别写出<code>Log.v() Log.d() Log.i() Log.w() 以及 Log.e()</code>中，<code>v,d,i,w,e</code>所代表的意思</p>
+<blockquote>
+<p>VERBOSE，DEBUG,INFO, WARN，ERROR</p>
+</blockquote>
+<h3 id="设计模式">设计模式</h3><p>简述下面设计模式的理解描述，应用以及相处相应的案例</p>
+<ol>
+<li>观察者模式</li>
+<li>适配器模式</li>
+</ol>
+<h3 id="如何更新UI">如何更新UI</h3><p>不在主UI线程中更新，而使用异步线程：Handler，AsyncTask </p>
+<h3 id="溢出：关于AndroidOOM，以及如何避免？">溢出：关于AndroidOOM，以及如何避免？</h3><ol>
+<li>应该尽量避免static成员变量引用资源耗费过多的实例</li>
+<li>线程产生内存泄露的主要原因在于线程生命周期的不可控。将线程的内部类，改为静态内部类</li>
+</ol>
+<h3 id="图片处理：如何解决Bitmap带给我们的内存问题？">图片处理：如何解决Bitmap带给我们的内存问题？</h3><blockquote>
+<p>在用完Bitmap时，要及时的recycle掉<br>巧妙的运用软引用（SoftRefrence）<br>及时释放Cursor<br>尽量使用9path图片<br>Adapter要使用convertView复用<br>显示的区域很小,记载一个缩小过的图片.如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BitmapFactory.<span class="keyword">Options</span> <span class="keyword">options</span> = <span class="keyword">new</span> BitmapFactory.<span class="keyword">Options</span>(); <span class="keyword">options</span>.inSampleSize = <span class="number">2</span>;<span class="comment">//图片宽高都为原来的二分之一，即图片为原来的四分之一</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="操作题：">操作题：</h3><h4 id="模拟登录，注册和注销">模拟登录，注册和注销</h4><p>已知：注册账号：admin 密码：qq123456。进行模拟登录，登录后可以进行对文本框进行编辑，否则要求其进行登录<br>要求：<br>简单的界面布局，<br>view使用：</p>
+<ul>
+<li>输入框editText，要求不符合规则输入进行提示，账号只能是英文+数字。输入框的长度在<code>6~12</code>之间</li>
+<li>进度条progress处理登录以及注销时候跳转出现（1~2）或者出现100进度的进度条，</li>
+<li>button的使用，要求圆角，蓝色</li>
+</ul>
+<p>使用：<code>MVC</code>的思想，进行模块化。</p>
+<h4 id="ListView的使用">ListView的使用</h4><p>对<strong>布局，ListView，Style,Selector</strong>的考察<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1429929706478.png" alt="Alt text"> <img src="http://7tebhw.com1.z0.glb.clouddn.com/1429929565748.png" alt="Alt text"><br>标记5的为60dp，标记6的为28dp</p>
+<p>要求：<br>当点击子项的时候，颜色变为红色。<br>使用<code>Style.xml</code>进行模块化属性配置</p>
+<h3 id="附加题一：实战问题分析">附加题一：实战问题分析</h3><ol>
+<li>动态设置TextView的width不起作用。如何解决或者写出正确的代码</li>
+<li>对android碎片化处理：如何获取手机的屏幕尺寸</li>
+<li><code>onSaveInstanceState</code>的功能以及触发的时机</li>
+</ol>
+<h3 id="附加题二（阿里客户端笔试题）">附加题二（阿里客户端笔试题）</h3><ol>
+<li>请列举一些导致”APP启动慢”感受的典型问题或负面模式及相应的优化策略。</li>
+<li>Android生态中典型的碎片化问题，如何适配。</li>
+<li>请以你的平台为例，解释APP“卡”的原因，并给出“滑屏卡顿”与“转场卡顿”的解决方案</li>
+</ol>
+<h3 id="扩展">扩展</h3><p>加入网络的模块，在<code>php</code>后台端，暴露出<code>json</code>数据，使用安卓进行<code>json</code>数据的读取。（通过这种方式即可对网络编程方面进行一定的考察）</p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/01/android-Tab/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          android使用Tab效果滑动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/18/Red-Black-Game/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">红黑牌游戏--广技师选修课</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="News-release-system" data-title="三轮考题（新闻发布系统）" data-url="http://hexo.trity.cc/2015/04/25/News-release-system/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

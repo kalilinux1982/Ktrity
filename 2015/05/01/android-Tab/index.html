@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android使用Tab效果滑动 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用SlidingTabLayout这是android L最新的使用tab的效果，Google Play的应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android使用Tab效果滑动">
+<meta property="og:url" content="http://hexo.trity.cc/2015/05/01/android-Tab/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="使用SlidingTabLayout这是android L最新的使用tab的效果，Google Play的应用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android使用Tab效果滑动">
+<meta name="twitter:description" content="使用SlidingTabLayout这是android L最新的使用tab的效果，Google Play的应用">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 15px;">ActionBar</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android-Tab" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/01/android-Tab/" class="article-date">
+  	<time datetime="2015-05-01T01:13:16.000Z" itemprop="datePublished">2015-05-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android使用Tab效果滑动
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sldingTabLayout/">sldingTabLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tab/">tab</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用SlidingTabLayout">使用<code>SlidingTabLayout</code></h3><p>这是<code>android L</code>最新的使用<code>tab</code>的效果，<code>Google Play</code>的应用<br><a id="more"></a><br>教程：<a href="https://github.com/codepath/android_guides/wiki/Google-Play-Style-Tabs-using-SlidingTabLayout" target="_blank" rel="external">Google Play Style Tabs using SlidingTabLayout</a>，挺详细的教程<br>通过这篇：<a href="http://blog.csdn.net/Mr_WangGang/article/details/42340265" target="_blank" rel="external">SlidingTabLayout的使用—替代ActionBar的Tab导航</a>，可以知道</p>
+<ul>
+<li>样式：直接在<code>xml</code>上的<code>SlidingTabLayout</code>上改，他是继承<code>HorizontalScrollView</code>的，可以通过<code>background</code>来设置颜色</li>
+<li>加入<code>custom_tab.xml</code>的时候，是代表<code>tab</code>使用<strong>图标</strong></li>
+<li>改<code>tab</code>中的字体颜色，参考这里：<a href="http://stackoverflow.com/questions/26362555/custom-selected-tab-text-color-in-slidingtablayout" target="_blank" rel="external">Custom selected tab text color in SlidingTabLayout</a></li>
+<li>改下划线的颜色：<br>第一种方式：<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.<span class="built_in">color</span>.tab_text_color));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>第二种方式<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">slidingTabLayout.setCustomTabColorizer(<span class="keyword">new</span> SlidingTabLayout.TabColorizer()&#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getIndicatorColor</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> Color.WHITE;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>想改<code>Tab</code>点击的效果，发现<code>slidingTabLayout</code>的<code>createDefaultTabView</code>方法，是根据设定的<code>Theme</code>来进行改变的。</li>
+<li>如何使用在<code>Fragment</code>中的静态方法<code>newInstance</code>传递数据呢<br>思路：通过<code>Bundle</code>进行传递，在<code>oncreate</code>方法中使用<code>getArguments()</code>方法得到，另一种方式是通过<code>fragment.title</code>的方式来改变成员变量的值<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>  <span class="keyword">static</span>  <span class="keyword">final</span> String BG_PAGE=<span class="string">"BgManagerFragment"</span>;</span><br><span class="line">  <span class="keyword">public</span>  <span class="keyword">static</span>  <span class="keyword">final</span> String FRAGMENT_TITLE=<span class="string">"tilte"</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> mPage;</span><br><span class="line">  <span class="keyword">private</span> String title;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">BgManagerFragment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// Required empty public constructor</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">BgManagerFragment <span class="title">newInstance</span><span class="params">(String title,<span class="keyword">int</span> page)</span></span>&#123;</span><br><span class="line">      Bundle args = <span class="keyword">new</span> Bundle();</span><br><span class="line">      args.putInt(BG_PAGE, page);</span><br><span class="line">      args.putString(FRAGMENT_TITLE, title);</span><br><span class="line">      BgManagerFragment fragment = <span class="keyword">new</span> BgManagerFragment();</span><br><span class="line">      fragment.setArguments(args);</span><br><span class="line">      <span class="keyword">return</span> fragment;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">      mPage=getArguments().getInt(BG_PAGE);<span class="comment">//在newInstance方法中通过Bundle进行传递值</span></span><br><span class="line">      title=getArguments().getString(FRAGMENT_TITLE);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>另一种，只列出<code>newInstance()</code>方法<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">BgManagerFragment <span class="title">newInstance</span><span class="params">(String title,<span class="keyword">int</span> page)</span></span>&#123;</span><br><span class="line">    BgManagerFragment fragment = <span class="keyword">new</span> BgManagerFragment();</span><br><span class="line">    fragment.title=title;</span><br><span class="line">    fragment.mPage=page;</span><br><span class="line">    <span class="keyword">return</span>  fragment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>如何让不同的<code>fragment</code>加载不同数据，进行不同的显示。通过别人的案例，可以知道需要对<code>adapter</code>和<code>Fragment</code>进行修改</li>
+</ul>
+<h3 id="添加图标到tab">添加图标到<code>tab</code></h3><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="built_in">int</span>[] imageResId = &#123;</span><br><span class="line">        R.drawable.ic_one,</span><br><span class="line">        R.drawable.ic_two,</span><br><span class="line">        R.drawable.ic_three</span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line"><span class="comment">// ... </span></span><br><span class="line"> </span><br><span class="line">@Override </span><br><span class="line"><span class="keyword">public</span> CharSequence getPageTitle(<span class="built_in">int</span> position) &#123;</span><br><span class="line">    <span class="comment">// Generate title based on item position </span></span><br><span class="line">    <span class="comment">// return tabTitles[position]; </span></span><br><span class="line">    Drawable <span class="built_in">image</span> = context.getResources().getDrawable(imageResId[position]);</span><br><span class="line">    <span class="built_in">image</span>.setBounds(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">image</span>.getIntrinsicWidth(), <span class="built_in">image</span>.getIntrinsicHeight());</span><br><span class="line">    SpannableString sb = <span class="keyword">new</span> SpannableString(<span class="string">" "</span>);</span><br><span class="line">    ImageSpan imageSpan = <span class="keyword">new</span> ImageSpan(<span class="built_in">image</span>, ImageSpan.ALIGN_BOTTOM);</span><br><span class="line">    sb.setSpan(imageSpan, <span class="number">0</span>, <span class="number">1</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);</span><br><span class="line">    <span class="keyword">return</span> sb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>但是由于<code>SlidingTabLayout</code>自带的<code>TextView</code>会调用 <code>setAllCaps(true)</code>，会<strong>取消所有的 ImageSpan 的效果</strong>。所以需要<strong>自定义TabView</strong>。</p>
+</blockquote>
+<p>接着：<br>在 <code>tab.setViewPager(pager)</code> 之前调用 <code>tab.setCustomTabView(R.layout.custom_tab,0)</code> 设置自定义TabView。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">tab</span>.setCustomTabView(R.layout.custom_tab,<span class="number">0</span>);</span><br><span class="line"><span class="constant">tab</span>.setViewPager(pager);</span><br></pre></td></tr></table></figure></p>
+<p>如果要每个TabView都<strong>平分屏幕宽度</strong>，只需在自定义的TextView 上加上权重属性即可;<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">android:</span>layout_weight=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="通过以上方式，是实现了显示图标，但是selector的效果完全没有了，那么如何解决？">通过以上方式，是实现了显示图标，但是<code>selector</code>的效果完全没有了，那么如何解决？</h4><p>参考：<a href="http://kalkanotel.com/add-icons-to-slidingtablayout-instead-of-text-i429670.htm" target="_blank" rel="external">ADeveloper: Add Icons to SlidingTabLayout instead of Text</a>的答案5.<br>和这个<a href="http://stackoverflow.com/questions/23472759/add-icons-to-slidingtablayout-instead-of-text" target="_blank" rel="external">Add Icons to SlidingTabLayout instead of Text</a>，只有三个赞成的答案，得到启发。</p>
+<h4 id="第一种解决方式：">第一种解决方式：</h4><p>按照<code>stackoverflow</code>来，就可以解决了<br>第一步：修改适配器<code>FragmentPagerAdapter</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClubMemberManagerAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] imageResId = &#123;R.drawable.tab_select_home,R.drawable.tab_select_act,R.drawable.tab_select_data&#125;;</span><br><span class="line"><span class="comment">//添加一个获取资源的方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDrawableId</span><span class="params">(<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">    <span class="comment">//Here is only example for getting tab drawables</span></span><br><span class="line">    <span class="keyword">return</span> imageResId[position];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面这个方法，是为了不让字体消失出来</span></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">   Drawable image = context.getResources().getDrawable(imageResId[position]);</span><br><span class="line">    image.setBounds(<span class="number">0</span>, <span class="number">0</span>, image.getIntrinsicWidth(), image.getIntrinsicHeight());</span><br><span class="line">    SpannableString sb = <span class="keyword">new</span> SpannableString(<span class="string">" "</span>);</span><br><span class="line">    ImageSpan imageSpan = <span class="keyword">new</span> ImageSpan(image, ImageSpan.ALIGN_BOTTOM);</span><br><span class="line">    sb.setSpan(imageSpan, <span class="number">0</span>, <span class="number">1</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);</span><br><span class="line">    <span class="keyword">return</span> sb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二步：<br>那么相应的加载<code>SlidingTabLayout</code>的<code>Activity/fragment</code>就不需要这句</p>
+<blockquote>
+<p>//slidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);</p>
+</blockquote>
+<p>第三步：<br>修改<code>SlidingTabLayout</code>的<code>populateTabStrip()</code>方法<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">private void populateTabStrip() &#123;</span><br><span class="line">	//强制转换成ClubMemberManagerAdapter，为了得到ClubMemberManagerAdapter下的得到资源的方法：getDrawableId</span><br><span class="line">    final ClubMemberManagerAdapter <span class="variable">adapter =</span> (ClubMemberManagerAdapter)mViewPager.getAdapter();</span><br><span class="line">    final OnClickListener <span class="variable">tabClickListener =</span> new TabClickListener();</span><br><span class="line"></span><br><span class="line">    for (int <span class="variable">i =</span> <span class="number">0</span>; i &lt; adapter.getCount(); i++) &#123;</span><br><span class="line">        View <span class="variable">tabView =</span> <span class="constant">null</span>;</span><br><span class="line">        TextView <span class="variable">tabTitleView =</span> <span class="constant">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (mTabViewLayoutId != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable">tabView =</span> LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,</span><br><span class="line">                    <span class="constant">false</span>);</span><br><span class="line">            <span class="variable">tabTitleView =</span> (TextView) tabView.findViewById(mTabViewTextViewId);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">tabView =</span>= <span class="constant">null</span>) &#123;</span><br><span class="line">	        //默认是生成TextView</span><br><span class="line">	      	<span class="variable">tabView =</span> createDefaultTabView(getContext());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">tabImageView =</span>= <span class="constant">null</span> &amp;&amp; TextView.class.isInstance(tabView)) &#123;</span><br><span class="line">	        //这里依然是TextView.class.的判断父系</span><br><span class="line">            <span class="variable">tabImageView =</span> (ImageView) tabView;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mDistributeEvenly) &#123;</span><br><span class="line">            LinearLayout.LayoutParams <span class="variable">lp =</span> (LinearLayout.LayoutParams) tabView.getLayoutParams();</span><br><span class="line">            lp.<span class="variable">width =</span> <span class="number">0</span>;</span><br><span class="line">            lp.<span class="variable">weight =</span> <span class="number">1</span>;</span><br><span class="line">        &#125;   				  </span><br><span class="line">        tabTitleView.setCompoundDrawablesWithIntrinsicBounds(<span class="number">0</span>,adapter.getDrawableId(i), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        //上面这句是TexView加载资源的方式，参数为（左，上，右，下）</span><br><span class="line">		tabTitleView.setText(adapter.getPageTitle(i));</span><br><span class="line">		tabTitleView.setTextColor(Color.WHITE);</span><br><span class="line">        tabView.setOnClickListener(tabClickListener);</span><br><span class="line">        String <span class="variable">desc =</span> mContentDescriptions.get(i, <span class="constant">null</span>);</span><br><span class="line">        <span class="keyword">if</span> (desc != <span class="constant">null</span>) &#123;</span><br><span class="line">            tabView.setContentDescription(desc);</span><br><span class="line">        &#125;</span><br><span class="line">        mTabStrip.addView(tabView);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">i =</span>= mViewPager.getCurrentItem()) &#123;</span><br><span class="line">            tabView.setSelected(<span class="constant">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过上面的配置会发现，图标的<code>selector</code>效果有了，但是毕竟是TextView,虽然没有<strong>字体</strong>，但还是会继续<strong>占位置</strong>，效果依然不理想。所以…</p>
+<h4 id="第二种解决方式：直接将TextView改成ImageView便可以。">第二种解决方式：直接将<code>TextView</code>改成<code>ImageView</code>便可以。</h4><p>第一步：同理，依然需要资源<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ClubMemberManagerAdapter</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">FragmentPagerAdapter</span> &#123;</span></span><br><span class="line">public int getDrawableId(int position)&#123;</span><br><span class="line">    <span class="comment">//Here is only example for getting tab drawables</span></span><br><span class="line">    <span class="keyword">return</span> imageResId[position];<span class="comment">//图标资源</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line">public <span class="type">CharSequence</span> getPageTitle(int position) &#123;</span><br><span class="line">    <span class="keyword">return</span> tabTitles[position];<span class="comment">//使用imageview,这个只是一个摆设而已</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二步，依然是修改<code>SlidingTabLayout</code>的方法<code>populateTabStrip</code><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">private void populateTabStrip() &#123;</span><br><span class="line">   //强制转换成ClubMemberManagerAdapter，为了得到ClubMemberManagerAdapter下的得到资源的方法：getDrawableId</span><br><span class="line">   final ClubMemberManagerAdapter <span class="variable">adapter =</span> (ClubMemberManagerAdapter)mViewPager.getAdapter();</span><br><span class="line">   final OnClickListener <span class="variable">tabClickListener =</span> new TabClickListener();</span><br><span class="line"></span><br><span class="line">   for (int <span class="variable">i =</span> <span class="number">0</span>; i &lt; adapter.getCount(); i++) &#123;</span><br><span class="line">       View <span class="variable">tabView =</span> <span class="constant">null</span>;</span><br><span class="line">       ImageView <span class="variable">tabImageView =</span> <span class="constant">null</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (mTabViewLayoutId != <span class="number">0</span>) &#123;</span><br><span class="line">           // If there is a custom tab view layout id set, try <span class="constant">and</span> inflate it</span><br><span class="line">           <span class="variable">tabView =</span> LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,</span><br><span class="line">                   <span class="constant">false</span>);</span><br><span class="line">           <span class="variable">tabImageView =</span> (ImageView) tabView.findViewById(mTabViewTextViewId);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="variable">tabView =</span>= <span class="constant">null</span>) &#123;</span><br><span class="line">	       //改成ImageView生成方式</span><br><span class="line">           <span class="variable">tabView =</span> createImageViewTabView(getContext());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="variable">tabImageView =</span>= <span class="constant">null</span> &amp;&amp; ImageView.class.isInstance(tabView)) &#123;</span><br><span class="line">	       //这里是ImageView.class.的判断父系，因为改成ImageView的生成方式</span><br><span class="line">           <span class="variable">tabImageView =</span> (ImageView) tabView;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (mDistributeEvenly) &#123;</span><br><span class="line">           LinearLayout.LayoutParams <span class="variable">lp =</span> (LinearLayout.LayoutParams) tabView.getLayoutParams();</span><br><span class="line">           lp.<span class="variable">width =</span> <span class="number">0</span>;</span><br><span class="line">           lp.<span class="variable">weight =</span> <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       //加载图标资源</span><br><span class="line">       tabImageView.setImageResource(adapter.getDrawableId(i));</span><br><span class="line">       tabView.setOnClickListener(tabClickListener);</span><br><span class="line">       String <span class="variable">desc =</span> mContentDescriptions.get(i, <span class="constant">null</span>);</span><br><span class="line">       <span class="keyword">if</span> (desc != <span class="constant">null</span>) &#123;</span><br><span class="line">           tabView.setContentDescription(desc);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       mTabStrip.addView(tabView);</span><br><span class="line">       <span class="keyword">if</span> (<span class="variable">i =</span>= mViewPager.getCurrentItem()) &#123;</span><br><span class="line">           tabView.setSelected(<span class="constant">true</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第三步，就是方法<code>createImageViewTabView</code>是怎么实现的呢<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function">ImageView <span class="title">createImageViewTabView</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">    ImageView imageView = <span class="keyword">new</span> ImageView(context);</span><br><span class="line">    imageView.setLayoutParams(<span class="keyword">new</span> LinearLayout.LayoutParams(</span><br><span class="line">            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));</span><br><span class="line"></span><br><span class="line">    TypedValue outValue = <span class="keyword">new</span> TypedValue();</span><br><span class="line">    getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,</span><br><span class="line">            outValue, <span class="keyword">true</span>);<span class="comment">//使用系统的主题</span></span><br><span class="line">    imageView.setBackgroundResource(outValue.resourceId);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> padding = (<span class="keyword">int</span>) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);</span><br><span class="line">    imageView.setPadding(padding, padding, padding, padding);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> imageView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>改成这种imageview后，感觉已经将<code>SlidingTabLayout</code>改成了自能加载ImageView的类了。</p>
+<h4 id="用另一种的实现">用另一种的实现</h4><p><a href="https://guides.codepath.com/android/Sliding-Tabs-with-PagerSlidingTabStrip" target="_blank" rel="external">Sliding Tabs with PagerSlidingTabStrip</a></p>
+<h3 id="Fragment上使用Tab">Fragment上使用<code>Tab</code></h3><p>参考：<a href="https://guides.codepath.com/android/ActionBar-Tabs-with-Fragments" target="_blank" rel="external">ActionBar Tabs with Fragments</a></p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/25/News-release-system/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">三轮考题（新闻发布系统）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android-Tab" data-title="android使用Tab效果滑动" data-url="http://hexo.trity.cc/2015/05/01/android-Tab/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
