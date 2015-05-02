@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>application学习 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍：Application是单例模式的类，android系统为每个应用程序创建一个Application类的对象且只创建一个。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="application学习">
+<meta property="og:url" content="http://hexo.trity.cc/2015/05/03/android-application-learn/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="介绍：Application是单例模式的类，android系统为每个应用程序创建一个Application类的对象且只创建一个。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="application学习">
+<meta name="twitter:description" content="介绍：Application是单例模式的类，android系统为每个应用程序创建一个Application类的对象且只创建一个。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 15px;">ActionBar</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars1.githubusercontent.com/u/7866290?v=3&amp;s=400">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android-application-learn" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/03/android-application-learn/" class="article-date">
+  	<time datetime="2015-05-02T16:17:16.000Z" itemprop="datePublished">2015-05-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      application学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/application/">application</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><h3 id="介绍：">介绍：</h3><p><code>Application</code>是单例模式的类，<code>android</code>系统为每个应用程序创建一个<code>Application</code>类的<strong>对象且只创建一个</strong>。<a id="more"></a><br>启动<code>Application</code>时，系统会<strong>创建一个PID</strong>，即进程ID，所有的<code>Activity</code>都会在此进程<strong>上运行</strong>。<br><code>Application</code>创建的时候初始化<strong>全局变量</strong>，同一个应用的所有<code>Activity</code><strong>都可以取到这些全局变量的值</strong><br><code>Application</code>对象的生命周期是整个程序中最长的，它的<strong>生命周期就等于这个程序的生命周期</strong><br><code>Application</code><strong>全局的单例的</strong>，所以在不同的<code>Activity,Service</code>中获得的对象都是<strong>同一个对象</strong></p>
+</li>
+<li><h3 id="应用领域：数据传递、数据共享和数据缓存等操作。">应用领域：<strong>数据传递、数据共享和数据缓存</strong>等操作。</h3><ul>
+<li>复杂数据的传递：<ul>
+<li><code>Activity A,</code> 跳转到 <code>Activity B</code>，用<code>Intent.putExtra()</code> 或者<code>Bundle</code>进行传递数据，但是：<code>Intent和Bundle</code>所能携带的数据类型都是一些<strong>基本的数据类型</strong>，想实现<strong>复杂的数据传递</strong>就比较麻烦了，通常需要实现 <code>Serializable</code>或者<code>Parcellable接口</code></li>
+<li>用<code>Application</code>进行解决：（思路）<br>在<code>Application</code>中创建一个<code>HashMap</code> ，以字符串为索引，<code>Object</code>为value这样我们的<code>HashMap</code>就可以<strong>存储任何类型的对象</strong>了。在<code>Activity A</code>中把<strong>需要传递的对象</strong>放入这个<code>HashMap</code>，然后通过<code>Intent</code>或者<strong>其它途经</strong>再把这<strong>索引的字符串</strong>传递给<code>Activity B</code> <code>,Activity B</code> 就可以<strong>根据这个字符串</strong>在<code>HashMap</code>中取出<strong>这个对象</strong>了。只要再向下转个型 ，就实现了对象的传递。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="生命周期">生命周期</h3><ul>
+<li><code>onCreate</code> <strong>在创建应用程序时创建</strong></li>
+<li><code>onTerminate</code> <strong>当终止应用程序对象时调用，不保证一定被调用</strong>，当程序是被内核终止以便为其他应用程序释放资源，那么将不会提醒，并且不调用应用程序的对象的<code>onTerminate</code>方法而直接终止进 程</li>
+<li><code>onLowMemory</code> <strong>当后台程序已经终止资源还匮乏时会调用这个方法</strong>。<strong>好的应用程序一般会在这个方法里面释放一些不必要的资源来应付当后台程序已经终止</strong>，前台应用程序内存还不够时的情况。<code>onConfigurationChanged</code> 配置改变时触发这个方法</li>
+<li><strong>备注</strong>:<br><code>application 被杀死的情况分析</code>：（<code>Application</code>的生命周期代表这个<strong>应用的生命周期</strong>）<br>为了决定在内存较低的时候杀掉哪个进程, Android会根据运行在这些进程内的组件及他们的状态把进程划分成一个”重要程度层次”. 其重要的程度按以下规则排序:<ul>
+<li>1：<strong>前端进程可以是一个持有运行在屏幕最前端并与用户交互的Activity的进程(onResume方法被调用时)</strong>，也可以是持有一个正在运行的IntentReceiver(也就是说他正在执行自己的onReceiveIntent方法)的进程. 在系统中, 只会有少数这样的进程, 并且<strong>除非内存已经低到不够这些进程运行</strong>, 否则系统不会主动杀掉这些进程. 这时, 设备通常已经达到了需要内存整理的状态, 所以杀掉这些进程是为了不让用户界面停止响应.</li>
+<li>2：<strong>可视进程是持有一个被用户可见, 但没有显示在最前端 (onPause方法被调用时) 的Activity的进程</strong>. 举例来说, 这种进程通常出现在一个前端Activity以一个对话框出现并保持前一个Activity可见时. 这种进程被系统认为是极其重要的, 并且通常不会被杀掉, 除非<strong>为了保持所有前端进程正常运行不得不杀掉这些可见进程</strong>.</li>
+<li>3：<strong>服务进程是持有一个Service的进程, 该Service是由startService()方法启动的</strong>, 尽管这些进程用户不能直接看到, 但是通常他们做的工作用户是十分关注的(例如, 在<strong>后台播放mp3或是在后台下载 上传文件</strong>), 所以, 除非为了保持所有的前端进程和可视进程正常运行外, 系统是不会杀掉服务进程的.</li>
+<li>4：<strong>后台进程是持有一个不再被用户可见的Activity(onStop()方法被调用时)的进程</strong>. 这些进程不会直接影响用户体验. 加入这些进程已经完整的,正确的完成了自己的生命周期(访问Activity查看更多细节), 系统会在为前三种进程释放内存时随时杀掉这些后台进程. 通常会有很多的后台进程在运行, 所以这些进程被<strong>存放在一个LRU列表中</strong>, 以保证在低内存的时候, <strong>最近一个被用户看到的进程会被最后杀掉</strong>.</li>
+<li>5：<strong>空进程是没有持有任何活动应用组件的进程.</strong> 保留这种进程的唯一理由是<strong>为了提供一种缓存机制, 缩短他的应用下次运行时的启动时间</strong>. 就其本身而言, 系统杀掉这些进程的目的是为了在这些空进程和底层的核心缓存之间平衡整个系统的资源. 来自：<code>www.2cto.com</code></li>
+<li>当需要给一个进程分类的时候, 系统会在该进程中处于活动状态的所有组件里掉选一个重要等级最高作为分类依据. 查看Activity, Service,和IntentReceiver的文档, 了解<strong>每个组件在进程整个生命周期中的贡献.</strong> 每一个classes的文档详细描述他们在<strong>各自应用的生命周期中所起得作用</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现步骤：">实现步骤：</h3><pre><code><span class="number">1.</span>继承<span class="type">Application</span>
+
+        public <span class="class"><span class="keyword">class</span> <span class="title">CustomApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span>{</span>
+            <span class="annotation">@Override</span>
+            public void onCreate(){}
+        }
+</code></pre><p>继承<code>Application类</code>，主要重写里面的<code>onCreate（）</code>方法（android.app.Application包的onCreate（）<strong>才是真正的Android程序的入口点）</strong><br>    2.在<code>AndroidManifest.xml</code>文件中配置自定义的<code>Application</code></p>
+<pre><code>&lt;<span class="type">application</span>
+        android:<span class="property">name</span>=<span class="string">"CustomApplication"</span>&gt;
+&lt;/<span class="type">application</span>&gt;
+</code></pre><ol>
+<li><p>如何获得<code>Application</code>的信息（全局变量）呢？</p>
+<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">FirstActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Activity</span>{</span>
+    <span class="keyword">private</span> <span class="type">CustomApplication</span> app;
+    <span class="annotation">@Override</span>
+    public void onCreate(<span class="type">Bundle</span> savedInstanceState){
+        .....
+        app = (<span class="type">CustomApplication</span>) getApplication(); <span class="comment">// 获得CustomApplication对象</span>
+        <span class="type">Log</span>.i(<span class="string">"FirstActivity"</span>, <span class="string">"初始值====="</span> + app.getValue()); <span class="comment">// 获取进程中的全局变量值，看是否是初始化值</span>
+        app.setValue(<span class="string">"Harvey Ren"</span>); <span class="comment">// 重新设置值</span>
+        <span class="type">Log</span>.i(<span class="string">"FirstActivity"</span>, <span class="string">"修改后====="</span> + app.getValue()); <span class="comment">// 再次获取进程中的全局变量值，看是否被修改</span>
+    }
+}
+</code></pre></li>
+</ol>
+<p>只需要调用<code>Context</code>的 <code>getApplicationContext</code><strong>或者</strong><code>Activity的getApplication方法</code>来<strong>获得</strong>一个<strong>Application对象</strong>，然后再得到相应的<strong>成员变量</strong>即可。</p>
+<ul>
+<li><h3 id="知识延伸：">知识延伸：</h3><p><code>MemoryLeak</code><br>在Java中内存泄漏是指：<strong>某个(某些)对象已经不在被使用应该被gc所回收，但有一个对象持有这个对象的引用而阻止这个对象被回收。比如</strong>我们通常会这样创建一个<code>View TextView tv = new TextView(this);</code>这里的<code>this</code>通常都是<code>Activity</code>。所以这个<code>TextView</code>就持有着<strong>这个Activity的引用</strong>。<br>通常情况下，当<strong>用户转动手机</strong>的时候，android会重新调用<code>OnCreate()</code>方法<strong>生成一个新的Activity</strong>，原来的 Activity应该<strong>被GC所回收</strong>。但<strong>如果有个对象比如一个View的作用域超过了这个Activity</strong>(比如有一个<code>static</code>对象或者我们把这个 <code>View</code>的引用放到了<code>Application</code>当中)，这时候<strong>原来的Activity将不能被GC所回收</strong>，<code>Activity</code>本身又持有<strong>很多对象的引用，所以 整个Activity的内存被泄漏了。</strong></p>
+<blockquote>
+<p>备注：经常导致内存泄漏核心原因：<br> keeping a long-lived reference to a Context.持有一个context的对象，从而gc不能回收。</p>
+</blockquote>
+<ul>
+<li>1.<strong>一个View的作用域超出了所在的Activity的作用域</strong>，比如一个static的View或者把一个View cache到了application当中 etc<br><strong>理解</strong>：内存：注意静态的数据和缓存中的数据；注意释放；</li>
+<li>2.<strong>某些与View关联的Drawable的作用域超出了Activity的作用域</strong>。</li>
+<li>3.<strong>Runnable对象：</strong>比如在一<strong>个Activity中启用了一个新线程去执行一个任务</strong>，在这期间这<strong>个Activity被系统回收</strong>了， <strong>但Runnalbe的 任务还没有执行完毕并持有Activity的引用而泄漏</strong>，<strong>但这种泄漏一般来泄漏一段时间，只有Runnalbe的线程执行完闭，这个 Activity又可以被正常回收了</strong>。</li>
+<li>4.<strong>内存类的对象作用域超出Activity的范围：</strong>比如定义了<strong>一个内存类来存储数据</strong>，又把<strong>这个内存类的对象传给了其它Activity 或者Service等</strong>。因为内部类的对象<strong>会持有当前类的引用</strong>，所以也就持<strong>有了Context的引用</strong>。<code>解决方法</code>是如果<strong>不需要当前的引用把内部类写成static</strong>或者，把<strong>内部类抽取出来变成一个单独的类</strong>，或者把<strong>避免内部对象作用域超出Activity的作用域</strong>。<br><code>out Of Memery Error</code> 在android中<strong>每一个程序所分到的内存大小是有限的</strong>，如果超过了这个数就会报<code>Out Of Memory Error</code>。</li>
+<li>注意：所以尽量把程序中的一些<strong>大的数据cache到本地文件</strong>。以免内存使用量超标。记得数据传递完成之后，把存放在application<code>的HashMap中的数据remove掉</code>，以免发生内存的泄漏。</li>
+</ul>
+</li>
+<li><h3 id="参考资料：">参考资料：</h3><p><a href="http://www.cnblogs.com/renqingping/archive/2012/10/24/Application.html" target="_blank" rel="external">Android中Application类用法</a><br><a href="http://blog.csdn.net/suntaifly/article/details/39395981" target="_blank" rel="external">android application 详解</a>—深入浅出，讲解完整的Application，以及所涉及到的扩展知识。<br><a href="http://www.cnblogs.com/chon/archive/2011/07/11/2102894.html" target="_blank" rel="external">Android笔记 Application对象的使用-数据传递以及内存泄漏问题</a></p>
+</li>
+</ul>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/01/android-Tab/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android使用Tab效果滑动</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android-application-learn" data-title="application学习" data-url="http://hexo.trity.cc/2015/05/03/android-application-learn/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
