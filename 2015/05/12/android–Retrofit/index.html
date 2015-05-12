@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android网络开发框架--Retrofit | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目地址：square/retrofit
+实战一：依据IP进行get请求谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：Retrofit 解析 JSON 数据，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android网络开发框架--Retrofit">
+<meta property="og:url" content="http://hexo.trity.cc/2015/05/12/android–Retrofit/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="项目地址：square/retrofit
+实战一：依据IP进行get请求谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：Retrofit 解析 JSON 数据，">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1425996413153.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android网络开发框架--Retrofit">
+<meta name="twitter:description" content="项目地址：square/retrofit
+实战一：依据IP进行get请求谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：Retrofit 解析 JSON 数据，">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 15px;">ActionBar</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-android–Retrofit" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/12/android–Retrofit/" class="article-date">
+  	<time datetime="2015-05-12T10:33:16.000Z" itemprop="datePublished">2015-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android网络开发框架--Retrofit
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目地址：<a href="https://github.com/square/retrofit" target="_blank" rel="external">square/retrofit</a></p>
+<h3 id="实战一：依据IP进行get请求">实战一：依据IP进行get请求</h3><p>谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：<a href="http://www.jianshu.com/p/87c36d8dabce" target="_blank" rel="external">Retrofit 解析 JSON 数据</a>，<a id="more"></a>其中讲到是<a href="http://www.jsonschema2pojo.org/" target="_blank" rel="external">JSON数据在线转换</a>，扔进<code>json</code>格式的，导入<code>jar</code>，这篇讲得额外简单让人摸不了头脑，最后，直接根据谷歌+经验，将<code>jar</code>包进行解压，发现里面并不是<code>.class</code>而是<code>.java</code>文件，然后把相关的类导入，即可解决将要通过<code>gson</code>转换成的类，实在太方便了。最后留一个配置的截图</p>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/1425996413153.png" alt="Alt text"></p>
+<h3 id="api">api</h3><p>有了以上的<strong>实战经验</strong>，那么就可以更好地查看官方的wiki了：<a href="http://square.github.io/retrofit/" target="_blank" rel="external">A type-safe REST client for Android and Java</a>，这里有详细的教程，很多网上的，都是翻译此处了。</p>
+<p>这个<code>gitbook</code>很好地讲解（中文）<a href="http://malinkang.gitbooks.io/androidnote/content/retrofitshi_yong.html" target="_blank" rel="external">Retrofit使用</a>：</p>
+<h3 id="实战二：直接请求url，得到对象数组">实战二：直接请求url，得到对象数组</h3><p><strong>解析对象数组</strong></p>
+<p>想法是用<code>List</code>进行保存，<code>Json</code>数据<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="string">"j_id"</span>:<span class="string">"18"</span>,<span class="string">"j_name"</span>:<span class="string">"\u674e\u5803\u742a"</span>,<span class="string">"j_sex"</span>:<span class="string">"\u5973"</span>,<span class="string">"j_lphone"</span>:<span class="string">"13794672169"</span>,<span class="string">"j_sphone"</span>:<span class="string">"695169"</span>,<span class="string">"j_class"</span>:<span class="string">"2014"</span>,<span class="string">"clg_id"</span>:<span class="string">"1"</span>,<span class="string">"m_id"</span>:<span class="string">"1"</span>,<span class="string">"j_mail"</span>:null,<span class="string">"subdep_id"</span>:<span class="string">"1"</span>,<span class="string">"subdep_ps"</span>:<span class="string">"\u5e73\u9762\u8bbe\u8ba1\u3001\u89c6\u89c9\u4f20\u8fbe\u4e00\u7c7b\uff1f"</span>,<span class="string">"j_skill"</span>:<span class="string">"PS\u3001AI\u521a\u5165\u95e8\u3002corel draw\u4f1a\u7528\u4e9b\u8bb8\u3002"</span>,<span class="string">"j_brief"</span>:<span class="string">"\u5c06\u6765\u6253\u7b97\u4ece\u4e8b\u5e7f\u544a\u4e1a\uff0c\u6240\u4ee5\u3002\u3002\u3002\u60f3\u5b66\u66f4\u591a\uff01\u4e13\u4e1a\u6559\u7684\u662f\u6587\u6848\u7b56\u5212\u4e00\u7c7b\u7684\uff0c\u4e5f\u60f3\u6709\u70b9\u786c\u8d27\uff08\u6280\u672f\uff09\u508d\u508d\u8eab\u3002"</span>,<span class="string">"come_id"</span>:<span class="string">"9999"</span>,<span class="string">"j_time"</span>:<span class="string">"2015-03-15 22:08:05"</span>,<span class="string">"is_del"</span>:<span class="string">"0"</span>,<span class="string">"clg_name"</span>:<span class="string">"\u6587\u5b66\u9662"</span>,<span class="string">"m_name"</span>:<span class="string">"\u65b0\u95fb\u5b66"</span>,<span class="string">"subdep_name"</span>:<span class="string">"\u7f8e\u5de5\u8bbe\u8ba1"</span>&#125;,&#123;<span class="string">"j_id"</span>:<span class="string">"19"</span>,<span class="string">"j_name"</span>:<span class="string">"\u90d1\u9521\u4f73"</span>,<span class="string">"j_sex"</span>:<span class="string">"\u7537"</span>,<span class="string">"j_lphone"</span>:<span class="string">"13727516251"</span>,<span class="string">"j_sphone"</span>:<span class="string">"616251"</span>,<span class="string">"j_class"</span>:<span class="string">"2014"</span>,<span class="string">"clg_id"</span>:<span class="string">"3"</span>,<span class="string">"m_id"</span>:<span class="string">"7"</span>,<span class="string">"j_mail"</span>:null,<span class="string">"subdep_id"</span>:<span class="string">"1"</span>,<span class="string">"subdep_ps"</span>:<span class="string">"\u4e0d\u592a\u6e05\u695a"</span>,<span class="string">"j_skill"</span>:<span class="string">"c.c++"</span>,<span class="string">"j_brief"</span>:<span class="string">"\u8bf7\u7ed9\u6211\u4e00\u6b21\u673a\u4f1a\u5427\uff01\uff01"</span>,<span class="string">"come_id"</span>:<span class="string">"9999"</span>,<span class="string">"j_time"</span>:<span class="string">"2015-03-15 22:13:10"</span>,<span class="string">"is_del"</span>:<span class="string">"0"</span>,<span class="string">"clg_name"</span>:<span class="string">"\u4fe1\u606f\u79d1\u5b66\u4e0e\u5de5\u7a0b\u5b66\u9662"</span>,<span class="string">"m_name"</span>:<span class="string">"\u8f6f\u4ef6\u5de5\u7a0b"</span>,<span class="string">"subdep_name"</span>:<span class="string">"\u7f8e\u5de5\u8bbe\u8ba1"</span>&#125;,]</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>Retrofit</code>的解决方案：（异步）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HClabSignUtils</span> &#123;</span></span><br><span class="line">    <span class="comment">//eg:http://hclab.cn/hclab/index.php/Admin/Handler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ENDPOINT = <span class="string">"http://hclab.cn"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HClabSignService</span> &#123;</span></span><br><span class="line">        <span class="annotation">@GET</span>(<span class="string">"/hclab/index.php/&#123;user&#125;/Handler"</span>)</span><br><span class="line">        <span class="typename">void</span> getMessages(<span class="annotation">@Path</span>(<span class="string">"user"</span>) String person, Callback&lt;List&lt;Person&gt;&gt; callback);<span class="comment">//异步方法，并加入泛型集合</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> RestAdapter restAdapter = <span class="keyword">new</span> RestAdapter.Builder()</span><br><span class="line">            .setEndpoint(ENDPOINT)</span><br><span class="line">            .build();</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">public</span> HClabSignService hClabSignService = restAdapter.create(HClabSignService.<span class="keyword">class</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后再相应的<code>fragment</code>或者<code>activity</code>进行实现<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HClabSignUtils.hClabSignService.getMessages(<span class="string">"Admin"</span>, <span class="keyword">new</span> Callback&lt;List&lt;Person&gt;&gt;() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">success</span><span class="params">(List&lt;Person&gt; persons, Response response)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//相应的操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">failure</span><span class="params">(RetrofitError <span class="keyword">error</span>)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//错误处理相应的操作</span></span><br><span class="line">        Tools.showToast(getActivity(), <span class="string">"failure:"</span> + <span class="keyword">error</span>.getKind());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="retrofit_同步操作，对请求操作超时的设定与加强">retrofit 同步操作，对请求操作超时的设定与加强</h3><p>同步操作必须配合<code>AsyncTask</code>异步线程进行操作，但是这往往会遇到的情况就是网络环境不佳或者断网的情况，如果不加以设定，那么就会导致<strong>app异常</strong>或者体验不佳。<br>方法一：使用<code>ErrorHandler</code>进行操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyErrorHandler</span> <span class="keyword">implements</span> <span class="title">ErrorHandler</span> </span>&#123;</span><br><span class="line">  <span class="annotation">@Override</span> <span class="function"><span class="keyword">public</span> Throwable <span class="title">handleError</span><span class="params">(RetrofitError cause)</span> </span>&#123;</span><br><span class="line">    Response r = cause.getResponse();</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="keyword">null</span> &amp;&amp; r.getStatus() == <span class="number">401</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> UnauthorizedException(cause);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cause;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RestAdapter restAdapter = <span class="keyword">new</span> RestAdapter.Builder()</span><br><span class="line">    .setEndpoint(<span class="string">"https://api.github.com"</span>)</span><br><span class="line">    .setErrorHandler(<span class="keyword">new</span> MyErrorHandler())</span><br><span class="line">    .setLogLevel(RestAdapter.LogLevel.FULL)  <span class="comment">// Do this for development too.</span></span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure></p>
+<p>方法二：<br>通过<code>google</code>进行搜索<code>retrofit request timeout</code>发现这里<a href="http://stackoverflow.com/questions/24669309/how-to-increase-timeout-for-retrofit-requests-in-robospice-android" target="_blank" rel="external">How to increase timeout for retrofit requests in robospice android?</a>，发现要使用<code>OkHttpClient</code>进行设定，并且还要加入额外的包<code>compile &quot;com.squareup.okhttp:okhttp:1.5.4&quot;</code>，但是还是抛出了异常，但知道是从这里<code>restAdapter.setClient()</code>进行设定，直到这里<a href="http://stackoverflow.com/questions/23893113/nosuchmethoderror-if-i-am-using-okhttp-2-0-and-the-latest-retrofit" target="_blank" rel="external">NoSuchMethodError if i am using okhttp 2.0 and the latest retrofit?</a>，才知道为什么还会报错，最佳解决办法是自己写一个类来继承<code>UrlConnectionClient</code>，而且发现自己之前已经在这里有作者进行回答的答案：<a href="https://github.com/square/retrofit/issues/641" target="_blank" rel="external">How to config the Timeout</a>.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HClabSignUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">//eg:http://hclab.cn/hclab/index.php/Admin/Handler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ENDPOINT = <span class="string">"http://hclab.cn"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HClabSignService</span> </span>&#123;</span><br><span class="line">        <span class="annotation">@GET</span>(<span class="string">"/hclab/index.php/&#123;user&#125;/Handler"</span>)</span><br><span class="line">        <span class="function">List&lt;Person&gt; <span class="title">getMessages</span><span class="params">(@Path(<span class="string">"user"</span>)</span> String person)</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Person&gt; <span class="title">creativeService</span><span class="params">(String message)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        RestAdapter restAdapter = <span class="keyword">new</span> RestAdapter.Builder()</span><br><span class="line">                .setEndpoint(ENDPOINT).setClient(<span class="keyword">new</span> MyUrlConnectionClient()).setLogLevel(RestAdapter.LogLevel.FULL)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        HClabSignService hClabSignService = restAdapter.create(HClabSignService.class);</span><br><span class="line">        <span class="keyword">return</span> hClabSignService.getMessages(message);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MyUrlConnectionClient</span> <span class="keyword">extends</span> <span class="title">UrlConnectionClient</span> </span>&#123;</span><br><span class="line">	    <span class="annotation">@Override</span></span><br><span class="line">	    <span class="function"><span class="keyword">protected</span> HttpURLConnection <span class="title">openConnection</span><span class="params">(Request request)</span> <span class="keyword">throws</span> IOException</span>&#123;<span class="comment">//抛出异常，给上一层进行处理</span></span><br><span class="line">	        HttpURLConnection connection= <span class="keyword">super</span>.openConnection(request);</span><br><span class="line">	        connection.setConnectTimeout(<span class="number">15</span> * <span class="number">1000</span>);<span class="comment">//设置请求连接时间</span></span><br><span class="line">	        connection.setReadTimeout(<span class="number">30</span> * <span class="number">1000</span>);<span class="comment">//设置请求读取时间</span></span><br><span class="line">	        <span class="keyword">return</span> connection;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用retrofit的开源项目">使用retrofit的开源项目</h3><p><a href="https://github.com/xiprox/WaniKani-for-Android" target="_blank" rel="external">WaniKani-for-Android</a><br>以及问答：<br><a href="https://github.com/square/retrofit/issues" target="_blank" rel="external">square/retrofit problem</a></p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.totrit.com/2014/12/retrofit%E4%BD%BF%E7%94%A8%E5%88%9D%E4%BD%93%E9%AA%8C/" target="_blank" rel="external">Retrofit使用初体验</a>，结合背景来介绍。</p>
+<p><a href="http://www.cnblogs.com/angeldevil/p/3757335.html" target="_blank" rel="external">快速Android开发系列网络篇之Retrofit</a>，这里应该是结合自己的项目进行讲解，目前没有用到。所以留着</p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/19/Material Design-FloatingActionButton/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Material Design --FloatingActionButton
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/03/android-application-learn/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">application学习</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="android–Retrofit" data-title="android网络开发框架--Retrofit" data-url="http://hexo.trity.cc/2015/05/12/android–Retrofit/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
