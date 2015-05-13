@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用Gradle发布项目到JCenter仓库 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Gradle发布项目到JCenter仓库">
+<meta property="og:url" content="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1431311005956.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1431312029002.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Gradle发布项目到JCenter仓库">
+<meta name="twitter:description" content="有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 15px;">ActionBar</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/git/" style="font-size: 15px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg">
+				<hgroup>
+				  <h1 class="header-author">Trity</h1>
+				</hgroup>
+			</div>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Gradle-JCenter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/13/Gradle-JCenter/" class="article-date">
+  	<time datetime="2015-05-13T05:59:27.000Z" itemprop="datePublished">2015-05-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Gradle发布项目到JCenter仓库
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？<a id="more"></a>如下：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1431311005956.png" alt="Alt text"><br>本教程教你如何实现。历经整整一个下午，终于搞定了。</p>
+<h3 id="详细教程">详细教程</h3><p><a href="http://zhengxiaopeng.com/2015/02/02/%E4%BD%BF%E7%94%A8Gradle%E5%8F%91%E5%B8%83%E9%A1%B9%E7%9B%AE%E5%88%B0JCenter%E4%BB%93%E5%BA%93/" target="_blank" rel="external">使用Gradle发布项目到JCenter仓库</a>，此处不再多于讲诉，按着步骤来，便可以实现，但还是遇到一些bug，在这里记录下， 方便后人。</p>
+<ol>
+<li>在<strong>顶层</strong>项目加入<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">   <span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.0.0'</span></span><br><span class="line">   <span class="keyword">classpath</span> <span class="string">'com.github.dcendents:android-maven-plugin:1.2'</span></span><br><span class="line">   <span class="keyword">classpath</span> <span class="string">'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'</span></span><br><span class="line">   <span class="comment">// NOTE: Do not place your application dependencies here; they belong</span></span><br><span class="line">   <span class="comment">// in the individual module build.gradle files</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这三条语句最好是不要变。<br>本来我的默认<code>gradle</code>为<code>1.1</code>的，结果配置过程中，报：<code>Cannot call getBootClasspath() before setTargetInfo() is called</code><br>上面教程会缺少：<code>classpath &#39;com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0&#39;</code>这句（教程是在后面才加入），但我失去这句还是会报错，貌似<strong>无法进行刷新的错误，具体忘记了</strong></p>
+<ol>
+<li>配置<code>library</code>中的<code>build.gradle</code>，注意<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">siteUrl</span> =</span> <span class="symbol">'https</span>:<span class="comment">//github.com/zhengxiaopeng/BounceProgressBar'      // 项目的主页</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gitUrl</span> =</span> <span class="symbol">'https</span>:<span class="comment">//github.com/zhengxiaopeng/BounceProgressBar.git'   // Git仓库的url</span></span><br><span class="line">group = <span class="string">"org.rocko.bpb"</span>                                        <span class="comment">// Maven Group ID for the artifact，一般填你唯一的包名</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>特别是<code>group</code>，它是唯一标示你的项目地址的，到时候进行<code>compile</code>会进行用到，这里我的疏忽，第一次的时候，直接用到作者的了，结果变成了引用作者的类库，而自己的却不见了，应该是产生了冲突。<br>值得注意的这里：<br><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This is the library version used when deploying the artifact</span></span><br><span class="line"><span class="keyword">version</span> = <span class="string">"1.0.0"</span></span><br></pre></td></tr></table></figure></p>
+<p>必须制定<strong>版本号</strong>，否则审核成功后，你将会发现<code>unspecified</code>标示的错误。</p>
+<ol>
+<li><p>获得<code>bintray</code>的信息，如账号和key<br>具体看这里：<a href="http://blog.csdn.net/maosidiaoxian/article/details/43148643" target="_blank" rel="external">使用Gradle发布Android开源项目到JCenter</a></p>
+</li>
+<li><p>下一步就是进行<code>install</code>和<code>bintrayUpload</code>了<br>刚开始，我以为我要使用<code>cmd</code>的命令行或者<code>git</code>的命令行进行操作，结果提示我找不到相应的指令。看了教程是提示我要下载<code>gradle</code>，到时<code>android studio</code>本身就是使用<code>Gradle</code>进行编译，为什么还是这种提示呢？而且网上下载的并不是<code>exe</code>文件，该怎样进行安装呢？最后突发奇想，我便使用<code>android studio</code>自带的<code>terminal</code>进行敲入如下的命令，发现会<code>as</code>自己先下载好对应<code>gradle</code>的版本，并进行执行相应的命令，突然觉得这真是太好用了。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1431312029002.png" alt="Alt text"></p>
+</li>
+<li><p>最后是向管理员提交类库的申请了。这一步管理员进行审核等待，在结果没有出来之前还是可以马上进行加体验的，不过需要以下的配置。(在需要导入类库的地方)</p>
+</li>
+</ol>
+<p>第一步：在顶层的<code>build.gradle</code><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">buildscript</span> &#123;</span><br><span class="line">    <span class="title">repositories</span> &#123;</span><br><span class="line">        <span class="title">maven</span> &#123; <span class="title">url</span> <span class="string">"http://dl.bintray.com/trity93/maven"</span> &#125;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        <span class="title">classpath</span> <span class="string">'com.android.tools.build:gradle:1.1.0'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">allprojects &#123;</span><br><span class="line">    <span class="title">repositories</span> &#123;</span><br><span class="line">        <span class="title">maven</span> &#123; <span class="title">url</span> <span class="string">"http://dl.bintray.com/trity93/maven"</span> &#125;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主要是加入(申明去哪里进行拉取类库)</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">maven</span> &#123; <span class="title">url</span> <span class="string">"http://dl.bintray.com/trity93/maven"</span> &#125;</span><br><span class="line">mavenCentral()</span><br></pre></td></tr></table></figure>
+<p>上面<code>maven</code>格式为：<code>maven {url http://dl.bintray.com/你的用户名/maven}</code></p>
+<p>第二步：在自己的<code>app</code>的<code>build.gradle</code>添加<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">compile</span> <span class="string">'cc.trity.floatingactionbutton:library:+'</span></span><br></pre></td></tr></table></figure></p>
+<p>这里的library统一使用<code>+</code>,或者使用你<strong>对应的版本号</strong>；</p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.cnblogs.com/qianxudetianxia/p/4322331.html" target="_blank" rel="external">Android拓展系列(12)—使用Gradle发布aar项目到JCenter仓库</a><br><a href="http://blog.saymagic.cn/2015/02/16/release-library-to-jcenter.html" target="_blank" rel="external">Android Studio发布项目到Jcenter</a></p>
+
+        
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/12/android–Retrofit/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android网络开发框架--Retrofit</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Gradle-JCenter" data-title="使用Gradle发布项目到JCenter仓库" data-url="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
