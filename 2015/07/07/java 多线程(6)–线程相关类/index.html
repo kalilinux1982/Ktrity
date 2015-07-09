@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java 多线程(6)--线程相关类 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ThreadLocal其功能非常简单：为每一个使用该变量的线程都提供一个变量值的副本，每个线程都可以独立地改变自己的副本，而不会和其他线程产生冲突。提供三个public方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 多线程(6)--线程相关类">
+<meta property="og:url" content="http://hexo.trity.cc/2015/07/07/java 多线程(6)–线程相关类/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="ThreadLocal其功能非常简单：为每一个使用该变量的线程都提供一个变量值的副本，每个线程都可以独立地改变自己的副本，而不会和其他线程产生冲突。提供三个public方法">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/20150707101628.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 多线程(6)--线程相关类">
+<meta name="twitter:description" content="ThreadLocal其功能非常简单：为每一个使用该变量的线程都提供一个变量值的副本，每个线程都可以独立地改变自己的副本，而不会和其他线程产生冲突。提供三个public方法">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/Builder模式/" style="font-size: 10px;">Builder模式</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ThreadLocal/" style="font-size: 12.5px;">ThreadLocal</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 17.5px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 15px;">java</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a><a href="/tags/原型模式/" style="font-size: 10px;">原型模式</a><a href="/tags/外观模式/" style="font-size: 10px;">外观模式</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工厂方法模式/" style="font-size: 10px;">工厂方法模式</a><a href="/tags/建造者模式/" style="font-size: 10px;">建造者模式</a><a href="/tags/抽象工厂模式/" style="font-size: 10px;">抽象工厂模式</a><a href="/tags/桥接模式/" style="font-size: 10px;">桥接模式</a><a href="/tags/状态模式/" style="font-size: 10px;">状态模式</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/策略/" style="font-size: 10px;">策略</a><a href="/tags/简单工厂模式/" style="font-size: 10px;">简单工厂模式</a><a href="/tags/线程同步/" style="font-size: 10px;">线程同步</a><a href="/tags/线程池/" style="font-size: 10px;">线程池</a><a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a><a href="/tags/组合模式/" style="font-size: 10px;">组合模式</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/装饰模式/" style="font-size: 10px;">装饰模式</a><a href="/tags/观察者/" style="font-size: 10px;">观察者</a><a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a><a href="/tags/适配器模式/" style="font-size: 10px;">适配器模式</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a><a href="/tags/静态工厂方法模式/" style="font-size: 10px;">静态工厂方法模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-java 多线程(6)–线程相关类" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/07/java 多线程(6)–线程相关类/" class="article-date">
+  	<time datetime="2015-07-07T01:50:16.000Z" itemprop="datePublished">2015-07-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java 多线程(6)--线程相关类
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ThreadLocal/">ThreadLocal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ThreadLocal">ThreadLocal</h3><p>其功能非常简单：为每一个使用该变量的线程都提供一个变量值的副本，每个线程都可以独立地改变自己的副本，而不会和其他线程产生冲突。<br>提供三个<code>public</code>方法<a id="more"></a></p>
+<ul>
+<li>T get() 返回当前副本的值</li>
+<li>remove 删除此线程局部变量中当前线程的值</li>
+<li>set() 设置此线程局部变量中当前线程副本中的值</li>
+</ul>
+<p>详细使用参考：<a href="http://lavasoft.blog.51cto.com/62575/51926/" target="_blank" rel="external">深入研究java.lang.ThreadLocal类</a></p>
+<h3 id="包装线程不安全的集合">包装线程不安全的集合</h3><p>使用<code>collections</code>提供静态方法把线程不安全的集合包装成线程安全的集合。分别为<code>synchronized+对应的集合名</code></p>
+<h3 id="线程安全的集合类">线程安全的集合类</h3><p><img src="http://7tebhw.com1.z0.glb.clouddn.com/20150707101628.png" alt="enter image description here"></p>
+<p>以<code>Concurrent</code>开头的集合，支持并发访问的集合，支持多个线程并发<strong>写入访问</strong>，写入是线程安全，但<strong>读取不必锁定</strong>，采用复杂的算法并不会锁定整个集合。</p>
+<ul>
+<li><code>ConcurrentLinedQueue</code>,使用在多个线程共享访问一个公共集合时。不许使用<code>null</code>值，访问无须等待</li>
+<li><code>ConcurrentHashMap</code>支持<strong>16个线程并发写入</strong>，超过16个，需要等待，可以设置<code>concurrentcyLevel</code>构造参数来是更多的并发写入线程（默认16个）</li>
+</ul>
+<p>缺点：当使用<strong>迭代器</strong>遍历集合时，该迭代器可能不能反映创建迭代器之后所做的修改，但程序却不会抛出异常。</p>
+<p>以<code>CopyOnWrite</code>开头的集合</p>
+<ul>
+<li><code>CopyOnWriteArrayList</code> 复制底层的数组的方式来实现<strong>写操作</strong>。执行<strong>读操作</strong>时不必<strong>加锁和阻塞</strong>。当执行写入操作的时候（add,set,remove）会对数组的副本进行操作，所以是线程安全的。当执行写入操作的时候需要频繁地复制数组，性能比较差，但读操作就很快，很安全。所读&gt;写。适用在<strong>缓存</strong></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/07/java-thread-option-class/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          java 多线程(6)--线程相关类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/06/java 多线程(5)–线程池/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java 多线程(5)--线程池</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java 多线程(6)–线程相关类" data-title="java 多线程(6)--线程相关类" data-url="http://hexo.trity.cc/2015/07/07/java 多线程(6)–线程相关类/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

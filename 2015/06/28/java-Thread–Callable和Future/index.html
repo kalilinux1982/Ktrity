@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java 多线程(1.1) | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Callable和Future创建线程Callable接口 提供了一个call()方法作为线程执行体，call方法比run方法强大，因为：有返回值，并且可以返回异常，但是，返回值并不能直接调用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 多线程(1.1)">
+<meta property="og:url" content="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="使用Callable和Future创建线程Callable接口 提供了一个call()方法作为线程执行体，call方法比run方法强大，因为：有返回值，并且可以返回异常，但是，返回值并不能直接调用。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 多线程(1.1)">
+<meta name="twitter:description" content="使用Callable和Future创建线程Callable接口 提供了一个call()方法作为线程执行体，call方法比run方法强大，因为：有返回值，并且可以返回异常，但是，返回值并不能直接调用。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/Builder模式/" style="font-size: 10px;">Builder模式</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ThreadLocal/" style="font-size: 12.5px;">ThreadLocal</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 17.5px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 15px;">java</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a><a href="/tags/原型模式/" style="font-size: 10px;">原型模式</a><a href="/tags/外观模式/" style="font-size: 10px;">外观模式</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工厂方法模式/" style="font-size: 10px;">工厂方法模式</a><a href="/tags/建造者模式/" style="font-size: 10px;">建造者模式</a><a href="/tags/抽象工厂模式/" style="font-size: 10px;">抽象工厂模式</a><a href="/tags/桥接模式/" style="font-size: 10px;">桥接模式</a><a href="/tags/状态模式/" style="font-size: 10px;">状态模式</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/策略/" style="font-size: 10px;">策略</a><a href="/tags/简单工厂模式/" style="font-size: 10px;">简单工厂模式</a><a href="/tags/线程同步/" style="font-size: 10px;">线程同步</a><a href="/tags/线程池/" style="font-size: 10px;">线程池</a><a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a><a href="/tags/组合模式/" style="font-size: 10px;">组合模式</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/装饰模式/" style="font-size: 10px;">装饰模式</a><a href="/tags/观察者/" style="font-size: 10px;">观察者</a><a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a><a href="/tags/适配器模式/" style="font-size: 10px;">适配器模式</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a><a href="/tags/静态工厂方法模式/" style="font-size: 10px;">静态工厂方法模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-java-Thread–Callable和Future" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/28/java-Thread–Callable和Future/" class="article-date">
+  	<time datetime="2015-06-28T05:41:16.000Z" itemprop="datePublished">2015-06-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java 多线程(1.1)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Executor/">Executor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Future/">Future</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用Callable和Future创建线程">使用<code>Callable</code>和<code>Future</code>创建线程</h3><p><code>Callable</code>接口 提供了一个<code>call()</code>方法作为线程执行体，<code>call</code>方法比<code>run</code>方法强大，因为：<strong>有返回值，并且可以返回异常</strong>，但是，返回值并<strong>不能直接调用</strong>。<a id="more"></a></p>
+<h4 id="Executor">Executor</h4><p>配合<code>Callable</code>来使用的，在ExecutorService接口中声明了若干个<code>submit</code>方法的重载版本：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Callable&lt;T&gt; task)</span></span>;</span><br><span class="line">&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Runnable task, T result)</span></span>;</span><br><span class="line">Future&lt;?&gt; submit(Runnable task);</span><br></pre></td></tr></table></figure></p>
+<p>一般情况下我们使用第一个submit方法和第三个submit方法，第二个submit方法很少使用。</p>
+<p>详细方法使用：<a href="http://josh-persistence.iteye.com/blog/2145120" target="_blank" rel="external">Java并发编程 - Executor，Executors，ExecutorService, CompletionServie,Future,Callable</a><br>资料：<br><a href="http://it.deepinmind.com/java/2014/11/26/executorservice-10-tips-and-tricks.html" target="_blank" rel="external">ExecutorService的十个使用技巧</a><br><a href="http://blog.csdn.net/ns_code/article/details/17465497" target="_blank" rel="external">【Java并发编程】之十九：并发新特性—Executor框架与线程池（含代码）</a><br>———&gt;使用<code>Executor</code>有<strong>利于管理线程，线程池的操作。</strong>例如：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误使用：</span></span><br><span class="line"><span class="comment">// 创建10个任务并执行</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">	futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(<span class="keyword">new</span> TaskWithResult(i));</span><br><span class="line">	<span class="keyword">new</span> Thread(futureTask).start();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历任务的结果</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	System.out.<span class="built_in">println</span>(futureTask.<span class="built_in">get</span>()); <span class="comment">//不知道进行阻塞哪一个</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确使用如下：应该使用Executor线程池进行存储，并判断每一个是否执行完毕</span></span><br><span class="line"><span class="keyword">public</span> class CallableDemo1 &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">		<span class="keyword">long</span> start=System.currentTimeMillis();</span><br><span class="line">		ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line">		List&lt;Future&lt;<span class="keyword">String</span>&gt;&gt; resultList = <span class="keyword">new</span> ArrayList&lt;Future&lt;<span class="keyword">String</span>&gt;&gt;();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 创建10个任务并执行</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="comment">// 使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中</span></span><br><span class="line">			Future&lt;<span class="keyword">String</span>&gt; future = executorService</span><br><span class="line">					.submit(<span class="keyword">new</span> TaskWithResult(i));</span><br><span class="line">			<span class="comment">// 将任务执行结果存储到List中</span></span><br><span class="line">			resultList.<span class="built_in">add</span>(future);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 遍历任务的结果</span></span><br><span class="line">		<span class="keyword">for</span> (Future&lt;<span class="keyword">String</span>&gt; fs : resultList) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">while</span> (!fs.isDone())</span><br><span class="line">					;<span class="comment">// Future返回如果没有完成，则一直循环等待，直到Future返回完成</span></span><br><span class="line">				System.out.<span class="built_in">println</span>(fs.<span class="built_in">get</span>()); <span class="comment">// 打印各个线程（任务）执行的结果</span></span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">				<span class="comment">// 启动一次顺序关闭，执行以前提交的任务，但不接受新任务</span></span><br><span class="line">				executorService.shutdown();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.<span class="built_in">println</span>(<span class="string">"用时："</span>+(System.currentTimeMillis()-start));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TaskWithResult implements Callable&lt;<span class="keyword">String</span>&gt; &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="built_in">int</span> id;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> TaskWithResult(<span class="built_in">int</span> id) &#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> TaskWithResult() &#123;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 任务的具体过程，一旦任务传给ExecutorService的submit方法， 则该方法自动在一个线程上执行</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">String</span> call() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">		System.out.<span class="built_in">println</span>(<span class="string">"call()方法被自动调用！！！    "</span></span><br><span class="line">				+ Thread.currentThread().getName());</span><br><span class="line">		<span class="comment">// 该返回结果将被Future的get方法得到</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"call()方法被自动调用，任务返回的结果是："</span> + id + <span class="string">"    "</span></span><br><span class="line">				+ Thread.currentThread().getName();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Future介绍">Future介绍</h4><blockquote>
+<p>Future就是对于具体的<strong>Runnable或者Callable任务</strong>的执行结果进行<br>取消、查询是否完成、获取结果、设置结果操作。get方法会阻塞，直到任务返回结果(Future简介)</p>
+</blockquote>
+<p>使用<code>Future</code>控制关联的<code>Callable</code>任务，如：取消，得到<code>Callable</code>返回值，检测是否取消，是否完成。</p>
+<p><strong>注意</strong>：当时用得到返回值<code>get</code>方法时，将进行阻塞，知道线程<code>Callable</code>完成，返回返回值。</p>
+<h4 id="FutureTask(是Future的唯一实现类)">FutureTask(是Future的唯一实现类)</h4><blockquote>
+<p>FutureTask则是一个RunnableFuture<v>，而RunnableFuture实现了Runnbale又实现了Futrue<v>这两个接口</v></v></p>
+</blockquote>
+<p>另外包装<code>Runnable和Callable&lt;V&gt;</code>， 由构造函数注入依赖。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public <span class="type">FutureTask</span>(<span class="type">Callable</span>&lt;V&gt; callable) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (callable == null)  </span><br><span class="line">        throw new <span class="type">NullPointerException</span>();  </span><br><span class="line">    this.callable = callable;  </span><br><span class="line">    this.state = <span class="type">NEW</span>;       // ensure visibility <span class="keyword">of</span> callable  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">public <span class="type">FutureTask</span>(<span class="type">Runnable</span> runnable, V <span class="literal">result</span>) &#123;  </span><br><span class="line">    this.callable = <span class="type">Executors</span>.callable(runnable, <span class="literal">result</span>);  </span><br><span class="line">    this.state = <span class="type">NEW</span>;       // ensure visibility <span class="keyword">of</span> callable  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>从以上可以看到——&gt;<strong>Runnable注入会被Executors.callable()函数转换为Callable类型，即FutureTask最终都是执行Callable类型的任务</strong></p>
+<p>详细使用，请看以下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> ThirdThread <span class="keyword">implements</span> Callable&lt;<span class="keyword">Long</span>&gt; &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">Long</span> <span class="keyword">call</span>() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">		<span class="keyword">long</span> i=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(;i&lt;<span class="number">1000000000</span>;i++)&#123;</span><br><span class="line"><span class="comment">//			System.out.println(i);</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">		<span class="keyword">long</span> start;</span><br><span class="line">		start=System.currentTimeMillis();</span><br><span class="line">		<span class="comment">//使用ExecutorService进行实现</span></span><br><span class="line">		ExecutorService execute=Executors.newCachedThreadPool();</span><br><span class="line">		ThirdThread rtServer=<span class="keyword">new</span> ThirdThread();</span><br><span class="line">		FutureTask&lt;<span class="keyword">Long</span>&gt; taskServer=<span class="keyword">new</span> FutureTask&lt;&gt;(rtServer);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</span><br><span class="line"><span class="comment">//			System.out.println(i);</span></span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">20</span>)&#123;</span><br><span class="line">				execute.submit(taskServer);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line"><span class="comment">//			taskServer.get();</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"子线程1的返回值"</span>+taskServer.get());</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">// TODO: handle exception</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.<span class="keyword">println</span>(<span class="string">"结束时间："</span>+(System.currentTimeMillis()-start));</span><br><span class="line">		execute.shutdown();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//下面使用Thread线程进行实现</span></span><br><span class="line">		start=System.currentTimeMillis();</span><br><span class="line">		<span class="comment">//创建Callable对象</span></span><br><span class="line">		ThirdThread rt=<span class="keyword">new</span> ThirdThread();</span><br><span class="line">		<span class="comment">//使用FutureTask来包装Callable对象</span></span><br><span class="line">		FutureTask&lt;<span class="keyword">Long</span>&gt; <span class="keyword">task</span>=<span class="keyword">new</span> FutureTask&lt;<span class="keyword">Long</span>&gt;(rt);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</span><br><span class="line"><span class="comment">//			System.out.println(i);</span></span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">20</span>)&#123;</span><br><span class="line">				<span class="keyword">new</span> Thread(<span class="keyword">task</span>,<span class="string">"有返回值的线程"</span>).start();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">//获取线程返回值</span></span><br><span class="line">			System.out.<span class="keyword">println</span>(<span class="string">"子线程2的返回值"</span>+<span class="keyword">task</span>.get());</span><br><span class="line"><span class="comment">//			task.get();</span></span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.<span class="keyword">println</span>(<span class="string">"结束时间："</span>+(System.currentTimeMillis()-start));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">运行结果</span><br><span class="line">子线程<span class="number">1</span>的返回值<span class="number">1000000000</span></span><br><span class="line">结束时间：<span class="number">640</span></span><br><span class="line">子线程<span class="number">2</span>的返回值<span class="number">1000000000</span></span><br><span class="line">结束时间：<span class="number">532</span></span><br></pre></td></tr></table></figure></p>
+<p>上面使用两种方法对<code>callable</code>进行实现，其中一个使用<code>ExecutorService</code>和另一个使用<code>Thread</code>结果发现<code>Executor</code>并不比<code>Thread</code>好。<br>而这篇文章：<a href="http://blog.csdn.net/ns_code/article/details/17465497" target="_blank" rel="external">【Java并发编程】之十九：并发新特性—Executor框架与线程池（含代码）</a>，却这样说</p>
+<blockquote>
+<p>在Java 5之后，通过Executor来启动线程比使用Thread的start方法更好，除了更易管理，效率更好（用线程池实现，节约开销）</p>
+</blockquote>
+<p>显示中进行测试，却没有得到<strong>效率更好</strong>这一说。</p>
+<p><strong>扩展</strong>：不使用线程，单独跑两个<code>++i</code>直到<code>10000000</code>时，使用线程的，才占优势，使用时间少。因为<strong>创建线程</strong>占用很大的开销和时间。以下程序对比<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> i=<span class="number">0</span>;i&lt;<span class="number">10000000</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">20</span>)&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">long</span> j=<span class="number">0</span>;j&lt;<span class="number">10000000</span>;j++)&#123;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.<span class="keyword">out</span>.println(<span class="string">"结束时间："</span>+(System.currentTimeMillis()-start));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>结果</strong>：<br><strong>使用线程为26，不用为30</strong>。当<code>i</code>的数量级更大时，用时地 差距将更加大。</p>
+<h4 id="资料">资料</h4><p><a href="http://blog.csdn.net/bboyfeiyu/article/details/24851847" target="_blank" rel="external">Java中的Runnable、Callable、Future、FutureTask的区别与示例</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3949310.html" target="_blank" rel="external">Java并发编程：Callable、Future和FutureTask</a></p>
+<h4 id="扩展">扩展</h4><p><a href="http://it.deepinmind.com/%E5%B9%B6%E5%8F%91/2015/01/22/forkjoin-framework-vs-parallel-streams-vs-executorservice-the-ultimate-benchmark.html" target="_blank" rel="external">Java中不同的并发实现的性能比较</a>，比较了：<strong>ExecutorService vs. Fork/Join框架 vs. 并行流</strong>在多核（4,8,16,32）处理器下，性能状况。<br><strong>注意</strong>：并不是线程开越多就越好，因为<strong>线程过少会浪费CPU，而过多则会增加负载</strong></p>
+<h3 id="错误处理">错误处理</h3><ul>
+<li><a href="http://blog.csdn.net/wzy_1988/article/details/38922449" target="_blank" rel="external"> 解决java.util.concurrent.RejectedExecutionException</a>，从原理上分析。摘要两种情况：<blockquote>
+<ol>
+<li>线程池显示的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，这个异常就被会抛出来。</li>
+<li>当你的排队策略为有界队列，并且配置的拒绝策略是ThreadPoolExecutor.AbortPolicy，当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/30/java 多线程(3)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          java 多线程(3)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/28/java 多线程(2)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java 多线程(2)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java-Thread–Callable和Future" data-title="java 多线程(1.1)" data-url="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

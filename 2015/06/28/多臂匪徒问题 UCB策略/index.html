@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>多臂匪徒问题 UCB策略 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天是第三天了。今天才发现一个bug，就是判断胜负后，弹出的bug。原来，我并不能打败师兄最渣的版本。伤心…..">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多臂匪徒问题 UCB策略">
+<meta property="og:url" content="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="今天是第三天了。今天才发现一个bug，就是判断胜负后，弹出的bug。原来，我并不能打败师兄最渣的版本。伤心…..">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/IMG_20150629_094613.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/IMG_20150629_094629.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/houhuidu.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/ucb1.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/ucb%E5%85%AC%E5%BC%8F.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多臂匪徒问题 UCB策略">
+<meta name="twitter:description" content="今天是第三天了。今天才发现一个bug，就是判断胜负后，弹出的bug。原来，我并不能打败师兄最渣的版本。伤心…..">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/Builder模式/" style="font-size: 10px;">Builder模式</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ThreadLocal/" style="font-size: 12.5px;">ThreadLocal</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 17.5px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 15px;">java</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a><a href="/tags/原型模式/" style="font-size: 10px;">原型模式</a><a href="/tags/外观模式/" style="font-size: 10px;">外观模式</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工厂方法模式/" style="font-size: 10px;">工厂方法模式</a><a href="/tags/建造者模式/" style="font-size: 10px;">建造者模式</a><a href="/tags/抽象工厂模式/" style="font-size: 10px;">抽象工厂模式</a><a href="/tags/桥接模式/" style="font-size: 10px;">桥接模式</a><a href="/tags/状态模式/" style="font-size: 10px;">状态模式</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/策略/" style="font-size: 10px;">策略</a><a href="/tags/简单工厂模式/" style="font-size: 10px;">简单工厂模式</a><a href="/tags/线程同步/" style="font-size: 10px;">线程同步</a><a href="/tags/线程池/" style="font-size: 10px;">线程池</a><a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a><a href="/tags/组合模式/" style="font-size: 10px;">组合模式</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/装饰模式/" style="font-size: 10px;">装饰模式</a><a href="/tags/观察者/" style="font-size: 10px;">观察者</a><a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a><a href="/tags/适配器模式/" style="font-size: 10px;">适配器模式</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a><a href="/tags/静态工厂方法模式/" style="font-size: 10px;">静态工厂方法模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-多臂匪徒问题 UCB策略" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/28/多臂匪徒问题 UCB策略/" class="article-date">
+  	<time datetime="2015-06-28T02:26:16.000Z" itemprop="datePublished">2015-06-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      多臂匪徒问题 UCB策略
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UCB策略/">UCB策略</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多臂匪徒问题/">多臂匪徒问题</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天是第三天了。今天才发现一个<code>bug</code>，就是判断胜负后，弹出的<code>bug</code>。原来，我并不能打败师兄最渣的版本。伤心…..<a id="more"></a><br>郁闷夹杂不服气的信念，进去前行。</p>
+<h3 id="多臂匪徒问题">多臂匪徒问题</h3><p>对于一个局面，会有众多可选点可供选择落子，如何在这些可选点中进行权衡是围棋要解决的重要问题。而<strong>多臂匪徒问题</strong>就是对于这种在众多选择间进行权衡的情况所建立的模型。</p>
+<h4 id="围棋中应用">围棋中应用</h4><p>一个当前局面就可以看做一个老虎机，当前局面下所有的可选点就是老虎机的多个手臂。<br>以下是我的分析手稿：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/IMG_20150629_094613.jpg" alt="手稿一"><br><img src="http://7tebhw.com1.z0.glb.clouddn.com/IMG_20150629_094629.jpg" alt="手稿二"></p>
+<h4 id="后悔度">后悔度</h4><p>为了衡量各种不同策略间的优劣程度，我们通过引入一个后悔度的概念对这些策略进行评价。</p>
+<p>一个策略的后悔度：当使用该策略多次试探拉动拉手之后所获得的实际汇报和最优策略所能获得回报之间的差值。</p>
+<p>对于不同的策略，其后悔度越小，可以认为其搜索逼近最优结果。</p>
+<p>这个模型的核心思想：在<strong>探索</strong>和<strong>利用</strong>间寻求一个平衡点。</p>
+<ul>
+<li>探索：通过进行更多的试探以获得更多的知识。（一种策略是对<strong>回报低</strong>且<strong>拉动次数相对较少</strong>的拉手继续试探）—&gt;继续对可选的点进行随机模拟，得到相应的回报，等。</li>
+<li>利用：根据当前以获得的不同拉手的回报来选出最好的拉手。</li>
+</ul>
+<p>公式为<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/houhuidu.jpg" alt="enter image description here"></p>
+<h4 id="求解方法">求解方法</h4><p>针对多臂匪徒问题有很多策略给出了解决方案，可分为3类：</p>
+<ol>
+<li>半统一策略<ol>
+<li>e-贪婪策略</li>
+<li>e-优先策略</li>
+<li>e-下降策略</li>
+</ol>
+</li>
+<li>概率匹配策略</li>
+<li>定价策略</li>
+</ol>
+<h3 id="UCB策略">UCB策略</h3><p>可以多臂匪徒模型的后悔度控制在<code>O(lnN)</code>这个级别。</p>
+<p>用于解决多臂匪徒模型中遇到的在探索和利用间寻求平衡的问题。</p>
+<p>限制条件：多臂匪徒模型中<code>K</code>个拉手的回报在<code>[0,1]</code>区间</p>
+<h4 id="算法伪代码">算法伪代码</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">每个拉手访问一次</span><br><span class="line"><span class="keyword">loop</span></span><br><span class="line">	计算每个拉手j的ucb1上限信心索引Ij</span><br><span class="line">	访问上限信息索引最大的拉手</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">loop</span></span><br></pre></td></tr></table></figure>
+<p>公式为：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/ucb1.jpg" alt="enter image description here"><br>继续探讨公式<br>公式中的<code>2</code>应该改为<code>C</code>，更通用，而<code>C</code>的取值，依靠经验而得。依靠实际情况而定。研究人员发现，当<code>C=min{1/4,Vj[Tj(n)]}</code>的时候算法的性能明显提升。</p>
+<p>通过理解<code>UCB</code>，自己进行猜想上面的公式图片也有说明。<strong>在总次数n下，进行随机访问一个点后，对这点进行模拟对弈至终局，得到相应的访问次数和回报值，一直循环至n次结束。再通过UCB值进行计算，此时的xj，我这里的计算为：赢的次数/执行的次数。最后等到最大的UCB值作为下一个下棋点。</strong><br>下列是算法：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ChessPoint aiSearch(<span class="built_in">int</span> <span class="built_in">color</span>, <span class="built_in">int</span>[][] cbStatus,</span><br><span class="line">		ChessPointControll mChessPointControll) &#123;</span><br><span class="line">	ChessPoint chessPoint = <span class="keyword">new</span> ChessPoint();</span><br><span class="line">	ArrayList&lt;ChessPoint&gt; moves = MoveGenerator.jawsGenerator(cbStatus,mChessPointControll,-<span class="built_in">color</span>);<span class="comment">// 获得走法队列</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 打乱顺序，让随机性更加彻底</span></span><br><span class="line"><span class="comment">//		Collections.shuffle(moves);</span></span><br><span class="line">	<span class="keyword">if</span>(moves.<span class="built_in">size</span>()!=<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="built_in">int</span> x=<span class="number">0</span>;x&lt;PLACE_MAX;x++)&#123;<span class="comment">//进行随机模拟博弈</span></span><br><span class="line">			Random randomSelect = <span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">			<span class="built_in">int</span> y=randomSelect.nextInt(moves.<span class="built_in">size</span>());<span class="comment">//进行随机选择</span></span><br><span class="line">			moves.<span class="built_in">get</span>(y).addSelfTotalCount();<span class="comment">//增加</span></span><br><span class="line">			mChessPointControll.play(moves.<span class="built_in">get</span>(y).getX(), moves.<span class="built_in">get</span>(y).getY(), <span class="built_in">color</span>, cbStatus);<span class="comment">//下棋</span></span><br><span class="line">			<span class="comment">//新建棋盘，为蒙特卡洛对弈准备</span></span><br><span class="line">			ChessBoard board = <span class="keyword">new</span> ChessBoard(cbStatus);</span><br><span class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;<span class="comment">//进行蒙特卡洛对弈</span></span><br><span class="line">				Random <span class="built_in">random</span> = <span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; userMoves = MoveGenerator</span><br><span class="line">						.generator(board.getChessBoard(),-<span class="built_in">color</span>);<span class="comment">// 获得走法队列</span></span><br><span class="line">				<span class="keyword">if</span> (userMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;<span class="comment">//因为再走法中将不符合规则的情况排除了，所以有可能会为0的情况</span></span><br><span class="line">					moves.<span class="built_in">get</span>(y).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">int</span> j = <span class="built_in">random</span>.nextInt(userMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll.play(userMoves.<span class="built_in">get</span>(j).getX(),</span><br><span class="line">						userMoves.<span class="built_in">get</span>(j).getY(), -<span class="built_in">color</span>,</span><br><span class="line">						board.getChessBoard()).getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					moves.<span class="built_in">get</span>(y).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; pcMoves = MoveGenerator</span><br><span class="line">						.generator(board.getChessBoard(),<span class="built_in">color</span>);</span><br><span class="line">				<span class="keyword">if</span> (pcMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				j = <span class="built_in">random</span>.nextInt(pcMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll</span><br><span class="line">						.play(pcMoves.<span class="built_in">get</span>(j).getX(), pcMoves.<span class="built_in">get</span>(j).getY(),</span><br><span class="line">								<span class="built_in">color</span>, board.getChessBoard()).getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//清除上一个棋子</span></span><br><span class="line">			cbStatus[moves.<span class="built_in">get</span>(y).getX()][moves.<span class="built_in">get</span>(y).getY()]=ChessBoard.NO_CHESS;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//计算每一个拉手的UCB值,并选出最大的拉手</span></span><br><span class="line">	<span class="keyword">double</span> maxUCB=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ChessPoint cp : moves)&#123;</span><br><span class="line">		<span class="keyword">double</span> UCB=(<span class="keyword">double</span>)cp.getWinCount()/cp.getTotalCount()+Math.<span class="built_in">sqrt</span>(<span class="number">2</span>*Math.<span class="built_in">log</span>(PLACE_MAX)/cp.getTotalCount());</span><br><span class="line">		<span class="keyword">if</span>(UCB&gt;maxUCB)&#123;</span><br><span class="line">			maxUCB=UCB;</span><br><span class="line">			chessPoint=cp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*if(moves.size()!=0&amp;&amp;chessPoint.getX()==-1)&#123;//防止无故的错误,如胜率的次数全部为0</span><br><span class="line">		chessPoint=moves.get(0);</span><br><span class="line">	&#125;*/</span></span><br><span class="line">	System.out.<span class="built_in">println</span>(<span class="string">"选择当前点的UCB值为"</span>+maxUCB);</span><br><span class="line">	<span class="keyword">return</span> chessPoint;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>6月29号第四天后记：</strong>我通过网上，查找之前阅读有关于<code>UCB</code>的文章。如：<br><a href="http://www.cnblogs.com/qswang/archive/2011/08/14/2360491.html" target="_blank" rel="external">围棋博弈程序的实现与思考（1）——局面评估</a><br><a href="http://www.cnblogs.com/qswang/archive/2011/08/21/2360490.html" target="_blank" rel="external">围棋博弈程序的实现与思考（2）——探索与利用</a><br>其中的一段话为：</p>
+<blockquote>
+<p>假设你是CPU，你知道围棋规则，但不知道更高层次的围棋知识，只会模拟随机对局，面对茫茫棋盘，你将如何选择？你会逐个点模拟对局1万次，最后通过比较评估值大小来选择最优点，还是。。</p>
+</blockquote>
+<p>之前，我使用的<code>MC</code>，就是对可选点进行模拟1000次，然后再对赢的次数最多的一个进行选择为下一个要下棋的点。它最后给出的答案是：</p>
+<blockquote>
+<p>把当前盘面上的每一个可下点看成一个角子机，每次对UCB值最大的可下点进行蒙特卡罗评估，可更快找到靠谱的着手点。</p>
+</blockquote>
+<p>很明显，他跟我的理解并不一样，他的意思是，不再盲目随机地或者不一个个点进行模拟，而是通过对<code>UCB</code>值的方式进行有选择的模拟，再对最大的点进行蒙特卡罗评估，得下一个着手点。</p>
+<p>在跟师弟（另一个）的讨论下，终于明白公式其中的奥妙。<br>再对公式进行解释：<img src="http://7tebhw.com1.z0.glb.clouddn.com/ucb%E5%85%AC%E5%BC%8F.png" alt="enter image description here"></p>
+<blockquote>
+<p>这里的Xj—&gt;理解为此点Xj胜率，<strong>获胜次数/执行的次数</strong><br>Tj(n)—&gt;到目前为止<strong>拉手j</strong>总共访问次数<br>n—&gt;是到目前这一时刻为止所访问拉手的<strong>总次数</strong></p>
+</blockquote>
+<p>首先，我们对可选点，执行模拟一次后，得到胜负+执行次数，计算所有点的UCB值，然后，就根据<code>UCB</code>值选取最大的点，再进行模拟一次，再次得到胜负和执行次数，此时的n已经加一，影响所有点，所以再次计算所有点的UCB值，然后再选择一个UCB值最大的进行模拟，一直这个循环，最好达到限定的时间/限定的模拟次数后跳出。</p>
+<p>最后，到底要选择哪个点作为当前下棋的点呢？？师弟说是<strong>执行次数最多的点</strong>，而我一度认为是<strong>UCB值最大的</strong>，结果在跟上上届师兄的对弈中，反而，我认为的<strong>UCB值</strong>最大的情况赢了，而使用执行次数最大反而没有赢。</p>
+<p>下面是我的<strong>UCBSearch</strong>代码（没有作任何优化，代码优点冗长）<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找到最好的走法，使用蒙特卡洛算法</span></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">public</span> ChessPoint aiSearch(<span class="built_in">int</span> <span class="built_in">color</span>, <span class="built_in">int</span>[][] cbStatus,</span><br><span class="line">			ChessPointControll mChessPointControll) &#123;</span><br><span class="line">		ChessPoint chessPoint=<span class="keyword">new</span> ChessPoint();</span><br><span class="line">		ArrayList&lt;ChessPoint&gt; moves = MoveGenerator.jawsGenerator(cbStatus,</span><br><span class="line">				mChessPointControll, -<span class="built_in">color</span>);<span class="comment">// 获得走法队列</span></span><br><span class="line">		<span class="keyword">if</span>(moves.<span class="built_in">size</span>()==<span class="number">0</span>)&#123;<span class="comment">//说明已经没有可下的棋子了，胜负已经出现</span></span><br><span class="line">			<span class="keyword">return</span> chessPoint;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 进行对每个拉手模拟一遍</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> y = <span class="number">0</span>; y &lt; moves.<span class="built_in">size</span>(); y++) &#123;<span class="comment">// 进行随机模拟博弈</span></span><br><span class="line">			moves.<span class="built_in">get</span>(y).addSelfTotalCount();<span class="comment">// 增加</span></span><br><span class="line">			mChessPointControll.play(moves.<span class="built_in">get</span>(y).getX(), moves.<span class="built_in">get</span>(y).getY(),</span><br><span class="line">					<span class="built_in">color</span>, cbStatus);<span class="comment">// 下棋</span></span><br><span class="line">			<span class="comment">// 新建棋盘，为蒙特卡洛对弈准备</span></span><br><span class="line">			ChessBoard board = <span class="keyword">new</span> ChessBoard(cbStatus);</span><br><span class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;<span class="comment">// 进行蒙特卡洛对弈</span></span><br><span class="line">				Random <span class="built_in">random</span> = <span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; userMoves = MoveGenerator.generator(</span><br><span class="line">						board.getChessBoard(), -<span class="built_in">color</span>);<span class="comment">// 获得走法队列</span></span><br><span class="line">				<span class="keyword">if</span> (userMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;<span class="comment">// 因为再走法中将不符合规则的情况排除了，所以有可能会为0的情况</span></span><br><span class="line">					moves.<span class="built_in">get</span>(y).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">int</span> j = <span class="built_in">random</span>.nextInt(userMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll.play(userMoves.<span class="built_in">get</span>(j).getX(),</span><br><span class="line">						userMoves.<span class="built_in">get</span>(j).getY(), -<span class="built_in">color</span>, board.getChessBoard())</span><br><span class="line">						.getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					moves.<span class="built_in">get</span>(y).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; pcMoves = MoveGenerator.generator(</span><br><span class="line">						board.getChessBoard(), <span class="built_in">color</span>);</span><br><span class="line">				<span class="keyword">if</span> (pcMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				j = <span class="built_in">random</span>.nextInt(pcMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll.play(pcMoves.<span class="built_in">get</span>(j).getX(),</span><br><span class="line">						pcMoves.<span class="built_in">get</span>(j).getY(), <span class="built_in">color</span>, board.getChessBoard())</span><br><span class="line">						.getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 清除上一个棋子</span></span><br><span class="line">			cbStatus[moves.<span class="built_in">get</span>(y).getX()][moves.<span class="built_in">get</span>(y).getY()] = ChessBoard.NO_CHESS;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">int</span> maxCount=<span class="number">1</span>;<span class="comment">//计算总的执行次数，因为已经进行了第一次的模拟，所以为1</span></span><br><span class="line">		<span class="built_in">int</span> top=<span class="number">0</span>;<span class="comment">//记录UCB最大的索引</span></span><br><span class="line">		<span class="keyword">while</span>(maxCount&lt;=PLACE_MAX)&#123;</span><br><span class="line">			<span class="comment">// 计算每一个拉手的UCB值,并选出最大的拉手</span></span><br><span class="line">			<span class="keyword">double</span> maxUCB = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">int</span> x=<span class="number">0</span>;x&lt;moves.<span class="built_in">size</span>();x++) &#123;</span><br><span class="line">				<span class="keyword">double</span> UCB = (<span class="keyword">double</span>) moves.<span class="built_in">get</span>(x).getWinCount() / moves.<span class="built_in">get</span>(x).getTotalCount()</span><br><span class="line">						+ Math.<span class="built_in">sqrt</span>(<span class="number">2</span> * Math.<span class="built_in">log</span>(maxCount) / moves.<span class="built_in">get</span>(x).getTotalCount());</span><br><span class="line">				<span class="keyword">if</span> (UCB &gt; maxUCB) &#123;</span><br><span class="line">					maxUCB = UCB;</span><br><span class="line">					top = x;<span class="comment">//加下当前最大的索引</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//对当前最大UCB再一次模拟</span></span><br><span class="line">			moves.<span class="built_in">get</span>(top).addSelfTotalCount();<span class="comment">// 增加</span></span><br><span class="line">			mChessPointControll.play(moves.<span class="built_in">get</span>(top).getX(), moves.<span class="built_in">get</span>(top).getY(),</span><br><span class="line">					<span class="built_in">color</span>, cbStatus);<span class="comment">// 下棋</span></span><br><span class="line">			<span class="comment">// 新建棋盘，为蒙特卡洛对弈准备</span></span><br><span class="line">			ChessBoard board = <span class="keyword">new</span> ChessBoard(cbStatus);</span><br><span class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;<span class="comment">// 进行蒙特卡洛对弈</span></span><br><span class="line">				Random <span class="built_in">random</span> = <span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; userMoves = MoveGenerator.generator(</span><br><span class="line">						board.getChessBoard(), -<span class="built_in">color</span>);<span class="comment">// 获得走法队列</span></span><br><span class="line">				<span class="keyword">if</span> (userMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;<span class="comment">// 因为再走法中将不符合规则的情况排除了，所以有可能会为0的情况</span></span><br><span class="line">					moves.<span class="built_in">get</span>(top).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">int</span> j = <span class="built_in">random</span>.nextInt(userMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll.play(userMoves.<span class="built_in">get</span>(j).getX(),</span><br><span class="line">						userMoves.<span class="built_in">get</span>(j).getY(), -<span class="built_in">color</span>, board.getChessBoard())</span><br><span class="line">						.getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					moves.<span class="built_in">get</span>(top).addSelfWinCount();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				ArrayList&lt;ChessPoint&gt; pcMoves = MoveGenerator.generator(</span><br><span class="line">						board.getChessBoard(), <span class="built_in">color</span>);</span><br><span class="line">				<span class="keyword">if</span> (pcMoves.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				j = <span class="built_in">random</span>.nextInt(pcMoves.<span class="built_in">size</span>());</span><br><span class="line">				<span class="keyword">if</span> (mChessPointControll.play(pcMoves.<span class="built_in">get</span>(j).getX(),</span><br><span class="line">						pcMoves.<span class="built_in">get</span>(j).getY(), <span class="built_in">color</span>, board.getChessBoard())</span><br><span class="line">						.getWinNum() != <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 清除上一个棋子</span></span><br><span class="line">			cbStatus[moves.<span class="built_in">get</span>(top).getX()][moves.<span class="built_in">get</span>(top).getY()] = ChessBoard.NO_CHESS;</span><br><span class="line">			</span><br><span class="line">			maxCount++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//选择执行次数最多的点</span></span><br><span class="line"><span class="comment">//		int maxTotalCount=0;</span></span><br><span class="line"><span class="comment">//		for(ChessPoint cp:moves)&#123;</span></span><br><span class="line"><span class="comment">//			if(cp.getTotalCount()&gt;maxTotalCount)&#123;</span></span><br><span class="line"><span class="comment">//				maxTotalCount=cp.getTotalCount();</span></span><br><span class="line"><span class="comment">//				chessPoint=cp;</span></span><br><span class="line"><span class="comment">//			&#125;</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line"><span class="comment">//		System.out.println("执行的次数为"+maxTotalCount);</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> moves.<span class="built_in">get</span>(top);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/28/java 多线程(2)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          java 多线程(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/24/蒙特卡洛算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">蒙特卡洛算法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="多臂匪徒问题 UCB策略" data-title="多臂匪徒问题 UCB策略" data-url="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

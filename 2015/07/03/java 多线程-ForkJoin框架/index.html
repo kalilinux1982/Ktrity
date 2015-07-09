@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java 多线程--Fork/Join 框架 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过这篇Java中不同的并发实现的性能比较，可以知道Fork/Join框架的性能不错，所以特意进行学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 多线程--Fork/Join 框架">
+<meta property="og:url" content="http://hexo.trity.cc/2015/07/03/java 多线程-ForkJoin框架/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="通过这篇Java中不同的并发实现的性能比较，可以知道Fork/Join框架的性能不错，所以特意进行学习。">
+<meta property="og:image" content="http://www.developer.com/imagesvr_ce/3378/join-fork-image001.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0095/3482/d4abd3fb-5ed0-3609-834c-96f7b89c1515.jpg">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0095/3484/a86966e0-6fb0-3606-b84f-67a086eb2bb7.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 多线程--Fork/Join 框架">
+<meta name="twitter:description" content="通过这篇Java中不同的并发实现的性能比较，可以知道Fork/Join框架的性能不错，所以特意进行学习。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/Builder模式/" style="font-size: 10px;">Builder模式</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/ThreadLocal/" style="font-size: 12.5px;">ThreadLocal</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 17.5px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 15px;">java</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a><a href="/tags/原型模式/" style="font-size: 10px;">原型模式</a><a href="/tags/外观模式/" style="font-size: 10px;">外观模式</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工厂方法模式/" style="font-size: 10px;">工厂方法模式</a><a href="/tags/建造者模式/" style="font-size: 10px;">建造者模式</a><a href="/tags/抽象工厂模式/" style="font-size: 10px;">抽象工厂模式</a><a href="/tags/桥接模式/" style="font-size: 10px;">桥接模式</a><a href="/tags/状态模式/" style="font-size: 10px;">状态模式</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/策略/" style="font-size: 10px;">策略</a><a href="/tags/简单工厂模式/" style="font-size: 10px;">简单工厂模式</a><a href="/tags/线程同步/" style="font-size: 10px;">线程同步</a><a href="/tags/线程池/" style="font-size: 10px;">线程池</a><a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a><a href="/tags/组合模式/" style="font-size: 10px;">组合模式</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/装饰模式/" style="font-size: 10px;">装饰模式</a><a href="/tags/观察者/" style="font-size: 10px;">观察者</a><a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a><a href="/tags/适配器模式/" style="font-size: 10px;">适配器模式</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a><a href="/tags/静态工厂方法模式/" style="font-size: 10px;">静态工厂方法模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-java 多线程-ForkJoin框架" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/03/java 多线程-ForkJoin框架/" class="article-date">
+  	<time datetime="2015-07-03T06:10:16.000Z" itemprop="datePublished">2015-07-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java 多线程--Fork/Join 框架
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fork/">Fork</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Join/">Join</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过这篇<a href="http://it.deepinmind.com/%E5%B9%B6%E5%8F%91/2015/01/22/forkjoin-framework-vs-parallel-streams-vs-executorservice-the-ultimate-benchmark.html" target="_blank" rel="external">Java中不同的并发实现的性能比较</a>，可以知道<code>Fork/Join</code>框架的性能不错，所以特意进行学习。<a id="more"></a></p>
+<p>是<code>java 7</code>的新特性之一。</p>
+<h3 id="框架引入的原因">框架引入的原因</h3><blockquote>
+<p>使 用ExecutorService和Callable的主要问题是，<strong>Callable实例在本质上是阻塞的</strong>。（其实，这句话个人觉得是很有问题。）<strong>一旦一个Callable实例开始执行，其他所有Callable都会被阻塞</strong>。由于队列后面的Callable实例在前一实例未执行完成的时候不会被执行，因此许多资源无法得到利用。Fork/Join框架被引入来解决这一并行问题，而Executor解决的是并发问题（译者注：<strong>并发和并行的区别就是一个处理器同时处理多个任务和多个处理器或者是多核的处理器同时处理多个不同的任务</strong>）。</p>
+</blockquote>
+<h3 id="Fork/Join框架主要类">Fork/Join框架主要类</h3><h4 id="ForkJoinPool">ForkJoinPool</h4><p>实现了工作偷取算法，并可以执行ForkJoinTask任务。</p>
+<p>主要任务就是”<strong>工作窃取</strong>”。—<strong>算法：</strong>完成自己的工作而处于空闲的工作线程能够从其他仍然处于忙碌(busy)状态的工作线程处窃取等待执行的任务。</p>
+<p>其线程尝试<strong>发现和执行其他任务创建的子任务</strong>。</p>
+<p><strong>特别注意</strong>：任何时候都<strong>维持与可用的处理器数目一样数目</strong>的<strong>活动线程数</strong>。（线程少于处理器则浪费，多于则为负载）</p>
+<h4 id="ForkJoinTask">ForkJoinTask</h4><p>一 旦ForkJoinTask被启动，就会<strong>启动其子任务并等待它们执行完成</strong>。</p>
+<p>负责将自任务<strong>赋予线程池</strong>中处于<strong>等待任务状态</strong>的另 一线程。<br>而：线程池中的<strong>活动线程</strong>会<strong>尝试执行其他任务所创建的子任务</strong>。</p>
+<p><strong>提供的方法：</strong></p>
+<ul>
+<li>isCompletedAbnormally() - <strong>检查任务是否已经抛出异常或已经被取消了</strong>。（ForkJoinTask在执行的时候可能会抛出异常，但是我们没办法在主线程里直接捕获异常）</li>
+<li>fork () – 这个方法决定了ForkJoinTask的异步执行，凭借这个方法可以创建新的任务。</li>
+<li>join () – 该方法负责在计算完成侯返回结果，因此允许一个任务等待另一任务执行完成。（阻塞当前线程并等待获取结果）</li>
+</ul>
+<p>分支/合并的完整过程如下：<br><img src="http://www.developer.com/imagesvr_ce/3378/join-fork-image001.png" alt="enter image description here"></p>
+<h3 id="实现原理—算法">实现原理—算法</h3><h4 id="Divide_and_conquer">Divide and conquer</h4><blockquote>
+<p>合并排序是 divide-and-conquer 算法的一个例子，在这种算法中将一个问题递归分解成子问题，再将子问题的解决方案组合得到最终结果。 divide-and-conquer 算法也可用于顺序环境中，但是在并行环境中更加有效，因为可以并行处理子问题。<br>并行 divide-and-conquer 算法首先对问题进行评估，确定其大小是否更适合使用顺序解决方案；通常，可通过将问题大小与某个阙值进行比较完成。如果问题大到需要并行分解，算法会将其分解成两个或更多子问题，并以并行方式对子问题递归调用算法本身，然后等待子问题的结果，最后合并这些结果。用于选择顺序和并行执行方法的理想阙值是协调并行任务的成本。如果协调成本为 0，更多的更细粒度的任务会提供更好的并行性；在需要转向顺序方法之前，协调成本越低，就可以划分更细粒度的任务。 </p>
+</blockquote>
+<h4 id="递归（旧的方法）">递归（旧的方法）</h4><blockquote>
+<p>如果从一个数组中，选一个最大值。我一般都会采用递归调用。这样的话只有当前线程的一个方法是运行的，其他方法都阻塞在线程栈中。所以在多核情况下，其他CPU都是空闲，没有得到充分利用。 </p>
+</blockquote>
+<h4 id="并行计算（fork-join）">并行计算（fork-join）</h4><blockquote>
+<p>类似hadoop的map/reduce，可以将任务拆分成多个块，然后最终将这些子结果集合并成最终结果集。它的行为表现为当前任务是暂停的，并行执行两个子任务，而当前任务等待两个子任务的完成。然后就可以将两个子任务的结果进行合并。这种并行分解方法常常称作 fork-join，因为执行一个任务将首先分解（fork）为多个子任务，然后再合并（join）（完成后）。 </p>
+</blockquote>
+<h4 id="工作窃取">工作窃取</h4><blockquote>
+<p>fork-join 框架通过一种称作工作窃取（work stealing） 的技术减少了工作队列的争用情况。每个工作线程都有自己的工作队列，这是使用双端队列（或者叫做 deque）来实现的（Java 6 在类库中添加了几种 deque 实现，包括 ArrayDeque 和 LinkedBlockingDeque）。当一个任务划分一个新线程时，它将自己推到 deque 的头部。当一个任务执行与另一个未完成任务的合并操作时，它会将另一个任务推到队列头部并执行，而不会休眠以等待另一任务完成（像 Thread.join() 的操作一样）。当线程的任务队列为空，它将尝试从另一个线程的 deque 的尾部 窃取另一个任务。<br>可以使用标准队列实现工作窃取，但是与标准队列相比，deque 具有两方面的优势：减少争用和窃取。因为只有工作线程会访问自身的 deque 的头部，deque 头部永远不会发生争用；因为只有当一个线程空闲时才会访问 deque 的尾部，所以也很少存在线程的 deque 尾部的争用（在 fork-join 框架中结合 deque 实现会使这些访问模式进一步减少协调成本）。跟传统的基于线程池的方法相比，减少争用会大大降低同步成本。此外，这种方法暗含的后进先出（last-in-first-out，LIFO）任务排队机制意味着最大的任务排在队列的尾部，当另一个线程需要窃取任务时，它将得到一个能够分解成多个小任务的任务，从而避免了在未来窃取任务。因此，工作窃取实现了合理的负载平衡，无需进行协调并且将同步成本降到了最小。<br><img src="http://dl2.iteye.com/upload/attachment/0095/3482/d4abd3fb-5ed0-3609-834c-96f7b89c1515.jpg" alt="enter image description here"><br><img src="http://dl2.iteye.com/upload/attachment/0095/3484/a86966e0-6fb0-3606-b84f-67a086eb2bb7.jpg" alt="enter image description here"></p>
+</blockquote>
+<p>以上全都引用：<a href="http://phl.iteye.com/blog/2036899" target="_blank" rel="external">java并发（二十五）java7之fork-join框架</a></p>
+<h3 id="源码分析：Fork/Join框架的实现原理">源码分析：Fork/Join框架的实现原理</h3><p>ForkJoinPool由ForkJoinTask数组和ForkJoinWorkerThread数组组成，ForkJoinTask数组负责存放程序提交给ForkJoinPool的任务，而ForkJoinWorkerThread数组负责执行这些任务。</p>
+<p>ForkJoinTask的fork方法实现原理。当我们调用ForkJoinTask的fork方法时，程序会调用ForkJoinWorkerThread的pushTask方法异步的执行这个任务，然后立即返回结果。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> ForkJoinTask&lt;V&gt; <span class="title">fork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ((ForkJoinWorkerThread) Thread.currentThread())</span><br><span class="line">            .pushTask(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>pushTask方法把当前任务存放在ForkJoinTask 数组queue里。然后再调用ForkJoinPool的signalWork()方法唤醒或创建一个工作线程来执行任务。代码如下：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">final void pushTask(ForkJoinTask t) &#123;</span><br><span class="line">        ForkJoinTask[] q; int s, m;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="variable">q =</span> queue) != <span class="constant">null</span>) &#123;    // ignore <span class="keyword">if</span> queue removed</span><br><span class="line">            long <span class="variable">u =</span> (((<span class="variable">s =</span> queueTop) &amp; (<span class="variable">m =</span> q.length - <span class="number">1</span>)) &lt;&lt; ASHIFT) + ABASE;</span><br><span class="line">            UNSAFE.putOrderedObject(q, u, t);</span><br><span class="line">            <span class="variable">queueTop =</span> s + <span class="number">1</span>;         // <span class="constant">or</span> use putOrderedInt</span><br><span class="line">            <span class="keyword">if</span> ((s <span class="variable">-=</span> queueBase) &lt;= <span class="number">2</span>)</span><br><span class="line">                pool.signalWork();</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">s =</span>= m)</span><br><span class="line">                growQueue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>ForkJoinTask的join方法实现原理。Join方法的主要作用是阻塞当前线程并等待获取结果。让我们一起看看ForkJoinTask的join方法的实现，代码如下：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function">V <span class="title">join</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (doJoin() != NORMAL)</span><br><span class="line">            <span class="function"><span class="keyword">return</span> <span class="title">reportResult</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="function"><span class="keyword">return</span> <span class="title">getRawResult</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="function">V <span class="title">reportResult</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> s; Throwable ex;</span><br><span class="line">        <span class="keyword">if</span> ((s = status) == CANCELLED)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> CancellationException();</span><br><span class="line"><span class="keyword">if</span> (s == EXCEPTIONAL &amp;&amp; (ex = getThrowableException()) != <span class="keyword">null</span>)</span><br><span class="line">            UNSAFE.throwException(ex);</span><br><span class="line">        <span class="function"><span class="keyword">return</span> <span class="title">getRawResult</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先，它调用了doJoin()方法，通过doJoin()方法得到当前任务的状态来判断返回什么结果，任务状态有四种：已完成（NORMAL），被取消（CANCELLED），信号（SIGNAL）和出现异常（EXCEPTIONAL）。</p>
+<ul>
+<li>如果任务状态是已完成，则直接返回任务结果。</li>
+<li>如果任务状态是被取消，则直接抛出CancellationException。</li>
+<li>如果任务状态是抛出异常，则直接抛出对应的异常。</li>
+</ul>
+<p>以上全部参考：<a href="http://www.infoq.com/cn/articles/fork-join-introduction" target="_blank" rel="external">聊聊并发（八）——Fork/Join框架介绍</a></p>
+<h3 id="例子：">例子：</h3><h4 id="斐波那契数列">斐波那契数列</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> Fibonacci <span class="keyword">extends</span> RecursiveTask&lt;<span class="keyword">Long</span>&gt; &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> n;</span><br><span class="line"></span><br><span class="line">	Fibonacci(<span class="keyword">long</span> n) &#123;</span><br><span class="line">		<span class="keyword">this</span>.n = n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span><br><span class="line">	 * 该方法负责创建出新的任务分支，并合并计算结果。</span><br><span class="line">	 * 注意compute方法，是将主要问题可以被分解为两个大块</span><br><span class="line">	 */</span></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">Long</span> compute() &#123;</span><br><span class="line">		<span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;  </span><br><span class="line">            <span class="keyword">return</span> n;  </span><br><span class="line">        &#125;  </span><br><span class="line">        Fibonacci f1 = <span class="keyword">new</span> Fibonacci(n - <span class="number">1</span>);  </span><br><span class="line">        f1.fork();  </span><br><span class="line">        Fibonacci f2 = <span class="keyword">new</span> Fibonacci(n - <span class="number">2</span>);  </span><br><span class="line">        <span class="keyword">return</span> f2.compute() + f1.<span class="keyword">join</span>();  </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</span><br><span class="line">		System.out.<span class="keyword">println</span>(<span class="string">"本机所拥有的线程 个数"</span>+<span class="keyword">Runtime</span>.getRuntime().availableProcessors());<span class="comment">//我的机子为i3，双核4线程</span></span><br><span class="line">		Fibonacci <span class="keyword">task</span> = <span class="keyword">new</span> Fibonacci(<span class="number">20</span>);  </span><br><span class="line">        ForkJoinPool pool = <span class="keyword">new</span> ForkJoinPool();<span class="comment">//当前硬件条件下可用处理器数量进行配置。我的机 器配有一个含2个处理器单元的双核处理器上</span></span><br><span class="line">        pool.invoke(<span class="keyword">task</span>);<span class="comment">//invoke()方法将对斐波那契的任务进行分解，该任务会轮流调用 Fibonacci类的compute()方法  </span></span><br><span class="line">        System.out.<span class="keyword">println</span>(<span class="keyword">task</span>.getRawResult()); </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="局限性">局限性</h3><ul>
+<li>任务只能使用fork()和join()操作，作为同步机制。不能使用其它同步机制，如果使用其他同步机制，工作线程不能执行其他任务，当它们在同步操作时。比如，在Fork/Join框架中，你使任务进入睡眠，正在执行这个任务的工作线程将不会执行其他任务，在这睡眠期间内。</li>
+<li>任务不应该执行I/O操作，如读或写数据文件。</li>
+<li>任务不能抛出检查异常，它必须包括必要的代码来处理它们。</li>
+</ul>
+<h3 id="总结">总结</h3><p>使用<code>Fork/Join</code>框架的使用：问题在于如何进行分析，将大任务分成两个小的任务，这是需要解决。</p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.importnew.com/2279.html" target="_blank" rel="external">Java 7 Fork/Join 框架</a>，对整体进行介绍<br><a href="http://phl.iteye.com/blog/2036899" target="_blank" rel="external">java并发（二十五）java7之fork-join框架</a>，对框架所用到的算法进行介绍<br><a href="http://www.infoq.com/cn/articles/fork-join-introduction" target="_blank" rel="external">聊聊并发（八）——Fork/Join框架介绍</a>，通过源码进行分析。<br>系列教程：<a href="http://ifeve.com/a-java-fork-join-framework-1/" target="_blank" rel="external">Java Fork Join框架 (一) 摘要</a><br><a href="https://www.zybuluo.com/MiloXia/note/79215" target="_blank" rel="external">Java Fork Join框架</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/04/设计模式 状态模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式 状态模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/30/java 多线程(3)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java 多线程(3)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java 多线程-ForkJoin框架" data-title="java 多线程--Fork/Join 框架" data-url="http://hexo.trity.cc/2015/07/03/java 多线程-ForkJoin框架/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
