@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-Map集合--排序 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当中涉及到TreeMap，比较器Comparable,下面先进行介绍TreeMap。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-Map集合--排序">
+<meta property="og:url" content="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="当中涉及到TreeMap，比较器Comparable,下面先进行介绍TreeMap。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-Map集合--排序">
+<meta name="twitter:description" content="当中涉及到TreeMap，比较器Comparable,下面先进行介绍TreeMap。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12.5px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 12.5px;">Join</a><a href="/tags/Map/" style="font-size: 12.5px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 17.5px;">java</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Java Map 按Key排序和按Value排序" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/03/Java Map 按Key排序和按Value排序/" class="article-date">
+  	<time datetime="2015-08-03T03:54:16.000Z" itemprop="datePublished">2015-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java-Map集合--排序
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Comparator/">Comparator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TreeMap/">TreeMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当中涉及到<code>TreeMap</code>，比较器<code>Comparable</code>,下面先进行介绍<code>TreeMap</code>。<a id="more"></a></p>
+<h3 id="TreeMap是什么">TreeMap是什么</h3><p>一个内部元素,默认以<code>key</code>的大小进行排序，所以当<code>key</code>的类型没有<strong>实现</strong><code>Comparable</code>的比较器的话，输出的时候会抛出异常。如下：</p>
+<blockquote>
+<p>cannot be cast to java.lang.Comparable</p>
+</blockquote>
+<p>所以，充当<code>key</code>，必须实现<code>Comparable</code>告诉<code>TreeMap</code>所排序的规则。最常见的就是<code>String</code>，看<code>String</code>类就知道<strong>它实现了Compoarator</strong>，实现方法<code>compareTo</code>中是一个个<strong>字符进行比较</strong>。</p>
+<h4 id="与TreeSet比较">与<code>TreeSet</code>比较</h4><p>通过查看源码<code>TreeSet</code>，从两个构造函数可以知道，其底层实现为<code>TreeMap</code>。<br>详情看：<a href="http://shmilyaw-hotmail-com.iteye.com/blog/1836431" target="_blank" rel="external">java集合类深入分析之TreeMap/TreeSet篇</a></p>
+<h4 id="与HashMap比较">与HashMap比较</h4><ul>
+<li>存取复杂度</li>
+</ul>
+<p><code>HashMap</code>在<code>HashCode</code>不重复的情况下， 链表仅有一个值。此时的复杂度为<code>O(1)</code>,若有重复，链表有值的时候为<code>O(n)</code></p>
+<p><code>TreeMap</code>对元素的操作复杂度为<code>O(logn)</code></p>
+<h4 id="实现机制">实现机制</h4><p>基于<strong>红黑树</strong>的数据结构，进行插入，查找等。</p>
+<h5 id="什么是红黑树？">什么是红黑树？</h5><p>它是既是<strong>平衡的</strong>又是<strong>二叉搜索树</strong>。<br>详细查看：<br><a href="http://blog.csdn.net/chenssy/article/details/26668941" target="_blank" rel="external">Java提高篇（二七）——-TreeMap</a>，后面再写一篇关于<strong>红黑树</strong>的分析</p>
+<h3 id="比较器：Comparator和Comparable">比较器：<code>Comparator</code>和<code>Comparable</code></h3><h4 id="两者有什么区别？">两者有什么区别？</h4><p><strong>范围上：</strong><br><code>Comparable</code>是在<strong>集合内部定义</strong>的方法实现的排序。<br><code>Comparator</code>是在<strong>集合外部</strong>实现的排序。（可以说<code>Comparator</code>是<code>Comparable</code>的一个补充吧）<br><strong>本身定义上</strong><br><code>Comparable</code> 是一个对象本身就已经支持<strong>自比较</strong>所需要实现的接口（可以自身进行比较：String,Integer）。一般<code>Collections.sort()或者Arrays.sort</code>默认使用<strong>自然排序</strong>。</p>
+<blockquote>
+<p>而<strong>自然排序：</strong>实现<code>Comparable</code>接口设定的排序方式。（默认从小到大）</p>
+</blockquote>
+<p><code>Comparator</code> 是一个专用的比较器，<strong>当这个对象不支持自比较或者自比较函数不能满足你的要求时</strong>，你可以写一个比较器来完成两个对象之间大小的比较.<br>通常使用<code>Comparator</code>来改变<strong>某个类</strong>的默认排序。</p>
+<p><strong>方法上</strong>（通过接口的方法，比较容易分辨什么是自比较等）<br>接口：<code>Comparator&lt;K&gt;</code>的实现方法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(K a, K b)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接口：<code>Comparable&lt;K&gt;</code>的实现方法<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Person o)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="例子讲解：">例子讲解：</h4><p><a href="http://www.blogjava.net/fastunit/archive/2008/04/08/191533.html" target="_blank" rel="external">Comparator和Comparable在排序中的应用</a></p>
+<h3 id="实例代码-实现Map集合按value进行排序：">实例代码-实现Map集合按value进行排序：</h3><p>现在对将要用到的<code>TreeMap</code>和比较器<code>Comparator</code>已经有大体的了解了。<br>思路：因为<code>TreeMap</code>默认是按<code>key</code>进行排序，而它的<strong>构造方法</strong>是可以<strong>指定排序</strong>的，所以我们使用<code>Comparator</code>来进行改变他默认的排序。</p>
+<p>首先是指定排序的方式，实现接口<code>Comparator</code>，这里泛型<code>&lt;k&gt;</code>，使得以后可以进行扩展。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValueComparator</span>&lt;<span class="title">K</span>&gt; <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">K</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    Map&lt;K, Double&gt; base;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ValueComparator</span><span class="params">(Map&lt;K, Double&gt; base)</span> </span>&#123;<span class="comment">//构造函数传入一个map集合</span></span><br><span class="line">        <span class="keyword">this</span>.base = base;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    实现compare，进行按value的大小来排序，按key排序也是实现这个方法</span><br><span class="line">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(K a, K b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (base.get(a) &gt;= base.get(b)) &#123;<span class="comment">//根据key来获取value值来进行比较</span></span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="comment">// returning 0 would merge keys</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>装备好比较器后，下面进行调用，返回一个<code>map</code>集合更具有适用性。创建<code>TreeMap</code>并制定排序的规则，然后将<strong>原来的map</strong>全部导入到<code>treeMap</code>中,再进行返回。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">* 按照map集合中value进行排序</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;ChessPoint, Double&gt; sortMapByValue(Map&lt;ChessPoint, Double&gt; oriMap)&#123;</span><br><span class="line"><span class="keyword">if</span> (oriMap == <span class="keyword">null</span> || oriMap.isEmpty()) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">Map&lt;ChessPoint, Double&gt; sortMap = <span class="keyword">new</span> TreeMap&lt;ChessPoint, Double&gt;(  </span><br><span class="line">                <span class="keyword">new</span> ValueComparator&lt;&gt;(oriMap)); <span class="comment">//进行指定规则的TreeMap</span></span><br><span class="line">sortMap.putAll(oriMap);<span class="comment">//将Map的元素全部加入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> sortMap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另一种实现方式如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> <span class="javadoc">/** </span><br><span class="line">     * 使用 Map按value进行排序 </span><br><span class="line">     *<span class="javadoctag"> @param</span> map </span><br><span class="line">     *<span class="javadoctag"> @return</span> </span><br><span class="line">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, String&gt; sortMapByValue(Map&lt;String, String&gt; oriMap) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (oriMap == <span class="keyword">null</span> || oriMap.isEmpty()) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        Map&lt;String, String&gt; sortedMap = <span class="keyword">new</span> LinkedHashMap&lt;String, String&gt;();  </span><br><span class="line">        List&lt;Map.Entry&lt;String, String&gt;&gt; entryList = <span class="keyword">new</span> ArrayList&lt;Map.Entry&lt;String, String&gt;&gt;(  </span><br><span class="line">                oriMap.entrySet());  </span><br><span class="line">        Collections.sort(entryList, <span class="keyword">new</span> MapValueComparator());  </span><br><span class="line">  </span><br><span class="line">        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iter = entryList.iterator();  </span><br><span class="line">        Map.Entry&lt;String, String&gt; tmpEntry = <span class="keyword">null</span>;  </span><br><span class="line">        <span class="keyword">while</span> (iter.hasNext()) &#123;  </span><br><span class="line">            tmpEntry = iter.next();  </span><br><span class="line">            sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> sortedMap;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="扩展：自定义类在TreeMap中进行排序">扩展：自定义类在TreeMap中进行排序</h3><p>从上面介绍<code>TreeMap</code>可以知道，自定义类如果不实现接口<code>Comparable</code>的话，将抛出异常，所以，我们只需要实现接口<code>Comparable</code>后，便可以解决。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Person</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x, y;</span><br><span class="line">    ....</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Person o)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">if</span>(x&gt;o.x)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TreeMap&lt;Person, Double&gt; map = <span class="keyword">new</span> TreeMap&lt;Person, Double&gt;();</span><br><span class="line">        map.put(<span class="keyword">new</span> Person(<span class="number">1</span>, <span class="number">2</span>), <span class="number">0.0</span>);</span><br><span class="line">        map.put(<span class="keyword">new</span> Person(<span class="number">1</span>, <span class="number">3</span>), <span class="number">5.0</span>);</span><br><span class="line">        map.put(<span class="keyword">new</span> Person(<span class="number">1</span>, <span class="number">4</span>), <span class="number">4.0</span>);</span><br><span class="line">        map.put(<span class="keyword">new</span> Person(<span class="number">1</span>, <span class="number">5</span>), <span class="number">6.0</span>);</span><br><span class="line">        System.out.println(<span class="string">"map: "</span>+map);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="资料">资料</h3><p>参考：<br><a href="http://stackoverflow.com/questions/2864840/treemap-sort-by-value" target="_blank" rel="external">TreeMap sort by value</a><br><a href="http://blog.csdn.net/top_code/article/details/8528954" target="_blank" rel="external">Java Map 按Key排序和按Value排序</a>,这个有介绍另一种方式实现，使用<code>Map.Entry</code>并使用<code>Collections.sort</code><br>从上面的例子中启发自己的思想</p>
+<p><a href="http://wangkuiwu.github.io/2012/02/12/collection-12-treemap/" target="_blank" rel="external">Java 集合系列12之 TreeMap详细介绍(源码解析)和使用示例</a>，对<code>TreeMap</code>的源码进行<strong>注释</strong>，非常详细。</p>
+<p><a href="http://blog.csdn.net/mageshuai/article/details/3849143" target="_blank" rel="external">Comparable与Comparator的区别</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/21/Arrays.sort和Collections.sort区别/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Arrays.sort和Collections.sort区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/02/重写equals和hashCode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">重写equals和hashCode</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java Map 按Key排序和按Value排序" data-title="java-Map集合--排序" data-url="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

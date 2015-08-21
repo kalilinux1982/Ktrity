@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>重写equals和hashCode | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为什么要重写？通过重写equals和hashCode来保证取值的正确性，相同的进行覆盖，避免因为hashcode不同，而存在二义性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重写equals和hashCode">
+<meta property="og:url" content="http://hexo.trity.cc/2015/08/02/重写equals和hashCode/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="为什么要重写？通过重写equals和hashCode来保证取值的正确性，相同的进行覆盖，避免因为hashcode不同，而存在二义性。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重写equals和hashCode">
+<meta name="twitter:description" content="为什么要重写？通过重写equals和hashCode来保证取值的正确性，相同的进行覆盖，避免因为hashcode不同，而存在二义性。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12.5px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 12.5px;">Join</a><a href="/tags/Map/" style="font-size: 12.5px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 17.5px;">java</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-重写equals和hashCode" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/02/重写equals和hashCode/" class="article-date">
+  	<time datetime="2015-08-02T02:48:16.000Z" itemprop="datePublished">2015-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      重写equals和hashCode
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/equals/">equals</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashcode/">hashcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="为什么要重写？">为什么要重写？</h3><p>通过重写<code>equals</code>和<code>hashCode</code>来保证取值的正确性，相同的进行覆盖，避免因为<code>hashcode</code>不同，而存在二义性。<a id="more"></a><br>详情查看：<a href="http://bdcwl.blog.163.com/blog/static/765222652009112744733937" target="_blank" rel="external">HashMap什么时候重写hashcode和equals方法，为什么需要重写 </a></p>
+<h3 id="重写后理想中的状态是：">重写后理想中的状态是：</h3><ul>
+<li>在<code>equals</code>比较相同，<code>hashCode</code>也相同的条件下，</li>
+<li>不同的对象产生不相同的hashCode值，这样在操作散列的时候就完全可以<code>达到O(1)的查找效率</code>，而<strong>不必去遍历链表</strong>。</li>
+</ul>
+<h3 id="hashCode重写成怎样最好"><code>hashCode</code>重写成怎样最好</h3><p>下面摘自《effective java》推荐的方式：</p>
+<blockquote>
+<ol>
+<li>初始化一个整形变量，为此变量赋予一个非零的常数值，比如int result = 17;</li>
+<li>选取equals方法中用于比较的所有域，然后针对每个域的属性进行计算：<br>(1) 如果是boolean值，则计算f ? 1:0<br>(2) 如果是byte\char\short\int,则计算(int)f<br>(3) 如果是long值，则计算(int)(f ^ (f &gt;&gt;&gt; 32))<br>(4) 如果是float值，则计算Float.floatToIntBits(f)<br>(5) 如果是double值，则计算Double.doubleToLongBits(f)，然后返回的结果是long,再用规则(3)去处理long,得到int<br>(6) 如果是对象应用，如果equals方法中采取递归调用的比较方式，那么hashCode中同样采取递归调用hashCode的方式。　　否则需要为这个域计算一个范式，比如当这个域的值为null的时候，那么hashCode 值为0<br>(7) 如果是数组，那么需要为每个元素当做单独的域来处理。如果你使用的是1.5及以上版本的JDK，那么没必要自己去　　　　重新遍历一遍数组，java.util.Arrays.hashCode方法包含了8种基本类型数组和引用数组的hashCode计算，算法同上，<br>　　java.util.Arrays.hashCode(long[])的具体实现:</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">(<span class="keyword">long</span> a[])</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> element : a) &#123;</span><br><span class="line">            <span class="keyword">int</span> elementHash = (<span class="keyword">int</span>)(element ^ (element &gt;&gt;&gt; <span class="number">32</span>));</span><br><span class="line">            result = <span class="number">31</span> * result + elementHash;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Arrays.hashCode(…)只会计算一维数组元素的hashCOde,如果是多维数组，那么需要递归进行hashCode的计算，那么就需要使用Arrays.deepHashCode(Object[])方法。</p>
+<ol>
+<li>最后，要如同上面的代码，把每个域的散列码合并到result当中：result = 31 * result + elementHash;</li>
+<li>测试，hashCode方法是否符合文章开头说的基本原则，这些基本原则虽然不能保证性能，但是可以保证不出错。</li>
+</ol>
+<h3 id="问题探讨：">问题探讨：</h3><h4 id="为什么初始值要使用非0的整数?">为什么初始值要使用非0的整数?</h4><blockquote>
+<p>这个的目的主要是为了减少hash冲突，考虑这么个场景，如果初始值为0,并且计算hash值的前几个域hash值计算都为0，那么这几个域就会被忽略掉，但是初始值不为0,这些域就不会被忽略掉.实例代码：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span>[] array;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(<span class="keyword">int</span>... a)</span> </span>&#123;</span><br><span class="line">        array = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>; <span class="comment">//注意，此处初始值为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> element : array) &#123;</span><br><span class="line">            result = <span class="number">31</span> * result + element;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Test t = <span class="keyword">new</span> Test(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        Test t2 = <span class="keyword">new</span> Test(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        System.out.println(t.hashCode());</span><br><span class="line">        System.out.println(t2.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果hashCode中result的初始值为0，那么对象t和对象t2的hashCode值都会为0，尽管这两个对象不同。但如果result的值为17,那么计算hashCode的时候就不会忽略这些为0的值，最后的结果t1是15699857，t2是506447</p>
+<h4 id="为什么每次需要使用乘法去操作result?">为什么每次需要使用乘法去操作result?</h4><p>主要是为了使散列值依赖于域的顺序，还是上面的那个例子，Test t = new Test(1, 0)跟Test t2 = new Test(0, 1), t和t2的最终hashCode返回值是不一样的。</p>
+<h4 id="为什么是31?">为什么是31?</h4><p>31是个神奇的数字，因为任何数n * 31就可以被JVM优化为 (n &lt;&lt; 5) -n,移位和减法的操作效率要比乘法的操作效率高的多。</p>
+<h4 id="以上hashcode的详解都摘自：对几个通用的Java_hashCode重写方案的一些思考和探讨">以上hashcode的详解都摘自：<a href="http://my.oschina.net/chihz/blog/56256" target="_blank" rel="external">对几个通用的Java hashCode重写方案的一些思考和探讨</a></h4><h4 id="所以，最后的重写hashcode的代码为">所以，最后的重写hashcode的代码为</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">17</span>;</span><br><span class="line"></span><br><span class="line">        result = <span class="number">31</span> * result + x;</span><br><span class="line">        result = <span class="number">31</span> * result + y;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/03/Java Map 按Key排序和按Value排序/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          java-Map集合--排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/28/java-Map集合-HashMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java-Map集合-HashMap</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="重写equals和hashCode" data-title="重写equals和hashCode" data-url="http://hexo.trity.cc/2015/08/02/重写equals和hashCode/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

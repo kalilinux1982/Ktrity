@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java-Map集合-HashMap | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Map集合就想是Set集合和List集合的组合。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-Map集合-HashMap">
+<meta property="og:url" content="http://hexo.trity.cc/2015/07/28/java-Map集合-HashMap/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="Map集合就想是Set集合和List集合的组合。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-Map集合-HashMap">
+<meta name="twitter:description" content="Map集合就想是Set集合和List集合的组合。">
+  
+    <link rel="alternative" href="/atom.xml" title="Trity" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Trity</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">出来混迟早要还的。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12.5px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 12.5px;">Join</a><a href="/tags/Map/" style="font-size: 12.5px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/ShadowSocks/" style="font-size: 10px;">ShadowSocks</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 17.5px;">java</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.luojiawei.me/">getNway的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Trity</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7tebhw.com1.z0.glb.clouddn.com/7866290.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Trity</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">出来混迟早要还的。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-java-Map集合-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/28/java-Map集合-HashMap/" class="article-date">
+  	<time datetime="2015-07-28T02:48:16.000Z" itemprop="datePublished">2015-07-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java-Map集合-HashMap
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hashtable/">Hashtable</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Map集合就想是Set集合和List集合的组合。<a id="more"></a><br><strong>为什么这样说呢？</strong><br>因为：<code>Map&lt;K,V&gt;</code>中key是<strong>无序不可重复</strong>的集合相当于<code>Set</code>集合，其中<code>Map</code>的一个方法<code>KeySet()</code>就是返回所有<code>key</code>组成的<code>set</code>集合。<br>而<code>value</code>是有序，可重复的集合，相当于<code>List</code>集合。<br><strong>为什么说是有序呢</strong>？这里的<code>value</code>对应的<strong>索引</strong>为<code>key</code>而不是<code>List</code>集合中单一的<strong>整数值</strong>。</p>
+<h3 id="HashMap和HashTable的区别">HashMap和HashTable的区别</h3><p>两者主要的区别在于：</p>
+<ol>
+<li><code>Hashtable</code>是线程安全的，而<code>HashMap</code>是线程不安全的，当多线程访问同一个<code>Map</code>对象时，使用<code>Hashtable</code>实现类会更好。</li>
+<li>Hashtable不允许使用<code>null</code>作为<code>key和value</code>,但<code>HashMap</code>可以使用<code>null</code>作为<code>key</code>或者<code>value</code></li>
+</ol>
+<h3 id="如何正确使用HashMap/hashtable来进行存储，获取对象">如何正确使用<code>HashMap/hashtable</code>来进行存储，获取对象</h3><p>那么用作<code>key</code>的对象就必须实现<code>hashCode</code>方法和<code>equals</code>方法。</p>
+<h4 id="为什么一定要实现hashCode方法和equals方法？">为什么一定要实现<code>hashCode</code>方法和<code>equals</code>方法？</h4><p>让我们看看基类<code>Object</code>的这两个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);<span class="comment">//两个对象的引用比较</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;<span class="comment">//通过注释可以知道：通过将该对象的内部地址转换成一个整数也就是哈希码，由于每个对象的内存地址都不一样，所以哈希码也不一样。</span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以知道只有当且仅当同一个对象所处的内存地址相同时的时候，才会认为相同。例如：<br>第一种情况：<code>new Object()和new Object()</code>为两个对象，放在<code>HashMap</code>中是可以存在的，那么就达不到我们预想的结果：<code>key</code>不可重复。<br>另一个种情况：从<code>Object</code>的<code>hashCode</code>方法可以得知，它是返回<strong>当前对象的内存地址</strong>，当我们使用<code>put</code>存进去的时候，<strong>内存地址变化了</strong>，产生不同于当初的<strong>键</strong>。而使用<code>get</code>的方式，加入参数进行匹配时候，当前的对象即<strong>键</strong>已经改变，导致无法找到。<br>所以我们基于第一种情况必须重写<code>equals</code>方法和第二种情况需要<code>hashCode</code>方法.</p>
+<p><strong>注意</strong>：在Map集合使用过程中：<strong>equals()相等，hashCode就一定要相等，而hashCode相等，却不要求equals相等，为什么呢？</strong></p>
+<blockquote>
+<p>Map的结构能够快速找到一个对象，而不是进行较慢的线性查找。使用hash过的键来定位对象分两步。Map可以看作是数组的数组。第一个数组的索引就是对键采用hashCode()计算出来的值，再在这个位置上查找第二个数组，使用键的equals()方法来进行线性查找，直到找到要找的对象。参考：<a href="http://www.importnew.com/8701.html" target="_blank" rel="external">Java中的equals()和hashCode()契约</a></p>
+</blockquote>
+<p>下面使用实例进行讲解：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class Test &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> <span class="built_in">color</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> Test(<span class="keyword">String</span> <span class="built_in">color</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.<span class="built_in">color</span> = <span class="built_in">color</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">boolean</span> equals(<span class="keyword">Object</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> Test))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;   </span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="keyword">this</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.<span class="built_in">color</span> == ((Test) obj).<span class="built_in">color</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">    Test a1 = <span class="keyword">new</span> Test(<span class="string">"green"</span>);</span><br><span class="line">    Test a2 = <span class="keyword">new</span> Test(<span class="string">"red"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//hashMap stores apple type and its quantity</span></span><br><span class="line">        <span class="keyword">HashMap</span> m = <span class="keyword">new</span> <span class="keyword">HashMap</span>();</span><br><span class="line">        m.put(a1, <span class="number">10</span>);</span><br><span class="line">        m.put(a2, <span class="number">20</span>);</span><br><span class="line">        System.out.<span class="built_in">println</span>(m.<span class="built_in">get</span>(<span class="keyword">new</span> Test(<span class="string">"green"</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>你会发现最后的输出结果居然为<code>null</code>,因为这里我们并没有重写<code>hashCode</code>方法，而在HashMap的<code>get</code>方法中<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> V <span class="built_in">get</span>(<span class="keyword">Object</span> <span class="variable">key</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">key</span> == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> getForNullKey();</span><br><span class="line">    Entry&lt;K,V&gt; entry = getEntry(<span class="variable">key</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span> == entry ? <span class="keyword">null</span> : entry.getValue();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> Entry&lt;K,V&gt; getEntry(<span class="keyword">Object</span> <span class="variable">key</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> hash = (<span class="variable">key</span> == <span class="keyword">null</span>) ? <span class="number">0</span> : hash(<span class="variable">key</span>);<span class="comment">//获取运算后的哈希值</span></span><br><span class="line">    <span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</span><br><span class="line">         e != <span class="keyword">null</span>;</span><br><span class="line">         e = e.next) &#123;</span><br><span class="line">        <span class="keyword">Object</span> k;</span><br><span class="line">        <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">            ((k = e.<span class="variable">key</span>) == <span class="variable">key</span> || (<span class="variable">key</span> != <span class="keyword">null</span> &amp;&amp; <span class="variable">key</span>.equals(k))))<span class="comment">//先比较e.hash == hash，最后才进行equals的比较</span></span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> <span class="built_in">int</span> hash(<span class="keyword">Object</span> k) &#123;</span><br><span class="line">    <span class="built_in">int</span> h = hashSeed;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> != h &amp;&amp; k <span class="keyword">instanceof</span> <span class="keyword">String</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> sun.misc.Hashing.stringHash32((<span class="keyword">String</span>) k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    h ^= k.hashCode();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// This function ensures that hashCodes that differ only by</span></span><br><span class="line">    <span class="comment">// constant multiples at each bit position have a bounded</span></span><br><span class="line">    <span class="comment">// number of collisions (approximately 8 at default load factor).</span></span><br><span class="line">    h ^= (h &gt;&gt;&gt; <span class="number">20</span>) ^ (h &gt;&gt;&gt; <span class="number">12</span>);</span><br><span class="line">    <span class="keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="number">7</span>) ^ (h &gt;&gt;&gt; <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重上面的源码分析可以知道：<br>当调用<code>get</code>方法的时候：</p>
+<blockquote>
+<p>根据元素的key获取hashcode，然后根据hashcode获取数组下标位置，如果只有一个元素则直接取出。如果该位置一个链表，则需要调用equals方法遍历链表中的所有元素与当前的元素比较,得到真正想要的对象。<br>可以看出如果根据hashcdoe算出的数组位置尽量的均匀分布，则可以避免遍历链表的情况，以提高性能。参考：<a href="http://bdcwl.blog.163.com/blog/static/765222652009112744733937" target="_blank" rel="external">HashMap什么时候重写hashcode和equals方法，为什么需要重写  </a></p>
+</blockquote>
+<p>所以后者<code>equals</code>相等时，前者<code>hashcode</code>也一定相等。</p>
+<h3 id="如何使用Collections工具类把HashMap变成线程安全">如何使用Collections工具类把HashMap变成线程安全</h3><p>缘由：和<code>vector</code>一样，尽量少用<code>Hashtable</code>。</p>
+<p>因为：在<code>Collections</code>中提供了<code>synchronizedXxx</code>方法，用来<strong>解决多线程访问的时候的并发问题</strong>.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Collection  c  =  Collections.synchronizedCollection(<span class="keyword">new</span>  ArrayList());</span><br><span class="line">List list  =  Collections.synchronizedList(<span class="keyword">new</span>  ArrayList());</span><br><span class="line">Set  s  =  Collections.synchronizedSet(<span class="keyword">new</span>  HashSet());</span><br><span class="line">Map  m  =  Collections.synchronizedMap(<span class="keyword">new</span>  HashMap());</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br><a href="http://trophy.iteye.com/blog/1145078" target="_blank" rel="external">java同步包装器与线程安全</a>有实例代码<strong>进行检测</strong>。<br><a href="http://blog.happyhls.me/2013/02/26/java-java-util-collectionarraylisthashmaphashset/" target="_blank" rel="external">Java–Collection,ArrayList,HashMap,HashSet</a></p>
+<h3 id="扩展">扩展</h3><h4 id="所有Map的实现类都重写了_toString方法">所有<code>Map</code>的实现类都重写了 <code>toString</code>方法</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; hashMap=<span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();</span><br><span class="line">hashMap.put(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">hashMap.put(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">hashMap.put(<span class="string">"a"</span>, <span class="keyword">null</span>);</span><br><span class="line">System.out.<span class="built_in">println</span>(hashMap);</span><br></pre></td></tr></table></figure>
+<p>直接输出即可看到相关的键值对。</p>
+<h4 id="HashMap的调用put函数操作">HashMap的调用put函数操作</h4><blockquote>
+<p>1.首先根据put元素的key获取hashcode,然后根据hashcode算出数组的下标位置,如果下标位置没有元素，直接放入元素即可。<br>2.如果该下标位置有元素（即根据put元素的key算出的hashcode一样即重复了），则需要已有元素和put元素的key对象比较equals方法，如果equals不一样，则说明可以放入进map中。这里由于hashcode一样，所以得出的数组下标位置相同。所以会在该数组位置创建一个链表，后put进入的元素到放链表头，原来的元素向后移动。  </p>
+</blockquote>
+<h4 id="特例：Java-Collections_Framework学习与总结-IdentityHashMap">特例：<a href="http://brokendreams.iteye.com/blog/1929199" target="_blank" rel="external">Java-Collections Framework学习与总结-IdentityHashMap</a></h4><p>注意：<code>IdentityHashMap</code>的<code>put</code>操作：</p>
+<blockquote>
+<p>IdentityHashMap中会调用System.identityHashCode(x)来获得对象的hashCode(也就是对象的hashCode方法<strong>没有被覆盖情况下的返回值</strong>)，<strong>仅用“==”来进行后面key的比较</strong>.</p>
+</blockquote>
+<p>与HashMap存储数据时的比较：</p>
+<blockquote>
+<p>IdentityHashMap和HashMap内部都实现了散列表，但有区别，体现在对散列冲突的处理上。HashMap中以分离链表的方式来解决散列<strong>冲突</strong>，也就是将散列在同一个桶内的数据组织成一个<strong>链表结构</strong>；IdentityHashMap中则以开放寻址的方式来解决散列冲突，当发生散列冲突时，数据被<strong>放入下一个空闲地址</strong>(也叫线程探测法)</p>
+</blockquote>
+<h4 id="什么时候使用ConcurrentHashMap">什么时候使用ConcurrentHashMap</h4><p>当有大量的并发更新时，ConcurrentHashMap此时可以被使用</p>
+<h4 id="并发修改的集合是安全的有哪些">并发修改的集合是安全的有哪些</h4><blockquote>
+<p>用java5.0新加入的<code>ConcurrentLinkedQueue、ConcurrentHashMap、CopyOnWriteArrayList 和 CopyOnWriteArraySet</code><br>对这些集合进行并发修改是安全的</p>
+</blockquote>
+<h3 id="资料">资料</h3><p><a href="http://bdcwl.blog.163.com/blog/static/765222652009112744733937" target="_blank" rel="external">HashMap什么时候重写hashcode和equals方法，为什么需要重写  </a><br><a href="http://www.cnblogs.com/zhangchuan210/p/3535532.html" target="_blank" rel="external">JAVA中重写equals()方法为什么要重写hashcode()方法说明</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/02/重写equals和hashCode/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          重写equals和hashCode
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/28/java 探讨System.out.println(数组);的结果/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java-探讨System.out.println(数组);的结果 </div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java-Map集合-HashMap" data-title="java-Map集合-HashMap" data-url="http://hexo.trity.cc/2015/07/28/java-Map集合-HashMap/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Trity
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
