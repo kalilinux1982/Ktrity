@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>mysql命令及sql语句 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="收集开发常见的mysql命令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql命令及sql语句">
+<meta property="og:url" content="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="收集开发常见的mysql命令。">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151109005504.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151109005553.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql命令及sql语句">
+<meta name="twitter:description" content="收集开发常见的mysql命令。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-mysql命令及sql语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql命令及sql语句
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/03/mysql命令及sql语句/">
+      <time datetime="2015-10-03T09:03:28.000Z" itemprop="datePublished">2015-10-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>收集开发常见的<code>mysql</code>命令。<br><a id="more"></a></p>
+<h3 id="如何指定数据库创建表">如何指定数据库创建表</h3><blockquote>
+<p>show databases;<br>use test; #使用show中显示的棋种一个数据库</p>
+</blockquote>
+<h3 id="如何导出数据库：（mysqldump）">如何导出数据库：（mysqldump）</h3><p>找到你的<code>mysql</code>的位置，打开此路径的黑框控制台，输入：</p>
+<blockquote>
+<p>mysqldump -u 用户名 -p 数据库名 &gt; 存放位置</p>
+</blockquote>
+<p>这里是<code>-u</code>并不是<code>-r</code>等。</p>
+<p><strong>扩展：</strong></p>
+<ul>
+<li><p>导出远程数据库：</p>
+<blockquote>
+<p>mysqldump -h  192.168.11.210  -u  root  -p  test&gt;c:/test.sql</p>
+</blockquote>
+</li>
+<li><p>导出一个表的结构，并且带表中的数据</p>
+<blockquote>
+<p>mysqldump -u 用户名 -p  数据库名  表名 &gt; 导出的文件名</p>
+</blockquote>
+</li>
+<li><p>导入数据库</p>
+<blockquote>
+<p>mysql server 5.1/bin &gt; mysql -u root -p<br>mysql server 5.1/bin &gt; mysql&gt;use ‘数据库’</p>
+</blockquote>
+</li>
+</ul>
+<p>然后使用source命令,后面参数为脚本文件(如这里用到的.sql):</p>
+<blockquote>
+<p>mysql server 5.1/bin &gt; mysql&gt;source d:wcnc_db.sql</p>
+</blockquote>
+<h3 id="如何查看表的结构(desc)">如何查看表的结构(desc)</h3><blockquote>
+<p>desc 表名<br>或者： describe 表名</p>
+</blockquote>
+<p>以表格的形式来展示<strong>表的结构</strong>。</p>
+<blockquote>
+<p>show create table 表名</p>
+</blockquote>
+<p>显示<strong>创建表格的脚本代码</strong>。</p>
+<h3 id="表的修改（alter）">表的修改（alter）</h3><ul>
+<li>修改某个表的字段名称及指定为空或非空<blockquote>
+<p>alter table 表名称 change column 字段原名称 字段新名称 字段类型 [是否允许非空];</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：上面的<strong>字段类型</strong>是不可以缺少的，否则会带来错误的。</p>
+<h3 id="select相关使用"><code>select</code>相关使用</h3><ul>
+<li><code>select into</code> 从一个表中选取数据，然后把数据插入另一个表中<br>使用参考：<a href="http://www.w3school.com.cn/sql/sql_select_into.asp" target="_blank" rel="external">SQL SELECT INTO 语句</a>，格式：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">INTO</span> new_table_name [<span class="keyword">IN</span> externaldatabase] </span><br><span class="line"><span class="keyword">FROM</span> old_tablename</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例子：制作<code>Persons</code>表的备份。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">INTO</span> Persons_backup</span><br><span class="line"><span class="keyword">FROM</span> Persons</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：当次数据库存在表<code>Persons_backup</code>将提示错误。</p>
+<h3 id="如何增加数据（insert）">如何增加数据（insert）</h3><p><strong>注意写在前面：</strong><br>凡是字符串都是要<code>‘’</code>的，否则报错</p>
+<p>下列几种方式进行增加数据<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 values(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这种形式，只能按着<code>列名</code>的顺序来进行给值赋值。面对<strong>主键自增的情况很不适用</strong>。<br>如果只是想给指定的<strong>列名</strong>赋值的话,看以下：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名(属性<span class="number">1</span>，属性<span class="number">2</span>,<span class="keyword">...</span>) values(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果想<strong>同时插入多条记录</strong>，又如何解决呢？<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 values(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>)，(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>)，<span class="keyword">...</span></span><br><span class="line">或者</span><br><span class="line">insert into 表名(属性<span class="number">1</span>，属性<span class="number">2</span>,<span class="keyword">...</span>) values(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>)，(值<span class="number">1</span>,值<span class="number">2</span>,<span class="keyword">...</span>),<span class="keyword">...</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到，其实很简单，只需要在原来的基础上增加<code>(值1,值2,...)</code>即可。</p>
+<p>开发中，常遇到的需求就是讲<strong>查询的结果插入表中</strong>，尤其在表与表之间有关联的地方。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> 表名<span class="number">1</span>(属性列表<span class="number">1</span>) <span class="keyword">select</span> 属性列表<span class="number">2</span> <span class="keyword">from</span> 表名<span class="number">2</span> <span class="keyword">where</span> 条件语句</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：<strong>属性列表1</strong>和<strong>属性列表2</strong>要一一对应。</p>
+<h4 id="如何增加一条数据并返回对应的ID">如何增加一条数据并返回对应的ID</h4><p><a href="http://blog.csdn.net/hewei0241/article/details/17169709" target="_blank" rel="external">mysql插入数据后返回自增ID的方法</a><br>在<code>java</code>中的正确使用方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rs = st.executeQuery(<span class="string">"select last_insert_id() as last_id from schedule"</span>);</span><br><span class="line">lastid = rs.getString(<span class="string">"last_id"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>注意这里的值是<code>String</code>并不是<code>int</code>比较奇怪<br>其他方式：<br><a href="http://blog.csdn.net/hewei0241/article/details/17169709" target="_blank" rel="external">mysql插入数据后返回自增ID的方法</a></p>
+<h3 id="如何删除表(drop、delete、delete)">如何删除表(drop、delete、delete)</h3><ul>
+<li><p>使用<code>drop</code></p>
+<blockquote>
+<p>drop table 表名<br>此方式将删除表的结构被依赖的约束(constrain)、触发器(trigger)、索引(index)，为（ddl）不能回滚立即生效.</p>
+</blockquote>
+</li>
+<li><p>使用<code>delete</code><br>为数据库操作语言(dml)，这个操作会放到 <code>rollback segement</code> 中，<strong>事务提交之后才生效</strong>。<br>每次删除一行，并在事务日志中为所删除的每行记录一项</p>
+<blockquote>
+<p><code>delete from 表名</code> # 不带where是将删除所有数据</p>
+</blockquote>
+</li>
+<li><p>使用<code>delete</code><br>同属（ddl）不能回滚，立即生效。<br>删除表的所有数据，但保留表结构。<br>只在事务日志中记录页的释放</p>
+<blockquote>
+<p>truncate table 表名<br>相当于<code>delete</code>不带<code>where</code>的时候，但是比<code>delete</code>快。</p>
+</blockquote>
+</li>
+<li><p><code>truncate</code>与<code>delete</code>比较：</p>
+</li>
+</ul>
+<ol>
+<li>在删除时如果遇到任何一行违反约束（主要是外键约束），<code>TRUNCATE TABLE</code>仍然删除，只是表的结构及其列、约束、索引等保持不变，但<code>DELETE</code>是直接返回错误</li>
+<li>被外键约束的表，不能使用<code>TRUNCATE TABLE</code></li>
+<li>如果想保留标识计数值，请改用<code>DELETE</code></li>
+<li><code>TRUNCATE TABLE</code>不能用于参与了索引视图的表</li>
+</ol>
+<p>参考：<a href="http://www.cnblogs.com/8765h/archive/2011/11/25/2374167.html" target="_blank" rel="external">SQL truncate 、delete与drop区别</a></p>
+<h3 id="主外键联表查询（join）">主外键联表查询（join）</h3><p><a href="http://www.jb51.net/article/30974.htm" target="_blank" rel="external">SQL的Join使用图解教程</a></p>
+<h4 id="实战使用:">实战使用:</h4><p><strong>1。连接多个表的时候：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DELETE subscribers, subscriptions</span><br><span class="line">FROM subscribers</span><br><span class="line">INNER JOIN subscriptions </span><br><span class="line">ON subscribers.id = subscriptions.subscriber_id</span><br><span class="line">INNER JOIN magazines </span><br><span class="line">ON subscriptions.magazine_id = magazines.id</span><br><span class="line">WHERE subscribers.name=<span class="string">'Wes'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>2.关联删除（未认证）<br><a href="http://www.tuicool.com/articles/qYjmAvq" target="_blank" rel="external">MySQL的多表关联与自连接</a></p>
+<ol>
+<li>多表关联查询</li>
+</ol>
+<p>如图的关系<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151109005504.png" alt=""><br><strong>需求是依靠地区来显示报障和维修记录的信息</strong>。（三表关联）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> 地区位置,教室位置,故障类型,时间,工具,花费 <span class="keyword">from</span> 教室 </span><br><span class="line"><span class="keyword">right</span> <span class="keyword">join</span> (报障表 <span class="keyword">right</span> <span class="keyword">join</span> 维修表 <span class="keyword">on</span> 报障表.报障ID=维修表.报障ID) </span><br><span class="line"><span class="keyword">on</span> 教室.教室ID=报障表.教室ID </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> 地区 <span class="keyword">on</span> 地区.地区ID=教室.地区ID</span></span><br></pre></td></tr></table></figure></p>
+<p>下图也是三表关联，但属性间的关系并不强。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151109005553.png" alt=""><br>现在需求：<strong>依靠主分类显示主分类下所用的金额</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> MainTypeMsg,MoneyNum <span class="keyword">from</span> expendtable </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> UserMoney </span><br><span class="line"><span class="keyword">on</span> UserMoney.UserMoneyID=expendtable.UserMoneyID  </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> ItemType </span><br><span class="line"><span class="keyword">on</span> ItemType.ItemTypeID=expendtable.ItemTypeID </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> MainType</span><br><span class="line"><span class="keyword">on</span> ItemType.MainTypeID=MainType.MainTypeID</span></span><br></pre></td></tr></table></figure></p>
+<p>总结：理解好：<code>left join</code>和<code>right join</code>后，监视结果集，<strong>是大到小的合并，还是小到大的合并。</strong></p>
+<h3 id="如何避免插入重复数据到数据库中">如何避免插入重复数据到数据库中</h3><p><strong>在SQLite3下：(添加<code>OR IGNORE</code>或者<code>replace</code>)</strong></p>
+<blockquote>
+<p>在INSERT语句中添加<code>OR IGNORE</code>，即可（<strong>重复数据会跳过，且不影响后续数据插入</strong>）<br>示例如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">OR</span> <span class="keyword">IGNORE</span> <span class="keyword">into</span> PDA_Test (DeviceID,MethodName) <span class="keyword">values</span>(<span class="string">'1112'</span>,<span class="string">'测试原有'</span>);</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>或者<strong>进行直接替换的操作</strong>：(<strong>发现重复的先删除再插入，如果记录有多个字段，在插入的时候如果有的字段没有赋值，那么新插入的记录这些字段为空</strong>)<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">replace</span> <span class="keyword">into</span> PDA_Test (DeviceID,MethodName) <span class="keyword">values</span>(<span class="string">'1112'</span>,<span class="string">'测试原有'</span>);</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://www.cnphp.info/sqlite-conflict-on-update.html" target="_blank" rel="external"># SQLite中使用约束解决插入/更新重复问题</a><br><a href="http://www.jb51.net/article/31421.htm" target="_blank" rel="external"># MYSQL插入处理重复键值的几种方法</a></p>
+<h3 id="函数使用">函数使用</h3><h4 id="SUM统计"><code>SUM</code>统计</h4><p><strong>字段为<code>datetime</code>的情况下：</strong></p>
+<ul>
+<li>使用<code>month()</code>函数：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">month</span>(<span class="keyword">CurTime</span>),<span class="keyword">sum</span>(MoneyNum) <span class="keyword">from</span>  usermoney <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">month</span>(<span class="keyword">CurTime</span>)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>结合<code>join</code>语句</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">month</span>(<span class="keyword">CurTime</span>),<span class="keyword">sum</span>(MoneyNum) <span class="keyword">from</span> expendtable  </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> UserMoney </span><br><span class="line"><span class="keyword">on</span> UserMoney.UserMoneyID=expendtable.UserMoneyID </span><br><span class="line"><span class="keyword">where</span> UserTableID=<span class="number">1</span> </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">month</span>(<span class="keyword">CurTime</span>)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>DATE_FORMAT(时间字段,&#39;%m&#39;)</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">DATE_FORMAT</span>(f1,<span class="string">'%m'</span>)  <span class="keyword">from</span> tt <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">DATE_FORMAT</span>(f1,<span class="string">'%m'</span>)</span></span><br></pre></td></tr></table></figure>
+<p>使用格式为：（datetime:<code>2008-01-15 12：10：00</code>）<br><code>DATE_FORMAT</code>的参数格式:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'%Y'</span>  <span class="number">2008</span></span><br><span class="line"><span class="string">'%Y-%m'</span>  <span class="number">2008</span>-<span class="number">01</span></span><br><span class="line"><span class="string">'%Y-%c'</span>  <span class="number">2008</span>-<span class="number">1</span></span><br><span class="line"><span class="string">'%m'</span>  <span class="number">01</span></span><br><span class="line"><span class="string">'%c'</span>  <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="like_模糊查询"><code>like</code> 模糊查询</h4><p><strong>通配符描述：</strong></p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%</td>
+<td>与包含0,1个或多个字符的字符串匹配</td>
+</tr>
+<tr>
+<td>_</td>
+<td>与任意单字符匹配</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>特定范围（例如，[a-f]）或特定集（例如，[abcdef]）中的任意单字符匹配</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>与特定范围（例如，[^a-f]）或特定集（例如，[^abcdef]）<strong>之外</strong>的任意单字符匹配</td>
+</tr>
+</tbody>
+</table>
+<p>案例使用<a href="http://new-restart.iteye.com/blog/1416765" target="_blank" rel="external">sql like 通配符 模糊查询技巧及特殊字符</a></p>
+<h3 id="性能优化">性能优化</h3><ul>
+<li><p><a href="http://www.cnblogs.com/panchunting/archive/2013/04/27/SQL_Tech_001.html" target="_blank" rel="external">SQL Server系列之 删除大量数据</a>文中进行测试<strong>插入和删除</strong>的效率。效率最高的为：批量插入，使用<code>TRUNCATE</code>进行删除。应用到场景为：</p>
+<ol>
+<li><p>保留需要的数据之新表中-&gt;TRUNCATE原表数据-&gt;还原之前保留的数据之原表中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">INTO</span> #keep <span class="keyword">FROM</span> Original <span class="keyword">WHERE</span> CreateDate &gt; <span class="string">'2011-12-31'</span></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> Original</span><br><span class="line"><span class="keyword">INSERT</span> Original <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> #keep</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建表结构-&gt;批量插入需要保留的数据-&gt;DROP原表-&gt;重命名新表为原表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #keep <span class="keyword">AS</span> (xxx) xxx <span class="comment">-- 使用上面提到的方法（使用既有表的创建脚本），但是不能够保证完全一致；</span></span><br><span class="line">　　<span class="keyword">INSERT</span> #keep <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Original <span class="keyword">where</span> clause</span><br><span class="line">　　<span class="keyword">DROP</span> TBALE Original</span><br><span class="line">　　<span class="keyword">EXEC</span> SP_RENAME <span class="string">'#keep'</span>,<span class="string">'Original'</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>注意</strong>：<strong>比第一种方法略快点，因为省略了数据还原（即最后一步的数据恢复）</strong>，但是稍微麻烦点，因为你需要创建一张和以前原有一模一样的表结构，包括基本列、属性、约束、索性等等。</p>
+<h3 id="关键字使用">关键字使用</h3><ul>
+<li>desc 倒序<blockquote>
+<p>select * from yourtable where 查询条件 order by id desc</p>
+</blockquote>
+</li>
+<li><p>asc 升序</p>
+</li>
+<li><p>limit 限制</p>
+<blockquote>
+<p>…order by id desc limit 0,10;</p>
+</blockquote>
+</li>
+<li><p>distinct 取出重复</p>
+<blockquote>
+<p>SELECT distinct(<code>lcontent</code>) FROM <code>caiji_ym_liuyan</code></p>
+</blockquote>
+</li>
+<li><p><a href="http://www.cnblogs.com/weiwang/p/3245915.html" target="_blank" rel="external">mysql中时间比较的实现</a></p>
+</li>
+<li><p><code>between and</code>用法</p>
+<blockquote>
+<p>0~200的范围:<br>SELECT * FROM titles WHERE ytd_sales BETWEEN 0 AND 200<br>或者：<br>WHERE ytd_sales &gt; 0 AND ytd_sales &lt; 200</p>
+</blockquote>
+</li>
+<li><p>in 的用法（是否在in包含里面）</p>
+<blockquote>
+<p>SELECT * FROM Store_Information WHERE Store_Name IN (‘Los Angeles’, ‘San Diego’);</p>
+</blockquote>
+</li>
+<li><p><code>group by all</code>用法</p>
+<blockquote>
+<p>条件：<strong>只有在 SELECT 语句还包括 WHERE 子句时</strong><br>在添加<code>ALL 关键字</code>，那么查询结果将包括由 <code>GROUP BY</code> 子句产生的<strong>所有组</strong>，<strong>即使某些组没有符合搜索条件的行</strong>。<br>例子：<br>查询结果：<br>1班 72<br>2班 75<br>3班 NULL<br>正确为：<code>SELECT AVG(score) FROM test WHERE class&lt;3 GROUP BY ALL class</code><br>解释：因为出现了3班 NULL<br>条件限制了选择的<code>class&lt;3</code> 所以只有1 ，2班有成绩。但添加了<code>all</code>就会包含<code>group by</code>的所有行。</p>
+</blockquote>
+</li>
+<li><p><code>grant</code>权限控制</p>
+<blockquote>
+<p>授权格式： <code>grant 权限 to 角色</code><br>使用：<code>grant select,insert on userdb.userinfo to&#39;zhangsan&#39;@&#39;localhost&#39;</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="参考：">参考：</h3><p><a href="http://www.111cn.net/database/mysql/62555.htm" target="_blank" rel="external"># MySQL数据库三个表的左连接查询(LEFT JOIN)</a><br><a href="http://www.cnblogs.com/CareySon/archive/2011/12/07/2279522.html" target="_blank" rel="external">T-SQL查询进阶—深入浅出视图</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/" data-id="cikmrgd12000i50jsj24gxlut" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/04/java界面编程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java界面编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/01/数据库的基础知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库的基础知识</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/" data-title="mysql命令及sql语句" data-url="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

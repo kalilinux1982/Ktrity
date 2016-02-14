@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android RecyclerView使用 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="# Using the RecyclerView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android RecyclerView使用">
+<meta property="og:url" content="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="# Using the RecyclerView">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android RecyclerView使用">
+<meta name="twitter:description" content="# Using the RecyclerView">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android RecyclerView使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android RecyclerView使用
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/17/android RecyclerView使用/">
+      <time datetime="2015-12-17T03:38:23.000Z" itemprop="datePublished">2015-12-17</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p><a href="https://guides.codepath.com/android/Using-the-RecyclerView#compared-to-listview" target="_blank" rel="external"># Using the RecyclerView</a><br><a id="more"></a></p>
+<h3 id="与ListView比较">与<code>ListView</code>比较</h3><p>相关的比较，突出<code>RecyclerView</code>的特性：</p>
+<ul>
+<li><code>ViewHolder</code>： ListView可以不需要ViewHolder，而RecyclerView必须要ViewHolder</li>
+<li>使用<code>RecyclerView.LayoutManager</code>布局</li>
+<li><code>RecyclerView.ItemAnimator</code>控制使用动画。</li>
+<li>适配器使用<code>RecyclerView.Adapter</code></li>
+<li><code>RecyclerView.ItemDecoration</code>设置分割线</li>
+<li><code>RecyclerView.OnItemTouchListener</code>提供触摸事件</li>
+</ul>
+<p>其他不同点：</p>
+<ul>
+<li>使用<code>ViewHolder</code>中<code>onclick</code>来代替<code>onItemClick</code>:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Used to cache the views within the item layout for fast access</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(Context context, View itemView)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">super</span>(itemView);</span><br><span class="line">           itemView.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// Handles the row being being clicked</span></span><br><span class="line">       <span class="annotation">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">       ...</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用的布局：RecyclerView-LayoutManager">使用的布局：<a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank" rel="external">RecyclerView.LayoutManager</a></h3><p>可继承<code>LayoutManager</code>来自定义布局管理器。但也提供其三个子类如：</p>
+<ul>
+<li><code>LinearLayoutManager</code> shows items in a vertical or horizontal scrolling list.</li>
+<li><code>GridLayoutManager</code> shows items in a grid.</li>
+<li><code>StaggeredGridLayoutManager</code> shows items in a staggered（交错） grid.（显示不规则）</li>
+</ul>
+<p>下面介绍使用：</p>
+<ul>
+<li><code>LayoutManager</code>：</li>
+</ul>
+<p>最简单的使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recyclerView.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure></p>
+<p>当然可以进行自定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setup layout manager for items</span></span><br><span class="line">LinearLayoutManager layoutManager = <span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">// 默认使用垂直，当然可以设置水平</span></span><br><span class="line">layoutManager.setOrientation(LinearLayoutManager.VERTICAL);</span><br><span class="line"><span class="comment">// 默认从0开始滑动</span></span><br><span class="line">layoutManager.scrollToPosition(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// Attach layout manager to the RecyclerView</span></span><br><span class="line">recyclerView.setLayoutManager(layoutManager);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>GridLayoutManager</code>用法给<code>LinearLayoutManager</code>差不多，不过注意下面：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mainMenuRecycler.setLayoutManager(<span class="keyword">new</span> GridLayoutManager(<span class="keyword">this</span>,<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+<p>这里的<code>2</code>代表<strong>一行有2列</strong>。</p>
+<ul>
+<li><code>StaggeredGridLayoutManager</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StaggeredGridLayoutManager sgLayoutManager=</span><br><span class="line"><span class="keyword">new</span> StaggeredGridLayoutManager(<span class="number">2</span>,StaggeredGridLayoutManager.VERTICAL);<span class="comment">//当垂直布局，为一行显示的个数，水平布局为显示多少行</span></span><br><span class="line">recyclerView.setLayoutManager(sgLayoutManager);</span><br></pre></td></tr></table></figure>
+<h3 id="适配器RecyclerView-Adapter">适配器<code>RecyclerView.Adapter</code></h3><p>必须<code>override</code>两个主要的方法：</p>
+<ul>
+<li>inflate the view 和 view holder</li>
+<li>bind data to view</li>
+</ul>
+<p>新的好处在于：我们不需要关心<code>recycled</code>。</p>
+<h3 id="关于动画ItemAnimator">关于动画<code>ItemAnimator</code></h3><p>使用第三方的类库<a href="https://github.com/wasabeef/recyclerview-animators" target="_blank" rel="external">third-party recyclerview-animators library</a>，此类库包含所有关于<code>recyclerView</code>的动画。</p>
+<p>其实是有提供两个类的<code>SimpleItemAnimator</code>和<code>DefaultItemAnimator</code>，但后面弃用，还处于开发阶段。</p>
+<h3 id="当数据改变，如何通知适配器做响应的改变呢">当数据改变，如何通知适配器做响应的改变呢</h3><p><code>RecyclerView adapter</code>提供了解决方法：</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>notifyItemChanged(int pos)</code></td>
+<td>Notify that item at position has changed.</td>
+</tr>
+<tr>
+<td><code>notifyItemInserted(int pos)</code></td>
+<td>Notify that item reflected at position has been newly inserted.</td>
+</tr>
+<tr>
+<td><code>notifyItemRemoved(int pos)</code></td>
+<td>Notify that items previously located at position has been removed from the data set.</td>
+</tr>
+<tr>
+<td><code>notifyDataSetChanged()</code></td>
+<td>Notify that the dataset has changed. Use only as last resort.</td>
+</tr>
+</tbody>
+</table>
+<p>注意：<br>关于<code>notifyDataSetChanged()</code>方法：</p>
+<blockquote>
+<p>If you want your animations to work, do not rely on calling <code>notifyDataSetChanged()</code>;</p>
+</blockquote>
+<h3 id="加入New_Items">加入<code>New Items</code></h3><p>分两种情况，一种是添加在头部，一种是添加在尾部。<br>头部：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adapter.notifyItemInserted(<span class="number">0</span>);</span><br><span class="line">recyclerView.scrollToPosition(<span class="number">0</span>);   <span class="comment">// index 0 position</span></span><br></pre></td></tr></table></figure></p>
+<p>尾部：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adapter.notifyItemInserted(contacts.size() - <span class="number">1</span>);  <span class="comment">// contacts.size() - 1 is the last element position</span></span><br><span class="line">rvContacts.scrollToPosition(mAdapter.getItemCount() - <span class="number">1</span>); <span class="comment">// update based on adapter</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="滑动监听：（实现加载更多）">滑动监听：（实现加载更多）</h3><h3 id="装饰器（如：分割线）">装饰器（如：分割线）</h3><p>分割线的加入，使用装饰器的模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RecyclerView.ItemDecoration itemDecoration = <span class="keyword">new</span> </span><br><span class="line">    DividerItemDecoration(<span class="keyword">this</span>, DividerItemDecoration.VERTICAL_LIST);</span><br><span class="line">recyclerView.addItemDecoration(itemDecoration);</span><br></pre></td></tr></table></figure></p>
+<p>改<code>DividerItemDecoration</code>类要使用第三方的类库，或者自己继承<code>RecyclerView.ItemDecoration</code>，例子如下：<br><a href="https://gist.github.com/alexfu/0f464fc3742f134ccd1e" target="_blank" rel="external">DividerItemDecoration.java</a></p>
+<h3 id="优化">优化</h3><p>但每个<code>item</code>都有相同的宽和高，可进行下列优化：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recyclerView.setHasFixedSize(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义接口处理点击的监听事件">自定义接口处理点击的监听事件</h3><p>最传统的做法：<br><a href="http://guides.codepath.com/android/Using-the-RecyclerView#simple-click-handler-within-viewholder" target="_blank" rel="external">Simple Click Handler within ViewHolder</a><br>自定义接口使得activity调用:<a href="http://guides.codepath.com/android/Using-the-RecyclerView#attaching-click-handlers-using-listeners" target="_blank" rel="external">Attaching Click Handlers using Listeners</a></p>
+<p>或者使用<code>ItemClickSupport</code>装饰器，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(</span><br><span class="line">  <span class="keyword">new</span> ItemClickSupport.OnItemClickListener() &#123;</span><br><span class="line">      <span class="annotation">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClicked</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> position, View v)</span> </span>&#123;</span><br><span class="line">          <span class="comment">// do it</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>最后添加子项的点击效果（在<code>item</code>的根布局添加）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">...</span></span><br><span class="line">    <span class="attribute">android:background</span>=<span class="value">"?android:attr/selectableItemBackground"</span>&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="复杂的布局">复杂的布局</h3><p><a href="https://guides.codepath.com/android/Heterogenous-Layouts-inside-RecyclerView" target="_blank" rel="external"># Heterogenous Layouts inside RecyclerView</a></p>
+<h3 id="源码分析：">源码分析：</h3><p><a href="http://www.devtf.cn/?p=351" target="_blank" rel="external">创建一个 RecyclerView LayoutManager – Part 1</a><br><a href="http://wiresareobsolete.com/2014/09/recyclerview-layoutmanager-2/" target="_blank" rel="external">Building a RecyclerView LayoutManager – Part 2</a><br><a href="http://wiresareobsolete.com/2015/02/recyclerview-layoutmanager-3/" target="_blank" rel="external">Building a RecyclerView LayoutManager – Part 3</a></p>
+<p><a href="http://ifeve.com/recyclerview-part-1%EF%BC%9A%E4%B8%BAlistview%E4%B8%93%E5%AE%B6%E5%86%99%E7%9A%84%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">RecyclerView Part 1：为ListView专家写的基础</a><br><a href="http://ifeve.com/recyclerview-part-2%EF%BC%9A%E9%80%89%E6%8B%A9%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">RecyclerView Part 2：选择模式</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/" data-id="cikmrgd57002y50jsr8aeu3x4" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RecyclerView/">RecyclerView</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/21/android SwipeRefreshLayout使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android SwipeRefreshLayout使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/17/android FloatingActionButton使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android FloatingActionButton使用</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/" data-title="android RecyclerView使用" data-url="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

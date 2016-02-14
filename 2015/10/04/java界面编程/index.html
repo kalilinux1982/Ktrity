@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>java界面编程 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="虽然很少使用java来完成桌面程序，但是为了毕业设计，就不得不去了解了，以下都是关于awt和swing编程，偏向于swing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java界面编程">
+<meta property="og:url" content="http://hexo.trity.cc/2015/10/04/java界面编程/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="虽然很少使用java来完成桌面程序，但是为了毕业设计，就不得不去了解了，以下都是关于awt和swing编程，偏向于swing">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/borderLayout_bug.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1342932343_3962.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java界面编程">
+<meta name="twitter:description" content="虽然很少使用java来完成桌面程序，但是为了毕业设计，就不得不去了解了，以下都是关于awt和swing编程，偏向于swing">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-java界面编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java界面编程
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/04/java界面编程/">
+      <time datetime="2015-10-04T04:01:18.000Z" itemprop="datePublished">2015-10-04</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>虽然很少使用java来完成桌面程序，但是为了毕业设计，就不得不去了解了，以下都是关于<code>awt和swing</code>编程，偏向于<code>swing</code><br><a id="more"></a></p>
+<h3 id="如何更改Swing的皮肤">如何更改Swing的皮肤</h3><p>自带的<code>java</code>皮肤太丑了，没有深入了解，还以为都是这么丑，了解后才发现也是可以更换皮肤的。<br>详情参考：<a href="http://www.iteye.com/topic/348082" target="_blank" rel="external">Java界面开发学习笔记【三】 使用Swing皮肤机制</a>，从这里可以发现可以使用其他平台的皮肤，如：苹果，但是要导入其他的类库了，所以我们只使用本身<code>win7</code>系统的皮肤了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;  UIManager.setLookAndFeel(<span class="string">"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">new</span> YourClass(); <span class="comment">//start your application </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我还是在这里<a href="http://stackoverflow.com/questions/9541045/how-to-set-jframe-look-and-feel" target="_blank" rel="external">How to set jframe look and feel</a>才找到怎么用的了，果然国外才是强大。<br><strong>注意</strong>：</p>
+<ul>
+<li>在<code>main</code>函数中先设置<code>setLookAndFeel</code>然后再<code>new Youtclass()</code>。</li>
+<li>从程序进口一开始设置后，后面的<code>jFrame</code>的皮肤都会相应的改变。</li>
+<li>使用<strong>皮肤</strong>后导致很多控件的效果不能用了，例如：改变颜色，字体等。只能通过<strong>贴图片的方式改变</strong>。</li>
+</ul>
+<p>其他皮肤：<a href="http://www.open-open.com/61.htm" target="_blank" rel="external">java开源swing外观</a></p>
+<h3 id="JPanel使用">JPanel使用</h3><h4 id="如何设置JPanel为透明：">如何设置JPanel为透明：</h4><blockquote>
+<p>jpanel.setOpaque(false);</p>
+</blockquote>
+<h3 id="JTabbedPane使用（标签tab）">JTabbedPane使用（标签tab）</h3><p><strong>注意：</strong><br>不应该使用<code>add()</code>来增加组件，而是使用<code>addTab</code>来增加，因为<code>add</code>每次增加会覆盖原有的<strong>标签页</strong></p>
+<p><strong>设置tab沾满整行</strong>：（默认从左开始排，不够的时候很难看）<br>想找到怎么改变tab，让tab居中，可以没有找到。无奈只能另一种方法来实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tabIcon.length; i++) &#123;</span><br><span class="line">            <span class="comment">// 加入tab,需要title,icon,显示内容的组件</span></span><br><span class="line">            tabbedPane.addTab(</span><br><span class="line">                    <span class="keyword">null</span>,</span><br><span class="line">                    <span class="keyword">new</span> ImageIcon(getClass().getResource(</span><br><span class="line">                            Commons.IMAGE_FILE + tabIcon[i])), <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">//改变tab选项框</span></span><br><span class="line">            JLabel tabLabel = <span class="keyword">new</span> JLabel(<span class="keyword">new</span> ImageIcon(getClass().getResource(</span><br><span class="line">                    Commons.IMAGE_FILE + tabIcon[i])), JLabel.CENTER);</span><br><span class="line">            tabLabel.setPreferredSize(<span class="keyword">new</span> Dimension(<span class="number">102</span>,<span class="number">70</span>));<span class="comment">//设置大小</span></span><br><span class="line">            <span class="comment">//改变tab选项框</span></span><br><span class="line">            tabbedPane.setTabComponentAt(i, tabLabel);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>setTabComponentAt</code>来改变<code>tab</code>的组件，这里是<code>jlabel</code>，并通过组件来<strong>设置大小</strong>。已达到占满一行的效果。</p>
+<p><strong>Tab切换不进行缓存</strong><br>项目中发现，tab的左右切换还是原来的数据，导致在前一个tab更新了数据，另外一个tab则无法显示更新的数据。<br>原来我在这里设置错了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">tabbedPane.addChangeListener(<span class="keyword">new</span> ChangeListener() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stateChanged</span><span class="params">(ChangeEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 如果被选择的组件依然是空</span></span><br><span class="line">                <span class="keyword">int</span> n = tabbedPane.getSelectedIndex();</span><br><span class="line">                <span class="keyword">if</span> (tabbedPane.getSelectedComponent() == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 获取所选标签页</span></span><br><span class="line">                    <span class="comment">// 为指定标前页加载内容</span></span><br><span class="line">                    loadTab(n);</span><br><span class="line">                &#125;<span class="comment">/*else&#123;</span><br><span class="line">                    loadTab(n);</span><br><span class="line">                &#125;*/</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>原来在这个监听中：当<code>Component</code>不为空的时候，就不加载<code>loadTab</code>了，实现了缓存，如果不想要缓存，即可把注释删去。<br>但又有另外一个问题，我想要缓存，但执行某个操作后，将更新全部的<code>tab</code>。查看源码：<br>方法<code>addTab()</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addTab</span><span class="params">(String title, Icon icon, Component component, String tip)</span> </span>&#123;</span><br><span class="line">        insertTab(title, icon, component, tip, pages.size());</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertTab</span><span class="params">(String title, Icon icon, Component component, String tip, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> newIndex = index;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// If component already exists, remove corresponding</span></span><br><span class="line">        <span class="comment">// tab so that new tab gets added correctly</span></span><br><span class="line">        <span class="comment">// Note: we are allowing component=null because of compatibility,</span></span><br><span class="line">        <span class="comment">// but we really should throw an exception because much of the</span></span><br><span class="line">        <span class="comment">// rest of the JTabbedPane implementation isn't designed to deal</span></span><br><span class="line">        <span class="comment">// with null components for tabs.</span></span><br><span class="line">        <span class="keyword">int</span> removeIndex = indexOfComponent(component);</span><br><span class="line">        <span class="keyword">if</span> (component != <span class="keyword">null</span> &amp;&amp; removeIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">            removeTabAt(removeIndex);</span><br><span class="line">            <span class="keyword">if</span> (newIndex &gt; removeIndex) &#123;</span><br><span class="line">                newIndex--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从注释可以知道：<code>If component already exists, remove corresponding</code>，我得到启发，我先将他们全部<code>remove</code>后<code>add</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">executeUpdate</span><span class="params">(<span class="keyword">int</span> index, ResultSet rs)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        tabbedPane.removeAll();</span><br><span class="line">        addAllTab();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现接口，进行监听通知。如果这里使用<code>tabbedPane.repaint()</code>是没有任何效果的。</p>
+<h3 id="JTable使用">JTable使用</h3><p>设置某列不可编辑<br>将<code>JLabel</code>的<code>model</code>进行重写：(AbstractModel的实现类)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCellEditable</span><span class="params">(<span class="keyword">int</span> rowindex,<span class="keyword">int</span> colindex)</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (colindex==<span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>设置表格的内容居中</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JTable tabledata = <span class="keyword">new</span> JTable();</span><br><span class="line">DefaultTableCellRenderer tcr = <span class="keyword">new</span> DefaultTableCellRenderer();<span class="comment">// 设置table内容居中</span></span><br><span class="line"> <span class="comment">// tcr.setHorizontalAlignment(JLabel.CENTER);  tcr.setHorizontalAlignment(SwingConstants.CENTER);// 这句和上句作用一样</span></span><br><span class="line"> tabledata.setDefaultRenderer(Object.class, tcr);</span><br></pre></td></tr></table></figure></p>
+<p><strong>设置缩放时横向滚动条</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">设置横向滚动条：setAutoResizeMode(JTable.AUTO_RESIZE_OFF)</span><br><span class="line">默认是设置竖向滚动条：setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);</span><br></pre></td></tr></table></figure></p>
+<h4 id="单元格编辑出现下拉框">单元格编辑出现下拉框</h4><p>参考：<a href="http://blog.csdn.net/cannel_2020/article/details/7269073" target="_blank" rel="external">浅析JTable与TableModel、TableCellRenderer、TableCellEditor接口——使用JComboBox显示单元格的值</a><br>两种方式实现：</p>
+<ol>
+<li>继承<code>JCombox</code>并实现<code>TableCellEditor</code>，具体的代码参考以上的链接中的：<br><strong><strong>实现TableCellEditor（单元格编辑器）接口</strong></strong>。</li>
+</ol>
+<p>接着进行设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TableColumnModel tcm= table.getColumnModel();</span><br><span class="line">TableColumn tc = tcm.getColumn(index);<span class="comment">//index第几列进行改变,从0开始</span></span><br><span class="line"><span class="comment">//设置“性别”列的单元格渲染器（renderer）</span></span><br><span class="line">tc.setCellRenderer(<span class="keyword">new</span> GenderRenderer());</span><br><span class="line"><span class="comment">//设置“性别”列的单元格编辑器（editor）  </span></span><br><span class="line">tc.setCellEditor(<span class="keyword">new</span> GenderEditor());</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>使用<code>DefaultCellEditor</code>即可，这种方式比较简单。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">editTableJCombox</span><span class="params">(String[] jcbItem, <span class="keyword">int</span> columnIndex)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//获取第几列要进行加入下拉框</span></span><br><span class="line">        TableColumn lastColumn = table.getColumnModel().getColumn(columnIndex);</span><br><span class="line">        JComboBox&lt;String&gt; editCombo = <span class="keyword">new</span> JComboBox&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (String tmp : jcbItem) &#123;</span><br><span class="line">            editCombo.addItem(tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 设置该列使用基于JComboBox的DefaultCellEditor</span></span><br><span class="line">        lastColumn.setCellEditor(<span class="keyword">new</span> DefaultCellEditor(editCombo));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="怎么给选中项添加监听器">怎么给选中项添加监听器</h4><p>给<code>JTable</code>添加<strong>鼠标点击事件</strong>，然后通过<code>getValueAt()</code>取得相关的值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">jlTitleList = <span class="keyword">new</span> JTable();</span><br><span class="line">jlTitleList.addMouseListener(<span class="keyword">new</span> MouseAdapter() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mouseClicked</span><span class="params">(MouseEvent e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> sr;</span><br><span class="line">            <span class="keyword">if</span> ((sr = jlTitleList.getSelectedRow()) == -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                tableSelectValue=(String)jlTitleList.getModel().getValueAt(sr, jlTitleList.getSelectedColumn());</span><br><span class="line">            jcaPanel.chageTitle(selectBtn,tableSelectValue);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="下拉选择框（choice&amp;JComboBox）">下拉选择框（choice&amp;JComboBox）</h3><p>方法一：使用<code>awt的类choice</code>：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Choice</span> <span class="built_in">c</span> = <span class="keyword">new</span> <span class="type">Choice</span>();</span><br><span class="line"><span class="built_in">c</span>.add(<span class="string">"teacher"</span>);</span><br><span class="line"><span class="built_in">c</span>.add(<span class="string">"admin"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>问题：不知道为什么无法显示中文。</p>
+<p>方法二：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>[] strArrRole = <span class="keyword">new</span> <span class="built_in">String</span>[] &#123; <span class="string">"教师"</span>, <span class="string">"管理员"</span>&#125;;</span><br><span class="line">jcbRole=<span class="keyword">new</span> JComboBox&lt;<span class="built_in">String</span>&gt;(strArrRole);</span><br></pre></td></tr></table></figure></p>
+<p>注意：<br>构造函数需要一个<code>泛型</code>数组，可以是字符串，数字等</p>
+<p>关于：<a href="http://www.iteye.com/topic/293222" target="_blank" rel="external">Swing开发之JComboBox篇</a>的使用：</p>
+<ul>
+<li>增加ItemListener和ActionListener</li>
+<li>采用模板创建JComboBox</li>
+<li>采用ArrayList组装JComboBox</li>
+<li>给JComboBox每项增加图片</li>
+<li>改变JComboBox编辑框颜色</li>
+<li>编辑 JComboBox框，实现颜色切换</li>
+<li>改变JComboBox旁边按钮样式</li>
+</ul>
+<h3 id="JLabel使用">JLabel使用</h3><p><strong>如何让字体居中</strong></p>
+<blockquote>
+<p>JLabel jlabel = new JLabel(“Hello”,JLabel.CENTER);</p>
+</blockquote>
+<p>使用<code>JTable.removeColumn()</code>报错：<br>查看：<a href="http://stackoverflow.com/questions/12224650/jtable-removecolumn-method-throws-exception" target="_blank" rel="external">JTable.removeColumn() method throws exception</a></p>
+<p><strong>如何修改背景</strong><br>本应该最快的想到的为：</p>
+<blockquote>
+<p>jLabel.setBackground(Color.RED);</p>
+</blockquote>
+<p>但事实是没有效果的，经过查询发现，原来<code>JLabel</code>默认是<strong>透明的</strong>，所以要设置不透明后，再改变背景即可。</p>
+<blockquote>
+<p>jLabel.setOpaque(true);</p>
+</blockquote>
+<h3 id="JTextField使用">JTextField使用</h3><p>为输入框加入提示信息：<a href="http://stackoverflow.com/questions/1738966/java-jtextfield-with-input-hint" target="_blank" rel="external">Java JTextField with input hint</a></p>
+<h3 id="JOptionPane_提示框使用">JOptionPane 提示框使用</h3><p>参考：<a href="http://847353020-qq-com.iteye.com/blog/954532" target="_blank" rel="external">JOptionPane类提示框的一些常用的方法</a></p>
+<h3 id="属性方法使用">属性方法使用</h3><h4 id="【Swing基础】setPreferredSize和setSize的区别及用法"><a href="http://blog.csdn.net/isea533/article/details/8593183" target="_blank" rel="external">【Swing基础】setPreferredSize和setSize的区别及用法</a></h4><blockquote>
+<p><code>setPreferredSize</code>在使用非<code>this.setLayout(null)</code>的情况下，即：使用现有的布局。来改变组件的大小。<br>而<code>setSize,setLocation,setBounds</code>在<code>setLayout(null)</code>下使用</p>
+</blockquote>
+<h3 id="布局管理器">布局管理器</h3><h4 id="默认布局BorderLayout的bug">默认布局<code>BorderLayout</code>的bug</h4><p>在<code>JPanel</code>使用默认的布局为<code>BorderLayout</code>的时候，出现以下：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/borderLayout_bug.png" alt="border_false"><br>发现跟我想象的：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1342932343_3962.png" alt="border_true"><br>不一样，到底怎么回事，一度让我我记错了，重回去看的时候，想会不会是默认的<code>borderLayout</code>有问题呢？试了下果然是这样。需要<strong>重写<code>new BorderLayout()</code></strong>的方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setLayout(<span class="keyword">new</span> BorderLayout(<span class="number">30</span>,<span class="number">10</span>));</span><br><span class="line"><span class="keyword">this</span>.add(jpNorth, BorderLayout.NORTH);</span><br><span class="line"><span class="keyword">this</span>.add(jScrollPaneTable, BorderLayout.CENTER);</span><br><span class="line"><span class="keyword">this</span>.add(bottomPanel, BorderLayout.SOUTH);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Java_GUI事件监听器"><a href="http://blog.csdn.net/lzm1340458776/article/details/37701615" target="_blank" rel="external">Java GUI事件监听器</a></h3><h3 id="参考引用文章">参考引用文章</h3><p><a href="https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html" target="_blank" rel="external">How to Set the Look and Feel</a>，这里非常详细。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/04/java界面编程/" data-id="cikmrgd1e000o50jsw5xb7ee8" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/04/java界面编程/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awt/">awt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swing/">swing</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/11/java JDBC编程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java JDBC编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/03/mysql命令及sql语句/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mysql命令及sql语句</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/10/04/java界面编程/" data-title="java界面编程" data-url="http://hexo.trity.cc/2015/10/04/java界面编程/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

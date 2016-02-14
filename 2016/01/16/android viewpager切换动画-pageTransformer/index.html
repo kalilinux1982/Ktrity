@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android viewpager切换动画-pageTransformer | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="想使用viewpager的切换动画，源于一个叫sun的应用，想模仿3d转场的效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android viewpager切换动画-pageTransformer">
+<meta property="og:url" content="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="想使用viewpager的切换动画，源于一个叫sun的应用，想模仿3d转场的效果。">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201410/26/1414293422_1593.gif">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android viewpager切换动画-pageTransformer">
+<meta name="twitter:description" content="想使用viewpager的切换动画，源于一个叫sun的应用，想模仿3d转场的效果。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android viewpager切换动画-pageTransformer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android viewpager切换动画-pageTransformer
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/16/android viewpager切换动画-pageTransformer/">
+      <time datetime="2016-01-16T03:15:04.000Z" itemprop="datePublished">2016-01-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>想使用<code>viewpager</code>的切换动画，源于一个叫<code>sun</code>的应用，想模仿<strong>3d转场</strong>的效果。<br><a id="more"></a></p>
+<h3 id="setPageTransformer">setPageTransformer</h3><p><code>ViewPager</code>提供了一个<code>setPageTransformer</code>，用于设置ViewPager切换时的动画效果。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">viewpagerMain.setPageTransformer(<span class="keyword">true</span>,<span class="keyword">new</span> CubeOutTransformer());</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：并不兼容3.0以下的版本的,会没有任何效果。<br>源码中有以下的判断<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">11</span>) &#123;</span><br></pre></td></tr></table></figure></p>
+<p>其中设置动画的<code>CubeOutTransformer</code>需要实现<code>viewpager.PageTransformer</code>这个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PageTransformer</span> </span>&#123;  </span><br><span class="line"><span class="javadoc">/** </span><br><span class="line">...</span><br><span class="line">*<span class="javadoctag"> @param</span> position Position of page relative to the current front-and-center </span><br><span class="line">*                 position of the pager. 0 is front and center. 1 is one full </span><br><span class="line">*                 page position to the right, and -1 is one page position to the left. </span><br><span class="line">*/</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View page, <span class="keyword">float</span> position)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据解释可以知道：<br><strong>position的可能性的值</strong>有，其实从官方示例的注释就能看出：</p>
+<ul>
+<li>[-Infinity,-1)  已经看不到了</li>
+<li>(1,+Infinity] 已经看不到了</li>
+<li>[-1,1] </li>
+</ul>
+<p><strong>重点看[-1,1]这个区间 </strong>， 其他两个的View都已经看不到了。即：</p>
+<p><strong>假设现在ViewPager在A页现在滑出B页</strong>，则:</p>
+<ul>
+<li>A页的position变化就是( 0, -1]</li>
+<li>B页的position变化就是[ 1 , 0 ]</li>
+</ul>
+<p>下面进行设置一个案例：<br><img src="http://img.my.csdn.net/uploads/201410/26/1414293422_1593.gif" alt=""><br>下面我们分析代码：</p>
+<p>我们设置View的旋转中心为：(固定旋转轴)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ViewHelper.setPivotX(view, view.getMeasuredWidth() * <span class="number">0.5f</span>);</span><br><span class="line">ViewHelper.setPivotY(view, view.getMeasuredHeight());</span><br></pre></td></tr></table></figure>
+<p>依然是ViewPager在A页现在滑出B页</p>
+<p>那么A页应当在滑动过程中0度到-20度的偏移，B页应当在滑动过程中+20度到0度的偏移</p>
+<p>结合</p>
+<p>A页的position变化就是( 0, -1]</p>
+<p>B页的position变化就是[ 1 , 0 ]</p>
+<p>那么旋转的角度即：mRot = (20 * position); A页 mRot :0 ,~ -20 ; B页 mRot :20 ~ 0  ;</p>
+<p>瞬间觉得好简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zhy.view;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> com.nineoldandroids.view.ViewHelper;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> android.annotation.SuppressLint;  </span><br><span class="line"><span class="keyword">import</span> android.support.v4.view.ViewPager;  </span><br><span class="line"><span class="keyword">import</span> android.util.Log;  </span><br><span class="line"><span class="keyword">import</span> android.view.View;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RotateDownPageTransformer</span> <span class="keyword">implements</span> <span class="title">ViewPager</span>.<span class="title">PageTransformer</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> ROT_MAX = <span class="number">20.0f</span>;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mRot;  </span><br><span class="line">      </span><br><span class="line">  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span>  </span><br><span class="line">    </span>&#123;  </span><br><span class="line">  </span><br><span class="line">        Log.e(<span class="string">"TAG"</span>, view + <span class="string">" , "</span> + position + <span class="string">""</span>);  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>)  </span><br><span class="line">        &#123; <span class="comment">// [-Infinity,-1)  </span></span><br><span class="line">            <span class="comment">// This page is way off-screen to the left.  </span></span><br><span class="line">            ViewHelper.setRotation(view, <span class="number">0</span>);  </span><br><span class="line">  </span><br><span class="line">        &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(position &lt;= <span class="number">1</span>)</span> <span class="comment">// a页滑动至b页 ； a页从 0.0 ~ -1 ；b页从1 ~ 0.0  </span></span><br><span class="line">        </span>&#123; <span class="comment">// [-1,1]  </span></span><br><span class="line">            <span class="comment">// Modify the default slide transition to shrink the page as well  </span></span><br><span class="line">            <span class="keyword">if</span> (position &lt; <span class="number">0</span>)  </span><br><span class="line">            &#123;  </span><br><span class="line">  </span><br><span class="line">                mRot = (ROT_MAX * position);  </span><br><span class="line">                ViewHelper.setPivotX(view, view.getMeasuredWidth() * <span class="number">0.5f</span>);  </span><br><span class="line">                ViewHelper.setPivotY(view, view.getMeasuredHeight());  </span><br><span class="line">                ViewHelper.setRotation(view, mRot);  </span><br><span class="line">            &#125; <span class="keyword">else</span>  </span><br><span class="line">            &#123;  </span><br><span class="line">  </span><br><span class="line">                mRot = (ROT_MAX * position);  </span><br><span class="line">                ViewHelper.setPivotX(view, view.getMeasuredWidth() * <span class="number">0.5f</span>);  </span><br><span class="line">                ViewHelper.setPivotY(view, view.getMeasuredHeight());  </span><br><span class="line">                ViewHelper.setRotation(view, mRot);  </span><br><span class="line">            &#125;  </span><br><span class="line">  </span><br><span class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)  </span></span><br><span class="line">  </span><br><span class="line">            <span class="comment">// Fade the page relative to its size.  </span></span><br><span class="line">  </span><br><span class="line">        &#125; <span class="keyword">else</span>  </span><br><span class="line">        &#123; <span class="comment">// (1,+Infinity]  </span></span><br><span class="line">            <span class="comment">// This page is way off-screen to the right.  </span></span><br><span class="line">            ViewHelper.setRotation(view, <span class="number">0</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上缩写均摘抄于：<a href="http://blog.csdn.net/lmj623565791/article/details/40411921" target="_blank" rel="external">Android 实现个性的ViewPager切换动画 实战PageTransformer（兼容Android3.0以下）</a>,这里面用到向下兼容的，使用 <strong><a href="https://github.com/JakeWharton/NineOldAndroids" target="_blank" rel="external">NineOldAndroids</a></strong>来达到当<code>sdk&lt;11</code>的时候仍然有效果。</p>
+<p>另外介绍一个这些效果的库：<br><strong><a href="https://github.com/ToxicBakery/ViewPagerTransforms" target="_blank" rel="external">ViewPagerTransforms</a></strong>，包含各种你想要的效果。</p>
+<p><strong>注意这里有一个错误</strong>：<br>上面的情况是<code>activity+viewpager</code>，但当Fragment和ViewPager一起交错使用时，出现以下异常：</p>
+<p><a href="http://blog.csdn.net/fener10289/article/details/8519552" target="_blank" rel="external">Recursive entry to executePendingTransactions</a><br>解决方法：看如下修改<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将：</span><br><span class="line">BgManagerAdapter bgManagerAdapter=<span class="keyword">new</span> BgManagerAdapter(getActivity().getFragmentManager(),fragments);</span><br><span class="line">改成：</span><br><span class="line">BgManagerAdapter bgManagerAdapter=<span class="keyword">new</span> BgManagerAdapter(<span class="keyword">this</span>.getChildFragmentManager(),fragments);</span><br></pre></td></tr></table></figure></p>
+<p>即：<code>activity.getFragmentManager()</code>改成<code>fragment.getChildFragmentManager()</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/" data-id="cikmr5jgk0031m8jsg5oidih1" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pageTransformer/">pageTransformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewpager/">viewpager</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/18/android bitmap实战/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android bitmap实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/14/android 单元测试-junit/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 单元测试-junit</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/" data-title="android viewpager切换动画-pageTransformer" data-url="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

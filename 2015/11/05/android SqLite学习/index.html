@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android SqLite学习 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="纯Sqlite数据库的学习：SQLite教程
+操作SQLite数据库导出SQLite数据库：参看资料：如何设置Android手机的sqlite3命令环境在Android中查看和管理sqlite数据库
+两种方式：一种是使用DDMS,而另一种是使用adb shell
+数据类型：(5种)
+
+， integer 表示整型，real 表示浮点型，text 表示文本类型，blob 表示二进制类型，NULL 表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android SqLite学习">
+<meta property="og:url" content="http://hexo.trity.cc/2015/11/05/android SqLite学习/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="纯Sqlite数据库的学习：SQLite教程
+操作SQLite数据库导出SQLite数据库：参看资料：如何设置Android手机的sqlite3命令环境在Android中查看和管理sqlite数据库
+两种方式：一种是使用DDMS,而另一种是使用adb shell
+数据类型：(5种)
+
+， integer 表示整型，real 表示浮点型，text 表示文本类型，blob 表示二进制类型，NULL 表">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212182322.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/115957-7e7068ef5a687b48.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android SqLite学习">
+<meta name="twitter:description" content="纯Sqlite数据库的学习：SQLite教程
+操作SQLite数据库导出SQLite数据库：参看资料：如何设置Android手机的sqlite3命令环境在Android中查看和管理sqlite数据库
+两种方式：一种是使用DDMS,而另一种是使用adb shell
+数据类型：(5种)
+
+， integer 表示整型，real 表示浮点型，text 表示文本类型，blob 表示二进制类型，NULL 表">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android SqLite学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android SqLite学习
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/05/android SqLite学习/">
+      <time datetime="2015-11-05T04:44:34.000Z" itemprop="datePublished">2015-11-05</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="纯Sqlite数据库的学习：">纯Sqlite数据库的学习：</h3><p><a href="http://www.yiibai.com/sqlite/" target="_blank" rel="external">SQLite教程</a></p>
+<h3 id="操作SQLite数据库">操作<code>SQLite</code>数据库</h3><p>导出<code>SQLite</code>数据库：<br>参看资料：<a href="http://blog.csdn.net/ygsyyl/article/details/8144407" target="_blank" rel="external">如何设置Android手机的sqlite3命令环境</a><br><a href="http://www.cnblogs.com/walkingp/archive/2011/03/28/1997437.html" target="_blank" rel="external">在Android中查看和管理sqlite数据库</a></p>
+<p>两种方式：一种是使用<code>DDMS</code>,而另一种是使用<code>adb shell</code></p>
+<p><strong>数据类型：</strong>(5种)</p>
+<blockquote>
+<p>， <code>integer</code> 表示整型，<code>real</code> 表示浮点型，<code>text</code> 表示文本类型，<code>blob</code> 表示二进制类型，<code>NULL</code> 表示空值</p>
+</blockquote>
+<p>但，他属于<strong>弱类型</strong>的数据库，数据类型自己转换。</p>
+<h3 id="SQLiteDatabase讲解">SQLiteDatabase讲解</h3><h4 id="使用">使用</h4><p><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+<p><strong>插入（insert）</strong></p>
+<blockquote>
+<p>三个参数:</p>
+<ul>
+<li>第一个参数是表名，我们希望向哪张表里添加数据，这里就传入该表的名字。</li>
+<li>第二个参数用于在未指定添加数据的情况下给某些可为空的列自动赋值 NULL，一般我们用不到这个功能，直接传入 null 即可。</li>
+<li>第三个参数是一个 <code>ContentValues</code> 对象，它提供了一系列的 put()方法重载，用于向 <code>ContentValues</code> 中添加数据，只需要将表中的<strong>每个列名以及相应的待添加数据传入</strong>即可</li>
+</ul>
+</blockquote>
+<p><strong>更新update()</strong></p>
+<blockquote>
+<p>接收四个参数:</p>
+<ul>
+<li>第一个参数和 insert()方法一样，也是表名，在这里指定去更新哪张表里的数据。</li>
+<li>第二个参数是 ContentValues 对象，要把更新数据在这里组装进去。</li>
+<li>第三个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第四个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"price"</span>, <span class="number">10.99</span>);</span><br><span class="line">db.update(<span class="string">"Book"</span>, values, <span class="string">"name = ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"The Data Vinci Code"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除 delete()</strong></p>
+<blockquote>
+<p>接收三个参数:</p>
+<ul>
+<li>第一个参数仍然是表名，这个已经没什么好说的了，</li>
+<li>第二个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第三个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">db.delete(<span class="string">"Book"</span>, <span class="string">"pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>查询(query)：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy,String limit)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>table:表名称</li>
+<li>columns:列名称数组</li>
+<li>selection:条件字句，相当于where</li>
+<li>selectionArgs:条件字句，参数数组</li>
+<li>groupBy:分组列</li>
+<li>having:分组条件</li>
+<li>orderBy:排序列</li>
+<li>limit:分页查询限制</li>
+<li>Cursor:返回值，相当于结果集ResultSet</li>
+</ul>
+<p>图例：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212182322.png" alt=""></p>
+<p><strong>返回的类型都是<code>Cursor</code>,常用的方法：</strong>:<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/115957-7e7068ef5a687b48.png" alt=""></p>
+<p><strong>直接使用SQL操作数据库</strong>：（<code>execSQL</code>&amp;<code>rawQuery</code>）<br>下面举两个实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.execSQL(<span class="string">"delete from Book where pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br><span class="line">db.rawQuery(<span class="string">"select * from Book"</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出<strong>曾删改</strong>使用<code>execSQL</code>，而查询使用<code>rawQuery</code>即可。这两个方法接收两个参数：</p>
+<ul>
+<li>第一个参数：<strong>sql语句，可包含占位符</strong></li>
+<li>第二个参数：<strong>占位符的内容，没有为null</strong></li>
+</ul>
+<h4 id="事务的简单使用：">事务的简单使用：</h4><p><strong>SQLiteDatabase对事务的使用：</strong></p>
+<blockquote>
+<p>使用SQLiteDatabase的beginTransaction()方法可以开启一个事务，程序执行到endTransaction() 方法时会检查事务的标志是否为成功，如果程序执行到endTransaction()之前调用了setTransactionSuccessful() 方法设置事务的标志为成功则提交事务，如果没有调用setTransactionSuccessful() 方法则回滚事务</p>
+</blockquote>
+<p><strong>概念：</strong><br>什么是<strong>回滚事务</strong></p>
+<blockquote>
+<p><strong>事务</strong>是一组组合成逻辑工作单元的操作，虽然系统中可能会出错，但事务将控制和维护事务中每个操作的一致性和完整性.</p>
+</blockquote>
+<p>如果事务中的某个点发生故障，则所有更新都可以回滚到事务开始之前的状态。</p>
+<p><strong>事务应用在什么方面：</strong></p>
+<blockquote>
+<p>很多时候我们需要批量的向Sqlite中插入大量数据时，单独的使用添加方法导致应用响应缓慢, 因为sqlite插入数据的时候默认一条语句就是一个事务，有多少条数据就有多少次磁盘操作。如初始8000条记录也就是要8000次读写磁盘操作。同时也是为了保证数据的一致性，避免出现数据缺失等情况</p>
+</blockquote>
+<p>代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbOpenHelper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line"><span class="comment">//开启事务</span></span><br><span class="line">db.beginTransaction();</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">//批量处理操作</span></span><br><span class="line"><span class="comment">//do something</span></span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line"><span class="comment">//设置事务标志为成功，当结束事务时就会提交事务</span></span><br><span class="line">db.setTransactionSuccessful();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line"><span class="comment">//结束事务</span></span><br><span class="line">db.endTransaction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码使用到了<code>getWritableDatabase()</code>方法，与之对应还有<code>getReadableDatabase()</code>方法。那么这两者有什么区别呢？<br>参考：<a href="http://blog.csdn.net/dsa63/article/details/16951193" target="_blank" rel="external">getWritableDatabase与getReadableDatabase的用法区别</a><br><strong>两者区别：</strong></p>
+<ul>
+<li>相同点：都具备读写的功能。</li>
+<li>不同点：<ul>
+<li><code>getWritableDatabase</code><blockquote>
+<p>如果打开的数据库磁盘满了，此时<strong>只能读不能写</strong>，此时调用了getWritableDatabase的实例，那么<strong>将会发生错误（异常）</strong></p>
+</blockquote>
+</li>
+<li><code>getReadableDatabase</code><blockquote>
+<p>先调用getWritableDatabase以读写的方式打开数据库，如果数据库的磁盘满了，<strong>此时返回打开失败</strong>，继而用getReadableDatabase的实例<strong>以只读的方式去打开数据库</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>大家留意</strong>：<br>当磁盘满的情况，一个<strong>抛出异常</strong>，一个是以<strong>只读的方式打开</strong>，所以：当执行<strong>增删改</strong>的情况下，最好是调用<code>getWritableDatabase</code>,而执行<strong>查询</strong>的时候，则调用<code>getReadableDatabase</code>更安全。</p>
+<h4 id="源码解析getWritableDatabase和getReadableDatabase：">源码解析<code>getWritableDatabase</code>和<code>getReadableDatabase</code>：</h4><p>参见：<a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a></p>
+<ul>
+<li>getReadableDatabase<blockquote>
+<p>首先判断是否已存在数据库实例并且是打开状态，如果是，则直接返回该实例，否则试图获取一个可读写模式的数据库实例,<strong>注意：调用getWritableDatabase获取实例</strong>，如果遇到磁盘空间已满等情况获取失败的话，再以只读模式打开数据库，获取数据库实例并返回，然后为mDatabase赋值为最新打开的数据库实例</p>
+</blockquote>
+</li>
+<li>getWritableDatabase<blockquote>
+<p>首先判断mDatabase如果不为空已打开并不是只读模式则直接返回，否则如果mDatabase不为空则加锁，然后开始打开或创建数据库，比较版本，根据版本号来调用相应的方法，为数据库设置新版本号，最后释放旧的不为空的mDatabase并解锁，把新打开的数据库实例赋予mDatabase，并返回最新实例</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="升级数据库的最佳方式">升级数据库的最佳方式</h3><p>在<code>onUpgrade</code>使用<code>switch-case</code>语句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span>  </span>&#123;</span><br><span class="line"><span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">db.execSQL(CREATE_CATEGORY);</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意并没有<code>break</code>语句，保证在<strong>跨版本升级</strong>的时候，每一次的数据库修改都<strong>能被全部执<br>行到</strong>。</p>
+<h3 id="如何避免插入重复数据到数据库中">如何避免插入重复数据到数据库中</h3><p><strong>使用：<code>OR IGNORE</code></strong></p>
+<blockquote>
+<p>在INSERT语句中添加<code>OR IGNORE</code>，即可（<strong>重复数据会跳过，且不影响后续数据插入</strong>）<br>示例如下：<br>insert OR IGNORE into PDA_Test (DeviceID,MethodName) values(‘1112’,’测试原有’);</p>
+</blockquote>
+<h3 id="性能优化：">性能优化：</h3><p><a href="http://www.cnblogs.com/hustcat/archive/2010/06/23/1762987.html" target="_blank" rel="external">浅谈SQLite——查询处理及优化</a></p>
+<h4 id="删除优化">删除优化</h4><p><a href="http://www.cnblogs.com/panchunting/archive/2013/04/27/SQL_Tech_001.html" target="_blank" rel="external">SQL Server系列之 删除大量数据</a>，总结以下方法：</p>
+<ol>
+<li>保留需要的数据之新表中-&gt;<code>TRUNCATE</code>原表数据-&gt;还原之前保留的数据之原表中(<strong>但SQlite不支持<code>TRUNCATE</code></strong>)</li>
+<li>新建表结构-&gt;批量插入需要保留的数据-&gt;<code>DROP</code>原表-&gt;重命名新表为原表</li>
+</ol>
+<p><a href="http://www.yiibai.com/sqlite/sqlite_truncate_table.html" target="_blank" rel="external">SQLite truncate table命令</a></p>
+<h4 id="遵循规则进行优化搜索">遵循规则进行优化搜索</h4><p><a href="http://blog.csdn.net/wlchen123/article/details/8247424" target="_blank" rel="external">sqllite查询优化</a><br><a href="http://www.cnblogs.com/DxSoft/archive/2011/02/12/1952872.html" target="_blank" rel="external">Sqlite官方的查询优化文档</a></p>
+<p><strong>使用索引进行优化：</strong><br><a href="http://blog.csdn.net/ychw365/article/details/5996776" target="_blank" rel="external">在SQLite中使用索引优化查询速度</a></p>
+<ul>
+<li>如何判断索引是否存在：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> type,tb1_name,name <span class="keyword">as</span> index_num <span class="keyword">FROM</span> sqlite_master <span class="keyword">WHERE</span> type == <span class="string">'index'</span> <span class="keyword">AND</span> tbl_name == <span class="string">'table_name'</span> <span class="keyword">And</span> name=<span class="string">'index_name'</span></span></span><br></pre></td></tr></table></figure>
+<p>从上面的代码可查询到对应的索引有多少个，从而判断索引是否存在。</p>
+<ul>
+<li>创建索引：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">index</span> index_name <span class="keyword">on</span> table_name (column_name)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">index</span> index_commidityid</span></span><br></pre></td></tr></table></figure>
+<h3 id="错误">错误</h3><p>参考解决方案<br><a href="http://blog.sina.com.cn/s/blog_5da93c8f0102v3js.html" target="_blank" rel="external">Android: SQLiteDatabaseLockedException: database is locked</a></p>
+<h3 id="资料">资料</h3><p><a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a><br><a href="http://www.jianshu.com/p/5c33be6ce89d#" target="_blank" rel="external"># Android SQLite详解</a><br><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/05/android SqLite学习/" data-id="cikmr5jib0043m8jszng5z3gx" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/05/android SqLite学习/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/06/android 线程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 线程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/28/java 源码解析：ScheduledThreadPoolExecutor和Timer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java 源码解析：ScheduledThreadPoolExecutor和Timer</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/11/05/android SqLite学习/" data-title="android SqLite学习" data-url="http://hexo.trity.cc/2015/11/05/android SqLite学习/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

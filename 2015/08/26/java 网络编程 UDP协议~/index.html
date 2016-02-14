@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>java 网络编程 UDP协议 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UDP协议英文：User Datagram Protocol即：用户数据报协议。不可靠，传输少量的数据（限制在64KB下），效率高，在两端建立socket（负责发送和接收，无服务端和客户端的概念），位于传输层，而IP为网络层。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 网络编程 UDP协议">
+<meta property="og:url" content="http://hexo.trity.cc/2015/08/26/java 网络编程 UDP协议~/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="UDP协议英文：User Datagram Protocol即：用户数据报协议。不可靠，传输少量的数据（限制在64KB下），效率高，在两端建立socket（负责发送和接收，无服务端和客户端的概念），位于传输层，而IP为网络层。">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1524390.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 网络编程 UDP协议">
+<meta name="twitter:description" content="UDP协议英文：User Datagram Protocol即：用户数据报协议。不可靠，传输少量的数据（限制在64KB下），效率高，在两端建立socket（负责发送和接收，无服务端和客户端的概念），位于传输层，而IP为网络层。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-java 网络编程 UDP协议~" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java 网络编程 UDP协议
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/08/26/java 网络编程 UDP协议~/">
+      <time datetime="2015-08-26T09:39:54.000Z" itemprop="datePublished">2015-08-26</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h3 id="UDP协议">UDP协议</h3><p>英文：<code>User Datagram Protocol</code>即：用户数据报协议。<br>不可靠，传输少量的数据（限制在64KB下），效率高，在两端建立<code>socket</code>（负责发送和接收，无服务端和客户端的概念），位于<strong>传输层</strong>，而IP为<strong>网络层</strong>。<br><a id="more"></a><br>使用场景：网络游戏，视频会议，实时性高的情况。<br>主要作用：完成<strong>网络数据流和数据报</strong>之间的转换。在信息的发送端，UDP协议将网络数据流封装成数据报，然后将数据报发送出去，接收端为逆过程。</p>
+<h4 id="传输层和网络层有什么区别呢？">传输层和网络层有什么区别呢？</h4><blockquote>
+<p>网络层（IP层）提供<strong>点到点</strong>的连接即提供主机之间的逻辑通信，传输层提供<strong>端到端的连接</strong>——提供进程之间的逻辑通信。</p>
+</blockquote>
+<h4 id="那上面的端对端，即：什么是端口呢">那上面的端对端，即：什么是端口呢</h4><blockquote>
+<p><strong>为了使运行不同操作系统的计算机的应用进程能够互相通信</strong>，就必须用统一的方法对TCP/IP体系的应用进程进行标志。<br>解决这个问题的方法就是在运输层使用协议端口号(protocol port number)，或通常简称为<strong>端口(port)</strong>。</p>
+</blockquote>
+<p>简单理解，IP的地址负责的是点到点，而仅仅通过IP来连接到对方的电脑是不够的，因为电脑中要很多的应用程序，到底是将数据传输给那个应用程序呢？我们还要需要端口（TCP/IP）来区分是哪一个应用程序。两者结合达到网络通信。</p>
+<h4 id="与TCP协议的比较">与TCP协议的比较</h4><p><code>TCP</code>（Transmission Control Protocol）可靠的、面向连接的协议（eg:打电话）、传输效率低全双工通信（发送缓存&amp;接收缓存）、面向字节流。使用TCP的应用：Web浏览器；电子邮件、文件传输程序。</p>
+<p><code>UDP</code>（User Datagram Protocol）不可靠的、无连接的服务，传输效率高（发送前时延小），一对一、一对多、多对一、多对多、面向报文，尽最大努力服务，无拥塞控制。使用UDP的应用：域名系统 (DNS)；视频流；IP语音(VoIP)。</p>
+<h3 id="java是怎么使用UDP协议达到网络通信的呢？">java是怎么使用UDP协议达到网络通信的呢？</h3><p>java使用<code>DaatagramSocket</code>代表<code>UDP</code>协议的<code>socket</code>，它本身只是<strong>码头</strong>，只负责<strong>接收和发送数据报</strong>，使用<code>DatagramPacket</code>来代表数据报。发送的数据通过这个对象进行完成。<br>由<code>DatagramPacket</code>来决定<strong>数据报的目的地</strong>。<br>实际上，还是可以区分出<strong>服务端和客户端</strong>的，下面展示服务端与客户端和客户端与客户端的传输。</p>
+<h4 id="服务端与客户端">服务端与客户端</h4><p>在<code>TCP</code>的<code>socket</code>中，我们需要建立连接后再进行传输，所以有明显的服务端和客户端之分。而<code>UDP</code>则不同，不需要建立连接，直接往目标进行发送数据。但还是可以人为的指定好<strong>客户端和服务端的</strong>。服务端的特性是有<strong>固定的IP和端口</strong>。<br>下面展示用法：<br>服务端<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPServer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PORT=<span class="number">30000</span>;</span><br><span class="line">    <span class="comment">//定义每个数据报的最大的大小为4KB</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DATA_LEN=<span class="number">4096</span>;</span><br><span class="line">    <span class="comment">//定义接受网络数据的字节数组</span></span><br><span class="line">    <span class="keyword">byte</span>[] inBuff=<span class="keyword">new</span> <span class="keyword">byte</span>[DATA_LEN];</span><br><span class="line">    <span class="comment">//已指定字节数组创建准备接受数据的DatagramPacket对象</span></span><br><span class="line">    <span class="keyword">private</span> DatagramPacket inPacket=<span class="keyword">new</span> DatagramPacket(inBuff, inBuff.length);</span><br><span class="line">    <span class="comment">//定义发送的DatagramPacket对象</span></span><br><span class="line">    <span class="keyword">private</span> DatagramPacket outPacket;</span><br><span class="line">    <span class="comment">//定义一个字符串数组，服务器发送该数组的元素</span></span><br><span class="line">    String[] book=<span class="keyword">new</span> String[]&#123;<span class="string">"I"</span>,<span class="string">"am"</span>,<span class="string">"Stu"</span>&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建datagramsocket对象</span></span><br><span class="line">            DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(PORT);</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//采用循环接受数据</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">                    <span class="comment">//读取inPacket的数据</span></span><br><span class="line">                    socket.receive(inPacket);</span><br><span class="line">                    <span class="comment">//判断getData()和inbuf是否为同一个数组</span></span><br><span class="line">                    System.out.println(inPacket.getData()==inBuff);</span><br><span class="line">                    System.out.println(socket.getSoTimeout());</span><br><span class="line">                    <span class="comment">//将接受后的内容转化为字符串进行输出</span></span><br><span class="line">                    System.out.println(<span class="keyword">new</span> String(inBuff,<span class="number">0</span>,inPacket.getLength()));</span><br><span class="line">                    <span class="comment">//从字符串中取出一个元素作为发送数据</span></span><br><span class="line">                    <span class="keyword">byte</span>[] sendData=book[i%<span class="number">4</span>].getBytes();</span><br><span class="line">                    <span class="comment">//已指定的字符数组作为发送数据，以刚接手到的datagramPacket的</span></span><br><span class="line">                    <span class="comment">//源socketAddress作为目标socketAddress创建DatagramPacket</span></span><br><span class="line">                    outPacket=<span class="keyword">new</span> DatagramPacket(sendData,sendData.length, inPacket.getSocketAddress());<span class="comment">//通过这个getSocketAddress就可以得到相应的IP地址和端口了</span></span><br><span class="line">                    <span class="comment">//发送数据</span></span><br><span class="line">                    socket.send(outPacket);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> UDPServer().init();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>相应的客户端:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UdpClient</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 定义数据报的目的地</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEST_PORT = <span class="number">30000</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEST_IP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    <span class="comment">// 定义每个数据报的大小，最大为4kb</span></span><br><span class="line">    ...<span class="comment">//更UdpServer一样相应成员的声明</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建一个客户端DatagramSocket使用随机端口</span></span><br><span class="line">            DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();</span><br><span class="line">            outPacket=<span class="keyword">new</span> DatagramPacket(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>], <span class="number">0</span>,InetAddress.getByName(DEST_IP),DEST_PORT);</span><br><span class="line">            <span class="comment">//创建键盘输入流</span></span><br><span class="line">            Scanner scan=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">            <span class="comment">//不断读取键盘输入</span></span><br><span class="line">            <span class="keyword">while</span>(scan.hasNextLine())&#123;</span><br><span class="line">                <span class="comment">//将键盘输入的一行字符串转换字节数组</span></span><br><span class="line">                <span class="keyword">byte</span>[] buff=scan.nextLine().getBytes();</span><br><span class="line">                <span class="comment">//设置发送用到的DatagramPacket中的字节数据</span></span><br><span class="line">                outPacket.setData(buff);</span><br><span class="line">                <span class="comment">//发送数据报</span></span><br><span class="line">                socket.send(outPacket);</span><br><span class="line">                <span class="comment">//读取Socket中的数据，读到的数据放在inPacket所封装的字节数组中</span></span><br><span class="line">                socket.receive(inPacket);</span><br><span class="line">                System.out.println(<span class="keyword">new</span> String(inBuff,<span class="number">0</span>,inPacket.getLength()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> UdpClient().init();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过以上的代码，我们可以总结以下规律，即：使用步骤</p>
+<ol>
+<li>定义好IP地址和端口，以及字节数组的大小（最终以此形式传输）并初始化<strong>输入的DatagramPacket</strong></li>
+<li>创建<code>DatagramSocket</code>实例（监听端口，S/C都各自不同）</li>
+<li>S和C都有所不同<br>3.1 S则先进行<code>socket.receive(inPacket);</code><br>3.2 而C则创建<code>outPacket</code>（IP地址和端口，字节数组），并使用<code>outPacket.setData(buff);</code>将需要发送的数据进行设置，再使用<code>socket.send(outPacket);</code>进行发送</li>
+<li>当发送后的就进行等待接受，接受完的进行处理并发送的一个循环里面，这优点像<strong>进程间通信的情况</strong>。</li>
+</ol>
+<p>使用当中的<strong>注意点</strong>：</p>
+<ol>
+<li>一定要注意<code>DatagramPacket</code>的设置，因为它指定发送给哪一个应用程序，通过<strong>接受的数据报</strong>可等到相应的<code>ip地址和端口</code>。</li>
+<li><code>socket.receive(inPacket);</code>是阻塞的。必要时需要对应启动一个线程。</li>
+</ol>
+<h3 id="针对注意的第一点，我们看客户端对客户端的传输">针对注意的第一点，我们看客户端对客户端的传输</h3><p>其实很简单，我们只要对每个客户端的<code>DatagramSocket</code>监听不同的端口，而使用<code>DatagramPacket</code>指定要传输的<code>端口和IP地址即可</code>。我们只需要对上面的<strong>类UdpClient</strong>进行修改如下：<br>第一个客户端<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DatagramSocket socket=<span class="keyword">new</span>  DatagramSocket(<span class="number">30001</span>);<span class="comment">//添加端口，而不是随机端口，</span></span><br><span class="line">outPacket=<span class="keyword">new</span>  DatagramPacket(<span class="keyword">new</span>  <span class="keyword">byte</span>[<span class="number">0</span>],<span class="number">0</span>,InetAddress.getByName(DEST_IP),<span class="number">30000</span>);<span class="comment">//将要传输放的端口和ip设置</span></span><br></pre></td></tr></table></figure></p>
+<p>第二个客户端则相反即可<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DatagramSocket socket=<span class="keyword">new</span>  DatagramSocket(<span class="number">30000</span>);<span class="comment">//添加端口，而不是随机端口，</span></span><br><span class="line">outPacket=<span class="keyword">new</span>  DatagramPacket(<span class="keyword">new</span>  <span class="keyword">byte</span>[<span class="number">0</span>],<span class="number">0</span>,InetAddress.getByName(DEST_IP),<span class="number">30001</span>);<span class="comment">//将要传输放的端口和ip设置</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="针对注意第二点，当socket-receive(inPacket);如何不阻塞主线程">针对注意第二点，当<code>socket.receive(inPacket);</code>如何不阻塞主线程</h3><p>下面我对相应的代码进行了封装和优化，并让类实现<code>Runnable</code>接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UdpClient</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 定义数据报的目的地</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEST_PORT = <span class="number">30001</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEST_IP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    ...<span class="comment">//相应成员的声明</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UdpClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建一个客户端DatagramSocket使用随机端口</span></span><br><span class="line">            socket = <span class="keyword">new</span> DatagramSocket(DEST_PORT);</span><br><span class="line">            <span class="comment">// 初始化发送数据报，包含一个长度为0的字节数组</span></span><br><span class="line">            outPacket = <span class="keyword">new</span> DatagramPacket(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>], <span class="number">0</span>,</span><br><span class="line">                    InetAddress.getByName(DEST_IP), <span class="number">30000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="javadoc">/**</span><br><span class="line">     * 发送字符串坐标strxy,用于使用ai先手的情况</span><br><span class="line">     *</span><br><span class="line">     *<span class="javadoctag"> @param</span> strXY</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendPointXy</span><span class="params">(String strXY)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] buff = strXY.getBytes();</span><br><span class="line">        outPacket.setData(buff);<span class="comment">// 设置数据报的字节数据</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 发送数据报</span></span><br><span class="line">            socket.send(outPacket);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="javadoc">/**</span><br><span class="line">     * 进行接受坐标strXY，并进行处理进行下棋，最后进行发送</span><br><span class="line">     * </span><br><span class="line">     *<span class="javadoctag"> @param</span> strXY</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiverPointXy</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">        String[] strXY = content.split(<span class="string">","</span>);</span><br><span class="line">        ...<span class="comment">//对数据进行处理</span></span><br><span class="line">        sendPointXy(chComputer.getX() + <span class="string">","</span> + chComputer.getY());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="javadoc">/**</span><br><span class="line">     * 成为被动接受方</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acceptPointXy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            socket.receive(inPacket);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        receiverPointXy(<span class="keyword">new</span> String(inBuff, <span class="number">0</span>, inPacket.getLength()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//死循环不断地进行监听</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            acceptPointXy();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上面的代码可以看到，当我们发送后，再也不进行<code>receive</code>，而是交给线程的<code>run</code>中进行死循环地<code>receive</code>监听。并把<code>send</code>方法和<code>receive</code>方法封装出来，是为了区分谁先发送，谁监听的情况。否则发送方就无法将数据到达目的地。</p>
+<h3 id="如何让receive跳出？">如何让<code>receive</code>跳出？</h3><p>也就是告诉<strong>等待的对方</strong>，我已经退出了，不需要继续等待呢？<br>这里分两种情况的方法，一种是正常退出，另一种是非正常退出。</p>
+<h4 id="正常退出：">正常退出：</h4><p>传入特定的字符进行判断对方已经退出了，并主动停止等待。我根据上一个代码块进行修改如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> isRunning=<span class="keyword">true</span>;<span class="comment">//默认true;</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiverPointXy</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//首先进行判断是否关闭的情况</span></span><br><span class="line">        <span class="keyword">if</span>(content.isEmpty())&#123;<span class="comment">//当正常关闭的时候，对方发送空字符来标示关闭</span></span><br><span class="line">            isRunning=<span class="keyword">false</span>;<span class="comment">//不再循环等待</span></span><br><span class="line">            <span class="keyword">if</span>(socket!=<span class="keyword">null</span>)</span><br><span class="line">                socket.close();</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        ....</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//isRunning进行标识是否等待</span></span><br><span class="line">        <span class="keyword">while</span>(isRunning)&#123;</span><br><span class="line">            acceptPointXy();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="非正常退出：">非正常退出：</h4><p>程序遇到异常，网络不正常的时候，我们可以设置<code>timeout</code>来停止等待：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.setSoTimeout(<span class="number">60000</span>);<span class="comment">// 设置等待时间为1分钟</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="那么你可能会好奇，默认的Timeout是多久呢？我们通过查看源码的注释">那么你可能会好奇，默认的<code>Timeout</code>是多久呢？我们通过查看源码的注释</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* <span class="keyword">...</span></span><br><span class="line">* A timeout of zero is interpreted as an infinite timeout.</span><br><span class="line">*/</span><br><span class="line">public synchronized void setSoTimeout(int timeout) throws SocketException &#123;</span><br><span class="line">        <span class="keyword">if</span> (isClosed())</span><br><span class="line">            throw new SocketException(<span class="string">"Socket is closed"</span>);</span><br><span class="line">        getImpl().setOption(SocketOptions.SO_TIMEOUT, new Integer(timeout));</span><br><span class="line">    &#125;</span><br><span class="line"> DatagramSocketImpl getImpl() throws SocketException &#123;</span><br><span class="line">        <span class="keyword">if</span> (!created)</span><br><span class="line">            createImpl();</span><br><span class="line">        <span class="keyword">return</span> impl;</span><br><span class="line">    &#125;</span><br><span class="line"> /**</span><br><span class="line">     * Retrieve setting <span class="keyword">for</span> SO_TIMEOUT.  <span class="number">0</span> returns implies that the</span><br><span class="line">     * option is disabled (i.e., timeout of infinity).</span><br><span class="line">*/</span><br><span class="line">public synchronized int getSoTimeout() throws SocketException &#123;</span><br><span class="line">        <span class="keyword">if</span> (isClosed())</span><br><span class="line">            throw new SocketException(<span class="string">"Socket is closed"</span>);</span><br><span class="line">        <span class="keyword">if</span> (getImpl() == null)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过查看源码可以发现，当我们执行<code>setSoTimeout</code>的时候，将调用<code>getImpl()</code>方法创建<code>DatagramSocketImpl</code>，使得<code>getImpl()！=null</code>，返回<strong>不为零</strong>的数字。所以，默认的<code>timeout</code>为<code>0</code>。但是<strong>为零</strong>的情况，我们通过看方法的<strong>注释</strong>可以发现，<strong>为零意味着无限等待</strong>。</p>
+<h3 id="使用MulticastSocket实现多点广播">使用<code>MulticastSocket</code>实现多点广播</h3><p>使用<code>MulticastSocket</code>可以将数据报以<strong>广播方式发送到数量不等的多个客户端</strong>。</p>
+<h4 id="原理">原理</h4><blockquote>
+<p>若要使用多点广播时，则需要让一个数据报有一组目标主机地址，当数据报发出后，整个组的所有主机都能收到该数据报。<br><strong>IP多点广播（或多点发送）实现了将单一信息发送到多个接收者的广播</strong>。<br><strong>其思想是</strong>设置一组特殊网络地址作为多点广播地址，每一个多点广播地址都被看做一个组，当客户端需要发送、接收广播信息时，加入到该组即可。</p>
+</blockquote>
+<p><strong>IP协议为多点广播</strong>提供了这批特殊的IP地址，这些IP地址的范围是<code>224.0.0.0至239.255.255.255</code>。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/1524390.jpg" alt="多点广播的示意图"></p>
+<p>注意<code>MulticastSocket</code>重要的属性：</p>
+<blockquote>
+<p>使用<code>jionGroup()</code>方法来加入指定组；使用<code>leaveGroup()</code>方法脱离一个组。<br>使用<code>setTimeToLive(int ttl)</code>方法，通过参数<code>ttl</code>来指定<strong>最多可以跨过多少个网络</strong>。（默认情况<code>ttl=1</code>）</p>
+<ul>
+<li>ttl=0时，指定数据报应停留在本地主机</li>
+<li>ttl=1时，指定数据报发送到本地局域网</li>
+<li>ttl=32时，指定数据报只能发送到本站点的网络上</li>
+<li>ttl=64时，指定数据报应保留在本地区</li>
+<li>ttl=128时，指定数据报应保留在本大洲</li>
+<li>ttl=64时，指定数据报可发送到所有地方</li>
+</ul>
+</blockquote>
+<p>当在某些系统中，<strong>可能有多个网络接口</strong>：（将会对多点广播带来问题）</p>
+<blockquote>
+<p>通过调用<code>setInterface</code>可选择<code>MulticastSocket</code>所<strong>使用的网络接口</strong>；也可以使用getInterface方法查询MulticastSocket监听的网络接口。</p>
+</blockquote>
+<h4 id="示例代码：">示例代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MulticastSocketTest</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用常量作为本程序的多点广播IP地址</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BROADCAST_IP = <span class="string">"230.0.0.1"</span>;</span><br><span class="line">    <span class="comment">// 使用常量作为本程序的多点广播目的的端口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BROADCAST_PORT = <span class="number">30000</span>;</span><br><span class="line">    <span class="comment">// 定义每个数据报的最大大小为4K</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DATA_LEN = <span class="number">4096</span>;</span><br><span class="line">    <span class="comment">// 定义本程序的MulticastSocket实例</span></span><br><span class="line">    <span class="keyword">private</span> MulticastSocket socket = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> InetAddress broadcastAddress = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> Scanner scan = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 定义接收网络数据的字节数组</span></span><br><span class="line">    <span class="keyword">byte</span>[] inBuff = <span class="keyword">new</span> <span class="keyword">byte</span>[DATA_LEN];</span><br><span class="line">    <span class="comment">// 以指定字节数组创建准备接受数据的DatagramPacket对象</span></span><br><span class="line">    <span class="keyword">private</span> DatagramPacket inPacket = <span class="keyword">new</span> DatagramPacket(inBuff, inBuff.length);</span><br><span class="line">    <span class="comment">// 定义一个用于发送的DatagramPacket对象</span></span><br><span class="line">    <span class="keyword">private</span> DatagramPacket outPacket = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建用于发送、接收数据的MulticastSocket对象</span></span><br><span class="line">            <span class="comment">// 因为该MulticastSocket对象需要接收，所以有指定端口</span></span><br><span class="line">            socket = <span class="keyword">new</span> MulticastSocket(BROADCAST_PORT);</span><br><span class="line">            broadcastAddress = InetAddress.getByName(BROADCAST_IP);</span><br><span class="line">            <span class="comment">// 将该socket加入指定的多点广播地址</span></span><br><span class="line">            socket.joinGroup(broadcastAddress);</span><br><span class="line">            <span class="comment">// 设置本MulticastSocket发送的数据报被回送到自身</span></span><br><span class="line">            socket.setLoopbackMode(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 初始化发送用的DatagramSocket，它包含一个长度为0的字节数组</span></span><br><span class="line">            outPacket = <span class="keyword">new</span> DatagramPacket(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>], <span class="number">0</span>, broadcastAddress,</span><br><span class="line">                    BROADCAST_PORT);</span><br><span class="line">            <span class="comment">// 启动以本实例的run()方法作为线程体的线程</span></span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">this</span>).start();</span><br><span class="line">            <span class="comment">// 创建键盘输入流</span></span><br><span class="line">            scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">            <span class="comment">// 不断读取键盘输入</span></span><br><span class="line">            <span class="keyword">while</span> (scan.hasNextLine()) &#123;</span><br><span class="line">                <span class="comment">// 将键盘输入的一行字符串转换字节数组</span></span><br><span class="line">                <span class="keyword">byte</span>[] buff = scan.nextLine().getBytes();</span><br><span class="line">                <span class="comment">// 设置发送用的DatagramPacket里的字节数据</span></span><br><span class="line">                outPacket.setData(buff);</span><br><span class="line">                <span class="comment">// 发送数据报</span></span><br><span class="line">                socket.send(outPacket);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            socket.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="comment">// 读取Socket中的数据，读到的数据放在inPacket所封装的字节数组里。</span></span><br><span class="line">                socket.receive(inPacket);</span><br><span class="line">                <span class="comment">// 打印输出从socket中读取的内容</span></span><br><span class="line">                System.out.println(<span class="string">"聊天信息："</span></span><br><span class="line">                        + <span class="keyword">new</span> String(inBuff, <span class="number">0</span>, inPacket.getLength()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 捕捉异常</span></span><br><span class="line">        <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 让该Socket离开该多点IP广播地址</span></span><br><span class="line">                    socket.leaveGroup(broadcastAddress);</span><br><span class="line">                    <span class="comment">// 关闭该Socket对象</span></span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125;</span><br><span class="line">                System.exit(<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MulticastSocketTest().init();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多次按<code>ctrl+f11</code>生成多个示例进行测试。可以发现，使用<code>MulticastSocket</code>监听统一端口，多个示例并不会产生<strong>端口被占用</strong>的错误。再者监听的<code>IP地址</code>要为<code>IP协议</code>上的<strong>广播地址</strong>。</p>
+<p><strong>扩展</strong>：（聊天室的实现）<br><a href="http://book.51cto.com/art/200809/89226.htm" target="_blank" rel="external">使用MulticastSocket实现多点广播（2）</a></p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.cnblogs.com/visily/archive/2013/03/15/2961190.html" target="_blank" rel="external">TCP、UDP详解</a><br><a href="http://book.51cto.com/art/200809/89225.htm" target="_blank" rel="external">17.4.3 使用MulticastSocket实现多点广播（1）</a>,这个居然是《java疯狂讲义第二部》的全教程。<br><a href="http://examples.javacodegeeks.com/core-java/net/multicastsocket-net/java-net-multicastsocket-example/" target="_blank" rel="external">java.net.MulticastSocket Example</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/08/26/java 网络编程 UDP协议~/" data-id="cikmrgd24001050jsqz02p42o" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/08/26/java 网络编程 UDP协议~/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DatagramPacket/">DatagramPacket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DatagramSocket/">DatagramSocket</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/26/java 网络编程 UDP协议/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java 网络编程 UDP协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/24/hexo博客换主题--icarus/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo博客换主题--icarus</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/08/26/java 网络编程 UDP协议~/" data-title="java 网络编程 UDP协议" data-url="http://hexo.trity.cc/2015/08/26/java 网络编程 UDP协议~/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

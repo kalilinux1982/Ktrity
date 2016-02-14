@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>Android 逆向编程-Dalvik字节码学习 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Dalvik字节码学习，从而看得到反编译后的未能转换为java文件的代码。了解整个apk的形成过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 逆向编程-Dalvik字节码学习">
+<meta property="og:url" content="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="Dalvik字节码学习，从而看得到反编译后的未能转换为java文件的代码。了解整个apk的形成过程。">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/dalvi字节码类型.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/apk打包过程.png">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/odex.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 逆向编程-Dalvik字节码学习">
+<meta name="twitter:description" content="Dalvik字节码学习，从而看得到反编译后的未能转换为java文件的代码。了解整个apk的形成过程。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Android 逆向编程-Dalvik字节码学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 逆向编程-Dalvik字节码学习
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/">
+      <time datetime="2015-07-20T16:03:40.000Z" itemprop="datePublished">2015-07-21</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Dalvik字节码学习，从而看得到反编译后的未能转换为<code>java</code>文件的代码。了解整个<code>apk</code>的形成过程。<br><a id="more"></a></p>
+<h2 id="Dalvik字节码的类型，方法与字段表示方法">Dalvik字节码的类型，方法与字段表示方法</h2><h3 id="1-类型：">1.类型：</h3><p><img src="http://7tebhw.com1.z0.glb.clouddn.com/dalvi字节码类型.png" alt=""><br><strong>J,D等64位</strong>，要使用两个寄存器存储，如<code>v0,v1,v3,v4</code>。</p>
+<ol>
+<li><code>L</code>类型表示<strong>java类型中的任何类</strong>：<br>包引用：<code>Lpackage/name/ObjectName;----&gt;L</code>表示后面跟着一个<strong>java类</strong>，<code>package/name/</code>表示对象所在包</li>
+</ol>
+<blockquote>
+<p>如：<code>Ljava/lang/String====&gt;java.lang.String</code></p>
+</blockquote>
+<ol>
+<li><code>[</code> 表示所有基本类型的数组。<strong>[ 紧跟基本类型描述符</strong>；如：<strong>[ I </strong>表示一维数组.</li>
+</ol>
+<blockquote>
+<p>如:</p>
+<ul>
+<li><code>[ I--&gt;int []</code></li>
+<li><code>[[I --&gt;int[][]</code></li>
+<li><code>[[[I--&gt;int[][][]</code></li>
+<li><code>[Ljava/lang/String</code> —&gt;对象数组，字符串数组</li>
+</ul>
+</blockquote>
+<h3 id="2-方法">2.方法</h3><p>格式：</p>
+<blockquote>
+<p><strong>Lpackage/name/ObjectName;-&gt;MethodName(III)Z</strong><br>Lpackage/name/ObjectName;一个类型</p>
+</blockquote>
+<p>MethodName具体方法名:</p>
+<ul>
+<li><code>(III)Z</code>是方法的签名部分，</li>
+<li><code>III</code>方法的参数（三个整形）</li>
+<li><code>Z</code>表示方法的<strong>返回类型boolean</strong></li>
+</ul>
+<blockquote>
+<p>例子：<code>method(I[[IILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/String</code><br>==&gt;<br><code>String method(int ,int [][],int String,Object[])</code></p>
+</blockquote>
+<p>注意：<code>bakSmali</code>生成以<strong>.method</strong> 开始，.<strong>end method</strong> 结束 <strong>#</strong> 加以注释</p>
+<h3 id="3-字段">3.字段</h3><p>格式：</p>
+<blockquote>
+<p><strong>Lpackage/name/ObjectName;-&gt;<code>FieldName:Ljava/lang/String;</code></strong></p>
+</blockquote>
+<p>由类型：</p>
+<blockquote>
+<p>Lpackage/name/ObjectName;</p>
+</blockquote>
+<p>字段名：</p>
+<blockquote>
+<p>FieldName</p>
+</blockquote>
+<p>字段类型：</p>
+<blockquote>
+<p>java/lang/String;</p>
+</blockquote>
+<p>字段与字段类型</p>
+<blockquote>
+<p>用”<strong>:</strong>“隔开</p>
+</blockquote>
+<p>注意：<code>BakSmali</code>生成以<strong>.field</strong>开头， # 注释</p>
+<p><strong>Dalvik指令集</strong></p>
+<ul>
+<li><strong>指令的特点</strong></li>
+<li><strong>空操作指令</strong></li>
+</ul>
+<blockquote>
+<p>助记符为nop，值为00</p>
+</blockquote>
+<ul>
+<li><strong>数据操作指令</strong></li>
+</ul>
+<blockquote>
+<p>指令：move</p>
+</blockquote>
+<ul>
+<li><strong>返回指令</strong></li>
+</ul>
+<blockquote>
+<p>指令：return<br>“return-void” void返回<br>“return-object” 对象类型返回</p>
+</blockquote>
+<ul>
+<li><strong>数据定义指令</strong></li>
+</ul>
+<blockquote>
+<p>用到的常量，字符串，类等数据，基础字节码为const<br>“const-class vAA,type@BBBB” 通过类型索引获取一个类引用并赋给寄存器vAA</p>
+</blockquote>
+<ul>
+<li><strong>锁指令</strong></li>
+</ul>
+<blockquote>
+<p>“monitor-enter vAA” 获取锁<br>“monitor-exit vAA” 释放锁</p>
+</blockquote>
+<ul>
+<li><strong>实例操作指令</strong></li>
+<li><strong>数组操作指令</strong></li>
+<li><strong>异常指令</strong></li>
+</ul>
+<blockquote>
+<p>指令：throw</p>
+</blockquote>
+<ul>
+<li><strong>跳转指令</strong></li>
+<li><strong>无条件跳转：goto</strong></li>
+<li><strong>分支跳转：switch</strong></li>
+</ul>
+<blockquote>
+<p>packed-switch vAA +BBB</p>
+</blockquote>
+<p>sparse-switch vAA,+BBB</p>
+<ul>
+<li><strong>条件跳转：if</strong><blockquote>
+<p>if-test vA,vB,+CCCC</p>
+</blockquote>
+</li>
+<li><strong>比较指令</strong></li>
+</ul>
+<blockquote>
+<p>浮点型或长整型进行比较<br>格式：cmpkind vAA vBB vCC</p>
+</blockquote>
+<ul>
+<li><strong>字段操作指令</strong></li>
+</ul>
+<blockquote>
+<p>普通字段：iinstanceop vA,vB field@CC<br>静态字段：sstaticop vAA,field@BBB</p>
+</blockquote>
+<ul>
+<li><strong>方法调用指令</strong></li>
+</ul>
+<blockquote>
+<p>invoke-kind{}<br>invoke-kind/range{}<br>例如：<br>invoke-static  调用实例的静态方法</p>
+</blockquote>
+<ul>
+<li><strong>数据转换指令</strong></li>
+</ul>
+<blockquote>
+<p>格式：unop vA,vB</p>
+</blockquote>
+<ul>
+<li><strong>数据运算指令</strong></li>
+</ul>
+<blockquote>
+<p>add-type sub-type ..</p>
+</blockquote>
+<ul>
+<li><strong>Dalvik指令集练习—写一个Dalvik版的Hello World</strong></li>
+<li><strong>编译smail文件</strong></li>
+</ul>
+<blockquote>
+<p>java －jar smail.jar －o class.dex HelloWorld.smail</p>
+</blockquote>
+<ul>
+<li><strong>测试运行：</strong></li>
+</ul>
+<blockquote>
+<p>adb push HelloWorld.zip /路径<br>adb shell davlikvm -cp /路径</p>
+</blockquote>
+<h3 id="4-Android可执行文件">4.Android可执行文件</h3><h4 id="Android程序的生成步骤:">Android程序的生成步骤:</h4><blockquote>
+<p><strong>apk 全称：android package.</strong> －－实际是一个zip的压缩文件。如：塞班的sis文件<br>每个apk都有一个<code>class.dex</code>，是android系统davild虚拟机的<strong>可执行文件</strong>.</p>
+</blockquote>
+<p>两种打包：eclipse 和ant实质是一样，分7个步骤</p>
+<ol>
+<li><p>打包资源文件，生成R.java文件。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/apk打包过程.png" alt=""></p>
+</li>
+<li><p>处理aidl文件，生成相应的java文件</p>
+</li>
+<li><p>编译工程源代码，生成class文件<br>讲src所有java文件生成class文件</p>
+</li>
+<li><p>转换所有的class文件，生成class.dex</p>
+</li>
+<li><p>打包apk文件，工具为apkbuilder为一个脚本文件，实际盗用的是android－sdk/tools/sdklib.jar</p>
+</li>
+<li><p>对apk进行签名<br>两种情况：<br>调试程序进行签名<code>－－debug.keystore</code>对<code>apk</code>进行签名<br>打包发布进行签名（两种）</p>
+<blockquote>
+<p>1.jdk提供的，jarsigner<br>2.android源码中的signapk</p>
+</blockquote>
+</li>
+<li><p>对签名后的apk进行对齐处理，工具为<code>zipalign</code>:<br>android程序的安装流程：<br><strong>4种方式：</strong></p>
+</li>
+</ol>
+<p>1.系统程序安装：开机时安装，无界面</p>
+<blockquote>
+<p>开机启动的PackageManagerServic服务完成，服务启动会扫描系统程序目录/system/app并重新安装所有程序</p>
+</blockquote>
+<p>2.anroid市场安装：网络安装，无界面</p>
+<blockquote>
+<p>无集成google play，则安装方式与第4种一样</p>
+</blockquote>
+<p>3.adb工具安装，无界面</p>
+<blockquote>
+<p>命令：adb install xx.apk(xxx为apk文件名)</p>
+</blockquote>
+<p>4.手机自带安装，sd卡里的apk安装，有界面:</p>
+<blockquote>
+<p>直接调用android系统的软件包packageinstaller.apk来完成<br>android系统程序的packageinstaller的PackageInstallerActivity</p>
+<ol>
+<li>接收Intent传来的apk文件信息</li>
+<li>初始化PackagerManager与PackageParser.Package对象</li>
+<li>调用PackageUtil类的静态方法getPackageInfo()解析程序包的信息<br>3.1. 如果出错：返回。否则成功：调用setContentView()方法<br>4.调用用PackageUtil类的静态方法getAppSnippet()与initSnippetForNewApp()来设置PackageInstallerActivity的控件显示程序的名称等<br>5.调用initiateInstall()方法进行初始化工作</li>
+</ol>
+</blockquote>
+<h3 id="dex文件格式">dex文件格式</h3><ul>
+<li>dex文件中的数据结构</li>
+<li>dex文件整体结构</li>
+<li>dex文件结构分析</li>
+</ul>
+<p>odex文件格式（进过优化的dex文件）：<br><strong>如何生成odex文件</strong><br>两种存在方式：</p>
+<ol>
+<li>从apk程序提取出来，与apk文件放在同一个目录且文件后缀为odex的文件，多为<code>android rom</code>的系统程序</li>
+<li><code>dalvik-cache</code>缓存文件仍然以<strong>dex作为后缀</strong>,在<code>cache/dalvik-cache</code>目录下，保存形式为”<code>apk 路径@apk名@classes.dex</code>“。</li>
+</ol>
+<p><strong>注意</strong>：apk为zip压缩方式，加载需要读class.dex，耗cpu，采用odex方式，加载dex必须的依赖库文件列表即可。</p>
+<ul>
+<li>odex文件整体结构<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/odex.png" alt=""></li>
+<li><p>odex文件结构分析</p>
+</li>
+<li><p>dex文件的验证与优化工具dexopt的工作过程</p>
+</li>
+<li>android应用程序另类破解方法</li>
+<li>静态分析android程序<br><strong>什么是静态分析（不运行程序代码下，进行阅读反汇编代码）</strong>：</li>
+</ul>
+<ol>
+<li>阅读反汇编的Dalvik字节码，或者smali文件</li>
+<li>反汇编java源码</li>
+<li><strong>定位andorid程序的关键代码</strong></li>
+<li>反编译apk</li>
+<li>AndroidManifest.xml文件—-包名，运行的系统版本，用到的组件</li>
+</ol>
+<h3 id="参考资料">参考资料</h3><p>以上都是通过阅读：《Android软件安全与逆向分析》这本书</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/" data-id="cikmr5j8s0000m8js2s4ssjrl" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dalvik/">Dalvik</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/28/为知笔记使用技巧/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          为知笔记使用技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/13/C++_sizeof/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C/C++ sizeof用法</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/" data-title="Android 逆向编程-Dalvik字节码学习" data-url="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

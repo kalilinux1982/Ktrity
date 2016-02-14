@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android bitmap实战 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="图片转成Bitmap的特点
+100K的图片，通过流的形式读到内存也是100K，占100K的内存。当图片以Bitmap的形式存在时,其占用的内存会瞬间变大。如：500K的图片通过bitmap的形式加载到内存，占了内存将近10M
+
+相关方法介绍：检测图片大小的方法
+通过文件形式检测：file.length()
+通过流的形式：bitmap.getByteCount()即：计算byte有多少。
+注意：此方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android bitmap实战">
+<meta property="og:url" content="http://hexo.trity.cc/2016/01/18/android bitmap实战/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="图片转成Bitmap的特点
+100K的图片，通过流的形式读到内存也是100K，占100K的内存。当图片以Bitmap的形式存在时,其占用的内存会瞬间变大。如：500K的图片通过bitmap的形式加载到内存，占了内存将近10M
+
+相关方法介绍：检测图片大小的方法
+通过文件形式检测：file.length()
+通过流的形式：bitmap.getByteCount()即：计算byte有多少。
+注意：此方">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android bitmap实战">
+<meta name="twitter:description" content="图片转成Bitmap的特点
+100K的图片，通过流的形式读到内存也是100K，占100K的内存。当图片以Bitmap的形式存在时,其占用的内存会瞬间变大。如：500K的图片通过bitmap的形式加载到内存，占了内存将近10M
+
+相关方法介绍：检测图片大小的方法
+通过文件形式检测：file.length()
+通过流的形式：bitmap.getByteCount()即：计算byte有多少。
+注意：此方">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android bitmap实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android bitmap实战
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/18/android bitmap实战/">
+      <time datetime="2016-01-18T08:36:29.000Z" itemprop="datePublished">2016-01-18</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="图片转成Bitmap的特点">图片转成Bitmap的特点</h3><blockquote>
+<p>100K的图片，<strong>通过流的形式读到内存</strong>也是100K，占100K的内存。<strong>当图片以Bitmap的形式存</strong>在时,其占用的内存会瞬间变大。如：500K的图片通过<code>bitmap</code>的形式加载到内存，占了内存将近<code>10M</code></p>
+</blockquote>
+<h3 id="相关方法介绍：">相关方法介绍：</h3><h4 id="检测图片大小的方法">检测图片大小的方法</h4><ul>
+<li>通过文件形式检测：<code>file.length()</code></li>
+<li>通过流的形式：<code>bitmap.getByteCount()</code>即：计算<code>byte</code>有多少。<blockquote>
+<p><strong>注意</strong>：此方法是<strong>4版本加上的，2版本是没有的</strong>，那么需要使用<strong>兼容模式</strong>：<code>bitmap.getRowByteCount()*bitmap.getHeight()</code>.</p>
+</blockquote>
+</li>
+<li>对于<code>FileInputStream</code>。检测大小的为<code>FileInputStream.available();</code></li>
+</ul>
+<h4 id="压缩方法compress（format,quality,ByteArrayOutputStream）">压缩方法<code>compress（format,quality,ByteArrayOutputStream）</code></h4><ul>
+<li><code>format</code>代表：压缩的格式。<br>不同的格式，影响不同，假若你设置的是<code>png格式</code>，则质量就可以忽略，怎么设，他都是<strong>无损的</strong>。</li>
+<li><code>quality</code>代表的是质量。（来自api的翻译）<br><code>0~100</code>,表示要压缩成原来的质量的比例.</li>
+</ul>
+<p>注意此方法：</p>
+<blockquote>
+<p>如果是JPG格式的话，而设置的压缩格式是PNG，则图片反而会变大，有可能变大十几倍。</p>
+</blockquote>
+<h4 id="其他方法">其他方法</h4><ul>
+<li><p>public void recycle()</p>
+<blockquote>
+<p>回收bitmap对象的，其回收的意思就是<strong>清除其对象的索引</strong>，但不会同步的立即清除像素的数据，他是需要gc回收的。<br>当<strong>bitmap过多</strong>造成<code>oom</code>是我们一般也会用着个方法<strong>配合gc强制回收bitmap</strong></p>
+</blockquote>
+</li>
+<li><p>Enum Bitmap.Config 一共有有四种形式</p>
+<blockquote>
+<p><code>ARGB_8888、ARGB_4444、ARGB_565、ALPHA_8</code>，他们<strong>每个像素占用的字节数</strong>分别为4、2、2、1</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="如何转换成Bitmap">如何转换成Bitmap</h5><ul>
+<li><p>byte[]转成Bitmap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] data;</span><br><span class="line">bitmap = BitmapFactory.decodeByteArray(data, <span class="number">0</span>, data.length);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>inputstream转成bitmap(<strong>注意</strong>：有<code>bug</code>将导致<strong>解析错误</strong>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BitmapFactory.decodeStream(inputStream);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="实战：">实战：</h3><ul>
+<li>质量压缩到100k以下，以便上传到服务器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">compressBmpToFile</span><span class="params">(Bitmap bmp,File file)</span></span>&#123;</span><br><span class="line">    ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">    <span class="keyword">int</span> options = <span class="number">80</span>;<span class="comment">//个人喜欢从80开始,</span></span><br><span class="line">    bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);</span><br><span class="line">    <span class="keyword">while</span> (baos.toByteArray().length / <span class="number">1024</span> &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        baos.reset();</span><br><span class="line">        options -= <span class="number">10</span>;</span><br><span class="line">        bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">        fos.write(baos.toByteArray());</span><br><span class="line">        fos.flush();</span><br><span class="line">        fos.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过此方法的存储在<code>file</code>文件下图片为<code>100K</code>以下，会导致<strong>失真</strong>的现象（每个像素的透明度会变化）。<strong>注意</strong>：以<strong>jpeg格式</strong>压缩后, 原来图片中透明的元素将消失。<br>但是尺寸不变，即长宽的比例不变。所以，通过<code>BitmapFactory.decodeFile（）</code>后得到的<code>bitmap</code>所<strong>占用内存的大小不变</strong>。</p>
+<ul>
+<li>采样率压缩（改变像素点）<blockquote>
+<p>采样率压缩是改变了图片的像素，他是通过先读取图片的边，然后在自己设定图片的边，然后根据设定，读取图片的像素.即选择性读取像素点，减少像素的个数，减少内存的占有率。</p>
+</blockquote>
+</li>
+</ul>
+<p>需要配合<code>BitmapFactory</code>的内部类<code>options</code>进行使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Bitmap <span class="title">compressImageToBitmap</span><span class="params">(String imagePath)</span></span>&#123;</span><br><span class="line">    BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</span><br><span class="line">    options.inJustDecodeBounds = <span class="keyword">true</span>;</span><br><span class="line">    Bitmap bitmap = BitmapFactory.decodeFile(imagePath,options);</span><br><span class="line">    <span class="keyword">if</span>(bitmap != <span class="keyword">null</span>)&#123;</span><br><span class="line">        System.out.println(bitmap.getByteCount());<span class="comment">//这里并不会执行，因为inJustDecodeBounds为true，返回bitmap为null</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"kong"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    options.inJustDecodeBounds = <span class="keyword">false</span>;</span><br><span class="line">    options.inSampleSize = <span class="number">2</span>;</span><br><span class="line">    bitmap = BitmapFactory.decodeFile(imagePath,options);</span><br><span class="line">    System.out.println(<span class="string">"压缩后的大小"</span>+bitmap.getByteCount());</span><br><span class="line">    <span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们通过<code>inJustDecodeBounds=true</code>来允许读取图片的边。通过<code>BitmapFactory.decodeFile</code>方法，将图片信息读取到<code>options</code>中。后面将<code>inJustDecodeBounds=false</code>后，进行设置<code>inSampleSize=2</code>来设置<strong>压缩倍数</strong>。（<strong>2代表1/2,这里的1/2值得是宽和高分别是原图的1/2。所以图片是被压缩了四倍</strong>）,最后通过<code>BitmapFactory.decodeFile</code>来返回<code>bitmap</code>.<br><strong>注意：</strong></p>
+<blockquote>
+<p>像素改变，压缩容易造成失真问题.通过设置图片的尺寸，然后再根据尺寸，选择的读取像素。达到减少内存</p>
+</blockquote>
+<p>当不知道<code>inSampleSize</code>应该设置多大的时候，更合理的使用方式：<a href="http://my.oschina.net/rengwuxian/blog/182885?fromerr=abfOtsId" target="_blank" rel="external">高效使用Bitmaps（一） 大Bitmap的加载</a><br>通过下列代码得到<code>inSampleSize</code>的大小：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateInSampleSize</span><span class="params">(</span><br><span class="line">            BitmapFactory.Options options, <span class="keyword">int</span> reqWidth, <span class="keyword">int</span> reqHeight)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 原始图片的宽高</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> height = options.outHeight;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> width = options.outWidth;</span><br><span class="line">    <span class="keyword">int</span> inSampleSize = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (height &gt; reqHeight || width &gt; reqWidth) &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfHeight = height / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfWidth = width / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// 在保证解析出的bitmap宽高分别大于目标尺寸宽高的前提下，取可能的inSampleSize的最大值</span></span><br><span class="line">        <span class="keyword">while</span> ((halfHeight / inSampleSize) &gt; reqHeight</span><br><span class="line">                &amp;&amp; (halfWidth / inSampleSize) &gt; reqWidth) &#123;</span><br><span class="line">            inSampleSize *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inSampleSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类BitmapFactory">类<code>BitmapFactory</code></h3><blockquote>
+<p>里面有一个比较常用的<strong>内部类Options</strong>.</p>
+</blockquote>
+<h4 id="options类">options类</h4><blockquote>
+<p>对在图片解码时做的一些设置</p>
+<ul>
+<li>1）Bitmap inBitmap<br>如过设置了这个字段，则在选择有options参数的解码方式执行时，就会重复利用这个bitmap</li>
+<li>2）Bitmap.Config inPreferredConfig<br>就是bitmap的配置，如果他不为空的话，BitmapFactory在解析图片的时候会按这个config解析.配合<code>1)</code>进行使用。</li>
+<li>3）boolean inJustDecodeBounds<br>这个是压缩的时候常用的到的字段，设置为true的时候是可以允许查询bitmap中没有分配像素的内存.<strong>注意：</strong><br>设置为<code>true</code>的时候，返回的<strong>bitmap是为null</strong>的，所以在设置完相对应的压缩参数之后需要设置会<code>false</code>才能再<strong>得到bitmap对象</strong>。可以理解为<strong>这个参数不设压缩不成功</strong>.</li>
+<li>4) inSampleSize<br>这个便是压缩的倍数，1是相当于和原来一样，2是压缩成原来的二分之一</li>
+<li>5) outWidth和outHeight代表压缩输出后的宽和高。</li>
+</ul>
+</blockquote>
+<h3 id="扩展：">扩展：</h3><h4 id="系统分配的单应用程序内存大小：">系统分配的单应用程序内存大小：</h4><p>根据：Android根据设备屏幕尺寸和dpi的不同进行分配：</p>
+<table>
+<thead>
+<tr>
+<th>屏幕尺寸</th>
+<th>DPI</th>
+<th>应用内存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>small / normal / large</td>
+<td>ldpi / mdpi</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>small / normal / large</td>
+<td>tvdpi / hdpi</td>
+<td>32MB</td>
+</tr>
+<tr>
+<td>small / normal / large</td>
+<td>xhdpi</td>
+<td>64MB</td>
+</tr>
+<tr>
+<td>small / normal / large</td>
+<td>400dpi</td>
+<td>96MB</td>
+</tr>
+<tr>
+<td>small / normal / large</td>
+<td>xxhdpi</td>
+<td>128MB</td>
+</tr>
+<tr>
+<td>xlarge</td>
+<td>mdpi</td>
+<td>32MB</td>
+</tr>
+<tr>
+<td>xlarge</td>
+<td>tvdpi / hdpi</td>
+<td>64MB</td>
+</tr>
+<tr>
+<td>xlarge</td>
+<td>xhdpi</td>
+<td>128MB</td>
+</tr>
+<tr>
+<td>xlarge</td>
+<td>400dpi</td>
+<td>192MB</td>
+</tr>
+<tr>
+<td>xlarge</td>
+<td>xxhdpi</td>
+<td>256MB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="应用到验证码中">应用到验证码中</h3><p><a href="http://blog.csdn.net/onlyonecoder/article/details/8231373" target="_blank" rel="external">android 端生成随机验证码 实现</a><br><a href="http://www.jianshu.com/p/a154fc388f88" target="_blank" rel="external"># [转载]验证码之父：Luis von Ahn</a><br><a href="http://segmentfault.com/a/1190000003655979" target="_blank" rel="external">Android框架之Android Validation表单验证框架</a></p>
+<h3 id="资料：">资料：</h3><p><a href="http://www.skoumal.net/en/android-how-draw-text-bitmap/" target="_blank" rel="external">Android - How to draw text on a bitmap</a><br><a href="http://www.cnblogs.com/feisky/archive/2010/01/10/1643460.html" target="_blank" rel="external">Android Bitmap和Canvas学习笔记</a><br><a href="http://blog.csdn.net/ls703/article/details/40378067" target="_blank" rel="external">Android应用开发之图片（Bitmap）压缩（一）————-Bitmap与BitmapFactory的认识及图片的存储形式大小的实验</a><br><a href="http://blog.csdn.net/ls703/article/details/40617465" target="_blank" rel="external">Android应用开发之图片（Bitmap）压缩（三）————-采样率压缩</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/18/android bitmap实战/" data-id="cikmr5jhp003pm8jso56e32ax" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/18/android bitmap实战/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bitmap/">Bitmap</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/19/android 解析网络数据/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 解析网络数据.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/16/android viewpager切换动画-pageTransformer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android viewpager切换动画-pageTransformer</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/01/18/android bitmap实战/" data-title="android bitmap实战" data-url="http://hexo.trity.cc/2016/01/18/android bitmap实战/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

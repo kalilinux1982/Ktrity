@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android activity | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="activity的启动模式有哪些？默认四种：
+
+standard：
+
+默认的启动模式.无论此activity是否在栈里面，每次启动都会创建该活动的一个新的实例。
+
+
+singleTop：
+
+在启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例.如果不在栈顶的话，还是会继续创建的。
+
+
+singleTask：
+
+每次启动该活动时系统首先会在返回栈中检查是否存在该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android activity">
+<meta property="og:url" content="http://hexo.trity.cc/2015/08/09/android activity/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="activity的启动模式有哪些？默认四种：
+
+standard：
+
+默认的启动模式.无论此activity是否在栈里面，每次启动都会创建该活动的一个新的实例。
+
+
+singleTop：
+
+在启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例.如果不在栈顶的话，还是会继续创建的。
+
+
+singleTask：
+
+每次启动该活动时系统首先会在返回栈中检查是否存在该">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151210182659.png">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201007/28/0_12803210018q71.gif">
+<meta property="og:image" content="http://my.csdn.net/uploads/201206/06/1338973966_6383.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android activity">
+<meta name="twitter:description" content="activity的启动模式有哪些？默认四种：
+
+standard：
+
+默认的启动模式.无论此activity是否在栈里面，每次启动都会创建该活动的一个新的实例。
+
+
+singleTop：
+
+在启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例.如果不在栈顶的话，还是会继续创建的。
+
+
+singleTask：
+
+每次启动该活动时系统首先会在返回栈中检查是否存在该">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android activity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android activity
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/08/09/android activity/">
+      <time datetime="2015-08-09T02:04:16.000Z" itemprop="datePublished">2015-08-09</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="activity的启动模式有哪些？">activity的启动模式有哪些？</h3><p>默认四种：</p>
+<ul>
+<li><p><code>standard</code>：</p>
+<blockquote>
+<p>默认的启动模式.<br>无论此<code>activity</code>是否在<strong>栈</strong>里面，每次启动都会创建<br>该活动的一个新的实例。</p>
+</blockquote>
+</li>
+<li><p><code>singleTop</code>：</p>
+<blockquote>
+<p>在启动活动时如果发现返回栈的<strong>栈顶已经是该活动</strong>，则认为可以<strong>直接使用它</strong>，不会再创建新的活动实例.如果不在栈顶的话，还是会继续创建的。</p>
+</blockquote>
+</li>
+<li><p><code>singleTask</code>：</p>
+<blockquote>
+<p>每次启动该活动时系统<br>首先会在返回栈中检查<strong>是否存在该活动的实例</strong>，<br>如果发现<strong>已经存在则直接使用该实例</strong>，<br>并把<strong>在这个活动之上的所有活动统统出栈</strong>，<br>如果没有发现就会<strong>创建一个新的活动实例</strong>。</p>
+</blockquote>
+</li>
+<li><p><code>singleInstance</code>：</p>
+<blockquote>
+<p> <code>singleInstance</code> 模式的活动会启用一个<strong>新的返回栈</strong>来管理这个活动,后退的时候，将<strong>后退完一个栈到另一个栈</strong>。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151210182659.png" alt=""><br>以上可以使用：<code>getTaskId()</code>进行测试是否在同一个栈中。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="生命周期">生命周期</h3><p><img src="http://hi.csdn.net/attachment/201007/28/0_12803210018q71.gif" alt="activity的生命周期"><br>根据这张生命周期的图片，我们可以进行测试，知道她的完整的生命周期，在不同的场景，方法之间的调用顺序：</p>
+<ul>
+<li>第一次打开应用：<code>onCreate()-&gt;onStart()-&gt;onResume</code></li>
+<li>当点击<code>home</code>键：<code>onPause()-&gt;onStop()</code></li>
+<li>按完<code>home</code>键后，我们再次打开应用：<code>onRestart()-&gt;onStart()-&gt;onResume()</code></li>
+<li>点击弹出窗口<code>AlertDialog</code>。当前的<code>Activity</code>依然可见：<code>onPause()</code></li>
+<li>点击跳转到另一个<code>activity</code>:<code>onPause(当前)-onCreate()-&gt;onStart()-&gt;onResume</code></li>
+<li>在第二个activity的时候，按<code>back</code>:<code>onPause(当前)-onResume（前一个）-onStop（前一个）-onDestroy（前一个）</code></li>
+<li>旋转屏幕：<code>onPause-&gt;onStop-&gt;onDestory-oncreate-onstart-onresume</code>。相当于销毁后进行重建。</li>
+<li>长按<code>home</code>键进行关闭应用，发现并不会调用<code>onDestory</code></li>
+<li><p>使用<code>finish</code>进行关闭应用：<code>onPause-&gt;onStop-&gt;onDestory</code></p>
+<blockquote>
+<p>注意在<code>oncreate</code>方法是不会走上面的流程的，而是直接调用<code>onDestory</code></p>
+</blockquote>
+</li>
+<li><p>使用<code>System.exit(0)</code>进行关闭应用，发现任何方法都不调用</p>
+</li>
+</ul>
+<h3 id="生命周期方法的使用：">生命周期方法的使用：</h3><p>只有<code>onResume</code>和<code>onCreate</code>所停留的时间比较长，其它状态 <code>(Created与Started)</code>都是<strong>短暂</strong>的，系统快速的执行那些回调函数并通过执行下一阶段的回调函数移动到下一个状态。</p>
+<ul>
+<li><code>onPause()</code>方法应该做的处理：<ul>
+<li>停止目前正在执行的任务，如：暂停视频的播放或者保存有可能长期存储的信息。</li>
+<li>停止动画或者是其他正在运行的操作，那些都会导致CPU的浪费.</li>
+<li>提交没有保存的改变，但是仅仅是在用户离开时期待保存的内容(例如邮件草稿)</li>
+<li>释放系统资源，例如<code>broadcast receivers, sensors</code> (比如GPS), 或者是其他任何会影响到电量的资源。如<code>Camera.release()</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<ol>
+<li>通常，你不应该使用onPause()来保存用户改变的数据 (例如填入表格中的个人信息) 到永久存储(File或者DB)上。</li>
+<li>你应该避免在onPause()时执行CPU-intensive 的工作，例如写数据到DB，因为它会导致切换到下一个activity变得缓慢(你应该把那些heavy-load的工作放到onStop()去做)</li>
+<li>那么你应该为了切换的顺畅而减少在OnPause()方法里面的工作量。</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>onResume()</p>
+<ul>
+<li>初始化那些你在onPause方法里面释放掉的组件，并执行那些activity每次进入Resumed state都需要的初始化动作 (例如开始动画与初始化那些只有在获取用户焦点时才需要的组件)</li>
+</ul>
+</li>
+<li><p><code>onstop()和onRestart()</code>当<code>activity</code>停止与重启的时候调用。</p>
+</li>
+</ul>
+<p>什么情况会导致<strong>停止和重启</strong>呢</p>
+<blockquote>
+<ol>
+<li>切换app</li>
+<li>创建新的activity，然后在back</li>
+<li><strong>当接收一个来电通话的时候</strong></li>
+</ol>
+</blockquote>
+<ul>
+<li>onStop()<ul>
+<li>极端情况，不执行<code>onDestory</code>方法，应该再<code>onstop</code>释放资源，避免内存泄露</li>
+<li>onStop()来执行那些CPU intensive的shut-down操作，例如writing information to a database.</li>
+<li>onStop里面做了哪些清除的操作就应该在onStart里面重新把那些清除掉的资源重新创建出来</li>
+<li>onDestory方法则是你最后去清除那些可能导致内存泄漏的地方</li>
+</ul>
+</li>
+</ul>
+<h3 id="回调方法：onActivityResult">回调方法：<code>onActivityResult</code></h3><p>其中有三个参数：</p>
+<ul>
+<li>requestCode</li>
+<li>resultCode</li>
+<li>intent</li>
+</ul>
+<p><strong>如何使用</strong>：<br>先跳转到下一个类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> requestCode1=<span class="number">1</span>;</span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent, requestCode1);</span><br></pre></td></tr></table></figure></p>
+<p>在第二个类使用以下方法进行回调：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello FirstActivity"</span>);</span><br><span class="line">setResult(RESULT_OK, intent);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure></p>
+<p>最后，我们回到第一个类进行处理，第二个类传来的信息：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line"><span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line"><span class="keyword">case</span> requestCode1:</span><br><span class="line"><span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</span><br><span class="line">String returnedData = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">Log.d(<span class="string">"FirstActivity"</span>, returnedData);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="onSaveInstanceState什么时候该调用："><code>onSaveInstanceState</code>什么时候该调用：</h3><ol>
+<li>旋转屏幕导致重建的时候</li>
+<li>在一个activity被杀死前调用，当该activity在将来某个时刻回来时可以恢复其先前状态。（非正常性死亡）例子：<blockquote>
+<p>如果activity B启用后位于activity A的前端，在某个时刻activity A因为系统回收资源的问题要被杀掉，A通过onSaveInstanceState将有机会保存其用户界面状态，使得将来用户返回到activity A时能通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)恢复界面的状态。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>不要将这个方法和activity生命周期回调如onPause()或onStop()搞混淆了，onPause()在activtiy被放置到背景或者自行销毁时总会被调用，onStop()在activity被销毁时被调用。一个会调用onPause()和onStop()，但不触发onSaveInstanceState的例子是当用户从activity B返回到activity A时：没有必要调用B的onSaveInstanceState(Bundle)，此时的B实例永远不会被恢复，因此系统会避免调用它。一个调用onPause()但不调用onSaveInstanceState的例子是当activity B启动并处在activity A的前端：如果在B的整个生命周期里A的用户界面状态都没有被破坏的话，系统是不会调用activity A的onSaveInstanceState(Bundle)的。</p>
+</blockquote>
+<p>参考：<a href="http://blog.csdn.net/ddna/article/details/5123482" target="_blank" rel="external">【Android翻译】关于Activity的onSaveInstanceState调用时机的说明</a><br><a href="http://blog.csdn.net/cyp331203/article/details/45313125" target="_blank" rel="external">【Android面试】(二):你不能不知道的view—-加id和不加id的区别？</a></p>
+<p><strong>代码样例：</strong><br>在<code>onSaveInstanceState</code>保存数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">String tempData = <span class="string">"Something you just typed"</span>;</span><br><span class="line">outState.putString(<span class="string">"data_key"</span>, tempData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>onCreate</code>再次得到数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">Log.d(TAG, <span class="string">"onCreate"</span>);</span><br><span class="line">requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">setContentView(R.layout.activity_main);</span><br><span class="line"><span class="keyword">if</span> (savedInstanceState != <span class="keyword">null</span>) &#123;</span><br><span class="line">String tempData = savedInstanceState.getString(<span class="string">"data_key"</span>);</span><br><span class="line">Log.d(TAG, tempData);</span><br><span class="line">&#125;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="和onPause的区别">和<code>onPause</code>的区别</h4><p><code>onPause</code>：<br>存储的是用户的<strong>存储那些持久性的数据，比如用户的输入</strong>等。<br>而<code>onSaveInstanceState</code>：<br>一般是能让我们存储一些activity的<strong>动态的状态值到Bundle对象中</strong>，以便在之后调用<code>onCreate(Bundle)</code>方法时用到.</p>
+<h3 id="屏幕旋转onConfigurationChanged">屏幕旋转<code>onConfigurationChanged</code></h3><p>默认没进行设置的时候，是可旋转屏幕，而旋转屏幕将导致<code>Activity</code>的重建，即摧毁在创建。</p>
+<blockquote>
+<p><strong>注意：</strong><code>onConfigurationChanged</code>事件并不是只有屏幕方向改变才可以触发，其他的一些系统设置改变也可以触发，比如<strong>打开或者隐藏键盘</strong>.</p>
+</blockquote>
+<p>不想重建可设置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">activity</span> <span class="attribute">android:name</span>=<span class="value">".app.CustomDialogActivity"</span></span><br><span class="line"><span class="attribute">android:label</span>=<span class="value">"@string/activity_custom_dialog"</span></span><br><span class="line"><span class="attribute">android:configChanges</span>=<span class="value">"orientation|keyboardHidden|screenSize"</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后重写<code>Activity</code>中的<code>onConfigurationChanged()</code>方法即可。但我却没有任何效果。还是重建了，<code>onConfigurationChanged</code>并不执行，为什么？<br>查看这里：<a href="http://stackoverflow.com/questions/6359328/android-onconfigurationchanged-is-not-being-called-in-activity" target="_blank" rel="external">Android onConfigurationChanged() is not being called in Activity</a><br>发现原来是版本的问题：</p>
+<blockquote>
+<p>You should use 13 API and set this configuration in your activity’s part of the manifest: <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code><br>It works fine. At all Android version.</p>
+</blockquote>
+<p>对比我的<code>manifest</code>返现缺少了<code>screenSize</code>，好了，加上就ok了。<br>生命周期如下：<br><img src="http://my.csdn.net/uploads/201206/06/1338973966_6383.jpg" alt=""></p>
+<p>参考：<a href="http://www.cnblogs.com/andriod-html5/archive/2012/06/06/2539375.html" target="_blank" rel="external">Android屏幕旋转时Activity的生命周期</a></p>
+<h3 id="关于Menu的使用">关于<code>Menu</code>的使用</h3><h4 id="使用onPrepareOptionsMenu决定是否显示menu_item，如下">使用<code>onPrepareOptionsMenu</code>决定是否显示<code>menu_item</code>，如下</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onPrepareOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 是否选择搜索栏    menu.findItem(R.id.action_search).setVisible(isVisibleSearch);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onPrepareOptionsMenu(menu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/08/09/android activity/" data-id="cikmr5jhw003um8jsva1uz5jp" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/08/09/android activity/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/activity/">activity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/09/android studio使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android studio
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/03/Java Map 按Key排序和按Value排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java-Map集合--排序</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/08/09/android activity/" data-title="android activity" data-url="http://hexo.trity.cc/2015/08/09/android activity/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>数据库的基础知识 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于数据库范式中，来源于知乎。仅为学习所用，侵权即删。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库的基础知识">
+<meta property="og:url" content="http://hexo.trity.cc/2015/10/01/数据库的基础知识/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="关于数据库范式中，来源于知乎。仅为学习所用，侵权即删。">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/5b16f655b57a957bfa340d0a996a0eea_b.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/44af74509a4e21372ed372be8560539d_b.jpg">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/68d080d437732aad8cfe451b427849d6_b.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库的基础知识">
+<meta name="twitter:description" content="关于数据库范式中，来源于知乎。仅为学习所用，侵权即删。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-数据库的基础知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库的基础知识
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/01/数据库的基础知识/">
+      <time datetime="2015-10-01T02:05:11.000Z" itemprop="datePublished">2015-10-01</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p><strong>关于数据库范式中，来源于知乎。</strong>仅为学习所用，侵权即删。<br><a id="more"></a></p>
+<h3 id="数据库范式：">数据库范式：</h3><ul>
+<li>第一范式  （<strong>属性不可分</strong>）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>品名</th>
+<th>进货</th>
+<th>销售</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>数量，单价</td>
+<td>数量,单价</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>从上面可以看到身为<strong>进货和销售</strong>的两个属性还可以进行分割为<strong>数量和单价</strong>，所以不符合<strong>第一范式</strong></p>
+<ul>
+<li>第二范式 （<strong>表中的每个非键字段由整个主键确定，且不能由主键自身的一部分确定。</strong>）</li>
+</ul>
+<p><img src="http://7tebhw.com1.z0.glb.clouddn.com/5b16f655b57a957bfa340d0a996a0eea_b.jpg" alt="表3"><br>从上表可以观察到属性间的依赖关系如下：</p>
+<blockquote>
+<p>（学号，课名）—&gt;分数<br>学号—&gt; （姓名，系名，系主任）</p>
+</blockquote>
+<p>所以，表违背了<strong>第二范式</strong>，即主键（学名，课名）确定了<strong>分数</strong>，但是<strong>主键</strong>的一部分<strong>学号</strong>却确定了（姓名，系名，系主任）。</p>
+<p>修改成以下，便可符合第二范式：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/44af74509a4e21372ed372be8560539d_b.jpg" alt="表4"></p>
+<ul>
+<li>第三范式 （在2NF下，<strong>表中不存在可以确定其他非关键字的非键字段。不可能存在传递函数依赖</strong>）</li>
+</ul>
+<p>从<strong>第二范式</strong>上表中进行分析：</p>
+<blockquote>
+<p>对于<strong>选课</strong>表，主码为（学号，课名），主属性为<strong>学号</strong>和<strong>课名，</strong>非主属性只有一个，为分数，不可能存在传递函数依赖，所以<strong>选课</strong>表的设计，符合3NF的要求。</p>
+<p>对于<strong>学生</strong>表，主码为<strong>学号</strong>，主属性为<strong>学号</strong>，非主属性为<strong>姓名</strong>、<strong>系名</strong>和<strong>系主任</strong>。因为 学号 → 系名，同时 系名 → 系主任，所以存在非主属性<strong>系主任</strong>对于码<strong>学号</strong>的传递函数依赖，所以<strong>学生</strong>表的设计，不符合3NF的要求。。</p>
+</blockquote>
+<p>即：存在<strong>系名决定系主任</strong>的情况，所以不符合第三范式。<br>进而改成（<strong>注意与第二范式进行对比</strong>）</p>
+<blockquote>
+<p>选课（学号，课名，分数）<br>=&gt;（学号，课名）-&gt;分数<br>学生（学号，姓名，系名）<br>=&gt; 学号-&gt;(姓名，系名)<br>系（系名，系主任）<br>=&gt; 系名-&gt;系主任</p>
+</blockquote>
+<ul>
+<li>BCN范式 (<strong>每个确定因子是一个键。这个范式特别用于处理非键字段确定主键的一部分主要的情况。</strong>)<br>由题目：</li>
+</ul>
+<ol>
+<li><p>某公司有若干个仓库；</p>
+</li>
+<li><p>每个仓库只能有一名管理员，一名管理员只能在一个仓库中工作；</p>
+</li>
+<li><p>一个仓库中可以存放多种物品，一种物品也可以存放在不同的仓库中。每种物品在每个仓库中都有对应的数量。</p>
+</li>
+</ol>
+<blockquote>
+<p>答：已知函数依赖集：仓库名 → 管理员，管理员 → 仓库名，（仓库名，物品名）→ 数量<br>码：（管理员，物品名），（仓库名，物品名）<br>主属性：仓库名、管理员、物品名<br>非主属性：数量<br>∵ 不存在非主属性对码的部分函数依赖和传递函数依赖。<br>∴ 此关系模式属于3NF。</p>
+</blockquote>
+<p>具体的数据:<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/68d080d437732aad8cfe451b427849d6_b.jpg" alt="表5"></p>
+<p>由图以及题目的理解，你会发现：仓库名和管理员是<strong>相互对应的关系</strong>。仓库名和管理员彼此<strong>相互确定的</strong>。所以违反了BCNF范式。</p>
+<p>进行修改如下：</p>
+<blockquote>
+<p>仓库（仓库名，管理员）<br>库存（仓库名，物品名，数量）</p>
+</blockquote>
+<h3 id="从关系型数据库到非关系型数据库"><a href="http://blog.csdn.net/robinjwong/article/details/18502195" target="_blank" rel="external">从关系型数据库到非关系型数据库</a></h3><h4 id="关系型数据库：二维表模型">关系型数据库：二维表模型</h4><p><strong>最大特点</strong>就是<strong>事务的一致性</strong>。<br><strong>常用概念</strong>：</p>
+<ul>
+<li>关系：可以理解为一张二维表，每个关系都具有一个关系名，就是通常说的表名</li>
+<li>元组：可以理解为二维表中的一行，在数据库中经常被称为记录</li>
+<li>属性：可以理解为二维表中的一列，在数据库中经常被称为字段</li>
+<li>域：属性的取值范围，也就是数据库中某一列的取值限制</li>
+<li>关键字：一组可以唯一标识元组的属性，数据库中常称为主键，由一个或多个列组成</li>
+<li>关系模式：指对关系的描述。其格式为：关系名(属性1，属性2， … … ，属性N)，在数据库中成为表结构</li>
+</ul>
+<p><strong>优点：</strong><br>容易理解，使用方便，易于维护<br><strong>缺点</strong>：</p>
+<ul>
+<li>高并发读写低</li>
+<li>海量数据读写效率低</li>
+<li>不利于扩展</li>
+<li>SQL负责，多表进行关联</li>
+</ul>
+<h4 id="非关系型数据库">非关系型数据库</h4><p>是一种数据结构化存储方法的集合。<br>非关系型的，分布式的，且一般不保证遵循ACID原则的数据存储系统.</p>
+<blockquote>
+<p>以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加一些自己的键值对，这样就不会局限于固定的结构，可以减少一些时间和空间的开销.</p>
+</blockquote>
+<p>适用性：</p>
+<blockquote>
+<p>尤其为<strong>SNS的应用</strong>，例如：<strong>微博、facebook</strong>。并且<strong>对并发读写能力要求极高</strong>。<br><strong>场景：</strong>SNS应用中，一致性却不是显得那么重要，用户A看到的内容和用户B看到同一用户C内容更新不一致是可以容忍的，或者说，两个人看到同一好友的数据更新的时间差那么几秒是可以容忍的.(违背了关系数据库的事务的一致性)</p>
+</blockquote>
+<p>分类：</p>
+<ul>
+<li><p>面向高性能并发读写的key-value数据库</p>
+<blockquote>
+<p>Redis,Tokyo Cabinet,Flare</p>
+</blockquote>
+</li>
+<li><p>面向海量数据访问的面向文档数据库</p>
+<blockquote>
+<p>MongoDB以及CouchDB</p>
+</blockquote>
+</li>
+<li><p>面向可扩展性的分布式数据库</p>
+</li>
+</ul>
+<h3 id="数据库事务">数据库事务</h3><p>必须具备ACID特性:</p>
+<ul>
+<li>Atomic原子性，<blockquote>
+<p>一个不可分割的工作单位.操作：<strong>要么都做，要么都不做</strong><br>例如：仅仅<strong>提交更新部分的数据而不是全部数据</strong>违反了数据库的<strong>原子性</strong>的规则？</p>
+</blockquote>
+</li>
+<li>Consistency一致性<blockquote>
+<p>从一个一致性状态变到另一个一致性状态<br>例如<code>完整性约束a+b=10</code>，一个事务改变了a，那么b也应随之改变</p>
+</blockquote>
+</li>
+<li>Isolation隔离性<blockquote>
+<p>一个事务的执行不能被其他事务干扰.并发执行的各个事务之间不能互相干扰</p>
+</blockquote>
+</li>
+<li>Durability持久性<blockquote>
+<p>一个事务一旦提交，它对数据库中数据的改变是永久性的<br>例如：对已提交事务的更新能恢复。持久性通过<strong>数据库备份和恢复来保证</strong></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>应用实例</strong>：（<strong>Spring事务类型详解</strong>）：</p>
+<ul>
+<li><p><strong>PROPAGATION_REQUIRED</strong>—支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。</p>
+</li>
+<li><p><strong>PROPAGATION_SUPPORTS</strong>—支持当前事务，如果当前没有事务，就以非事务方式执行。</p>
+</li>
+<li><p><strong>PROPAGATION_MANDATORY</strong>—支持当前事务，如果当前没有事务，就抛出异常。</p>
+</li>
+<li><p><strong>PROPAGATION_REQUIRES_NEW</strong>—新建事务，如果当前存在事务，把当前事务挂起。</p>
+<blockquote>
+<p>例子：内部事务回滚了，外部事务仍然可以提交</p>
+</blockquote>
+</li>
+<li><p><strong>PROPAGATION_NOT_SUPPORTED</strong>—以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</p>
+</li>
+<li><p><strong>PROPAGATION_NEVER</strong>—以非事务方式执行，如果当前存在事务，则抛出异常。</p>
+</li>
+<li><p><strong>PROPAGATION_NESTED</strong>—如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则进行与PROPAGATION_REQUIRED类似的操作。</p>
+</li>
+</ul>
+<p>参考：<a href="http://blog.csdn.net/liushuijinger/article/details/17364413" target="_blank" rel="external">菜鸟学SSH（六）——Spring事务管理</a></p>
+<h3 id="外键有什么作用，为什么要设计外键呢？">外键有什么作用，为什么要设计外键呢？</h3><p>今天终于明白主外键的关系了，汗颜~。怪自己大学课堂太自以为是，加上认为老师只是会吹水而已，我还是觉得他讲的东西，仅仅扩展自己的见识而已，并没有多么深入地讲解课堂。闲话不说。<br>之前，我理解的外键的作用是<strong>为关联数据以至于删除的时候，可以一并删除</strong>。直到现在在左毕业设计的时候，来重新弄懂才发现是恰恰相反。外键的作用<strong>在删除的时候，进行约束，只能删除子表，而不能删除父表（直至所有关联的子表删完才可）</strong>。例如：<br>表一：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>place</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>南一</td>
+</tr>
+<tr>
+<td>1</td>
+<td>南二</td>
+</tr>
+</tbody>
+</table>
+<p>表二：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>place</th>
+<th>problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>南一</td>
+<td>电脑坏了</td>
+</tr>
+<tr>
+<td>1</td>
+<td>南二</td>
+<td>话筒坏了</td>
+</tr>
+</tbody>
+</table>
+<p>表二的外键为<code>place</code>，表一属于<strong>父表</strong>，当<strong>南一</strong>换成<strong>元果楼</strong>了，那么就必须让表二的南二全部更换掉，才可以更新父表的表一，否则会报错。这样你会觉得麻烦，但是换一个方面的来想，就归因于<strong>为什么要设置外键了</strong>，我们就可以<strong>防止脏数据的出现</strong>，防止不知情的程序员，仅把一处改成了元果楼，而灭有把剩余的做对应的修改，导致冗余的数据。<br>觉得我讲得不够具体的话，可以查看这里：<a href="http://www.cppblog.com/wolf/articles/69089.html" target="_blank" rel="external">MYSQL外键(Foreign Key)的使用</a></p>
+<p>或许，<strong>你会觉得我把他都组合成一个表就可以了</strong>，省去了不必要的麻烦。凡是都有利弊，这样做，不符合<strong>范式</strong>，合理的设计会避免后续的不必要的麻烦。相关的范式：<br><a href="http://www.zhihu.com/question/24696366" target="_blank" rel="external">解释一下关系数据库的第一第二第三范式</a>中，刘慰老师的答案。</p>
+<h3 id="关于索引">关于索引</h3><ul>
+<li><p><strong>多级索引</strong><br>应用在<strong>ISAM文件系统</strong>，目的为：<strong>提高检索效率</strong></p>
+</li>
+<li><p>聚集索引</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/lwzz/archive/2012/08/05/2620824.html" target="_blank" rel="external">深入 聚集索引与非聚集索引(一)</a></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="创建索引">创建索引</h4><p>参考：<a href="http://www.w3school.com.cn/sql/sql_create_index.asp" target="_blank" rel="external">SQL CREATE INDEX 语句</a></p>
+<ul>
+<li>创建索引语法：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column_name) # column_name为索引的列</span><br><span class="line">具体例子如下：</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> PersonIndex</span><br><span class="line"><span class="keyword">ON</span> Person (LastName) </span><br><span class="line"># 默认是升序，降序的情况下为(LastName <span class="keyword">DESC</span>),即加入<span class="keyword">DESC</span>即可</span><br><span class="line"># 多个的情况，用“，”隔开，如下：</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>其他索引创建：<br><a href="http://www.111cn.net/database/mysql/53681.htm" target="_blank" rel="external"># mysql 如何创建索引?mysql创建索引</a></p>
+</li>
+<li><p>删除索引语法：（每种数据库都不同，<code>sqlite</code>属于<code>DB2</code>类型）</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">用于 Microsoft SQLJet (以及 Microsoft Access) 的语法:</span><br><span class="line"><span class="operator"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_name <span class="keyword">ON</span> table_name</span><br><span class="line">用于 MS <span class="keyword">SQL</span> <span class="keyword">Server</span> 的语法:</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> table_name.index_name</span><br><span class="line">用于 IBM DB2 和 Oracle 语法:</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_name</span><br><span class="line">用于 MySQL 的语法:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_name</span></span><br></pre></td></tr></table></figure>
+<p>资料参考：<a href="http://www.cnblogs.com/mywebname/articles/555696.html" target="_blank" rel="external">数据库索引介绍及使用</a></p>
+<p><strong>建立索引常用的规则</strong>：<br>1、表的主键、外键必须有索引；</p>
+<p>2、数据量超过300的表应该有索引；</p>
+<p>3、经常与其他表进行连接的表，在连接字段上应该建立索引；</p>
+<p>4、经常出现在Where子句中的字段，特别是大表的字段，应该建立索引；</p>
+<p>5、索引应该建在选择性高的字段上；</p>
+<p>6、索引应该建在小字段上，对于大的文本字段甚至超长字段，不要建索引；</p>
+<p>7、复合索引的建立需要进行仔细分析；尽量考虑用单字段索引代替：</p>
+<p>   A、正确选择复合索引中的主列字段，一般是选择性较好的字段；</p>
+<p>   B、复合索引的几个字段是否经常同时以AND方式出现在Where子句中？单字段查询是否极少甚至没有？如果是，则可以建立复合索引；否则考虑单字段索引；</p>
+<p>   C、如果复合索引中包含的字段经常单独出现在Where子句中，则分解为多个单字段索引；</p>
+<p>   D、如果复合索引所包含的字段超过3个，那么仔细考虑其必要性，考虑减少复合的字段；</p>
+<p>   E、如果既有单字段索引，又有这几个字段上的复合索引，一般可以删除复合索引；</p>
+<p>8、频繁进行数据操作的表，不要建立太多的索引；</p>
+<p>9、删除无用的索引，避免对执行计划造成负面影响；</p>
+<h3 id="关于视图">关于视图</h3><h4 id="创建视图">创建视图</h4><p><strong>创建视图规则</strong>：</p>
+<ol>
+<li><strong> 不能在视图定义中指定ORDER BY </strong>，除非定义中包含Top或For Xml 说明；</li>
+<li>所有的列必须有列名；</li>
+<li>这些所有的列名必须唯一；</li>
+</ol>
+<p><strong>为什么要创建视图，视图能解决什么问题：</strong><br>1，为最终用户减少数据库呈现的复杂性。客户端只要对视图写简单的代码，就能返回我所需要的数据，一些复杂的逻辑操作，放在了视图中来完成；<br>2，防止敏感的列被选中，同时仍然提供对其他重要数据的访问；<br>3，对视图添加一些额外的索引，来提高查询的效率；</p>
+<p><strong>缺点</strong>：<br>需要多一层的开销，没有直接<strong>运行底层SELECT语句那样快</strong>。</p>
+<h4 id="更新视图">更新视图</h4><blockquote>
+<p>当你修改视图的时候，修改的时候是对基础表的修改，它就好像是一个代理,而不是直接修改数据。</p>
+</blockquote>
+<p><strong>更新视图的时候，有哪些限制条件呢</strong><br> 1，只要视图有一列不能隐式获取值，你就不能想视图中插入数据,如果列允许NULL、有默认值或者IDETITY属性，则说明它可以隐式获取值；<br>2，如果视图包含联结，UPDATE或INSERT语句只能影响联结的一端。也就是说，INSERT或UPDATE语句必须定义目标列列表，这些列只能数据联结的一端。你不能从由联结查询定义的视图中删除数据；<br>3，不能修改作为计算结果的列。如：标量表达式和聚合函数，SqlServer不会尝试改变数据库引擎的计算结果；<br>4，如果在创建或修改视图时指定了WITH CHECK OPTION选项，与视图的查询筛选器有冲突的INSERT或UPDATE语句将被拒绝；我在“视图选项”一节详细讲解一下。</p>
+<h4 id="实例使用：SQL_VIEW（视图）">实例使用：<a href="http://www.w3school.com.cn/sql/sql_view.asp" target="_blank" rel="external">SQL VIEW（视图）</a></h4><h4 id="与基本表对比">与基本表对比</h4><p>参考：<br><a href="http://www.cnblogs.com/xbf321/archive/2009/06/16/view_in_sqlserver.html" target="_blank" rel="external">细说Sql Server中的视图(上)(更新)</a><br><a href="http://www.cnblogs.com/xbf321/archive/2009/06/19/view_two_in_sqlserver.html" target="_blank" rel="external">细说Sql Server中的视图(下)</a></p>
+<h3 id="参考">参考</h3><p><a href="http://www.zhihu.com/question/24696366" target="_blank" rel="external">解释一下关系数据库的第一第二第三范式</a>中，刘慰老师的答案。</p>
+<p><a href="http://josh-persistence.iteye.com/blog/2200644" target="_blank" rel="external">一看就懂的数据库范式介绍（1NF,2NF,3NF,BC NF,4NF,5NF)</a></p>
+<p><a href="http://www.cnblogs.com/winlinglin/archive/2008/11/19/1336337.html" target="_blank" rel="external">范式间的区别（具体例子）</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/01/数据库的基础知识/" data-id="cikmrgd0q000a50js7heslqc9" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/01/数据库的基础知识/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/03/mysql命令及sql语句/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mysql命令及sql语句
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/06/android 逆向编程-Dalvik虚拟机/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 逆向编程-Dalvik虚拟机</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/10/01/数据库的基础知识/" data-title="数据库的基础知识" data-url="http://hexo.trity.cc/2015/10/01/数据库的基础知识/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

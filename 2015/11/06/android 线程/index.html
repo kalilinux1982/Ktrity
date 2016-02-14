@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android 线程 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AsyncTask介绍参考引用资料：Android实战技巧：深入解析AsyncTask# 异步之AsyncTask(一)Android 深入解析AsyncTask（doInBackground不工作）
+实战：代码示例：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android 线程">
+<meta property="og:url" content="http://hexo.trity.cc/2015/11/06/android 线程/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="AsyncTask介绍参考引用资料：Android实战技巧：深入解析AsyncTask# 异步之AsyncTask(一)Android 深入解析AsyncTask（doInBackground不工作）
+实战：代码示例：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android 线程">
+<meta name="twitter:description" content="AsyncTask介绍参考引用资料：Android实战技巧：深入解析AsyncTask# 异步之AsyncTask(一)Android 深入解析AsyncTask（doInBackground不工作）
+实战：代码示例：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android 线程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android 线程
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/06/android 线程/">
+      <time datetime="2015-11-06T01:11:23.000Z" itemprop="datePublished">2015-11-06</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="AsyncTask介绍">AsyncTask介绍</h3><p>参考引用资料：<br><a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a><br><a href="http://www.jianshu.com/p/5f8a535c2c2e#" target="_blank" rel="external"># 异步之AsyncTask(一)</a><br><a href="http://blog.csdn.net/gf771115/article/details/17248037" target="_blank" rel="external">Android 深入解析AsyncTask（doInBackground不工作）</a></p>
+<h4 id="实战：">实战：</h4><p>代码示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意这个泛型的三个参数：String 为execute调用方法传入，为dobackground方法的参数，Integer 一般为这个，进行更新进度 Bitmap 是dobackground的返回值。</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>, <span class="title">Bitmap</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"ImageLoader"</span>;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//在dobackground前进行调用，这里进行设置view不可enable</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Initialize progress and image  </span></span><br><span class="line">        mGetImage.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">true</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.VISIBLE);  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">0</span>);  </span><br><span class="line">        mImageView.setImageResource(R.drawable.icon);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//后台线程，处理网络等，耗时的工作</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(String... url)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">/* </span><br><span class="line">         * Fucking ridiculous thing happened here, to use any Internet connections, either via HttpURLConnection </span><br><span class="line">         * or HttpClient, you must declare INTERNET permission in AndroidManifest.xml. Otherwise you will get </span><br><span class="line">         * "UnknownHostException" when connecting or other tcp/ip/http exceptions rather than "SecurityException" </span><br><span class="line">         * which tells you need to declare INTERNET permission. </span><br><span class="line">         */</span>  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">        URL u;  </span><br><span class="line">        HttpURLConnection conn = <span class="keyword">null</span>;  </span><br><span class="line">        InputStream in = <span class="keyword">null</span>;  </span><br><span class="line">        OutputStream out = <span class="keyword">null</span>;  </span><br><span class="line">        <span class="keyword">final</span> String filename = <span class="string">"local_temp_image"</span>;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            u = <span class="keyword">new</span> URL(url[<span class="number">0</span>]);  </span><br><span class="line">            conn = (HttpURLConnection) u.openConnection();  </span><br><span class="line">            conn.setDoInput(<span class="keyword">true</span>);  </span><br><span class="line">            conn.setDoOutput(<span class="keyword">false</span>);  </span><br><span class="line">            conn.setConnectTimeout(<span class="number">20</span> * <span class="number">1000</span>);  </span><br><span class="line">            in = conn.getInputStream();  </span><br><span class="line">            out = openFileOutput(filename, Context.MODE_PRIVATE);  </span><br><span class="line">            <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8196</span>];  </span><br><span class="line">            <span class="keyword">int</span> seg = <span class="number">0</span>;  </span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">long</span> total = conn.getContentLength();  </span><br><span class="line">            <span class="keyword">long</span> current = <span class="number">0</span>;  </span><br><span class="line">            <span class="comment">/* </span><br><span class="line">             * Without checking isCancelled(), the loop continues until reading whole image done, i.e. the progress </span><br><span class="line">             * continues go up to 100. But onPostExecute() will not be called. </span><br><span class="line">             * By checking isCancelled(), we can stop immediately, i.e. progress stops immediately when cancel() is called. </span><br><span class="line">             */</span>  </span><br><span class="line">            <span class="keyword">while</span> (!isCancelled() &amp;&amp; (seg = in.read(buf)) != -<span class="number">1</span>) &#123;  <span class="comment">//注意这里调用了isCancell的操作</span></span><br><span class="line">            out.write(buf, <span class="number">0</span>, seg);  </span><br><span class="line">            current += seg;  </span><br><span class="line">            <span class="keyword">int</span> progress = (<span class="keyword">int</span>) ((<span class="keyword">float</span>) current / (<span class="keyword">float</span>) total * <span class="number">100f</span>);  </span><br><span class="line">            publishProgress(progress);  </span><br><span class="line">            SystemClock.sleep(<span class="number">1000</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">            <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            conn.disconnect();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            in.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            out.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> BitmapFactory.decodeFile(getFileStreamPath(filename).getAbsolutePath());  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//实时更新进度</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... progress)</span> </span>&#123;  </span><br><span class="line">        mProgressBar.setProgress(progress[<span class="number">0</span>]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//dobackground执行完，则调用此方法，更新view的操作。</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap image)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (image != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        mImageView.setImageBitmap(image);  </span><br><span class="line">        &#125;  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">100</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.GONE);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是调用开始线程的操作：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> ImageLoader loader = <span class="keyword">new</span> ImageLoader();</span><br><span class="line">loader.execute(ImageUrl);</span><br></pre></td></tr></table></figure></p>
+<p>注意事项：</p>
+<ol>
+<li>AsyncTask对象不可重复使用，也就是说一个AsyncTask对象只能execute()一次</li>
+<li><strong>在doInBackground()中要检查isCancelled()的返回值</strong>，判断任务是否要进行取消的操作。</li>
+</ol>
+<blockquote>
+<p><code>2中</code>：<strong>调用cancel方法并不能真正立即把task取消掉</strong>,而只是把task的状态置为Cancel而已,需要配合isCancelled()方法来运用,在doingbackground或其他方法中判断是否被取消,然后做相应的处理.</p>
+</blockquote>
+<h3 id="AsyncTask任务调度问题">AsyncTask任务调度问题</h3><blockquote>
+<p>AsyncTask主要有二个部分：<br>一个是与主线各的交互，<br>另一个就是线程的管理调度。虽然可能多个AsyncTask的子类的实例，但是AsyncTask的<strong>内部Handler和ThreadPoolExecutor都是进程范围内共享的</strong>，其都是<code>static</code>的，也即属于类的，类的属性的作用范围是CLASSPATH，因为<strong>一个进程一个VM，所以是AsyncTask控制着进程范围内所有的子类实例</strong>。</p>
+</blockquote>
+<p>也就是说使用<code>AsyncTask</code>里的线程池是<code>static</code>的，那么他的生命周期是<strong>整一个进程</strong>，不会随<code>Asynctask</code>执行完而消失。<br>源码验证下，是否为<code>static</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">| <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = |</span><br><span class="line"> <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">128</span>); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that can be used to execute tasks in parallel. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor THREAD_POOL_EXECUTOR |</span><br><span class="line"> = <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE, |</span><br><span class="line"> TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that executes tasks one at a time in serial |</span><br><span class="line"> * order. This serialization is global to a particular process. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor SERIAL_EXECUTOR = <span class="keyword">new</span> SerialExecutor(); |</span><br></pre></td></tr></table></figure></p>
+<p>对以上使用的类不了解，需要了解<code>java多线程的知识</code>。</p>
+<p><strong>问题：</strong></p>
+<blockquote>
+<p>doInBackground()未及时执行，也就是它并没有在#execute()调用之后马上执行，而是等待了很久才得以执行.</p>
+</blockquote>
+<p>为什么不能马上执行呢？这里便需要了解<strong>AsyncTask任务调度</strong>问题：</p>
+<blockquote>
+<p>AsyncTask#execute()后，AsyncTask会把任务交给线程池，由线程池来管理创建Thread和运行Therad。</p>
+</blockquote>
+<p>而不同的版本，却有各种不同：</p>
+<ul>
+<li><p>Android2.3以前的版本，也即SDK/API 10和以前的版本</p>
+<blockquote>
+<p>内部的线程池限制是5个，也就是说同时只能有5个线程运行，超过的线程只能等待，等待前面的线程某个执行完了才被调度和运行</p>
+</blockquote>
+</li>
+<li><p>从Android 3.0开始对AsyncTask的API做出了一些调整：</p>
+</li>
+</ul>
+<ol>
+<li>execute()提交的任务(默认)<br>按先后顺序每次只运行一个.完成一个再执行下一个。</li>
+<li><p>新增了接口#executeOnExecutor()<br><strong>自定义的线程池来运行和调度Thread</strong>。</p>
+<blockquote>
+<p>创建一个<strong>没有限制</strong>的线程池(Executors.newCachedThreadPool())</p>
+</blockquote>
+</li>
+<li><p>二个预定义的线程池_SERIAL_EXECUTOR(<strong>相当于2.3,为5个</strong>)和_THREAD_POOL_EXECUTOR（与默认的<code>execute</code>一致，按顺序执行）</p>
+</li>
+</ol>
+<p>讲完理论，要有实例进行巩固下吧：可参考：<a href="http://blog.csdn.net/lichao3459/article/details/17712393" target="_blank" rel="external">AsyncTask引发的问题</a>。连接的是同一个类上执行<code>asyntask</code>的情况，而我要测试的是：在同一个<code>activity</code>下两个<code>fragment</code>分别执行<code>asynctask</code>去完成不同的需求下，也跟上面讲的情况一样。下面是代码：（值截取部分代码）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimesFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Integer</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> prog = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (prog &lt; <span class="number">101</span>) &#123;</span><br><span class="line">                SystemClock.sleep(<span class="number">100</span>);<span class="comment">//使用sleep来模拟实际情况。</span></span><br><span class="line">                publishProgress(prog);</span><br><span class="line">                prog++;</span><br><span class="line">                Log.e(<span class="string">"TimesFragment"</span>, <span class="string">"TimesFragment"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        mContext = getActivity();</span><br><span class="line">        SimpleAsyncTask simpleAsyncTask=<span class="keyword">new</span> SimpleAsyncTask();</span><br><span class="line">        simpleAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);<span class="comment">//注意这里调用执行方法</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>另一个<code>frament</code>也是一样，不再残余。</p>
+<p>总结：</p>
+<ul>
+<li>当有需要大量线程执行任务时，一定要<strong>创建线程池</strong>。</li>
+<li>与主线程有<strong>交互</strong>时用AsyncTask，否则就用Thread</li>
+</ul>
+<p>以上摘自：<a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a></p>
+<h3 id="关于Looper">关于<code>Looper</code></h3><p><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/14/2174255.html" target="_blank" rel="external">android的消息处理机制（图+源码分析）——Looper,Handler,Message</a>，源码分析&amp;图文分析<code>Looper</code></p>
+<p>一个小小的使用案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        Toast.makeText(mContext, <span class="string">"很抱歉,程序出现异常,即将退出."</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">        Looper.loop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p>参见使用错误异常为：</p>
+<blockquote>
+<p>Can’t create handler inside thread that has not called Looper.prepare()</p>
+</blockquote>
+<p>这种情况是：<strong>在Thread中执行更改UI的操作导致的</strong><br>解决方案参考： <a href="http://www.cnblogs.com/sonicit/archive/2013/01/13/2858475.html" target="_blank" rel="external">Can’t create handler inside thread that has not called Looper.prepare()</a>，而我是直接在<code>UI</code>操作放进<code>Handler</code>中就好了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/06/android 线程/" data-id="cikmr5je5001fm8jsfc14f266" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/06/android 线程/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AsyncTask/">AsyncTask</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/09/Git实战/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/05/android SqLite学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android SqLite学习</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/11/06/android 线程/" data-title="android 线程" data-url="http://hexo.trity.cc/2015/11/06/android 线程/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

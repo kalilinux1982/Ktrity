@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android fragment | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="生命周期除下下面几个方法不同以外，其他的跟activity相似来理解。
+fragments的大部分状态都和activity很相似，但fragment有一些新的状态:onAttach(Activity)当Fragment与Activity发生关联时调用。onCreateView(LayoutInflater, ViewGroup,Bundle)创建该Fragment的视图onActivityCrea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android fragment">
+<meta property="og:url" content="http://hexo.trity.cc/2015/08/18/android fragment/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="生命周期除下下面几个方法不同以外，其他的跟activity相似来理解。
+fragments的大部分状态都和activity很相似，但fragment有一些新的状态:onAttach(Activity)当Fragment与Activity发生关联时调用。onCreateView(LayoutInflater, ViewGroup,Bundle)创建该Fragment的视图onActivityCrea">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/1354170699_6619.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201211/29/1354170682_3824.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android fragment">
+<meta name="twitter:description" content="生命周期除下下面几个方法不同以外，其他的跟activity相似来理解。
+fragments的大部分状态都和activity很相似，但fragment有一些新的状态:onAttach(Activity)当Fragment与Activity发生关联时调用。onCreateView(LayoutInflater, ViewGroup,Bundle)创建该Fragment的视图onActivityCrea">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android fragment" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android fragment
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/08/18/android fragment/">
+      <time datetime="2015-08-18T02:05:27.000Z" itemprop="datePublished">2015-08-18</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="生命周期">生命周期</h3><p><img src="http://7tebhw.com1.z0.glb.clouddn.com/1354170699_6619.png" alt="如图"><br><img src="http://img.my.csdn.net/uploads/201211/29/1354170682_3824.png" alt="与Acitivity对比"><br>除下下面几个方法不同以外，其他的跟<code>activity</code>相似来理解。</p>
+<p><code>fragments</code>的大部分状态都和<code>activity</code>很相似，但fragment有一些新的状态:<br><strong>onAttach(Activity)</strong><br>当Fragment与Activity发生关联时调用。<br><strong>onCreateView(LayoutInflater, ViewGroup,Bundle)</strong><br>创建该Fragment的视图<br><strong>onActivityCreated(Bundle)</strong><br>当Activity的onCreate方法返回时调用<br><strong>onDestoryView()</strong><br>与onCreateView想对应，当该Fragment的视图被移除时调用<br><strong>onDetach()</strong><br>与onAttach相对应，当Fragment与Activity关联被取消时调用</p>
+<p>详细的<strong>生命周期分析</strong>：<a href="http://www.cnblogs.com/purediy/p/3276545.html" target="_blank" rel="external">[整] Android Fragment 生命周期图</a></p>
+<h3 id="静态与动态使用Fragment">静态与动态使用Fragment</h3><p><strong>静态使用</strong>：<br>相当于一个<code>view</code>，先对它进行得到自己的布局等实例化，初始化操作后，再<code>XML</code>进行布局即可。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">fragment</span></span><br><span class="line"><span class="attribute">android:layout_below</span>=<span class="value">"@id/id_fragment_title"</span>  </span><br><span class="line"><span class="attribute">android:id</span>=<span class="value">"@+id/id_fragment_content"</span>  </span><br><span class="line"><span class="attribute">android:name</span>=<span class="value">"com.zhy.zhy_fragments.ContentFragment"</span>  </span><br><span class="line"><span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>  </span><br><span class="line"><span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：<code>android:name</code>方法进行引用，而且加载此布局的<code>activity</code>并不需要对此<code>fragment</code>有任何的操作即可。</p>
+<p><strong>动态使用</strong>（对<code>fragment</code>进行添加，更新，删除）<br>在<code>xml</code>布局中使用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;FrameLayout  </span><br><span class="line">android:id=<span class="string">"@+id/id_content"</span>  </span><br><span class="line">android:layout_width=<span class="string">"fill_parent"</span>  </span><br><span class="line">android:layout_height=<span class="string">"fill_parent"</span>  </span><br><span class="line">android:layout_above=<span class="string">"@id/id_ly_bottombar"</span>  </span><br><span class="line">android:layout_below=<span class="string">"@id/id_fragment_title"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这个很容易理解，因为<code>xml</code>默认的父布局为<code>FrameLayout</code>,这种可以使用<code>merge</code>进行优化。<br>在主<code>activity</code>进行初始化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setDefaultFragment</span><span class="params">()</span>  </span>&#123;  </span><br><span class="line">FragmentManager fm = getFragmentManager();  </span><br><span class="line">FragmentTransaction transaction = fm.beginTransaction();<span class="comment">//得到开始的事务</span></span><br><span class="line">mWeixin = <span class="keyword">new</span> ContentFragment();  </span><br><span class="line">transaction.replace(R.id.id_content, mWeixin);<span class="comment">//replace进行替代</span></span><br><span class="line">transaction.commit();<span class="comment">//最后进行提交</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意这里的流程：<strong>先得到事务，使用<code>add/replace</code>进行加载<code>fragment</code>，最后进行提交。</strong></p>
+<p><strong>注意版本问题</strong>：</p>
+<ul>
+<li><p>Android3.0以下的版本：</p>
+<blockquote>
+<p>需要引入v4的包，然后Activity<code>继承FragmentActivity</code>，然后通过<code>getSupportFragmentManager</code>获得FragmentManager，而不可以<code>getFragmentManager</code>，会显示<code>v4</code>不匹配的错误。</p>
+</blockquote>
+</li>
+<li><p>Android3.0以上，直接<code>getFragmentManager</code>即可。</p>
+</li>
+</ul>
+<h3 id="相关家族类的使用说明">相关家族类的使用说明</h3><ul>
+<li>FragmentManager 在Activity操作Fragment<br>获得方式：getFragmentManager() // v4中，getSupportFragmentManager。最终目的是开启事务，也就是下一个类</li>
+<li><strong>FragmentTransaction</strong><blockquote>
+<p>FragmentTransaction transaction = fm.benginTransatcion();//开启一个事务<br>其中<code>fm</code>也就是<code>FragmentManager</code>来的。</p>
+<ul>
+<li><strong>transaction.add() </strong> 添加一个Fragment</li>
+<li><strong>transaction.remove()</strong> 移除一个Fragment。<br>如果被移除的Fragment没有添加到回退栈（回退栈后面会详细说），这个Fragment实例将会被销毁。</li>
+<li><strong>transaction.replace()</strong> 相当于：remove()然后add()的合体。</li>
+<li>其他方法<br>hide() 隐藏 show() 显示 detach() 将view从UI移除，但FragmentManager仍维护<br>attch() 重建view，添加到UI </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>注意：<code>State loss</code>的错误。</p>
+<blockquote>
+<p>commit方法一定要在Activity.onSaveInstance()之前调用.</p>
+</blockquote>
+<h3 id="回退栈（多次跳转，返回显示原来的数据）">回退栈（多次跳转，返回显示原来的数据）</h3><p>回退栈：（返回显示原来的信息）</p>
+<blockquote>
+<p><strong>FragmentTransaction.addToBackStack(String)</strong></p>
+</blockquote>
+<p>只需<code>commit</code>前调用即可。但需要注意添加<code>fragment</code>的两个方法：add和replace。<br>当调用<code>replace</code>的使用：<strong>以FragmentOne实例不会被销毁，但是视图层次依然会被销毁，即会调用onDestoryView和onCreateView</strong>。<br>证据来源：<a href="http://blog.csdn.net/lmj623565791/article/details/37992017" target="_blank" rel="external">Android Fragment 真正的完全解析（下）</a></p>
+<h3 id="与Activity通信">与<code>Activity</code>通信</h3><ul>
+<li><p>通过回调接口，即：fragA通知Activity去操作fragB。三角关系</p>
+</li>
+<li><p>Fragment和Activity可以通过getActivity与findFragmentByTag或者findFragmentById，进行任何操作，甚至在Fragment里面操作另外的Fragment。</p>
+<blockquote>
+<p>这里使用到<code>getActivity</code>,若需要<code>context</code>的话，要注意生命周期，即：getActivity().getContext()，还是getActivity().getApplicationContext();</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="屏幕旋转带来的bug:">屏幕旋转带来的bug:</h3><p>旋转屏幕，会不断地创建<code>fragment</code>。不断地<code>onCreate-&gt;onCreateView</code>。<br>如何解决：</p>
+<blockquote>
+<p>其实通过检查onCreate的参数Bundle savedInstanceState就可以判断，当前是否发生Activity的重新创建.</p>
+</blockquote>
+<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;  </span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);  </span><br><span class="line">       requestWindowFeature(Window.FEATURE_NO_TITLE);  </span><br><span class="line">       setContentView(R.layout.activity_main);</span><br><span class="line">       Log.e(TAG, savedInstanceState+<span class="string">""</span>);</span><br><span class="line">       <span class="keyword">if</span>(savedInstanceState == <span class="keyword">null</span>)&#123;<span class="comment">//进行判断是否为空</span></span><br><span class="line">           mFOne = <span class="keyword">new</span> FragmentOne();  </span><br><span class="line">           FragmentManager fm = getFragmentManager();  </span><br><span class="line">           FragmentTransaction tx = fm.beginTransaction();  </span><br><span class="line">           tx.add(R.id.id_content, mFOne, <span class="string">"ONE"</span>);  </span><br><span class="line">           tx.commit();  </span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>扩展：不断地旋转屏幕即可调用<code>onSavedInstanceState()</code>的方法。</p>
+<p>重绘：</p>
+<blockquote>
+<p>其实和Activity类似，Fragment也有onSaveInstanceState的方法，在此方法中进行保存数据，然后在onCreate或者onCreateView或者onActivityCreated进行恢复都可以。</p>
+</blockquote>
+<h3 id="Fragmeny与ActionBar和MenuItem集成">Fragmeny与ActionBar和MenuItem集成</h3><p>a、在Fragment的onCreate中调用  setHasOptionsMenu(true);</p>
+<p>b、然后在Fragment子类中实现onCreateOptionsMenu</p>
+<p>c、如果希望在Fragment中处理MenuItem的点击，也可以实现onOptionsItemSelected；当然了Activity也可以直接处理该MenuItem的点击事件.</p>
+<h3 id="使用Fragment创建对话框">使用Fragment创建对话框</h3><p><a href="http://blog.csdn.net/lmj623565791/article/details/37815413" target="_blank" rel="external">Android 官方推荐 : DialogFragment 创建对话框</a></p>
+<h3 id="正确添加fragment的写法">正确添加<code>fragment</code>的写法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;  </span><br><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);  </span><br><span class="line">setContentView(R.layout.activity_main);  </span><br><span class="line"></span><br><span class="line">FragmentManager fm = getSupportFragmentManager();  </span><br><span class="line">mContentFragment = (ContentFragment) fm.findFragmentById(R.id.id_fragment_container);  </span><br><span class="line"><span class="keyword">if</span>(mContentFragment == <span class="keyword">null</span> ) &#123;  </span><br><span class="line">mContentFragment = <span class="keyword">new</span> ContentFragment();  </span><br><span class="line">fm.beginTransaction().add(R.id.id_fragment_container,mContentFragment).commit();  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>1、为什么需要<strong>判null</strong>呢？</p>
+<p>主要是因为，当Activity因为配置发生改变（屏幕旋转）或者内存不足被系统杀死，造成重新创建时，我们的fragment会被保存下来，但是会创建新的FragmentManager，新的FragmentManager会首先会去获取保存下来的fragment队列，重建fragment队列，从而恢复之前的状态。</p>
+<p>2、add(R.id.id_fragment_container,mContentFragment)中的布局的id有何作用？</p>
+<p>一方面呢，是告知FragmentManager，此fragment的位置；另一方面是此fragment的唯一标识；就像我们上面通过fm.findFragmentById(R.id.id_fragment_container)查找~~</p>
+<h3 id="Fragment_Arguments提高复用性">Fragment Arguments提高复用性</h3><p>第一种写法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mArgument = getActivity().getIntent().getStringExtra(ARGUMENT);</span><br></pre></td></tr></table></figure></p>
+<p><strong>现在想动态给<code>fragment</code>传值？怎么传值呢？</strong><br>我们留意<code>getIntent()</code>这个方法，可以查看源码，源码是直接返回<code>mIntent</code>。所以我们可以在这里进行修改.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent=getIntent();</span><br><span class="line">intent.putExtra(K,V);...</span><br></pre></td></tr></table></figure></p>
+<p>通过上面的写法，我们<code>fragment</code>可以再次获取的时候，数据将改变。<br>但这种写法将导致<code>fragment</code>和<code>activity</code>进行捆绑。<br>所以，通过<code>setArgument()和getArgument()</code>进行数据的交流。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span>  </span><br><span class="line">   </span>&#123;  </span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);  </span><br><span class="line">       <span class="comment">// mArgument = getActivity().getIntent().getStringExtra(ARGUMENT);  </span></span><br><span class="line">       Bundle bundle = getArguments();  </span><br><span class="line">       <span class="keyword">if</span> (bundle != <span class="keyword">null</span>)  </span><br><span class="line">           mArgument = bundle.getString(ARGUMENT);  </span><br><span class="line"> </span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="javadoc">/** </span><br><span class="line">    * 传入需要的参数，设置给arguments </span><br><span class="line">    *<span class="javadoctag"> @param</span> argument </span><br><span class="line">    *<span class="javadoctag"> @return</span> </span><br><span class="line">    */</span>  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ContentFragment <span class="title">newInstance</span><span class="params">(String argument)</span>  </span><br><span class="line">   </span>&#123;  </span><br><span class="line">       Bundle bundle = <span class="keyword">new</span> Bundle();  </span><br><span class="line">       bundle.putString(ARGUMENT, argument);  </span><br><span class="line">       ContentFragment contentFragment = <span class="keyword">new</span> ContentFragment();  </span><br><span class="line">       contentFragment.setArguments(bundle);  </span><br><span class="line">       <span class="keyword">return</span> contentFragment;  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，你会发现，使用<code>android studio</code>新建一个<code>fragment</code>，默认会有这几个方法，还有<strong>接口</strong>。</p>
+<h3 id="使用startActivityForResult回调函数：(两个Fragment的交流)">使用<code>startActivityForResult</code>回调函数：(两个Fragment的交流)</h3><blockquote>
+<p>在Fragment中存在startActivityForResult（）以及onActivityResult（）方法，但是呢，没有setResult（）方法，用于设置返回的intent，这样我们就需要通过调用getActivity().setResult(ListTitleFragment.REQUEST_DETAIL, intent);。</p>
+</blockquote>
+<p>详细代码参考：<a href="http://blog.csdn.net/lmj623565791/article/details/42628537" target="_blank" rel="external">Android Fragment 你应该知道的一切</a></p>
+<h3 id="与窗口进行数据传递">与窗口进行数据传递</h3><p>同样是使用回调函数<code>startActivityForResult</code>，但这次的两个<code>fragment</code>并不是寄存在<code>activity</code>中的区别，这里的窗口继承<code>DialogFragment</code>。<br>我第一时间是想到自己写个接口就搞定了。不过<code>android</code>还是提供了方法的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>&#123;  </span><br><span class="line">EvaluateDialog dialog = <span class="keyword">new</span> EvaluateDialog();  </span><br><span class="line"><span class="comment">//注意setTargetFragment  </span></span><br><span class="line">dialog.setTargetFragment(ContentFragment.<span class="keyword">this</span>, REQUEST_EVALUATE);  </span><br><span class="line">dialog.show(getFragmentManager(), EVALUATE_DIALOG);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此处的<code>dialog</code>继承<code>DialogFragment</code>的。<br>注意：</p>
+<blockquote>
+<p>dialog.setTargetFragment(ContentFragment.this, REQUEST_EVALUATE);<br>我们调用了Fragment.setTargetFragment ，这个方法，一般就是用于当前fragment由别的fragment启动，在完成操作后返回数据的<br>DialogFragment:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置返回数据  </span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setResult</span><span class="params">(<span class="keyword">int</span> which)</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line"><span class="comment">// 判断是否设置了targetFragment  </span></span><br><span class="line"><span class="keyword">if</span> (getTargetFragment() == <span class="keyword">null</span>)  </span><br><span class="line"><span class="keyword">return</span>;  </span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent();  </span><br><span class="line">intent.putExtra(RESPONSE_EVALUATE, mEvaluteVals[which]);  </span><br><span class="line">getTargetFragment().onActivityResult(ContentFragment.REQUEST_EVALUATE,  </span><br><span class="line">Activity.RESULT_OK, intent);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="如何在fragment监听onCreateOptionsMenu"><strong>如何在<code>fragment</code>监听<code>onCreateOptionsMenu</code></strong></h3><p>首先像<code>activity</code>那样实现对应的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu, MenuInflater inflater)</span> </span>&#123;</span><br><span class="line">inflater.inflate(R.menu.pictrue_list, menu);        <span class="keyword">super</span>.onCreateOptionsMenu(menu,inflater);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你会发现怎么还是不能处理对应的<code>item</code>呢？原来还少一个方法，需要在这个方法之前执行<code>setHasOptionsMenu(true);</code><br>这回效果有了，不知道我的明明只有一个<code>item</code>，却出现了两个郁闷。从这里找到解决方法：<a href="http://bbs.csdn.net/topics/390877448" target="_blank" rel="external">Fragment内改变ActionBar的内容</a>,要在<code>onCreateOptionsMenu</code>方法的<code>inflate</code>之前进行<code>menu.clear();</code>就可以解决。</p>
+<h3 id="扩展：">扩展：</h3><h4 id="FragmentPagerAdapter与FragmentStatePagerAdapter区别">FragmentPagerAdapter与FragmentStatePagerAdapter区别</h4><ul>
+<li><p>FragmentPagerAdapter</p>
+<blockquote>
+<p>对于不再需要的fragment，选择调用detach方法，仅销毁视图，并不会销毁fragment实例。</p>
+</blockquote>
+</li>
+<li><p>FragmentStatePagerAdapter</p>
+<blockquote>
+<p>会销毁不再需要的fragment，当当前事务提交以后，会彻底的将fragmeng从当前Activity的FragmentManager中移除，state标明，销毁时，会将其onSaveInstanceState(Bundle outState)中的bundle信息保存下来，当用户切换回来，可以通过该bundle恢复生成新的fragment，也就是说，你可以在onSaveInstanceState(Bundle outState)方法中保存一些数据，在onCreate中进行恢复创建。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="使用中遇到的错误">使用中遇到的错误</h4><p><a href="http://blog.sina.com.cn/s/blog_5da93c8f0102v042.html" target="_blank" rel="external">关于Fragment使用中遇到的异常：Fragment already added和fragment not attached&amp;</a></p>
+<h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/lmj623565791/article/details/37970961" target="_blank" rel="external">Android Fragment 真正的完全解析（上）</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/37992017" target="_blank" rel="external">Android Fragment 真正的完全解析（下）</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/42628537" target="_blank" rel="external">Android Fragment 你应该知道的一切</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/08/18/android fragment/" data-id="cikmr5jh2003gm8jshzb7syjz" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/08/18/android fragment/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fragment/">fragment</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/18/android 知识补漏/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 知识补漏
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/14/java 知识补漏/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java 知识补漏</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/08/18/android fragment/" data-title="android fragment" data-url="http://hexo.trity.cc/2015/08/18/android fragment/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

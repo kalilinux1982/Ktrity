@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        32
+        98
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        50
+        117
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-java-Thread–Callable和Future" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 单元测试-配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/28/java-Thread–Callable和Future/">java 多线程 Callable和Future</a>
+      <a class="article-title" href="/2016/01/12/android 单元测试-配置/">android 单元测试-配置</a>
     </h1>
   
 
@@ -134,8 +134,304 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/06/28/java-Thread–Callable和Future/">
-      <time datetime="2015-06-28T05:41:16.000Z" itemprop="datePublished">2015-06-28</time>
+    <a href="/2016/01/12/android 单元测试-配置/">
+      <time datetime="2016-01-12T02:21:30.000Z" itemprop="datePublished">2016-01-12</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="概述">概述</h3><p><strong>单元测试的目标函数</strong>主要有三种：</p>
+<ol>
+<li><p>有明确的返回值，如上图的dosomething(Boolean param)，做单元测试时，只需调用这个函数，然后验证函数的返回值是否符合预期结果。</p>
+</li>
+<li><p>这个函数只改变其对象内部的一些属性或者状态，函数本身没有返回值，就验证它所改变的属性和状态。</p>
+</li>
+<li><p>一些函数没有返回值，也没有直接改变哪个值的状态，这就需要验证其行为，比如点击事件。</p>
+</li>
+</ol>
+<p><strong>注意：</strong>构造用例的原则是测试用例与函数一对一，实现条件覆盖与路径覆盖。<strong>一个用例只测一个函数，便于维护。</strong></p>
+<p><strong>java单元测试和Android单元测试对比</strong></p>
+<ul>
+<li>在Android中，<strong>单元测试的本质依旧是验证函数的功能</strong>，测试框架也是JUnit。</li>
+<li>在Java中，<strong>编写代码面对的只有类、对象、函数，</strong>编写单元测试时可以在测试工程中创建一个对象出来然后执行其函数进行测试，</li>
+<li>在Android中，<strong>编写代码需要面对的是组件、控件、生命周期、异步任务、消息传递等</strong>，</li>
+<li>虽然本质是SDK主动执行了一些实例的函数，但创建一个Activity<strong>并不能让它执行到resume的状态</strong>，因此需要JUnit之外的框架支持。</li>
+</ul>
+<h4 id="单元测试框架AndroidTest和Robolectric">单元测试框架AndroidTest和Robolectric</h4><blockquote>
+<p><strong>前者需要运行在Android环境上</strong>，<strong>后者可以直接运行在JVM上，速度也更快，可以直接由Jenkins周期性执行，无需准备Android环境</strong>。因此我们的单元测试基于Robolectric。对于一些测试对象依赖度较高而需要解除依赖的场景，我们可以借助Mock框架。</p>
+</blockquote>
+<h3 id="配置使用Robolectric">配置使用<code>Robolectric</code></h3><p>问题错误：</p>
+<ul>
+<li><a href="https://github.com/robolectric/robolectric/issues/1648" target="_blank" rel="external"># AndroidManifest.xml not found in RobolectricGradleTestRunner</a>，选择设置一下环境就好了</li>
+<li><a href="https://github.com/robolectric/robolectric/wiki/2.4-to-3.0-Upgrade-Guide" target="_blank" rel="external"># 2.4 to 3.0 Upgrade Guide</a>，版本问题，只支持到<code>21</code></li>
+<li><p><a href="https://github.com/robolectric/robolectric/issues/1620" target="_blank" rel="external"># Robolectric fails with AnnotationFormatError exception when using @Config annotation</a>，需要输入<code>gradlew test</code></p>
+</li>
+<li><p>错误1</p>
+<blockquote>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.<span class="string">RuntimeException:</span> <span class="regexp">/Users/</span>mtotschnig<span class="regexp">/entwicklung/</span>AndroidStudioAndRobolectric<span class="regexp">/app/</span>build<span class="regexp">/intermediates/</span>bundles<span class="regexp">/debug/</span>res/values is not a directory</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>改成：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">dependencies</span> &#123;  </span><br><span class="line">      <span class="title">testCompile</span> <span class="string">"org.robolectric:shadows-multidex:3.0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>即可</p>
+<ul>
+<li>错误2：<blockquote>
+<p>unknown resource ReName{TextAppearance AppCompat Widget Button}</p>
+</blockquote>
+</li>
+</ul>
+<p>归根接地还是资源SDK的问题，他并不支持更高的api。改成下面配置就好了。（<strong>目前能支持最新的api</strong>）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">  compileSdkVersion <span class="number">22</span></span><br><span class="line">  buildToolsVersion <span class="string">"23.0.2"</span></span><br><span class="line"></span><br><span class="line">  defaultConfig &#123;</span><br><span class="line">  applicationId <span class="string">"com.chriszou.testrobolectric"</span><span class="comment">//改成你的包即可</span></span><br><span class="line">  minSdkVersion <span class="number">15</span></span><br><span class="line">  targetSdkVersion <span class="number">22</span></span><br><span class="line">  versionCode <span class="number">1</span></span><br><span class="line">  versionName <span class="string">"1.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">  release &#123;</span><br><span class="line">  <span class="function">minifyEnabled <span class="keyword">false</span></span><br><span class="line">  proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-rules.pro'</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;&#125;</span><br><span class="line"></span><br><span class="line">dependencies </span>&#123;</span><br><span class="line">  <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span><br><span class="line">  compile 'com.android.support:appcompat-v7:22.2.0'</span><br><span class="line">  <span class="comment">//Unit test</span></span><br><span class="line">  testCompile 'junit:junit:4.12'</span><br><span class="line">  <span class="title">testCompile</span><span class="params">(<span class="string">'org.robolectric:robolectric:3.0-rc3'</span>)</span> </span>&#123;</span><br><span class="line">  exclude module: <span class="string">'commons-logging'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个是<code>app</code>的<code>build.gradle</code>的配置。以及下面：<br>在根目录的<code>build.gradle</code>为<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.2.3'</span></span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
+<p>以及：<code>\gradle\wrapper\gradle-wrapper.properties</code>的最后一行设置为：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\<span class="symbol">://services</span>.gradle.org/distributions/gradle-<span class="number">2.4</span>-all.zip</span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
+<p><strong>目前个人认为最新的教程</strong>：<br><a href="https://segmentfault.com/a/1190000002904944" target="_blank" rel="external">用Robolectric来做Android unit testing</a><br><a href="http://www.jianshu.com/p/dd988aac1b84" target="_blank" rel="external">android studio 1.5 搭建Robolectric 测试环境</a></p>
+<h4 id="Espresso和Robolectric切换使用">Espresso和Robolectric切换使用</h4><p>需要在这里<img src="http://i.imgur.com/twnVGE1.png" alt="Espresso"><br>进行不同的区分，上图为<code>Espresso</code>的配置，而<code>Robolectric</code>则不同的选项。</p>
+<p>两者的使用配置：</p>
+<ul>
+<li><a href="http://guides.codepath.com/android/Unit-Testing-with-Robolectric" target="_blank" rel="external">Unit Testing with Robolectric</a></li>
+<li><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso" target="_blank" rel="external">UI Testing with Espresso</a></li>
+</ul>
+<h3 id="Espresso使用"><code>Espresso</code>使用</h3><p>针对<code>ListView</code>:</p>
+<blockquote>
+<p>ListView is an <code>AdapterView</code>. AdapterViews <strong>present a problem</strong> when doing UI testing<br> AdapterView’s don’t work well with <code>onView(...)</code><br> Espresso provides an <code>onData(...)</code> entry point that makes sure to load the AdapterView item before performing any operations on it</p>
+</blockquote>
+<p>对于<code>listview</code>要使用<code>onData</code>来代替，参考：<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-listview" target="_blank" rel="external">interacting-with-a-listview</a></p>
+<p>还有针对其他的情况，详情查看下列地址:<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-recyclerview" target="_blank" rel="external">interacting-with-a-recyclerview</a><br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#stubbing-out-the-camera" target="_blank" rel="external">stubbing-out-the-camera</a></p>
+<p><strong>学习资料</strong><br><strong><a href="https://github.com/googlesamples/android-testing" target="_blank" rel="external">android-testing</a></strong><br><strong><a href="https://github.com/googlesamples/android-testing-templates" target="_blank" rel="external">android-testing-templates</a></strong><br><strong><a href="https://github.com/vgrec/EspressoExamples" target="_blank" rel="external">EspressoExamples</a></strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/" data-id="cikmr5jfc0023m8js272ozptw" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UnitTest/">UnitTest</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-关于贝塞尔曲线问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/08/关于贝塞尔曲线问题/">关于贝塞尔曲线问题</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/08/关于贝塞尔曲线问题/">
+      <time datetime="2016-01-08T06:55:23.000Z" itemprop="datePublished">2016-01-08</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/计算机网络-系统/">计算机网络&系统</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以下引用参考为<a href="http://tomkeyzhang.duapp.com/?p=88"># 在Android中如何绘制光滑曲线（一）</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/01/08/关于贝塞尔曲线问题/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/08/关于贝塞尔曲线问题/" data-id="cikmrgd0x000f50jsv459ko93" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/08/关于贝塞尔曲线问题/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/贝塞尔曲线/">贝塞尔曲线</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android Http网络获取数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/android Http网络获取数据/">android Http网络获取数据</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/06/android Http网络获取数据/">
+      <time datetime="2016-01-06T04:39:08.000Z" itemprop="datePublished">2016-01-06</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="使用HttpUrlConnecction连接">使用<code>HttpUrlConnecction</code>连接</h3><p>步骤：</p>
+<ol>
+<li>通过<code>URL</code>得到<code>HttpUrlConnecction</code>实例</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">HttpURLConnection connection = (HttpURLConnection) url.openConnection();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置请求方式<br>2.1 <code>Get</code>请求,直接获取数据</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.setRequestMethod(<span class="string">"GET"</span>);</span><br></pre></td></tr></table></figure>
+<p> 2.2 <code>Post</code>请求，发送数据提交给服务器。<strong>注意：</strong>每条数据都要以<strong>键值对的形式</strong>存在，<strong>数据与数据之间用&amp;符号隔开</strong>。<br>注意：必须先设置两个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送POST请求必须设置如下两行  ,需要在connect  之前设定好</span></span><br><span class="line">connection.setRequestMethod(<span class="string">"POST"</span>);</span><br><span class="line">urlConnect.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">urlConnect.setDoInput(<span class="keyword">true</span>);</span><br><span class="line">urlConnect.connect();<span class="comment">//需要连接成功后，才可以post发送数据</span></span><br></pre></td></tr></table></figure>
+<p>这里的<code>connect</code>必须在这两个方法之后，这两个方法的对应解释为：</p>
+<ul>
+<li><strong>URL 连接可用于输入和/或输出</strong>。如果打算使用 URL 连接进行输入,则将 <code>DoInput</code> 标志设置为 <strong>true</strong>；最后进行下面设置进行<code>post</code>请求：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataOutputStream out = <span class="keyword">new</span> DataOutputStream(connection.getOutputStream());</span><br><span class="line">out.writeBytes(<span class="string">"username=admin&amp;password=123456"</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>选项设置：连接超时、读取超时的毫秒数，以及服务器希望得到的一些消息头等</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection.setConnectTimeout(<span class="number">8000</span>);</span><br><span class="line">connection.setReadTimeout(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获取网络返回的数据流</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream in = connection.getInputStream();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>关闭连接</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.disconnect();</span><br></pre></td></tr></table></figure>
+<h4 id="其他设置">其他设置</h4><ul>
+<li><p>返回状态码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnection.getResponseCode()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Post</code>方式，设置非缓存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnection.setUseCaches(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="错误记录：">错误记录：</h4><p><a href="http://blog.csdn.net/d24244021/article/details/7696688" target="_blank" rel="external">android4.0中HttpURLConnection抛异常java.io.FileNotFoundException</a>，这个是<code>android4</code>的错误，当<code>httpCon.setDoOutput(true)</code>的时候，默认使用<code>post</code>方式，这里应该置为<code>false</code>.</p>
+<p>注意：<code>setDoOutput</code>的使用：</p>
+<blockquote>
+<p>网上查到的解释是，设置<code>true</code>，表示你发送的请求，会把body的内容发送至server端，即<code>POST和PUT</code>才需要使用。<strong>GET完全可以不用设置</strong>。</p>
+</blockquote>
+<h3 id="使用HttpClient连接">使用<code>HttpClient</code>连接</h3><p>步骤：</p>
+<ol>
+<li><code>HttpClient</code>为接口，需要<code>DefaultHttpClient</code>得到</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置请求的方式：(统一使用方法<code>execute</code>请求)<br>2.1 使用<code>get</code>请求，需要通过<code>HttpGet</code>对象进行请求</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpGet httpGet = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">httpClient.execute(httpGet);</span><br></pre></td></tr></table></figure>
+<p> 2.2 使用<code>post</code>请求，需要创建<code>httpPost</code>对象，再使用<code>NameValuePair</code>存放到<code>List</code>集合来<strong>存储键值</strong>。具体如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//存储键值</span></span><br><span class="line">List&lt;NameValuePair&gt; params = <span class="keyword">new</span> ArrayList&lt;NameValuePair&gt;();</span><br><span class="line">params.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"username"</span>, <span class="string">"admin"</span>));</span><br><span class="line">params.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"password"</span>, <span class="string">"123456"</span>));</span><br><span class="line"><span class="comment">//转换编码</span></span><br><span class="line">UrlEncodedFormEntity entity = <span class="keyword">new</span> UrlEncodedFormEntity(params, <span class="string">"utf-8"</span>);</span><br><span class="line"><span class="comment">//设置</span></span><br><span class="line">httpPost.setEntity(entity);</span><br><span class="line">httpClient.execute(httpPost);<span class="comment">//最后一步执行</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过<code>execute()</code>方法之后会返回一个 <code>HttpResponse</code> 对象,当状态码<code>==200</code>说明请求成功</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (httpResponse.getStatusLine().getStatusCode() == <span class="number">200</span>) &#123;</span><br><span class="line"><span class="comment">// 请求和响应都成功了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获取服务器返回的具体内容</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HttpEntity entity = httpResponse.getEntity();<span class="comment">//获取实例</span></span><br><span class="line">String response = EntityUtils.toString(entity, <span class="string">"utf-8"</span>);<span class="comment">//制定编码</span></span><br><span class="line">或者：得到输入流自行处理</span><br><span class="line">InputStram inputStreeam=httpEntity.getContent();</span><br></pre></td></tr></table></figure>
+<h4 id="方法解释：">方法解释：</h4><ul>
+<li>getEntity()：<blockquote>
+<p>用于获取响应的消息实体</p>
+</blockquote>
+</li>
+<li>getStatusLine()<blockquote>
+<p>用于<strong>获取响应的状态行</strong>，在返回结果<strong>StatusLine对象</strong>中<strong>包含了HTTP响应的状态码</strong>，可以使用方法<code>getStatusCode()</code>.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="错误">错误</h3><p>使用<code>HttpUrLConnection</code>抛出错误：<a href="http://stackoverflow.com/questions/11207394/getting-socketexception-connection-reset-by-peer-in-android" target="_blank" rel="external">Getting “SocketException : Connection reset by peer” in Android</a>，是<strong>端口被占用的问题</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/06/android Http网络获取数据/" data-id="cikmr5jis004em8js606tabao" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/06/android Http网络获取数据/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-java IO篇-NIO" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/03/java IO篇-NIO/">java IO篇-NIO</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/03/java IO篇-NIO/">
+      <time datetime="2016-01-03T07:00:29.000Z" itemprop="datePublished">2016-01-03</time>
     </a>
   </div>
 
@@ -151,21 +447,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="使用Callable和Future创建线程">使用<code>Callable</code>和<code>Future</code>创建线程</h3><p><code>Callable</code>接口 提供了一个<code>call()</code>方法作为线程执行体，<code>call</code>方法比<code>run</code>方法强大，因为：<strong>有返回值，并且可以返回异常</strong>，但是，返回值并<strong>不能直接调用</strong>。
+        <p>旧的IO系统<strong>一次只能处理一个字节</strong>,使得效率并不高。<br>输入，输出流都是<strong>阻塞式的输入，输出</strong></p>
+<p>新的IO采用内存<strong>映射文件的方式处理输入输出</strong>，将文件的一端区域<strong>映射到内存</strong>中。模拟了<strong>虚拟内存的概念</strong>，系统是<strong>一次处理一块数据</strong>，所以提高了效率。<br>
         
           <p class="article-more-link">
-            <a href="/2015/06/28/java-Thread–Callable和Future/#more">Read More</a>
+            <a href="/2016/01/03/java IO篇-NIO/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/" data-id="cidslju6i000n1wjs3tgi626e" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2016/01/03/java IO篇-NIO/" data-id="cikmrgd3z002650jsqxkki3fo" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2016/01/03/java IO篇-NIO/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Executor/">Executor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Future/">Future</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -175,7 +472,7 @@
 
 
     
-      <article id="post-多臂匪徒问题 UCB策略" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android Toolbar使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -184,7 +481,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/28/多臂匪徒问题 UCB策略/">多臂匪徒问题 UCB策略</a>
+      <a class="article-title" href="/2015/12/24/android Toolbar使用/">android Toolbar使用</a>
     </h1>
   
 
@@ -192,124 +489,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/06/28/多臂匪徒问题 UCB策略/">
-      <time datetime="2015-06-28T02:26:16.000Z" itemprop="datePublished">2015-06-28</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/不围棋/">不围棋</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天是第三天了。今天才发现一个<code>bug</code>，就是判断胜负后，弹出的<code>bug</code>。原来，我并不能打败师兄最渣的版本。伤心…..
-        
-          <p class="article-more-link">
-            <a href="/2015/06/28/多臂匪徒问题 UCB策略/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/" data-id="cidslju6d000h1wjsgz7qu9xu" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UCB策略/">UCB策略</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多臂匪徒问题/">多臂匪徒问题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-蒙特卡洛算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/24/蒙特卡洛算法/">蒙特卡洛算法</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/06/24/蒙特卡洛算法/">
-      <time datetime="2015-06-24T01:02:16.000Z" itemprop="datePublished">2015-06-24</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/不围棋/">不围棋</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天是第一天，想到7月7号，就要进行校内的比赛的时候，就有淡淡的忧伤，快马加鞭，放下手头的所有工作，全部精力放在不围棋上面。
-        
-          <p class="article-more-link">
-            <a href="/2015/06/24/蒙特卡洛算法/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/24/蒙特卡洛算法/" data-id="cidslju5i000a1wjsomtoomxo" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/06/24/蒙特卡洛算法/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/不围棋/">不围棋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蒙特卡洛算法/">蒙特卡洛算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android-cache" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/28/android-cache/">android 缓存</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/05/28/android-cache/">
-      <time datetime="2015-05-28T13:59:27.000Z" itemprop="datePublished">2015-05-28</time>
+    <a href="/2015/12/24/android Toolbar使用/">
+      <time datetime="2015-12-24T05:09:52.000Z" itemprop="datePublished">2015-12-24</time>
     </a>
   </div>
 
@@ -325,22 +506,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="学习资料：">学习资料：</h3><p><a href="http://blog.csdn.net/lnb333666/article/details/8460159">产品设计：Android应用-开发技术【数据缓存】
-</a>，倾向于使用文件缓存<br>介绍：<br><a href="http://www.cnblogs.com/qianxudetianxia/archive/2012/02/20/2112128.html">Android学习系列(27)—App缓存管理</a><br>以下是通过使用<code>file.lastModified()</code>来达到修改最新文件修改时间的效果<br>
+        <p>引用资料：<a href="http://guides.codepath.com/android/Using-the-App-ToolBar#overview">Using the App ToolBar</a><br>
         
           <p class="article-more-link">
-            <a href="/2015/05/28/android-cache/#more">Read More</a>
+            <a href="/2015/12/24/android Toolbar使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/28/android-cache/" data-id="cidslju94002l1wjsbqdui863" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/24/android Toolbar使用/" data-id="cikmrgd4f002f50jswdgjdc3p" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/28/android-cache/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/24/android Toolbar使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Toolbar/">Toolbar</a></li></ul>
 
     </footer>
   </div>
@@ -350,7 +530,7 @@
 
 
     
-      <article id="post-Gradle-JCenter" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android Snackbar&amp;Toast使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -359,7 +539,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/13/Gradle-JCenter/">使用Gradle发布项目到JCenter仓库</a>
+      <a class="article-title" href="/2015/12/23/android Snackbar&Toast使用/">android Snackbar&amp;Toast使用</a>
     </h1>
   
 
@@ -367,66 +547,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/13/Gradle-JCenter/">
-      <time datetime="2015-05-13T05:59:27.000Z" itemprop="datePublished">2015-05-13</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？
-        
-          <p class="article-more-link">
-            <a href="/2015/05/13/Gradle-JCenter/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/" data-id="cidsljub5004f1wjsq309ljs1" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android–Retrofit" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/12/android–Retrofit/">android网络开发框架--Retrofit</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/05/12/android–Retrofit/">
-      <time datetime="2015-05-12T10:33:16.000Z" itemprop="datePublished">2015-05-12</time>
+    <a href="/2015/12/23/android Snackbar&Toast使用/">
+      <time datetime="2015-12-23T15:46:59.000Z" itemprop="datePublished">2015-12-23</time>
     </a>
   </div>
 
@@ -442,22 +564,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目地址：<a href="https://github.com/square/retrofit">square/retrofit</a></p>
-<h3 id="实战一：依据IP进行get请求">实战一：依据IP进行get请求</h3><p>谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：<a href="http://www.jianshu.com/p/87c36d8dabce">Retrofit 解析 JSON 数据</a>，
+        <p><a href="https://guides.codepath.com/android/Displaying-the-Snackbar">Displaying the Snackbar</a><br><a href="https://guides.codepath.com/android/Displaying-Toasts">Displaying Toasts</a><br><code>Snackbar</code>的设计来源于<code>Toasts</code>。<br>
         
           <p class="article-more-link">
-            <a href="/2015/05/12/android–Retrofit/#more">Read More</a>
+            <a href="/2015/12/23/android Snackbar&Toast使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/12/android–Retrofit/" data-id="cidslju8h00221wjsiay9u3nd" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/23/android Snackbar&Toast使用/" data-id="cikmrgd4z002r50js8eynnv6f" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/12/android–Retrofit/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/23/android Snackbar&Toast使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snackbar/">Snackbar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Toast/">Toast</a></li></ul>
 
     </footer>
   </div>
@@ -467,7 +588,7 @@
 
 
     
-      <article id="post-Material Design-FloatingActionButton" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android SwipeRefreshLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -476,7 +597,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/Material Design-FloatingActionButton/">Material Design --FloatingActionButton</a>
+      <a class="article-title" href="/2015/12/21/android SwipeRefreshLayout使用/">android SwipeRefreshLayout使用</a>
     </h1>
   
 
@@ -484,8 +605,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/09/Material Design-FloatingActionButton/">
-      <time datetime="2015-05-09T02:11:27.000Z" itemprop="datePublished">2015-05-09</time>
+    <a href="/2015/12/21/android SwipeRefreshLayout使用/">
+      <time datetime="2015-12-21T13:40:01.000Z" itemprop="datePublished">2015-12-21</time>
     </a>
   </div>
 
@@ -501,21 +622,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="配置">配置</h3><h3 id="使用android_studio导入">使用android studio导入</h3><p><code>Github</code>地址: <a href="https://github.com/futuresimple/android-floating-action-button">futuresimple/android-floating-action-button</a><br>
+        <p><a href="https://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide#recyclerview-with-swiperefreshlayout">Implementing Pull to Refresh Guide</a><br>
         
           <p class="article-more-link">
-            <a href="/2015/05/09/Material Design-FloatingActionButton/#more">Read More</a>
+            <a href="/2015/12/21/android SwipeRefreshLayout使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/09/Material Design-FloatingActionButton/" data-id="cidsljuar003y1wjs39aivphr" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/21/android SwipeRefreshLayout使用/" data-id="cikmrgd4p002k50jsg3ir4iy6" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/09/Material Design-FloatingActionButton/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/21/android SwipeRefreshLayout使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FloatingActionButton/">FloatingActionButton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material-Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li></ul>
 
     </footer>
   </div>
@@ -525,7 +646,7 @@
 
 
     
-      <article id="post-android-application-learn" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android RecyclerView使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -534,7 +655,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/03/android-application-learn/">application学习</a>
+      <a class="article-title" href="/2015/12/17/android RecyclerView使用/">android RecyclerView使用</a>
     </h1>
   
 
@@ -542,8 +663,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/03/android-application-learn/">
-      <time datetime="2015-05-02T16:17:16.000Z" itemprop="datePublished">2015-05-03</time>
+    <a href="/2015/12/17/android RecyclerView使用/">
+      <time datetime="2015-12-17T03:38:23.000Z" itemprop="datePublished">2015-12-17</time>
     </a>
   </div>
 
@@ -559,22 +680,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><h3 id="介绍：">介绍：</h3><p><code>Application</code>是单例模式的类，<code>android</code>系统为每个应用程序创建一个<code>Application</code>类的<strong>对象且只创建一个</strong>。
+        <p><a href="https://guides.codepath.com/android/Using-the-RecyclerView#compared-to-listview"># Using the RecyclerView</a><br>
         
           <p class="article-more-link">
-            <a href="/2015/05/03/android-application-learn/#more">Read More</a>
+            <a href="/2015/12/17/android RecyclerView使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/03/android-application-learn/" data-id="cidslju9b002q1wjsotde2qkk" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/" data-id="cikmrgd57002y50jsr8aeu3x4" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/03/android-application-learn/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/application/">application</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RecyclerView/">RecyclerView</a></li></ul>
 
     </footer>
   </div>
@@ -584,7 +704,7 @@
 
 
     
-      <article id="post-android-Tab" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android FloatingActionButton使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -593,7 +713,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/01/android-Tab/">android使用Tab效果滑动</a>
+      <a class="article-title" href="/2015/12/17/android FloatingActionButton使用/">android FloatingActionButton使用</a>
     </h1>
   
 
@@ -601,8 +721,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/01/android-Tab/">
-      <time datetime="2015-05-01T01:13:16.000Z" itemprop="datePublished">2015-05-01</time>
+    <a href="/2015/12/17/android FloatingActionButton使用/">
+      <time datetime="2015-12-17T03:25:57.000Z" itemprop="datePublished">2015-12-17</time>
     </a>
   </div>
 
@@ -618,21 +738,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="使用SlidingTabLayout">使用<code>SlidingTabLayout</code></h3><p>这是<code>android L</code>最新的使用<code>tab</code>的效果，<code>Google Play</code>的应用<br>
+        <blockquote>
+<p>Google made available during Google I/O 2015 a support library to create floating action buttons library. In the past, third-party libraries such as <a href="https://github.com/makovkastar/FloatingActionButton">makovkastar/FloatingActionButton</a> and <a href="https://github.com/futuresimple/android-floating-action-button">futuresimple/android-floating-action-button</a> had to be used.<br>即：在发布会上继承上面两个<code>github</code>地址效果的浮动按钮。<br>
         
           <p class="article-more-link">
-            <a href="/2015/05/01/android-Tab/#more">Read More</a>
+            <a href="/2015/12/17/android FloatingActionButton使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/01/android-Tab/" data-id="cidslju9p00301wjscu25shdv" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/17/android FloatingActionButton使用/" data-id="cikmrgd5g003450jso9sbyzwn" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/01/android-Tab/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/17/android FloatingActionButton使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sldingTabLayout/">sldingTabLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tab/">tab</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FloatingActionButton/">FloatingActionButton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li></ul>
 
     </footer>
   </div>
@@ -642,7 +763,7 @@
 
 
     
-      <article id="post-News-release-system" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 命名规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -651,7 +772,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/25/News-release-system/">三轮考题（新闻发布系统）</a>
+      <a class="article-title" href="/2015/12/16/android 命名规范/">android 命名规范</a>
     </h1>
   
 
@@ -659,8 +780,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/04/25/News-release-system/">
-      <time datetime="2015-04-25T03:29:42.000Z" itemprop="datePublished">2015-04-25</time>
+    <a href="/2015/12/16/android 命名规范/">
+      <time datetime="2015-12-16T02:18:53.000Z" itemprop="datePublished">2015-12-16</time>
     </a>
   </div>
 
@@ -668,7 +789,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/面试/">面试</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
 
         </div>
@@ -676,21 +797,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>能用代码表示，尽可能使用代码表示（写出关键代码），以及相应的文字说明<br>
+        <p>以下内容摘自： <a href="http://keeganlee.me/post/android/20150709">Android技术积累:开发规范</a><br>
         
           <p class="article-more-link">
-            <a href="/2015/04/25/News-release-system/#more">Read More</a>
+            <a href="/2015/12/16/android 命名规范/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/04/25/News-release-system/" data-id="cidsljuae003n1wjsakuqpgap" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/16/android 命名规范/" data-id="cikmr5jf80020m8jse8ltmygv" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/04/25/News-release-system/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/16/android 命名规范/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔试题/">笔试题</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -701,7 +822,7 @@
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -711,7 +832,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础知识/">计算机基础知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -720,7 +841,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -747,6 +868,14 @@
             <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
           </li>
         
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -757,7 +886,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12.5px;">ActionBar</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 10px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12.5px;">Fork</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/Join/" style="font-size: 12.5px;">Join</a><a href="/tags/Map/" style="font-size: 12.5px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/ShadowSocks/" style="font-size: 12.5px;">ShadowSocks</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 20px;">android</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 12.5px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/java/" style="font-size: 17.5px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/多线程/" style="font-size: 15px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a>
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
     </div>
   </div>
 
@@ -770,7 +899,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2000 - 2015 Trity<br>
+      &copy; 2000 - 2016 Trity<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
 Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
  

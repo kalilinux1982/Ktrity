@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android 自定义view | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义view学习Android LayoutInflater原理分析，带你一步步深入了解View(一)知识点：
+
+LayoutInflater 加载布局。原理:pull解析方式来解析布局文件
+动态添加布局
+LayoutInflater.from(context).inflate(R.layout.title, this);
+
+
+源码解析其中的原理
+
+
+layout_width和layout_he">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android 自定义view">
+<meta property="og:url" content="http://hexo.trity.cc/2015/10/22/android 自定义view/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="自定义view学习Android LayoutInflater原理分析，带你一步步深入了解View(一)知识点：
+
+LayoutInflater 加载布局。原理:pull解析方式来解析布局文件
+动态添加布局
+LayoutInflater.from(context).inflate(R.layout.title, this);
+
+
+源码解析其中的原理
+
+
+layout_width和layout_he">
+<meta property="og:image" content="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151126094235.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android 自定义view">
+<meta name="twitter:description" content="自定义view学习Android LayoutInflater原理分析，带你一步步深入了解View(一)知识点：
+
+LayoutInflater 加载布局。原理:pull解析方式来解析布局文件
+动态添加布局
+LayoutInflater.from(context).inflate(R.layout.title, this);
+
+
+源码解析其中的原理
+
+
+layout_width和layout_he">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        98
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        117
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android 自定义view" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android 自定义view
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/22/android 自定义view/">
+      <time datetime="2015-10-22T02:53:35.000Z" itemprop="datePublished">2015-10-22</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="自定义view学习">自定义view学习</h3><p><a href="http://blog.csdn.net/guolin_blog/article/details/12921889" target="_blank" rel="external">Android LayoutInflater原理分析，带你一步步深入了解View(一)</a><br>知识点：</p>
+<ul>
+<li><code>LayoutInflater</code> 加载布局。原理:<strong>pull解析方式来解析布局文件</strong><ul>
+<li>动态添加布局<blockquote>
+<p>LayoutInflater.from(context).inflate(R.layout.title, this);</p>
+</blockquote>
+</li>
+<li>源码解析其中的原理</li>
+</ul>
+</li>
+<li>layout_width和layout_height要在<code>布局包裹下才起作用</code>，默认为<code>FrameLayout</code>.</li>
+</ul>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/16330267" target="_blank" rel="external">Android视图绘制流程完全解析，带你一步步深入了解View(二)</a><br>知识点：</p>
+<ul>
+<li>onMeasure 测量视图大小</li>
+<li>onLayout 对子视图进行布局（不同布局如relativeLayout的规则都不同）</li>
+<li>onDraw 绘制view的流程</li>
+</ul>
+<p><strong><code>getMeasureWidth</code>和<code>getWidth</code></strong>的区别：</p>
+<blockquote>
+<p><code>getMeasureWidth()</code>方法:<br>在measure()过程结束后就可以获取到<br>通过setMeasuredDimension()方法来进行设置的.<br><code>getWidth()</code>方法:<br>要在layout()过程结束后才能获取到<br>通过视图右边的坐标减去左边的坐标计算出来的</p>
+</blockquote>
+<p>一般情况下，两者的数据相同。</p>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/17045157" target="_blank" rel="external">Android视图状态及重绘流程分析，带你一步步深入了解View(三)</a><br>知识点：</p>
+<ul>
+<li><p>视图状态：（每个<code>view</code>都拥有）</p>
+<ol>
+<li>enabled 是否可用，响应<code>onTouch</code>事件</li>
+<li>focused 获取焦点，一般只有视图在focusable和focusable in touch mode同时成立，才可以获取焦点。如<code>editText</code></li>
+<li>window_focused 是否处于正在交互的窗口,系统自行决定</li>
+<li>selected 是否处于选中状态</li>
+<li>pressed 是否处于按下状态</li>
+</ol>
+</li>
+<li><p>视图重绘<br>setVisibility()、setEnabled()、setSelected()等方法导致视图重绘，可以手动调用<code>invalidate</code>或者<code>postinvalidate</code>来进行视图重绘，注意只会<strong>重绘draw</strong>流程，而不会重绘<code>meause</code>和<code>layout</code>流程，因为并没有改变大小和布局。<br>但在这篇<a href="http://blog.csdn.net/sk719887916/article/details/48443429" target="_blank" rel="external">Android View 中invalidate() 你所不知道的那些事</a>文章提出了异议。</p>
+<blockquote>
+<p>invalidate()会触发view Layout(),和draw(),但是它不会进行测量。 requestLayout(）方法最终也会执行draw（）的。</p>
+</blockquote>
+</li>
+</ul>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/17357967" target="_blank" rel="external">Android自定义View的实现方法，带你一步步深入了解View(四)</a><br>知识点：</p>
+<ul>
+<li>自定义view：自动记录点击事件的btn</li>
+<li>组合控件：通过继承布局的view来加载布局以及相关的组件</li>
+<li>继承控件，通过继承view来处理相应的事件，如listview中添加滑动删除的按钮，并实现相关的事件</li>
+</ul>
+<h3 id="postInvalidate和invalidate的区别">postInvalidate和invalidate的区别</h3><ul>
+<li><p><code>invalidate</code>智能在UI线程中直接使用，即：oncreate的时候，其他时候需要<strong>消息机制</strong>（使用<code>Handler</code>或者<code>runOnUiThread</code>）。</p>
+</li>
+<li><p><code>postInvalidate</code>直接封装了<code>handler</code>的消息机制，直接调用即可。</p>
+</li>
+</ul>
+<p>两者：</p>
+<ul>
+<li><strong>在非UI线程中</strong>是建立在<code>Thread</code>异步更新上。（都需要线程进行执行）</li>
+<li>在<code>UI线程中</code>直接执行即可更新。并不需要写线程，handler之类的。</li>
+</ul>
+<p><strong>扩展</strong>（<code>requestLayout</code>）</p>
+<ul>
+<li>当view确定自身已经不再适合现有的区域时，该view本身调用这个方法要求<code>parent view</code>重新调用他的<code>onMeasure</code>和<code>onLayout</code>来对重新设置自己位置。（<strong>特别的当view的layoutparameter发生改变，并且它的值还没能应用到view上</strong>）</li>
+</ul>
+<blockquote>
+<p>用途：有时我们在改变一个view 的内容之后 可能会造成显示出现错误，比如写ListView的时候 重用convertview中的某个TextView 可能因为前后填入的text长度不同而造成显示出错，此时我们可以在改变内容之后调用requestLayout方法加以解决。<br>参考：<a href="http://blog.csdn.net/lonely_fireworks/article/details/28910103" target="_blank" rel="external">view的requestLayout()方法</a></p>
+</blockquote>
+<h3 id="onTouchEvent触摸事件分发机制：">onTouchEvent触摸事件分发机制：</h3><p>参考：</p>
+<ul>
+<li><a href="http://blog.csdn.net/guolin_blog/article/details/9097463" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></li>
+</ul>
+<p>个人一张图理解整个流程：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151126094235.png" alt=""></p>
+<p>另外需要主要讲到的两中情况：</p>
+<ul>
+<li><p>注册了<code>ontouch</code>并返回<code>true</code>：</p>
+<blockquote>
+<p>每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件。这里需要注意，如果你在执行ACTION_DOWN的时候返回了false，后面一系列其它的action就不会再得到执行了.</p>
+</blockquote>
+</li>
+<li><p><code>ontouch</code>没有注册或者返回<code>false</code>:</p>
+<blockquote>
+<p>执行<code>ontouchEvent</code>方法。如果：<code>if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||(viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE))</code>为<code>true</code>的话，照样会有<code>ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件</code>,并且总是<strong>返回true</strong>.</p>
+</blockquote>
+</li>
+<li><p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>以上注意几个信息：<br><strong>1. onTouch和onTouchEvent有什么区别，又该如何使用？</strong></p>
+<blockquote>
+<p>从源码中可以看出，这两个方法都是在View的dispatchTouchEvent中调用的，<strong>onTouch优先于onTouchEvent执行</strong>。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。</p>
+</blockquote>
+<p>我们需要关注下面的三个类：</p>
+<ol>
+<li>public boolean dispatchTouchEvent(MotionEvent ev)  这个方法用来分发TouchEvent</li>
+<li>public boolean onInterceptTouchEvent(MotionEvent ev) 这个方法用来拦截TouchEvent</li>
+<li>public boolean onTouchEvent(MotionEvent ev) 这个方法用来处理TouchEvent</li>
+</ol>
+<p>对应的解释为：</p>
+<blockquote>
+<p>当TouchEvent发生时，首先Activity将TouchEvent传递给最顶层的View， TouchEvent最先到达最顶层 view 的 dispatchTouchEvent ，然后由  dispatchTouchEvent 方法进行分发，如果dispatchTouchEvent返回true ，则交给这个view的onTouchEvent处理，如果dispatchTouchEvent返回 false ，则交给这个 view 的 interceptTouchEvent 方法来决定是否要拦截这个事件，如果 interceptTouchEvent 返回 true ，也就是拦截掉了，则交给它的 onTouchEvent 来处理，如果 interceptTouchEvent 返回 false ，那么就传递给子 view ，由子 view 的 dispatchTouchEvent 再来开始这个事件的分发。如果事件传递到某一层的子 view 的 onTouchEvent 上了，这个方法返回了 false ，那么这个事件会从这个 view 往上传递，都是 onTouchEvent 来接收。而如果传递到最上面的 onTouchEvent 也返回 false 的话，这个事件就会“消失”，而且接收不到下一次事件。<br>来自：<a href="http://mobile.51cto.com/abased-374715.htm" target="_blank" rel="external"># Android dispatchTouchEvent介绍</a></p>
+</blockquote>
+<h3 id="自定义属性">自定义属性</h3><h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/cyp331203/article/details/40423727" target="_blank" rel="external">Android自定义控件系列一：Android如何实现老版优酷客户端三级环形菜单</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/22/android 自定义view/" data-id="cikmr5jdy001am8jsstxqmc5s" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/22/android 自定义view/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/22/android 动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 动画
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/14/android 使用ssl通信实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 使用ssl通信实践</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/10/22/android 自定义view/" data-title="android 自定义view" data-url="http://hexo.trity.cc/2015/10/22/android 自定义view/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
