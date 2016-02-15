@@ -90,7 +90,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        98
+        97
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -117,161 +117,6 @@
 
       
       <section id="main">
-      <article id="post-android 自定义view" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/22/android 自定义view/">android 自定义view</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/22/android 自定义view/">
-      <time datetime="2015-10-22T02:53:35.000Z" itemprop="datePublished">2015-10-22</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="自定义view学习">自定义view学习</h3><p><a href="http://blog.csdn.net/guolin_blog/article/details/12921889" target="_blank" rel="external">Android LayoutInflater原理分析，带你一步步深入了解View(一)</a><br>知识点：</p>
-<ul>
-<li><code>LayoutInflater</code> 加载布局。原理:<strong>pull解析方式来解析布局文件</strong><ul>
-<li>动态添加布局<blockquote>
-<p>LayoutInflater.from(context).inflate(R.layout.title, this);</p>
-</blockquote>
-</li>
-<li>源码解析其中的原理</li>
-</ul>
-</li>
-<li>layout_width和layout_height要在<code>布局包裹下才起作用</code>，默认为<code>FrameLayout</code>.</li>
-</ul>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/16330267" target="_blank" rel="external">Android视图绘制流程完全解析，带你一步步深入了解View(二)</a><br>知识点：</p>
-<ul>
-<li>onMeasure 测量视图大小</li>
-<li>onLayout 对子视图进行布局（不同布局如relativeLayout的规则都不同）</li>
-<li>onDraw 绘制view的流程</li>
-</ul>
-<p><strong><code>getMeasureWidth</code>和<code>getWidth</code></strong>的区别：</p>
-<blockquote>
-<p><code>getMeasureWidth()</code>方法:<br>在measure()过程结束后就可以获取到<br>通过setMeasuredDimension()方法来进行设置的.<br><code>getWidth()</code>方法:<br>要在layout()过程结束后才能获取到<br>通过视图右边的坐标减去左边的坐标计算出来的</p>
-</blockquote>
-<p>一般情况下，两者的数据相同。</p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/17045157" target="_blank" rel="external">Android视图状态及重绘流程分析，带你一步步深入了解View(三)</a><br>知识点：</p>
-<ul>
-<li><p>视图状态：（每个<code>view</code>都拥有）</p>
-<ol>
-<li>enabled 是否可用，响应<code>onTouch</code>事件</li>
-<li>focused 获取焦点，一般只有视图在focusable和focusable in touch mode同时成立，才可以获取焦点。如<code>editText</code></li>
-<li>window_focused 是否处于正在交互的窗口,系统自行决定</li>
-<li>selected 是否处于选中状态</li>
-<li>pressed 是否处于按下状态</li>
-</ol>
-</li>
-<li><p>视图重绘<br>setVisibility()、setEnabled()、setSelected()等方法导致视图重绘，可以手动调用<code>invalidate</code>或者<code>postinvalidate</code>来进行视图重绘，注意只会<strong>重绘draw</strong>流程，而不会重绘<code>meause</code>和<code>layout</code>流程，因为并没有改变大小和布局。<br>但在这篇<a href="http://blog.csdn.net/sk719887916/article/details/48443429" target="_blank" rel="external">Android View 中invalidate() 你所不知道的那些事</a>文章提出了异议。</p>
-<blockquote>
-<p>invalidate()会触发view Layout(),和draw(),但是它不会进行测量。 requestLayout(）方法最终也会执行draw（）的。</p>
-</blockquote>
-</li>
-</ul>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/17357967" target="_blank" rel="external">Android自定义View的实现方法，带你一步步深入了解View(四)</a><br>知识点：</p>
-<ul>
-<li>自定义view：自动记录点击事件的btn</li>
-<li>组合控件：通过继承布局的view来加载布局以及相关的组件</li>
-<li>继承控件，通过继承view来处理相应的事件，如listview中添加滑动删除的按钮，并实现相关的事件</li>
-</ul>
-<h3 id="postInvalidate和invalidate的区别">postInvalidate和invalidate的区别</h3><ul>
-<li><p><code>invalidate</code>智能在UI线程中直接使用，即：oncreate的时候，其他时候需要<strong>消息机制</strong>（使用<code>Handler</code>或者<code>runOnUiThread</code>）。</p>
-</li>
-<li><p><code>postInvalidate</code>直接封装了<code>handler</code>的消息机制，直接调用即可。</p>
-</li>
-</ul>
-<p>两者：</p>
-<ul>
-<li><strong>在非UI线程中</strong>是建立在<code>Thread</code>异步更新上。（都需要线程进行执行）</li>
-<li>在<code>UI线程中</code>直接执行即可更新。并不需要写线程，handler之类的。</li>
-</ul>
-<p><strong>扩展</strong>（<code>requestLayout</code>）</p>
-<ul>
-<li>当view确定自身已经不再适合现有的区域时，该view本身调用这个方法要求<code>parent view</code>重新调用他的<code>onMeasure</code>和<code>onLayout</code>来对重新设置自己位置。（<strong>特别的当view的layoutparameter发生改变，并且它的值还没能应用到view上</strong>）</li>
-</ul>
-<blockquote>
-<p>用途：有时我们在改变一个view 的内容之后 可能会造成显示出现错误，比如写ListView的时候 重用convertview中的某个TextView 可能因为前后填入的text长度不同而造成显示出错，此时我们可以在改变内容之后调用requestLayout方法加以解决。<br>参考：<a href="http://blog.csdn.net/lonely_fireworks/article/details/28910103" target="_blank" rel="external">view的requestLayout()方法</a></p>
-</blockquote>
-<h3 id="onTouchEvent触摸事件分发机制：">onTouchEvent触摸事件分发机制：</h3><p>参考：</p>
-<ul>
-<li><a href="http://blog.csdn.net/guolin_blog/article/details/9097463" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></li>
-</ul>
-<p>个人一张图理解整个流程：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151126094235.png" alt=""></p>
-<p>另外需要主要讲到的两中情况：</p>
-<ul>
-<li><p>注册了<code>ontouch</code>并返回<code>true</code>：</p>
-<blockquote>
-<p>每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件。这里需要注意，如果你在执行ACTION_DOWN的时候返回了false，后面一系列其它的action就不会再得到执行了.</p>
-</blockquote>
-</li>
-<li><p><code>ontouch</code>没有注册或者返回<code>false</code>:</p>
-<blockquote>
-<p>执行<code>ontouchEvent</code>方法。如果：<code>if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||(viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE))</code>为<code>true</code>的话，照样会有<code>ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件</code>,并且总是<strong>返回true</strong>.</p>
-</blockquote>
-</li>
-<li><p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>以上注意几个信息：<br><strong>1. onTouch和onTouchEvent有什么区别，又该如何使用？</strong></p>
-<blockquote>
-<p>从源码中可以看出，这两个方法都是在View的dispatchTouchEvent中调用的，<strong>onTouch优先于onTouchEvent执行</strong>。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。</p>
-</blockquote>
-<p>我们需要关注下面的三个类：</p>
-<ol>
-<li>public boolean dispatchTouchEvent(MotionEvent ev)  这个方法用来分发TouchEvent</li>
-<li>public boolean onInterceptTouchEvent(MotionEvent ev) 这个方法用来拦截TouchEvent</li>
-<li>public boolean onTouchEvent(MotionEvent ev) 这个方法用来处理TouchEvent</li>
-</ol>
-<p>对应的解释为：</p>
-<blockquote>
-<p>当TouchEvent发生时，首先Activity将TouchEvent传递给最顶层的View， TouchEvent最先到达最顶层 view 的 dispatchTouchEvent ，然后由  dispatchTouchEvent 方法进行分发，如果dispatchTouchEvent返回true ，则交给这个view的onTouchEvent处理，如果dispatchTouchEvent返回 false ，则交给这个 view 的 interceptTouchEvent 方法来决定是否要拦截这个事件，如果 interceptTouchEvent 返回 true ，也就是拦截掉了，则交给它的 onTouchEvent 来处理，如果 interceptTouchEvent 返回 false ，那么就传递给子 view ，由子 view 的 dispatchTouchEvent 再来开始这个事件的分发。如果事件传递到某一层的子 view 的 onTouchEvent 上了，这个方法返回了 false ，那么这个事件会从这个 view 往上传递，都是 onTouchEvent 来接收。而如果传递到最上面的 onTouchEvent 也返回 false 的话，这个事件就会“消失”，而且接收不到下一次事件。<br>来自：<a href="http://mobile.51cto.com/abased-374715.htm" target="_blank" rel="external"># Android dispatchTouchEvent介绍</a></p>
-</blockquote>
-<h3 id="自定义属性">自定义属性</h3><h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/cyp331203/article/details/40423727" target="_blank" rel="external">Android自定义控件系列一：Android如何实现老版优酷客户端三级环形菜单</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/22/android 自定义view/" data-id="cikmr5jdy001am8jsstxqmc5s" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/10/22/android 自定义view/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
       <article id="post-android 使用ssl通信实践" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -909,6 +754,64 @@
 
 
     
+      <article id="post-java 网络编程 TCP协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/java 网络编程 TCP协议/">java 网络编程 TCP协议</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/08/31/java 网络编程 TCP协议/">
+      <time datetime="2015-08-31T01:36:18.000Z" itemprop="datePublished">2015-08-31</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>两端各建立一个<code>socket</code>，并形成<strong>虚拟链路</strong>。然后通过虚拟链路进行通信，<strong>java</strong>通过<code>socket</code>产生的<strong>IO流</strong>进行通信。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/08/31/java 网络编程 TCP协议/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/08/31/java 网络编程 TCP协议/" data-id="cikmrgd2d001650js12zhsv8n" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/08/31/java 网络编程 TCP协议/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
       </nav>
@@ -929,7 +832,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

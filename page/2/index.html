@@ -90,7 +90,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        98
+        97
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -117,118 +117,6 @@
 
       
       <section id="main">
-      <article id="post-android 单元测试-配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/12/android 单元测试-配置/">android 单元测试-配置</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/12/android 单元测试-配置/">
-      <time datetime="2016-01-12T02:21:30.000Z" itemprop="datePublished">2016-01-12</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="概述">概述</h3><p><strong>单元测试的目标函数</strong>主要有三种：</p>
-<ol>
-<li><p>有明确的返回值，如上图的dosomething(Boolean param)，做单元测试时，只需调用这个函数，然后验证函数的返回值是否符合预期结果。</p>
-</li>
-<li><p>这个函数只改变其对象内部的一些属性或者状态，函数本身没有返回值，就验证它所改变的属性和状态。</p>
-</li>
-<li><p>一些函数没有返回值，也没有直接改变哪个值的状态，这就需要验证其行为，比如点击事件。</p>
-</li>
-</ol>
-<p><strong>注意：</strong>构造用例的原则是测试用例与函数一对一，实现条件覆盖与路径覆盖。<strong>一个用例只测一个函数，便于维护。</strong></p>
-<p><strong>java单元测试和Android单元测试对比</strong></p>
-<ul>
-<li>在Android中，<strong>单元测试的本质依旧是验证函数的功能</strong>，测试框架也是JUnit。</li>
-<li>在Java中，<strong>编写代码面对的只有类、对象、函数，</strong>编写单元测试时可以在测试工程中创建一个对象出来然后执行其函数进行测试，</li>
-<li>在Android中，<strong>编写代码需要面对的是组件、控件、生命周期、异步任务、消息传递等</strong>，</li>
-<li>虽然本质是SDK主动执行了一些实例的函数，但创建一个Activity<strong>并不能让它执行到resume的状态</strong>，因此需要JUnit之外的框架支持。</li>
-</ul>
-<h4 id="单元测试框架AndroidTest和Robolectric">单元测试框架AndroidTest和Robolectric</h4><blockquote>
-<p><strong>前者需要运行在Android环境上</strong>，<strong>后者可以直接运行在JVM上，速度也更快，可以直接由Jenkins周期性执行，无需准备Android环境</strong>。因此我们的单元测试基于Robolectric。对于一些测试对象依赖度较高而需要解除依赖的场景，我们可以借助Mock框架。</p>
-</blockquote>
-<h3 id="配置使用Robolectric">配置使用<code>Robolectric</code></h3><p>问题错误：</p>
-<ul>
-<li><a href="https://github.com/robolectric/robolectric/issues/1648" target="_blank" rel="external"># AndroidManifest.xml not found in RobolectricGradleTestRunner</a>，选择设置一下环境就好了</li>
-<li><a href="https://github.com/robolectric/robolectric/wiki/2.4-to-3.0-Upgrade-Guide" target="_blank" rel="external"># 2.4 to 3.0 Upgrade Guide</a>，版本问题，只支持到<code>21</code></li>
-<li><p><a href="https://github.com/robolectric/robolectric/issues/1620" target="_blank" rel="external"># Robolectric fails with AnnotationFormatError exception when using @Config annotation</a>，需要输入<code>gradlew test</code></p>
-</li>
-<li><p>错误1</p>
-<blockquote>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.<span class="string">RuntimeException:</span> <span class="regexp">/Users/</span>mtotschnig<span class="regexp">/entwicklung/</span>AndroidStudioAndRobolectric<span class="regexp">/app/</span>build<span class="regexp">/intermediates/</span>bundles<span class="regexp">/debug/</span>res/values is not a directory</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<p>改成：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">dependencies</span> &#123;  </span><br><span class="line">      <span class="title">testCompile</span> <span class="string">"org.robolectric:shadows-multidex:3.0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>即可</p>
-<ul>
-<li>错误2：<blockquote>
-<p>unknown resource ReName{TextAppearance AppCompat Widget Button}</p>
-</blockquote>
-</li>
-</ul>
-<p>归根接地还是资源SDK的问题，他并不支持更高的api。改成下面配置就好了。（<strong>目前能支持最新的api</strong>）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">  compileSdkVersion <span class="number">22</span></span><br><span class="line">  buildToolsVersion <span class="string">"23.0.2"</span></span><br><span class="line"></span><br><span class="line">  defaultConfig &#123;</span><br><span class="line">  applicationId <span class="string">"com.chriszou.testrobolectric"</span><span class="comment">//改成你的包即可</span></span><br><span class="line">  minSdkVersion <span class="number">15</span></span><br><span class="line">  targetSdkVersion <span class="number">22</span></span><br><span class="line">  versionCode <span class="number">1</span></span><br><span class="line">  versionName <span class="string">"1.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">  release &#123;</span><br><span class="line">  <span class="function">minifyEnabled <span class="keyword">false</span></span><br><span class="line">  proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-rules.pro'</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;&#125;</span><br><span class="line"></span><br><span class="line">dependencies </span>&#123;</span><br><span class="line">  <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span><br><span class="line">  compile 'com.android.support:appcompat-v7:22.2.0'</span><br><span class="line">  <span class="comment">//Unit test</span></span><br><span class="line">  testCompile 'junit:junit:4.12'</span><br><span class="line">  <span class="title">testCompile</span><span class="params">(<span class="string">'org.robolectric:robolectric:3.0-rc3'</span>)</span> </span>&#123;</span><br><span class="line">  exclude module: <span class="string">'commons-logging'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个是<code>app</code>的<code>build.gradle</code>的配置。以及下面：<br>在根目录的<code>build.gradle</code>为<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.2.3'</span></span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
-<p>以及：<code>\gradle\wrapper\gradle-wrapper.properties</code>的最后一行设置为：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\<span class="symbol">://services</span>.gradle.org/distributions/gradle-<span class="number">2.4</span>-all.zip</span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
-<p><strong>目前个人认为最新的教程</strong>：<br><a href="https://segmentfault.com/a/1190000002904944" target="_blank" rel="external">用Robolectric来做Android unit testing</a><br><a href="http://www.jianshu.com/p/dd988aac1b84" target="_blank" rel="external">android studio 1.5 搭建Robolectric 测试环境</a></p>
-<h4 id="Espresso和Robolectric切换使用">Espresso和Robolectric切换使用</h4><p>需要在这里<img src="http://i.imgur.com/twnVGE1.png" alt="Espresso"><br>进行不同的区分，上图为<code>Espresso</code>的配置，而<code>Robolectric</code>则不同的选项。</p>
-<p>两者的使用配置：</p>
-<ul>
-<li><a href="http://guides.codepath.com/android/Unit-Testing-with-Robolectric" target="_blank" rel="external">Unit Testing with Robolectric</a></li>
-<li><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso" target="_blank" rel="external">UI Testing with Espresso</a></li>
-</ul>
-<h3 id="Espresso使用"><code>Espresso</code>使用</h3><p>针对<code>ListView</code>:</p>
-<blockquote>
-<p>ListView is an <code>AdapterView</code>. AdapterViews <strong>present a problem</strong> when doing UI testing<br> AdapterView’s don’t work well with <code>onView(...)</code><br> Espresso provides an <code>onData(...)</code> entry point that makes sure to load the AdapterView item before performing any operations on it</p>
-</blockquote>
-<p>对于<code>listview</code>要使用<code>onData</code>来代替，参考：<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-listview" target="_blank" rel="external">interacting-with-a-listview</a></p>
-<p>还有针对其他的情况，详情查看下列地址:<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-recyclerview" target="_blank" rel="external">interacting-with-a-recyclerview</a><br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#stubbing-out-the-camera" target="_blank" rel="external">stubbing-out-the-camera</a></p>
-<p><strong>学习资料</strong><br><strong><a href="https://github.com/googlesamples/android-testing" target="_blank" rel="external">android-testing</a></strong><br><strong><a href="https://github.com/googlesamples/android-testing-templates" target="_blank" rel="external">android-testing-templates</a></strong><br><strong><a href="https://github.com/vgrec/EspressoExamples" target="_blank" rel="external">EspressoExamples</a></strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/" data-id="cikmr5jfc0023m8js272ozptw" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UnitTest/">UnitTest</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
       <article id="post-关于贝塞尔曲线问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -821,6 +709,64 @@
 
 
     
+      <article id="post-java IO篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/15/java IO篇/">java IO篇</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/15/java IO篇/">
+      <time datetime="2015-12-15T05:11:53.000Z" itemprop="datePublished">2015-12-15</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.zhihu.com/question/29351698">java中为什么BufferedReader，BufferedWriter 要比 FileReader 和 FileWriter高效？</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/15/java IO篇/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/15/java IO篇/" data-id="cikmqa4kr00004gjsomneketg" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/15/java IO篇/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/InputStream/">InputStream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
       </nav>
@@ -841,7 +787,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
