@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        97
+        131
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        117
+        144
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-java 注解学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-Rxjava的学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/03/java 注解学习/">java 注解学习</a>
+      <a class="article-title" href="/2016/04/24/Rxjava的学习笔记/">Rxjava的学习笔记</a>
     </h1>
   
 
@@ -134,8 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/02/03/java 注解学习/">
-      <time datetime="2016-02-03T05:11:48.000Z" itemprop="datePublished">2016-02-03</time>
+    <a href="/2016/04/24/Rxjava的学习笔记/">
+      <time datetime="2016-04-23T16:41:50.000Z" itemprop="datePublished">2016-04-24</time>
     </a>
   </div>
 
@@ -143,7 +143,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/android/">android</a>
   </div>
 
         </div>
@@ -151,872 +151,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-                
-        <a id="more"></a>
-<h3 id="基本的Annotation">基本的Annotation</h3><ul>
-<li><code>@Override</code><blockquote>
-<p>强制子类复写父类的方法</p>
-</blockquote>
-</li>
-<li><code>@Deprecated</code> 标记过时<blockquote>
-<p>表示某个程序元素（类，方法）过时。编译器会出现警告</p>
-</blockquote>
-</li>
-<li><code>@SuppressWarnings</code> 抑制编译器的警告</li>
-<li><code>@SafeVarargs</code> 这个是<code>java7</code>加入，代表堆污染的警告<br>示例情况：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">faultyMethod</span><span class="params">(List&lt;String&gt; ...listStrArray)</span></span>&#123;</span><br><span class="line">List[] listArray=listStrArray;</span><br><span class="line">List&lt;Integer&gt; myList=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">myList.add(<span class="keyword">new</span> Random().nextInt(<span class="number">100</span>));</span><br><span class="line">listArray[<span class="number">0</span>]=myList;</span><br><span class="line">String s=listArray[<span class="number">0</span>].get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>注意：</strong>java语言并<strong>不支持泛型数组</strong>，上面导致堆污染。</p>
-<p>如果想抑制上面的警告，只需要用<code>@SuppressWarnings(&quot;unchecked&quot;)</code>修饰。</p>
-<h3 id="使用@Retention">使用<code>@Retention</code></h3><p>只能休市一个<code>Anootation</code>定义，用于指定被休市的<code>Annotation</code>可以保留多长时间。并且保留一个<code>value</code>的成员变量。<br>value的值可以有三个：</p>
-<ul>
-<li>RetentionPolicy.CLASS 保留到编译后class的阶段，运行不保留</li>
-<li>RetentionPolicy.RUNTIME 保留到运行时</li>
-<li>RetentionPolicy.SOURCE: 值保留到源代码中。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Retention</span>(value=RetenionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> Testtable&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>可以直接指定<code>value</code>的值，上面写为<code>@Retention(RetenionPolicy.RUNTIME)</code>.</p>
-<h3 id="使用@Target">使用@Target</h3><p>只能修改<code>Annotation</code>的定义，可直接指定<code>value</code>的值，不需要<code>name=value</code>的形式。<br>value可选变量：</p>
-<ul>
-<li>ElementType.ANNOTATION_TYPE 只能修饰<code>Annotation</code></li>
-<li>ElementType.CONSTRUCTOR 只能修饰构造器</li>
-<li>ElementType.FIELD 只能修饰成员变量</li>
-<li>ElementType.LOCAL_VARIABLE 只能修饰局部变量</li>
-<li>ElementType.METHOD 只能修饰方法定义</li>
-<li>ElementType.PACKAGE 只能修饰包定义</li>
-<li>ElementType.PARAMETER 只能修饰参数</li>
-<li>ElementType.TYPE 只能修饰类，接口，枚举定义</li>
-</ul>
-<h3 id="@Documented">@Documented</h3><p>修饰的<code>Annotation</code>类将被<code>javac</code>工具提取为文档。</p>
-<h3 id="使用@Inherited">使用@Inherited</h3><p>修饰的<code>Annotation</code>类具有继承性。即：基类使用<code>@Inherited</code>，那么子类自动默认使用<code>@Inherited</code>修饰</p>
-<h3 id="定义Annotation">定义Annotation</h3><p>使用<code>@interface</code>关键字：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> Test&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在可以用<code>@Test</code>进行修饰<strong>类，方法，变量，接口等任何位置</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</span><br><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="指定成员变量">指定成员变量</h5><p>其成员定义：以方法的形式来定义<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> Test&#123;</span><br><span class="line"> <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>更定义接口的方法非常相似。<strong>注意：</strong>定义成员变量后，使用的时候必须<strong>指定值</strong>。</p>
-<h5 id="指定成员变量的默认值">指定成员变量的默认值</h5><p>使用<code>default</code>指定初始值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> Test&#123;</span><br><span class="line"><span class="function">string <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "trity"</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">age</span><span class="params">()</span> <span class="keyword">default</span> 32</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用的时候，不指定值，则为默认值。</p>
-<h3 id="提取Annotation信息">提取<code>Annotation</code>信息</h3><p>使用<code>java.lang.reflect</code>包下反射的工具类。通过反射来获取对应的注解信息。<br>三个方法访问<code>Annotation</code>的信息</p>
-<ul>
-<li>getAnnotation(); 返回指定的注解</li>
-<li>Annotation[] getAnnotations(); 返回存在的所有注解</li>
-<li>boolean isAnnotationPresent(); 是否存在指定的注解。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Annotation[] array=Class.forname(<span class="string">"MyClass"</span>).getMethod(<span class="string">"info"</span>).getAnnotation();</span><br><span class="line"><span class="comment">//遍历所有的注解</span></span><br><span class="line"><span class="keyword">for</span>(Annotation an:array)&#123;</span><br><span class="line">System.out.println(an)；</span><br><span class="line"><span class="comment">//通过强制转换得到对应的成员变量</span></span><br><span class="line"><span class="keyword">if</span>(an <span class="keyword">instanceof</span> Test)&#123;</span><br><span class="line">System.out.println(<span class="string">"an.getName()"</span>,((Test)an).method());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用Annotation的示例">使用<code>Annotation</code>的示例</h3><p>定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Retention</span>(RetentinoPolicy.RUNTIME)</span><br><span class="line"><span class="annotation">@Taeget</span>(ElementType.METHOD)</span><br><span class="line"><span class="keyword">public</span> <span class="annotation">@Interface</span> Testable&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span></span>&#123;</span><br><span class="line"><span class="annotation">@Testable</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m1</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m2</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"><span class="annotation">@Testable</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m3</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对应的<strong>注解处理工具</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProcessorTest</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(String clazz)</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> passed=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> failed=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(Method m: Class.forName(clazz).getMethods())&#123;</span><br><span class="line"><span class="keyword">if</span>(m.isAnnotationPresent(Testable.class))&#123;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">//调用m方法</span></span><br><span class="line">m.invoke(<span class="keyword">null</span>);</span><br><span class="line">passed++;</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">failed++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出统计结果</span></span><br><span class="line">System.out.....</span><br><span class="line">&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>扩展：按钮事件的监听。</p>
-<h3 id="编译处理Annotation">编译处理Annotation</h3><p>使用<code>APT</code>工具，简化开发者的工作量，因为APT可以在编译程序源代码的同时生成一些附属文件。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/02/03/java 注解学习/" data-id="cikmrgd2z001i50jsgjpwazib" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/02/03/java 注解学习/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java，anotation/">java，anotation</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Android 性能优化综合篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/Android 性能优化综合篇/">Android 性能优化综合篇</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/02/02/Android 性能优化综合篇/">
-      <time datetime="2016-02-02T05:39:40.000Z" itemprop="datePublished">2016-02-02</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="节制地使用Service">节制地使用Service</h3><p>当我们启动一个Service时，系统会倾向于<strong>将这个Service所依赖的进程进行保留，这样就会导致这个进程变得非常消耗内存</strong>。<br>并且，系统可以在<code>LRU cache</code>当中缓存的进程<strong>数量也会减少</strong>，<strong>导致切换应用程序的时候耗费更多性能</strong>。</p>
-<p>如果应用程序当中需要使用Service来执行后台任务的话，请一定要注意只有当任务正在执行的时候才应该让Service运行起来。另外，<strong>当任务执行完之后去停止Service的时候，要小心Service停止失败导致内存泄漏的情况</strong></p>
-<h3 id="当界面不可见时释放内存">当界面不可见时释放内存</h3><h4 id="我们如何才能知道程序界面是不是已经不可见了呢？">我们如何才能知道程序界面是不是已经不可见了呢？</h4><p>在<code>Activity</code>中重写<code>onTrimMemory()</code>方法，然后在这个方法中监听<code>TRIM_MEMORY_UI_HIDDEN</code>这个级别.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTrimMemory</span><span class="params">(<span class="keyword">int</span> level)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">super</span>.onTrimMemory(level);  </span><br><span class="line">    <span class="keyword">switch</span> (level) &#123;  </span><br><span class="line">    <span class="keyword">case</span> TRIM_MEMORY_UI_HIDDEN:  </span><br><span class="line">        <span class="comment">// 进行资源释放操作  </span></span><br><span class="line">        <span class="keyword">break</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：</strong><br><code>onTrimMemory()</code>方法中的<code>TRIM_MEMORY_UI_HIDDEN</code>回调只有当<strong>我们程序中的所有UI组件全部不可见</strong>的时候才会触发。<br>这和<code>onStop()</code>方法还是有很大区别的，因为onStop()方法只是<strong>当一个Activity完全不可见的时候就会调用</strong>。<br>我们一般在<code>onstop()</code>执行下列操作：</p>
-<blockquote>
-<p>比如说<strong>取消网络连接</strong>或者<strong>注销广播接收器</strong>等.</p>
-</blockquote>
-<h3 id="当内存紧张时释放内存">当内存紧张时释放内存</h3><p>我们接着上面的一点<code>onTrimMemory()</code>的操作。<br>在<strong>手机内存降低的时候及时通知我们</strong>。我们应该<strong>根据回调中传入的级别来去决定如何释放应用程序的资源</strong>。</p>
-<ul>
-<li><strong>TRIM_MEMORY_RUNNING_MODERATE    </strong>表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经有点低了，系统可能会开始根据LRU缓存规则来去杀死进程了。</li>
-<li><strong>TRIM_MEMORY_RUNNING_LOW    </strong>表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经非常低了，我们应该去释放掉一些不必要的资源以提升系统的性能，同时这也会直接影响到我们应用程序的性能。</li>
-<li><strong>TRIM_MEMORY_RUNNING_CRITICAL    </strong>表示应用程序仍然正常运行，但是系统已经根据LRU缓存规则杀掉了大部分缓存的进程了。这个时候我们应当尽可能地去释放任何不必要的资源，不然的话系统可能会继续杀掉所有缓存中的进程，并且开始杀掉一些本来应当保持运行的进程，比如说后台运行的服务。</li>
-</ul>
-<p>以上是当我们的应用程序正在运行时的回调，那么<strong>如果我们的程序目前是被缓存的</strong>，则会收到以下几种类型的回调：</p>
-<ul>
-<li><strong>TRIM_MEMORY_BACKGROUND    </strong>表示手机目前内存已经很低了，系统准备开始根据LRU缓存来清理进程。这个时候我们的程序在LRU缓存列表的最近位置，是不太可能被清理掉的，但这时去释放掉一些比较容易恢复的资源能够让手机的内存变得比较充足，从而让我们的程序更长时间地保留在缓存当中，这样当用户返回我们的程序时会感觉非常顺畅，而不是经历了一次重新启动的过程。</li>
-<li><strong>TRIM_MEMORY_MODERATE    </strong>表示手机目前内存已经很低了，并且我们的程序处于LRU缓存列表的中间位置，如果手机内存还得不到进一步释放的话，那么我们的程序就有被系统杀掉的风险了。</li>
-<li><strong>TRIM_MEMORY_COMPLETE    </strong>表示手机目前内存已经很低了，并且我们的程序处于LRU缓存列表的最边缘位置，系统会最优先考虑杀掉我们的应用程序，在这个时候应当尽可能地把一切可以释放的东西都进行释放。</li>
-</ul>
-<h3 id="避免在Bitmap上浪费内存">避免在Bitmap上浪费内存</h3><p>当我们读取一个Bitmap图片的时候，有一点一定要注意，就是<strong>千万不要去加载不需要的分辨率</strong>。因为<code>Bitmap</code>的大小事依靠通过计算像素点宽高的之积。</p>
-<h3 id="使用优化过的数据集合">使用优化过的数据集合</h3><p>Android API当中<strong>提供了一些优化过后的数据集合工具类</strong>，如<code>SparseArray，SparseBooleanArray，以及LongSparseArray</code>等来替换对应<code>HashMap</code>.</p>
-<p><strong>为什么可以达到优化的效果呢</strong>？<br><code>SparseArray</code>就<strong>避免掉了基本数据类型转换成对象数据类型的时间</strong></p>
-<h3 id="知晓内存的开支情况">知晓内存的开支情况</h3><ul>
-<li>使用枚举通常会比使用静态常量要消耗两倍以上的内存，在Android开发当中我们应当尽可能地不使用枚举。</li>
-<li>任何一个Java类，包括内部类、匿名类，都要占用大概500字节的内存空间。</li>
-<li>任何一个类的实例要消耗12-16字节的内存开支，因此频繁创建实例也是会一定程序上影响内存的。</li>
-<li>在使用HashMap时，即使你只设置了一个基本数据类型的键，比如说int，但是也会按照对象的大小来分配内存，大概是32字节，而不是4字节。因此最好的办法就是像上面所说的一样，使用优化过的数据集合。</li>
-</ul>
-<h3 id="谨慎使用抽象编程">谨慎使用抽象编程</h3><p>在Android上使用抽象会带来额外的内存开支，因为抽象的编程方法需要编写额外的代码，虽然这些代码根本执行不到，但是却也要映射到内存当中，不仅占用了更多的内存，在执行效率方面也会有所降低</p>
-<h3 id="尽量避免使用依赖注入框架">尽量避免使用依赖注入框架</h3><p>这些框架为了要搜寻代码中的注解，通常都需要经历较长的初始化过程，并且还可能将一些你用不到的对象也一并加载到内存当中。这些用不到的对象会一直占用着内存空间，可能要过很久之后才会得到释放，相较之下，也许多敲几行看似繁琐的代码才是更好的选择</p>
-<h3 id="使用ProGuard简化代码">使用ProGuard简化代码</h3><p>除了<strong>混淆之外</strong>，它还具有<strong>压缩和优化代码的功能</strong>。ProGuard会对我们的<strong>代码进行检索，删除一些无用的代码</strong>，并且会对类、字段、方法等进行重命名，重命名之后的类、字段和方法名都会比原来简短很多，这样的话也就对内存的占用变得更少了</p>
-<h3 id="使用多个进程">使用多个进程</h3><p>通过对<code>service</code>进行设置。如下：</p>
-<blockquote>
-<p>一个用于<strong>UI展示</strong>，另一个则用于在<strong>后台持续地播放音乐</strong>。</p>
-</blockquote>
-<p>对应<code>service</code>的设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;service android:name=<span class="string">".PlaybackService"</span></span><br><span class="line">         android:process=<span class="string">":background"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="监控app的内存">监控app的内存</h3><p>每个程序都会有可使用的<strong>内存上限</strong>，这被称为<strong>堆大小（Heap Size）</strong>。例如：</p>
-<blockquote>
-<p>堆大小也已经由<strong>Nexus One时的32MB</strong>，变成了<strong>Nexus 5时的192MB</strong></p>
-</blockquote>
-<p>如何检测当前手机允许占用多少内存？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line"><span class="keyword">int</span> heapSize = manager.getMemoryClass();</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：</strong><br>以<strong>MB为单位</strong>进行返回的.当程序超过这个值，将出现<code>OutOfMemoryError</code>.我们可以根据<strong>堆大小来决定缓存数据的容量</strong>.</p>
-<h4 id="怎样才能去监听系统的GC过程呢">怎样才能去监听系统的GC过程呢</h4><p>系统每进行一次GC操作时，都会在LogCat中打印一条日志，我们只要去分析这条日志就可以了，日志的基本格式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D/dalvikvm: &lt;GC_Reason&gt; &lt;Amount_freed&gt;, &lt;Heap_stats&gt;,  &lt;Pause_time&gt;</span><br></pre></td></tr></table></figure></p>
-<p>首先第一部分<strong>GC_Reason</strong>,这个是<strong>触发这次GC操作的原因</strong>：</p>
-<ul>
-<li><strong>GC_CONCURRENT</strong>:   当我们应用程序的堆内存快要满的时候，系统会自动触发GC操作来释放内存。</li>
-<li><strong>GC_FOR_MALLOC</strong>:   当我们的应用程序需要分配更多内存，可是现有内存已经不足的时候，系统会进行GC操作来释放内存。</li>
-<li><strong>GC_HPROF_DUMP_HEAP</strong>:   当生成HPROF文件的时候，系统会进行GC操作，关于HPROF文件我们下面会讲到。</li>
-<li><strong>GC_EXPLICIT</strong>:   这种情况就是我们刚才提到过的，主动通知系统去进行GC操作，比如调用System.gc()方法来通知系统。或者在DDMS中，通过工具按钮也是可以显式地告诉系统进行GC操作的。</li>
-</ul>
-<p>第二部分：<strong>Amount_freed</strong>，表示系统通过这次GC操作<strong>释放了多少内存</strong>:</p>
-<p>第三部分：<strong>Heap_stats</strong>中会<strong>显示当前内存的空闲比例以及使用情况</strong>（活动对象所占内存 / 当前程序总内存）</p>
-<p>最后：<strong>Pause_time</strong>表示这次GC操作<strong>导致应用程序暂停的时间</strong>。</p>
-<blockquote>
-<p><strong>注意：</strong> 2.3之前GC操作是不能并发进行的，后面的版本可以并发。几乎感觉不到<code>GC</code>阻塞程序的时间。</p>
-</blockquote>
-<h3 id="避免创建不必要的对象">避免创建不必要的对象</h3><p>场景：</p>
-<ul>
-<li><p>如果我们有一个<strong>需要拼接的字符串，那么可以优先考虑使用StringBuffer或者StringBuilder来进行拼接</strong>，而不是加号连接符，因为使用加号连接符会创建多余的对象，拼接的字符串越长，加号连接符的性能越低。</p>
-</li>
-<li><p>在没有特殊原因的情况下，尽量使用<strong>基本数据类来代替封装数据类型</strong>，<strong>int比Integer要更加高效</strong>，其它数据类型也是一样。</p>
-</li>
-<li><p>当一个方法的<strong>返回值是String</strong>的时候，通常可以去<strong>判断一下这个String的作用是什么</strong>，如果我们明确地知道调用方会将这个返回的String再进行拼接操作的话，可以考虑<strong>返回一个StringBuffer对象来代替</strong>，<strong>因为这样可以将一个对象的引用进行返回，而返回String的话就是创建了一个短生命周期的临时对象</strong>。</p>
-</li>
-<li><p>正如前面所说，基本数据类型要优于对象数据类型，类似地，基本数据类型的数组也要优于对象数据类型的数组。另外，<strong>两个平行的数组要比一个封装好的对象数组更加高效</strong>，举个例子，<strong>Foo[]和Bar[]这样的两个数组，使用起来要比Custom(Foo,Bar)[]这样的一个数组高效得多</strong>。</p>
-</li>
-</ul>
-<h3 id="静态优于抽象">静态优于抽象</h3><p>如果你并不需要访问一个对象中的某些字段，只是想调用它的某个方法来去完成一项通用的功能，那么可以将这个方法设置成静态方法，这会让调用的速度提升<code>15%-20%</code>。这样就避免去创建一个对象了。</p>
-<h3 id="对常量使用static_final修饰符">对常量使用static final修饰符</h3><p>这种优化方式<strong>只对基本数据类型以及String类型的常量有效</strong>，<strong>对于其它数据类型的常量是无效的</strong>。<br><strong>但是</strong>，对于任何常量都是用static final的关键字来进行声明仍然是<strong>一种非常好的习惯</strong>.</p>
-<h3 id="使用增强型for循环语法">使用增强型for循环语法</h3><ul>
-<li>mArray.length 最慢 这是因为每次比较都需要计算一个<code>length</code></li>
-<li>len 记录数组的长度 最快</li>
-<li>foreach 中间</li>
-</ul>
-<h3 id="多使用系统封装好的API">多使用系统封装好的API</h3><p>我们在编写程序时如果可以<strong>使用系统提供的API就应该尽量使用</strong>，系统提供的<strong>API完成不了我们需要的功能时才应该自己去写</strong>，因为使用系统的API在很多时候比我们自己写的代码要快得多，它们的<strong>很多功能都是通过底层的汇编模式执行的</strong>.<br><strong>例如：</strong></p>
-<blockquote>
-<p>使用循环的方式来对数组中的每一个元素一一进行赋值当然是可行的，但是如果我们直接使用系统中提供的<code>System.arraycopy()</code>方法将会<strong>让执行效率快9倍以上</strong>。</p>
-</blockquote>
-<h3 id="避免在内部调用Getters/Setters方法">避免在内部调用Getters/Setters方法</h3><p>在Android上这个技巧就不再是那么的受推崇了，因为字段搜寻要比方法调用效率高得多，<strong>我们直接访问某个字段可能要比通过getters方法来去访问这个字段快3到7倍</strong>。<strong>不过我们肯定不能仅仅因为效率的原因就将封装这个技巧给抛弃了</strong>，编写代码还是要按照面向对象思维的，但是我们可以在能优化的地方进行优化，<strong>比如说避免在内部调用getters/setters方法</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getOne() + getTwo();</span><br><span class="line">&#125;</span><br><span class="line"># 应该写为这种形式：</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> one + two;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="优化工具的使用">优化工具的使用</h3><p>继续查看：<a href="http://blog.csdn.net/guolin_blog/article/details/42238633" target="_blank" rel="external">Android最佳性能实践(二)——分析内存的使用情况</a><br>使用<code>Systrace</code>工具进行优化<br><a href="http://android.jobbole.com/81944/" target="_blank" rel="external"># 给 App 提速：Android 性能优化总结</a></p>
-<h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/guolin_blog/article/details/42238627" target="_blank" rel="external">Android最佳性能实践(一)——合理管理内存</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/42238633" target="_blank" rel="external">Android最佳性能实践(二)——分析内存的使用情况</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/42318689" target="_blank" rel="external">Android最佳性能实践(三)——高性能编码优化</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/02/02/Android 性能优化综合篇/" data-id="cikmrgcv3000050jsi5u407gg" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/02/02/Android 性能优化综合篇/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 性能优化读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/26/android 性能优化读书笔记/">android应用性能优化的读书笔记</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/26/android 性能优化读书笔记/">
-      <time datetime="2016-01-26T08:25:13.000Z" itemprop="datePublished">2016-01-26</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="第四章高效使用内存">第四章高效使用内存</h3><h4 id="注意数据类型：">注意数据类型：</h4><blockquote>
-<p>java char是16为（UTF-16）<br>java long 为64（c的为32，long long 为64）</p>
-</blockquote>
-<h4 id="性能取决于以下因素">性能取决于以下因素</h4><ul>
-<li>CPU如何操作特定的数据类型</li>
-<li>数据和指令需要占用多少存储空间</li>
-<li>数据在内存中的布局</li>
-</ul>
-<h4 id="各种数据类型使用排序算法耗时：（使用Arrays-sort()排序，找最小，求和）">各种数据类型使用排序算法耗时：（使用<code>Arrays.sort()</code>排序，找最小，求和）</h4><blockquote>
-<p>其中使用<code>short</code>最佳。总结规律：</p>
-<ul>
-<li>short数组的排序优于其他类型数组</li>
-<li>处理64为类型比32位慢。</li>
-</ul>
-</blockquote>
-<p><strong>16位数组排序远远快于32位或者64位的原因</strong>：<br>int和long使用某些版本的<strong>快速排序</strong>，而<code>short</code>数组使用的是<strong>计数排序</strong>。分析<code>arrays.java</code>的源码，看看每种数据类型的数组是如何排序。<br><code>short</code>的范围：<code>-32768~32767</code></p>
-<p><strong>关于<code>Boolean</code>类型</strong></p>
-<blockquote>
-<p>boolean实际只需要<strong>一位</strong>，但实际java分配了<code>8</code>位。为此，定义了<code>BitSet</code>类（系统源码提供）进行改善。</p>
-</blockquote>
-<h4 id="关于Bitset类">关于<code>Bitset</code>类</h4><p>在此基础上进行改善：值提取部分类的代码，使用<code>int</code>来代替<code>long</code>来维护数组。<br>详细使用:<a href="http://blog.csdn.net/haojun186/article/details/8482343" target="_blank" rel="external">java BitSet</a></p>
-<p><strong>面试题中也常出现</strong></p>
-<blockquote>
-<p>比如：统计40亿个数据中没有出现的数据，将40亿个不同数据进行排序等。<br>又如：现在有1千万个随机数，随机数的范围在1到1亿之间。现在要求写出一种算法，将1到1亿之间没有在随机数中的数求出来<br>programming pearls上也有一个关于使用bitset来查找电话号码的题目。<br>Bitmap的常见扩展，是用2位或者更多为来表示此数字的更多信息，比如出现了多少次等。</p>
-</blockquote>
-<p><strong>SparseBooleanArrays来改善大部分位被设为相同的值</strong>。使用<strong>策略模式</strong>在适当的时候进行调用。<br>关于：<a href="http://blog.csdn.net/xyz_fly/article/details/7931943" target="_blank" rel="external"><code>Android编程之SparseArray&lt;E&gt;</code>详解</a><br><a href="http://www.stormzhang.com/android/2013/08/01/android-use-sparsearray-for-performance-optimization/" target="_blank" rel="external">## Android性能优化之使用SparseArray代替HashMap</a></p>
-<h4 id="几条规则：">几条规则：</h4><ul>
-<li>处理大量数据的时候，尽量用小的数据类型进行代替</li>
-<li>避免类型转换</li>
-<li>有更好的性能就推倒重来</li>
-</ul>
-<h4 id="排布数据">排布数据</h4><p>将类换成数组，将每个属性用数组缓存，每个数组都相对应。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line"><span class="keyword">short</span> a;</span><br><span class="line"><span class="keyword">short</span> b;</span><br><span class="line">&#125;</span><br><span class="line"># 用两个数组进行维护</span><br><span class="line">arr1[index]=a;</span><br><span class="line">arr2[index]=b;</span><br><span class="line">代替</span><br><span class="line">arr3[index]=<span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure></p>
-<p>另外一点：要避免<code>getA()和getB()</code>的使用的开销，设为共有就好了。<br><strong>注意</strong>：这种优化并不能总是派上用场，需要知道代码使用的正确方式，才可以更好的优化代码。</p>
-<h4 id="使用StrictMode来检测没有关闭资源导致的泄漏问题">使用<code>StrictMode</code>来检测没有关闭资源导致的泄漏问题</h4><p>可检测的范围：</p>
-<ul>
-<li><code>SQLite</code>对象：游标没有关闭的泄漏。</li>
-<li><code>Acitivty</code>泄漏</li>
-<li>对象没有关闭的泄漏（实现<code>Closeable</code>接口的所有类）</li>
-<li><code>Disk Reads</code> 磁盘读和<code>Disk Writes</code> 磁盘写</li>
-<li>Network access 网络访问</li>
-<li>Custom Slow Code 自定义的运行速度慢的代码分析</li>
-</ul>
-<p>此功能在<strong>开发和测试阶段开启，应用发布的时候需要禁用</strong></p>
-<p>详细使用：<br><a href="http://tech.it168.com/a2011/0908/1243/000001243936_all.shtml" target="_blank" rel="external"># Android最佳实践之：StrictMode介绍</a><br><a href="http://blog.csdn.net/meegomeego/article/details/45746721" target="_blank" rel="external">StrictMode 详解</a></p>
-<ul>
-<li><p>启动：<br>只需要打开一次就可以。在<code>Activity/Application</code>的<code>onCreate()</code>方法上启用。</p>
-</li>
-<li><p>使用：</p>
-<blockquote>
-<p>违反情况可以记录在LogCat中或者存储在DropBox中(android.os.DropBox)服务中</p>
-</blockquote>
-</li>
-<li><p>忽略某些规则（指定代码不产生警告）</p>
-<blockquote>
-<p>在应用程序的主线程中去快速读写磁盘其实不会对应用的性能产生太大的影响，</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">StrictMode.ThreadPolicy old = StrictMode.getThreadPolicy();</span><br><span class="line">　　StrictMode.setThreadPolicy(<span class="keyword">new</span> StrictMode.ThreadPolicy.Builder(old)</span><br><span class="line">　　.permitDiskWrites()</span><br><span class="line">　　.build());</span><br><span class="line">　　doCorrectStuffThatWritesToDisk();</span><br><span class="line">　　StrictMode.setThreadPolicy(old);</span><br></pre></td></tr></table></figure>
-<p>这里首先用old来保存了当前的策略规则，然后<code>doCorrectStuffThatWritesToDisk();</code>这里，执行了一些向磁盘快速读写的操作，最后又重新启用了这些规则</p>
-<ul>
-<li>关闭：<br>在<code>&lt;Application&gt;</code>设置属性：<code>android:debuggable</code>，然后在代码中设置。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ApplicationInfo appInfo = context.getApplicationInfo();</span><br><span class="line"><span class="keyword">int</span> appFlags = appInfo.flags;</span><br><span class="line"><span class="keyword">if</span> ((appFlags &amp; ApplicationInfo.FLAG_DEBUGGABLE) != <span class="number">0</span>) &#123;</span><br><span class="line"><span class="comment">//虚拟机的策略（检测内存泄露,资源是否关闭）</span></span><br><span class="line">StrictMode.setVmPolicy(<span class="keyword">new</span> StrictMode.VmPolicy.Builder()</span><br><span class="line">.detectLeakedSqlLiteObjects()</span><br><span class="line">.penaltyLog()</span><br><span class="line">.penaltyDeath()</span><br><span class="line">.build());</span><br><span class="line"><span class="comment">//线程策略（磁盘读写，网路等）</span></span><br><span class="line">StrictMode.setThreadPolicy(<span class="keyword">new</span> StrictMode.ThreadPolicy.Builder()</span><br><span class="line">.detectAll()</span><br><span class="line">.penaltyLog()</span><br><span class="line">.penaltyDialog()</span><br><span class="line">.build());</span><br></pre></td></tr></table></figure>
-<p>可使用<code>detectAll()</code>来代替全部设置。</p>
-<ul>
-<li><p>相关的策略模式：</p>
-<blockquote>
-<p>线程策略（<code>ThreadPolicy</code>），虚拟机策略（<code>VmPolicy</code>）。虚拟机策略（VmPolicy）能检查内存泄漏</p>
-</blockquote>
-</li>
-<li><p>方法解释：</p>
-<ul>
-<li><code>.detectCustomSlowCalls</code> 发现UI线程调用的那些方法执行得比较慢. 还有时间输出，但需要在测试的方法中进行标记：<code>StrictMode.noteSlowCall(&quot;slowCall 2&quot;);</code></li>
-<li><code>penaltyDeath()</code>，当触发违规条件时，直接Crash掉当前应用程序</li>
-<li><code>setClassInstanceLimit()</code>，设置某个类的同时处于内存中的实例上限，可以协助检查内存泄露</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/26/android 性能优化读书笔记/" data-id="cikmrgd45002950jsjcgutldt" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/26/android 性能优化读书笔记/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 书籍项目知识点" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/22/android 书籍项目知识点/">android 书籍项目知识点</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/22/android 书籍项目知识点/">
-      <time datetime="2016-01-22T00:48:43.000Z" itemprop="datePublished">2016-01-22</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="第一行代码">第一行代码</h3><ul>
-<li>日志工具Log</li>
-<li>隐式Intent</li>
-<li>Act的启动模式</li>
-<li>随时随地的推出</li>
-<li>启动act的正确方式</li>
-<li>编写精美的聊天界面</li>
-<li>fragment的使用</li>
-<li>广播：有序，无序，自定义，本地-&gt;强制下线的功能</li>
-<li>升级数据库的最佳方式</li>
-<li>显示通知</li>
-<li>拦截短信</li>
-<li>前台服务，后台服务刷新</li>
-<li>网络数据解析，xml,json</li>
-<li>传感器-指南针</li>
-<li>创建测试instru..</li>
-<li>获取全局Context</li>
-<li>天气的开发</li>
-</ul>
-<h3 id="andriod应用性能优化">andriod应用性能优化</h3><ul>
-<li>第一章：优化代码，选择算法比实现算法那更重要。利用简单的技术：缓存和减少内存分配来优化应用程序。应用随时随地相应的方法。高效实用数据库的方法。</li>
-<li>第四章：探讨实用更少的内存提高性能。</li>
-<li>第五章：使用多线程保持随时随地的响应</li>
-<li>第六章：检测性能的工具及基础知识</li>
-<li>第七章：合理使用电量的方法</li>
-<li>第八章：完善程序布局和优化OpenGL的渲染技术</li>
-</ul>
-<h3 id="Android编程实战">Android编程实战</h3><p>面向具有android编程经验想学习更高级api和技巧</p>
-<ul>
-<li>2。java代码减少内存负载和垃圾回收技巧。各种多线程实现的优缺点</li>
-<li>3。组件，清单，资源的钙素</li>
-<li>4。如何设计用户界面</li>
-<li>5。适配屏幕，多点触控的用法</li>
-<li>8。广播使用，如何使用广播减少设备负载</li>
-<li>10。自动化测试</li>
-<li>12。Android应用安全问题，密钥等</li>
-<li>13。隐藏API如何运行</li>
-<li>14。在线web服务，如何优化网络</li>
-<li>18。内容api与USB，蓝牙的通信</li>
-</ul>
-<h3 id="Android编程权威指南">Android编程权威指南</h3><ul>
-<li>第2章 Android与MVC设计模式</li>
-<li>第7章 UI fragment与fragment 管理器</li>
-<li>使用fragment argument</li>
-<li>第11章 使用ViewPager</li>
-<li>第12章 对话框 DialogFragment</li>
-<li>第14章 fragment的保留</li>
-<li>第15章 应用本地化</li>
-<li>第19章 相机I：取景器</li>
-<li>第20章 相机II：拍摄并处理照片</li>
-<li>第24章 样式与include标签的使用</li>
-<li>第25章 XML Drawable与9-Patches</li>
-<li>第26章 HTTP与后台任务</li>
-<li>第27章 Looper、Handler与HandlerThread</li>
-<li>第28章 搜索</li>
-<li>第29章 后台服务</li>
-</ul>
-<h3 id="Android开发精要">Android开发精要</h3><blockquote>
-<p>源码分析的类型</p>
-</blockquote>
-<h3 id="android程序设计基础">android程序设计基础</h3><ul>
-<li>第17章，我们将学习Alarm组件，掌握在Android应用中如何利用Alarm来执行计划和任务</li>
-<li>第18 章，我们将学习触摸处理，掌握在Android应用中如何处理触控操作、实现多点触控等</li>
-<li>第19章，我们将深入研究View组件，探讨View组件的体系结构、事件处理、应用主题样式等高级话题</li>
-<li>第20章，我们将研究Android应用的底层运行机制-线程和进程，掌握Android应用的多线程处理技术</li>
-<li>第 24 章 综 合 示 例<blockquote>
-<p>一个儿童益智训练的小程序 应用启动后，将在屏幕的四个角显示不同形状的图形，在屏幕的中央显示其中的一个图<br>形，用户可以拖动这图形到屏幕四角与它匹配的图形之上。如果操作正确，则增加一分，进<br>入下一新游戏；否则，显示错误消息，继续此游戏。游戏过程中可以暂停，可以单击选项菜<br>单对游戏参数进行配置，包括设置背景音乐、振动提示等。另外，游戏还要支持不同语言和<br>地区特性</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="Android4-0网络编程详解">Android4.0网络编程详解</h3><ul>
-<li>第5章：下载文件，断点续传</li>
-<li>第六章:上传，调用webservice，http上传</li>
-<li>第7章：android聊天室，使用socket协议断点传录音和视频</li>
-</ul>
-<h3 id="Google-Android手机游戏设计达人讲座]-裴存亮等-扫描版[ED2000-COM]">Google.Android手机游戏设计达人讲座].裴存亮等.扫描版[ED2000.COM]</h3><ul>
-<li>第八章:基本图像的绘制（view,patin,matrix,canvas）</li>
-<li>第九章：事件处理</li>
-<li>第十二章：制作动画</li>
-<li>第十四章；存储游戏数据</li>
-<li>后面各种游戏案例</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/22/android 书籍项目知识点/" data-id="cikmrgd48002c50js5zz262mx" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/22/android 书籍项目知识点/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 解析网络数据" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/android 解析网络数据/">android 解析网络数据.md</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/19/android 解析网络数据/">
-      <time datetime="2016-01-19T01:00:32.000Z" itemprop="datePublished">2016-01-19</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="android解析XML的几种方式">android解析XML的几种方式</h3><ol>
-<li><p>使用<code>DOM</code>的方式：</p>
-<blockquote>
-<p><strong>将XML文档解析成树状模型并将其放入内存</strong>来完成解析工作的.<br><strong>好处</strong>：结构清除、操作方便。但耗费系统资源</p>
-</blockquote>
-</li>
-<li><p>使用<code>SAX</code>的方式：</p>
-<blockquote>
-<p>采用的是事件驱动，也就是说，它并<code>不需要解析完整个文档</code>，<strong>在按内容顺序解析文档的过程中，SAX会判断当前读到的字符是否合法XML语法中的某部分，如果符合就会触发事件</strong>。所谓事件，其实就是一些回调（callback）方法，这些方法(事件)定义在ContentHandler接口。</p>
-</blockquote>
-</li>
-<li><p>使用<code>PULL</code>的方式：(Android提供了支持，不需要第三方的包)</p>
-<blockquote>
-<p>允许你的应用程序代码<strong>主动</strong>从解析器中获取事件，正因为是<strong>主动获取事件</strong>，因此可以在<strong>满足了需要的条件后不再获取事件，结束解析</strong>.即：可以控制想解析到哪里就可以停止解析。<br>而<code>SAX</code>并<strong>不能控制事件的处理主动结束</strong></p>
-</blockquote>
-</li>
-</ol>
-<h3 id="使用PULL解析">使用PULL解析</h3><p>资料参考：<a href="http://blog.csdn.net/caesardadi/article/details/8626097" target="_blank" rel="external">XML PULL解析</a></p>
-<h4 id="步骤：">步骤：</h4><ol>
-<li>通过<code>XmlPullParserFactory</code>来得到<code>XmlPullParser</code>实例</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XmlPullParserFactory factory=XmlPullParserFactory.newInstance();</span><br><span class="line">XmlPullParser xmlPullParser=factory.newPullParser();</span><br></pre></td></tr></table></figure>
-<ol>
-<li>设置将要解析的<code>xml</code>数据，使用<code>setInput</code>方法，可接受两种不同的数据，一种是<code>string</code>，另一种是<code>inputstream</code>：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmlPullParser.setInput(<span class="keyword">new</span> StringReader(xmlData));</span><br><span class="line">或者</span><br><span class="line">xmlPullParser.setInput(inputstream,<span class="string">"utr-8"</span>);<span class="comment">//需要制定编码</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>得到解析事件，来判断是否为文档的末尾（处理不符合规则的情况）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> eventType=xmlPullParser.getEventType();</span><br></pre></td></tr></table></figure>
-<ol>
-<li>使用<code>while</code>循环，循环读取节点对应的数据,注意开始和结束的标识,<code>XmlPullParser.START_TAG/END_TAG</code>:</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (eventType!=XmlPullParser.END_DOCUMENT)&#123;</span><br><span class="line">    String nodeName=xmlPullParser.getName();</span><br><span class="line">    <span class="keyword">switch</span> (eventType)&#123;</span><br><span class="line">        <span class="keyword">case</span> XmlPullParser.START_TAG:&#123;</span><br><span class="line">            <span class="keyword">if</span>(nodeName.equals(<span class="string">"id"</span>))&#123;              id=xmlPullParser.nextText();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> XmlPullParser.END_TAG:&#123;</span><br><span class="line">        <span class="comment">//相应进行处理</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    eventType=xmlPullParser.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先用<code>eventType</code>判断的<strong>该节点的开始还是结束</strong>,因为：<code>&lt;id&gt;1&lt;/id&gt;</code>的<code>&lt;&gt;和&lt;/&gt;</code>是对应存在的，通过<code>getName</code>是获取<code>&lt;id&gt;</code>的<code>id</code>值，最后通过<code>nextText</code>获取对应的值为<code>1</code></p>
-<h4 id="相关方法解释：">相关方法解释：</h4><ul>
-<li>得到对应<code>AttributeValue</code>的属性值：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xmlPullParser.getAttributeValue(null, "virtual");</span><br><span class="line">或者</span><br><span class="line">xmlPullParser.getAttributeValue(0);</span><br><span class="line">得到的是下面，xml中`virtual`的对应值：</span><br><span class="line">&lt;clientsetting </span><br><span class="line">actual="1=183.62.250.17:8890" </span><br><span class="line">virtual="1=www.sina.com.cn:9002"&gt; </span><br><span class="line">&lt;/clientsetting&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="案例解析：">案例解析：</h4><ul>
-<li>根目录下的子节点不断循环出现的情况。如下：</li>
-</ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ServerList&gt;</span><br><span class="line">&lt;Server <span class="variable">tag=</span><span class="string">"服务器1"</span> <span class="variable">group=</span><span class="string">"甬交所实盘电信"</span> <span class="variable">ip=</span><span class="string">"14.23.84.3"</span>    <span class="variable">port=</span><span class="string">"9001"</span> <span class="variable">mode=</span><span class="string">"Socket"</span> <span class="variable">offsetpath=</span><span class="string">""</span>/&gt;</span><br><span class="line">&lt;Server <span class="variable">tag=</span><span class="string">"服务器2"</span> <span class="variable">group=</span><span class="string">"甬交所实盘电信"</span> <span class="variable">ip=</span><span class="string">"14.23.84.3"</span>    <span class="variable">port=</span><span class="string">"9002"</span> <span class="variable">mode=</span><span class="string">"Socket"</span> <span class="variable">offsetpath=</span><span class="string">""</span>/&gt;</span><br><span class="line">&lt;/ServerList&gt;</span><br></pre></td></tr></table></figure>
-<p>子节点：<code>Server</code>不断地循环出现。对应的解析如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> eventType=parser.getEventType();<span class="comment">//产生第一个事件</span></span><br><span class="line"><span class="keyword">while</span>(eventType!=XmlPullParser.END_DOCUMENT) &#123;</span><br><span class="line"><span class="keyword">switch</span>(eventType) &#123;</span><br><span class="line">    <span class="keyword">case</span> XmlPullParser.START_DOCUMENT:</span><br><span class="line">        netSettingVOs=<span class="keyword">new</span> ArrayList&lt;NetSettingVO&gt;();<span class="comment">//用list集合进行存储</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> XmlPullParser.START_TAG:</span><br><span class="line">        String name=parser.getName();<span class="comment">//获取当前解释器指向元素的名称</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"Server"</span>.equals(name)) &#123;</span><br><span class="line">            netSettingVO = <span class="keyword">new</span> NetSettingVO();</span><br><span class="line">            netSettingVO.setSvrName(parser.getAttributeValue(<span class="number">0</span>));<span class="comment">//tag</span></span><br><span class="line">            netSettingVO.setGroupName(parser.getAttributeValue(<span class="number">1</span>));<span class="comment">//group</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> XmlPullParser.END_TAG:</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"Server"</span>.equals(parser.getName())) &#123;</span><br><span class="line">            netSettingVOs.add(netSettingVO);<span class="comment">//END_TAG的时候进行加入</span></span><br><span class="line">            netSettingVO=<span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">eventType=parser.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>总结就是<code>START_TAG</code>进行实例化<code>list</code>集合，在<code>START_TAG</code>子项获取对应的<code>attr</code>，最后在<code>END_TAG</code>进行加入<code>list</code>集合。当然要使用<code>parser.next()</code>进行移动</p>
-<h3 id="SAX解析方式"><code>SAX</code>解析方式</h3><p>步骤：</p>
-<ol>
-<li>继承<code>DefaultHandler</code>并重写<code>5</code>个方法，父类中这5个方法都是空方法</li>
-</ol>
-<ul>
-<li>startDocument 开始<code>xml</code>解析时候调用，可用来进行<strong>初始化操作</strong></li>
-<li>endDocument 完成整个xml解析调用</li>
-<li>startElement 开始解析某个节点是时调用，可获取当前节点名</li>
-<li>endElement 完成解析某个节点时调用。可获取该节点所对应的值</li>
-</ul>
-<ol>
-<li>通过<code>SAXParserFactory</code>获取<code>XMLReader</code>实例,注意这里并不是<code>SAXParser</code>实例</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SAXParserFactory factory = SAXParserFactory.newInstance();</span><br><span class="line">XMLReader xmlReader =factory.newSAXParser().getXMLReader();</span><br></pre></td></tr></table></figure>
-<ol>
-<li>创建<code>DefaultHandler</code>实例，并调用<code>setContentHandler</code>进行设置</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Contenthandler contenthandler = <span class="keyword">new</span> Contenthandler();</span><br><span class="line"><span class="comment">//将Contenthandler实例设置到XMLReader中</span></span><br><span class="line">xmlReader.setContentHandler(contenthandler);</span><br></pre></td></tr></table></figure>
-<ol>
-<li>进行解析：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlReader.parse(<span class="keyword">new</span> InputSource(<span class="keyword">new</span> StringReader(xmlData)));</span><br></pre></td></tr></table></figure>
-<h3 id="使用DOM方式解析xml">使用<code>DOM</code>方式解析<code>xml</code></h3><p><a href="http://blog.csdn.net/chenzheng_java/article/details/6223426" target="_blank" rel="external">android之dom解析xml</a></p>
-<h3 id="使用JSONObject解析json">使用JSONObject解析json</h3><p>首先要知道格式一个数组<code>[{},{},{}]</code>，还是一个字符串：<code>{}</code>。<br>在数组的情况下，先得到<code>JSONArray</code>,然后在逐条对到元素：<code>JSONObject</code>，最后再取到每一个值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JSONArray jsonArray=<span class="keyword">new</span> JSONArray(jsonData);<span class="comment">//得到数组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;jsonArray.length();i++)&#123;</span><br><span class="line">    JSONObject jsonObject=jsonArray.getJSONObject(i);</span><br><span class="line">    String id=jsonObject.getString(<span class="string">"id"</span>);</span><br><span class="line">    String name=jsonObject.getString(<span class="string">"name"</span>);</span><br><span class="line">    String version=jsonObject.getString(<span class="string">"version"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果是一条字符串，直接得到<code>JSONObject</code>即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSONObject jsonObject=<span class="keyword">new</span> JSONObject(jsonData);</span><br></pre></td></tr></table></figure></p>
-<p><strong>下面列出了<code>JsonElement</code> 四种具体实现类型</strong>：</p>
-<ul>
-<li><code>JsonPrimitive</code> (Java Doc) —— 例如一个<strong>字符串或整型</strong>。</li>
-<li><code>JsonObject</code> (Java Doc) —— 一个以 JsonElement 名字（类型为 String）作为<strong>索引的集合</strong>。类似于 <code>Map&lt;String,JsonElement&gt;</code>集合（Java Doc）</li>
-<li><code>JsonArray</code> (Java Doc)—— JsonElement 的集合。注意<strong>数组的元素</strong>可以是四种类型中的任意一种，或者混合类型都支持。</li>
-<li><code>JsonNull</code> (Java Doc) —— 值为<code>null</code></li>
-</ul>
-<h3 id="使用Gson解析json">使用<code>Gson</code>解析<code>json</code></h3><p>使用参考：<a href="http://blog.csdn.net/ahuier/article/details/15493603" target="_blank" rel="external">Android客户端与服务端之间使用JSON交互数据。</a><br>原理解析：<br><a href="http://www.importnew.com/16630.html" target="_blank" rel="external">完全理解Gson（1）：简单入门</a><br><a href="http://www.importnew.com/16638.html" target="_blank" rel="external">完全理解Gson（2）：Gson序列化</a><br><a href="http://www.importnew.com/16786.html" target="_blank" rel="external">完全理解Gson（3）：Gson反序列化</a></p>
-<h3 id="使用jackson解析">使用<code>jackson</code>解析</h3><blockquote>
-<p>Jackson：与GSON类似，在频繁使用时性能更佳</p>
-</blockquote>
-<p>各种解析json数据的类库比较</p>
-<ul>
-<li>开源的Jackson:<blockquote>
-<p>Jackson对于复杂类型的json转换bean会出现问题，一些集合Map，List的转换出现问题。<br>Jackson对于复杂类型的bean转换Json，转换的json格式不是标准的Json格式<br>参考： <a href="http://www.cnblogs.com/kunpengit/p/4001680.html" target="_blank" rel="external">各个JSON技术的比较</a></p>
-</blockquote>
-</li>
-</ul>
-<p>建议：</p>
-<blockquote>
-<p><strong>使用Google的Gson和阿里巴巴的FastJson两种并行使用</strong>，<br>如果<strong>只是功能要求，没有性能要求</strong>，可以<strong>使用google的Gson</strong>，<br>如果有<strong>性能上面的要求</strong>可以<strong>使用Gson将bean转换json确保数据的正确，使用FastJson将Json转换Bean</strong></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/19/android 解析网络数据/" data-id="cikmr5jdg000tm8jsazx554od" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/19/android 解析网络数据/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dom/">dom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pull/">pull</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sax/">sax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xml/">xml</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android bitmap实战" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/18/android bitmap实战/">android bitmap实战</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/18/android bitmap实战/">
-      <time datetime="2016-01-18T08:36:29.000Z" itemprop="datePublished">2016-01-18</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="图片转成Bitmap的特点">图片转成Bitmap的特点</h3><blockquote>
-<p>100K的图片，<strong>通过流的形式读到内存</strong>也是100K，占100K的内存。<strong>当图片以Bitmap的形式存</strong>在时,其占用的内存会瞬间变大。如：500K的图片通过<code>bitmap</code>的形式加载到内存，占了内存将近<code>10M</code></p>
-</blockquote>
-<h3 id="相关方法介绍：">相关方法介绍：</h3><h4 id="检测图片大小的方法">检测图片大小的方法</h4><ul>
-<li>通过文件形式检测：<code>file.length()</code></li>
-<li>通过流的形式：<code>bitmap.getByteCount()</code>即：计算<code>byte</code>有多少。<blockquote>
-<p><strong>注意</strong>：此方法是<strong>4版本加上的，2版本是没有的</strong>，那么需要使用<strong>兼容模式</strong>：<code>bitmap.getRowByteCount()*bitmap.getHeight()</code>.</p>
-</blockquote>
-</li>
-<li>对于<code>FileInputStream</code>。检测大小的为<code>FileInputStream.available();</code></li>
-</ul>
-<h4 id="压缩方法compress（format,quality,ByteArrayOutputStream）">压缩方法<code>compress（format,quality,ByteArrayOutputStream）</code></h4><ul>
-<li><code>format</code>代表：压缩的格式。<br>不同的格式，影响不同，假若你设置的是<code>png格式</code>，则质量就可以忽略，怎么设，他都是<strong>无损的</strong>。</li>
-<li><code>quality</code>代表的是质量。（来自api的翻译）<br><code>0~100</code>,表示要压缩成原来的质量的比例.</li>
-</ul>
-<p>注意此方法：</p>
-<blockquote>
-<p>如果是JPG格式的话，而设置的压缩格式是PNG，则图片反而会变大，有可能变大十几倍。</p>
-</blockquote>
-<h4 id="其他方法">其他方法</h4><ul>
-<li><p>public void recycle()</p>
-<blockquote>
-<p>回收bitmap对象的，其回收的意思就是<strong>清除其对象的索引</strong>，但不会同步的立即清除像素的数据，他是需要gc回收的。<br>当<strong>bitmap过多</strong>造成<code>oom</code>是我们一般也会用着个方法<strong>配合gc强制回收bitmap</strong></p>
-</blockquote>
-</li>
-<li><p>Enum Bitmap.Config 一共有有四种形式</p>
-<blockquote>
-<p><code>ARGB_8888、ARGB_4444、ARGB_565、ALPHA_8</code>，他们<strong>每个像素占用的字节数</strong>分别为4、2、2、1</p>
-</blockquote>
-</li>
-</ul>
-<h5 id="如何转换成Bitmap">如何转换成Bitmap</h5><ul>
-<li><p>byte[]转成Bitmap</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] data;</span><br><span class="line">bitmap = BitmapFactory.decodeByteArray(data, <span class="number">0</span>, data.length);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>inputstream转成bitmap(<strong>注意</strong>：有<code>bug</code>将导致<strong>解析错误</strong>)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BitmapFactory.decodeStream(inputStream);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="实战：">实战：</h3><ul>
-<li>质量压缩到100k以下，以便上传到服务器</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">compressBmpToFile</span><span class="params">(Bitmap bmp,File file)</span></span>&#123;</span><br><span class="line">    ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">    <span class="keyword">int</span> options = <span class="number">80</span>;<span class="comment">//个人喜欢从80开始,</span></span><br><span class="line">    bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);</span><br><span class="line">    <span class="keyword">while</span> (baos.toByteArray().length / <span class="number">1024</span> &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        baos.reset();</span><br><span class="line">        options -= <span class="number">10</span>;</span><br><span class="line">        bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">        fos.write(baos.toByteArray());</span><br><span class="line">        fos.flush();</span><br><span class="line">        fos.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过此方法的存储在<code>file</code>文件下图片为<code>100K</code>以下，会导致<strong>失真</strong>的现象（每个像素的透明度会变化）。<strong>注意</strong>：以<strong>jpeg格式</strong>压缩后, 原来图片中透明的元素将消失。<br>但是尺寸不变，即长宽的比例不变。所以，通过<code>BitmapFactory.decodeFile（）</code>后得到的<code>bitmap</code>所<strong>占用内存的大小不变</strong>。</p>
-<ul>
-<li>采样率压缩（改变像素点）<blockquote>
-<p>采样率压缩是改变了图片的像素，他是通过先读取图片的边，然后在自己设定图片的边，然后根据设定，读取图片的像素.即选择性读取像素点，减少像素的个数，减少内存的占有率。</p>
-</blockquote>
-</li>
-</ul>
-<p>需要配合<code>BitmapFactory</code>的内部类<code>options</code>进行使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Bitmap <span class="title">compressImageToBitmap</span><span class="params">(String imagePath)</span></span>&#123;</span><br><span class="line">    BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</span><br><span class="line">    options.inJustDecodeBounds = <span class="keyword">true</span>;</span><br><span class="line">    Bitmap bitmap = BitmapFactory.decodeFile(imagePath,options);</span><br><span class="line">    <span class="keyword">if</span>(bitmap != <span class="keyword">null</span>)&#123;</span><br><span class="line">        System.out.println(bitmap.getByteCount());<span class="comment">//这里并不会执行，因为inJustDecodeBounds为true，返回bitmap为null</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"kong"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    options.inJustDecodeBounds = <span class="keyword">false</span>;</span><br><span class="line">    options.inSampleSize = <span class="number">2</span>;</span><br><span class="line">    bitmap = BitmapFactory.decodeFile(imagePath,options);</span><br><span class="line">    System.out.println(<span class="string">"压缩后的大小"</span>+bitmap.getByteCount());</span><br><span class="line">    <span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们通过<code>inJustDecodeBounds=true</code>来允许读取图片的边。通过<code>BitmapFactory.decodeFile</code>方法，将图片信息读取到<code>options</code>中。后面将<code>inJustDecodeBounds=false</code>后，进行设置<code>inSampleSize=2</code>来设置<strong>压缩倍数</strong>。（<strong>2代表1/2,这里的1/2值得是宽和高分别是原图的1/2。所以图片是被压缩了四倍</strong>）,最后通过<code>BitmapFactory.decodeFile</code>来返回<code>bitmap</code>.<br><strong>注意：</strong></p>
-<blockquote>
-<p>像素改变，压缩容易造成失真问题.通过设置图片的尺寸，然后再根据尺寸，选择的读取像素。达到减少内存</p>
-</blockquote>
-<p>当不知道<code>inSampleSize</code>应该设置多大的时候，更合理的使用方式：<a href="http://my.oschina.net/rengwuxian/blog/182885?fromerr=abfOtsId" target="_blank" rel="external">高效使用Bitmaps（一） 大Bitmap的加载</a><br>通过下列代码得到<code>inSampleSize</code>的大小：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateInSampleSize</span><span class="params">(</span><br><span class="line">            BitmapFactory.Options options, <span class="keyword">int</span> reqWidth, <span class="keyword">int</span> reqHeight)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 原始图片的宽高</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> height = options.outHeight;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> width = options.outWidth;</span><br><span class="line">    <span class="keyword">int</span> inSampleSize = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (height &gt; reqHeight || width &gt; reqWidth) &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfHeight = height / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfWidth = width / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// 在保证解析出的bitmap宽高分别大于目标尺寸宽高的前提下，取可能的inSampleSize的最大值</span></span><br><span class="line">        <span class="keyword">while</span> ((halfHeight / inSampleSize) &gt; reqHeight</span><br><span class="line">                &amp;&amp; (halfWidth / inSampleSize) &gt; reqWidth) &#123;</span><br><span class="line">            inSampleSize *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inSampleSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="类BitmapFactory">类<code>BitmapFactory</code></h3><blockquote>
-<p>里面有一个比较常用的<strong>内部类Options</strong>.</p>
-</blockquote>
-<h4 id="options类">options类</h4><blockquote>
-<p>对在图片解码时做的一些设置</p>
-<ul>
-<li>1）Bitmap inBitmap<br>如过设置了这个字段，则在选择有options参数的解码方式执行时，就会重复利用这个bitmap</li>
-<li>2）Bitmap.Config inPreferredConfig<br>就是bitmap的配置，如果他不为空的话，BitmapFactory在解析图片的时候会按这个config解析.配合<code>1)</code>进行使用。</li>
-<li>3）boolean inJustDecodeBounds<br>这个是压缩的时候常用的到的字段，设置为true的时候是可以允许查询bitmap中没有分配像素的内存.<strong>注意：</strong><br>设置为<code>true</code>的时候，返回的<strong>bitmap是为null</strong>的，所以在设置完相对应的压缩参数之后需要设置会<code>false</code>才能再<strong>得到bitmap对象</strong>。可以理解为<strong>这个参数不设压缩不成功</strong>.</li>
-<li>4) inSampleSize<br>这个便是压缩的倍数，1是相当于和原来一样，2是压缩成原来的二分之一</li>
-<li>5) outWidth和outHeight代表压缩输出后的宽和高。</li>
-</ul>
-</blockquote>
-<h3 id="扩展：">扩展：</h3><h4 id="系统分配的单应用程序内存大小：">系统分配的单应用程序内存大小：</h4><p>根据：Android根据设备屏幕尺寸和dpi的不同进行分配：</p>
-<table>
-<thead>
-<tr>
-<th>屏幕尺寸</th>
-<th>DPI</th>
-<th>应用内存</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>small / normal / large</td>
-<td>ldpi / mdpi</td>
-<td>16MB</td>
-</tr>
-<tr>
-<td>small / normal / large</td>
-<td>tvdpi / hdpi</td>
-<td>32MB</td>
-</tr>
-<tr>
-<td>small / normal / large</td>
-<td>xhdpi</td>
-<td>64MB</td>
-</tr>
-<tr>
-<td>small / normal / large</td>
-<td>400dpi</td>
-<td>96MB</td>
-</tr>
-<tr>
-<td>small / normal / large</td>
-<td>xxhdpi</td>
-<td>128MB</td>
-</tr>
-<tr>
-<td>xlarge</td>
-<td>mdpi</td>
-<td>32MB</td>
-</tr>
-<tr>
-<td>xlarge</td>
-<td>tvdpi / hdpi</td>
-<td>64MB</td>
-</tr>
-<tr>
-<td>xlarge</td>
-<td>xhdpi</td>
-<td>128MB</td>
-</tr>
-<tr>
-<td>xlarge</td>
-<td>400dpi</td>
-<td>192MB</td>
-</tr>
-<tr>
-<td>xlarge</td>
-<td>xxhdpi</td>
-<td>256MB</td>
-</tr>
-</tbody>
-</table>
-<h3 id="应用到验证码中">应用到验证码中</h3><p><a href="http://blog.csdn.net/onlyonecoder/article/details/8231373" target="_blank" rel="external">android 端生成随机验证码 实现</a><br><a href="http://www.jianshu.com/p/a154fc388f88" target="_blank" rel="external"># [转载]验证码之父：Luis von Ahn</a><br><a href="http://segmentfault.com/a/1190000003655979" target="_blank" rel="external">Android框架之Android Validation表单验证框架</a></p>
-<h3 id="资料：">资料：</h3><p><a href="http://www.skoumal.net/en/android-how-draw-text-bitmap/" target="_blank" rel="external">Android - How to draw text on a bitmap</a><br><a href="http://www.cnblogs.com/feisky/archive/2010/01/10/1643460.html" target="_blank" rel="external">Android Bitmap和Canvas学习笔记</a><br><a href="http://blog.csdn.net/ls703/article/details/40378067" target="_blank" rel="external">Android应用开发之图片（Bitmap）压缩（一）————-Bitmap与BitmapFactory的认识及图片的存储形式大小的实验</a><br><a href="http://blog.csdn.net/ls703/article/details/40617465" target="_blank" rel="external">Android应用开发之图片（Bitmap）压缩（三）————-采样率压缩</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/18/android bitmap实战/" data-id="cikmr5jhp003pm8jso56e32ax" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/18/android bitmap实战/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bitmap/">Bitmap</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android viewpager切换动画-pageTransformer" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/16/android viewpager切换动画-pageTransformer/">android viewpager切换动画-pageTransformer</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/16/android viewpager切换动画-pageTransformer/">
-      <time datetime="2016-01-16T03:15:04.000Z" itemprop="datePublished">2016-01-16</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>想使用<code>viewpager</code>的切换动画，源于一个叫<code>sun</code>的应用，想模仿<strong>3d转场</strong>的效果。<br>
+        <p>在一个使用<code>rxjava</code>的大环境下，自己也得赶快跟上步伐。现在先存储点资料。<br>
         
           <p class="article-more-link">
-            <a href="/2016/01/16/android viewpager切换动画-pageTransformer/#more">Read More</a>
+            <a href="/2016/04/24/Rxjava的学习笔记/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/" data-id="cikmr5jgk0031m8jsg5oidih1" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2016/04/24/Rxjava的学习笔记/" data-id="cinsxokq4005yw0h16cb7csq4" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2016/01/16/android viewpager切换动画-pageTransformer/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2016/04/24/Rxjava的学习笔记/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pageTransformer/">pageTransformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewpager/">viewpager</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rxjava/">Rxjava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 
     </footer>
   </div>
@@ -1026,7 +175,7 @@
 
 
     
-      <article id="post-android 单元测试-junit" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android studio优化编译速度" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1035,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/14/android 单元测试-junit/">android 单元测试-junit</a>
+      <a class="article-title" href="/2016/04/23/android studio优化编译速度/">android studio优化编译速度</a>
     </h1>
   
 
@@ -1043,8 +192,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/01/14/android 单元测试-junit/">
-      <time datetime="2016-01-14T01:48:08.000Z" itemprop="datePublished">2016-01-14</time>
+    <a href="/2016/04/23/android studio优化编译速度/">
+      <time datetime="2016-04-23T12:54:05.000Z" itemprop="datePublished">2016-04-23</time>
     </a>
   </div>
 
@@ -1052,7 +201,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/android/">android</a>
   </div>
 
         </div>
@@ -1060,136 +209,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-                
-        <a id="more"></a>
-<h3 id="测试分类">测试分类</h3><p><strong>白箱测试</strong><br>是指在知道被测试的软件如何（How）完成功能和完成什么样（What）的功能的条件下所作的测试。一般是由开发人员完成</p>
-<p><strong>黑箱测试</strong><br>则是指在知道被测试的软件完成什么样（What）的功能的条件下所作的测试。一般是由测试人员完成</p>
-<p><strong>集成测试</strong><br>是验证所有的类是否能互相配合，协同完成特定的任务，目前我们暂不关心它</p>
-<h3 id="案例使用步骤（java版）">案例使用步骤（java版）</h3><ol>
-<li>继承TestCase</li>
-<li>覆写<code>setUp</code>方法，进行初始化工作</li>
-<li>新建特殊的<strong>静态方法<code>suite</code></strong><blockquote>
-<p><code>suite()</code>是一个很特殊的静态方法，返回<code>TestSuite</code>类。JUnit的TestRunner会调用suite方法来<strong>确定有多少个测试可以执行</strong>。有两种方法，一种是进行指定其中的测试方法执行(即：覆盖<code>runtest</code>方法)，另一种是默认执行全部的测试方法。</p>
-</blockquote>
-</li>
-</ol>
-<p>案例代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testCar</span> <span class="keyword">extends</span> <span class="title">TestCase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> expectedWheels;</span><br><span class="line">    <span class="keyword">protected</span> Car myCar;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">testCar</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        expectedWheels = <span class="number">4</span>;</span><br><span class="line">        myCar = <span class="keyword">new</span> Car();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Test <span class="title">suite</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         * the type safe way</span><br><span class="line">         */</span></span><br><span class="line"><span class="comment">//        TestSuite suite = new TestSuite();</span></span><br><span class="line"><span class="comment">//        suite.addTest(new testCar("Car.getWheels") &#123;</span></span><br><span class="line"><span class="comment">//            protected void runTest() &#123;</span></span><br><span class="line"><span class="comment">//                testGetWheels();</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;);</span></span><br><span class="line"><span class="comment">//        return suite;</span></span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         * the dynamic way</span><br><span class="line">         */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TestSuite(testCar.class);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetWheels</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertEquals(expectedWheels, myCar.getWheels());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意几点</strong>：</p>
-<ul>
-<li>一定要保证<code>testXXX()</code>方法的<strong>public属性</strong></li>
-<li>覆盖<code>setUp()</code>方法，<br>初始化所有测试的Fixture（你甚至可以在setUp中建立网络连接），将每个测试略有不同的地方在testXXX()方法中进行配置。 </li>
-<li>覆盖<code>tearDown()</code><br>释放你在setUp()中分配的永久性资源，如数据库连接。</li>
-</ul>
-<p>当JUnit执行测试时，<strong>它在执行每个testXXXXX()方法前都调用setUp()，而在执行每个testXXXXX()方法后都调用tearDown()方法</strong>，由此保证了测试不会相互影响。</p>
-<p>如果JUnit报告了测试没有成功，JUnit会区分<strong>失败（failures）和错误（errors）</strong>。<strong>失败是一个期望的被assert方法检查到的结果</strong>。而<strong>错误则是意外的问题引起</strong>的，如ArrayIndexOutOfBoundsException</p>
-<h3 id="什么是断言">什么是断言</h3><ul>
-<li>Design by Contract的核心是断言（assersion）。</li>
-<li>断言是一个布尔语句，该语句不能为假，如果为假，则表明出现了一个bug。</li>
-<li>Design by Contract使用三种断言：前置条件（pre-conditions）、后置条件（post-conditions）和不变式（invariants）</li>
-</ul>
-<p><strong>前置条件</strong><br>在执行测试之前可以用于判断是否允许进入测试，即进入测试的条件。如 expectedWheels &gt; 0, myCar != null。<br><strong>后置条件</strong><br>用于在测试执行后判断测试的结果是否正确。如 expectedWheels==myCar.getWheels()。<br><strong>而不变式</strong><br>在判断交易(Transaction)的一致性（consistency）方面尤为有用</p>
-<h4 id="Refactoring">Refactoring</h4><p>与软件熵相关，遵循规则可以免于重构整个软件所带来的短期痛苦。<br><strong>Refactoring有一些规则：</strong><br>1&gt; 不要在加入新功能的同时refactor已有的代码。在这两者间要有一个清晰的界限。如每天早上1-2个小时的Refactoring，其余时间添加新的功能。<br>2&gt; 在你开始Refactoring前，和Refactoring后都要保证测试能顺利通过。否则Refactoring没有任何意义。<br>3&gt; 进行小的Refactoring，大的就不是Refactoring了。如果你打算重构整个软件，就没有必要Refactoring了。<br>只有在添加新功能和调试bug时才又必要Refactoring。不要等到交付软件的最后关头才Refactoring。那样和打补丁的区别不大。Refactoring 用在回归测试中也能显示其威力。要明白，我不反对打补丁，但要记住打补丁是应该最后使用的必杀绝招。（打补丁也需要很高的技术，详情参看微软网站） </p>
-<p>以上引用于摘录：<a href="http://langgufu.iteye.com/blog/620593" target="_blank" rel="external">很好的JUnit教程</a></p>
-<h3 id="Junit4使用注解">Junit4使用注解</h3><ul>
-<li><p><code>@Test</code>：使用该注解的方法为测试方法，自动运行时能够识别并被执行<br>包含两个参数：expected=XXXException.class 期望出现的异常<br>timeout=xxx 设定程序运行的超时时间</p>
-<blockquote>
-<p>带<code>@Test</code>注解，方法名随意，<strong>返回值必须为void，不能带有参数，可以声明异常</strong>（可以参考演示代码）。</p>
-</blockquote>
-</li>
-<li><p><code>@Ignore</code>：被忽略的测试方法</p>
-</li>
-<li><code>@Before</code>：在每个测试方法之前运行</li>
-<li><p><code>@After</code>： 在每个测试方法之后运行</p>
-<blockquote>
-<p><code>@Before、@After</code>修饰方法的一个用处是对待测试对象的“复原”操作，如<strong>成员变量回归，数据库回滚，打印日志</strong>等</p>
-</blockquote>
-</li>
-<li><p><code>@BeforeClass</code>：在所有测试开始之前运行</p>
-</li>
-<li><p><code>@AfterClass</code>：在所有测试开始之后运行</p>
-<blockquote>
-<p><code>@BeforeClass</code>加载一些耗时耗力的操作，如<strong>文件流的读取，数据库连接等，然后在<code>@AfterClass</code>中释放对应的资源</strong>即可.</p>
-</blockquote>
-</li>
-<li><p>类注解<code>@RunWith</code>，指定不同的类可以改变测试类的行为</p>
-</li>
-<li><p>定义测试数据集合方法<code>public static Collection data() {...}</code>，注意该方法要用<code>@Parameters修饰</code>（数据格式为二维数组）</p>
-</li>
-</ul>
-<h3 id="AssertThat用法"><code>AssertThat</code>用法</h3><p>需要导入的包（很多类重名，而且as的导入不好，直接就找不到了）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.matchers.JUnitMatchers.*;</span><br></pre></td></tr></table></figure></p>
-<p>比较函数得到的值或者控件取到的值是否相等的一个重要函数为<code>assertThat</code>。（网上很多教程官关于这个使用的，都是老的<code>2.4</code>，而<code>3.0</code>改变了很大。）<br>祥看:<a href="http://langgufu.iteye.com/blog/1893927" target="_blank" rel="external">assertThat用法</a></p>
-<h4 id="在其他包：org-junit-Assert-assertThat;下assertThat的使用">在其他包：<code>org.junit.Assert.assertThat;</code>下<code>assertThat</code>的使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertThat(<span class="string">"Next activity should not started"</span>, application.getNextStartedActivity(), is(nullValue()));</span><br></pre></td></tr></table></figure>
-<h3 id="assertEquals">assertEquals</h3><blockquote>
-<p>最直接的方式比较数组,集合:如果数组长度相同，且每个对应的元素相同，则两个数组相等，否则不相等。数组为空的情况也作了考虑</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/14/android 单元测试-junit/" data-id="cikmr5jfi0028m8jswlyvmo9u" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2016/01/14/android 单元测试-junit/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/junit/">junit</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 单元测试-Robolectric" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/13/android 单元测试-Robolectric/">android 单元测试-Robolectric</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/13/android 单元测试-Robolectric/">
-      <time datetime="2016-01-13T02:28:40.000Z" itemprop="datePublished">2016-01-13</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里只将语法，不讲配置。<code>Api</code>为<code>3.0</code><br>
+        <p>自从使用上公司的项目，关联了很多<code>android library</code>后，发现一次编译都要15分钟以上，不优化这个龟速的编译速度简直不想打开项目了。经过优化后还真的变快了，下面是我优化的。<br>
         
           <p class="article-more-link">
-            <a href="/2016/01/13/android 单元测试-Robolectric/#more">Read More</a>
+            <a href="/2016/04/23/android studio优化编译速度/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/13/android 单元测试-Robolectric/" data-id="cikmr5jfm002dm8jseh6njt5k" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2016/04/23/android studio优化编译速度/" data-id="cinsxokow004pw0h1m9ihowao" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2016/01/13/android 单元测试-Robolectric/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2016/04/23/android studio优化编译速度/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/">android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
 
     </footer>
   </div>
@@ -1199,7 +233,7 @@
 
 
     
-      <article id="post-android 单元测试-配置" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-关于Databinding的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1208,7 +242,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/12/android 单元测试-配置/">android 单元测试-配置</a>
+      <a class="article-title" href="/2016/04/23/关于Databinding的使用/">关于Databinding的使用</a>
     </h1>
   
 
@@ -1216,8 +250,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/01/12/android 单元测试-配置/">
-      <time datetime="2016-01-12T02:21:30.000Z" itemprop="datePublished">2016-01-12</time>
+    <a href="/2016/04/23/关于Databinding的使用/">
+      <time datetime="2016-04-23T08:17:12.000Z" itemprop="datePublished">2016-04-23</time>
     </a>
   </div>
 
@@ -1225,7 +259,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/android/">android</a>
   </div>
 
         </div>
@@ -1233,75 +267,429 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-                
-        <a id="more"></a>
-<h3 id="概述">概述</h3><p><strong>单元测试的目标函数</strong>主要有三种：</p>
-<ol>
-<li><p>有明确的返回值，如上图的dosomething(Boolean param)，做单元测试时，只需调用这个函数，然后验证函数的返回值是否符合预期结果。</p>
-</li>
-<li><p>这个函数只改变其对象内部的一些属性或者状态，函数本身没有返回值，就验证它所改变的属性和状态。</p>
-</li>
-<li><p>一些函数没有返回值，也没有直接改变哪个值的状态，这就需要验证其行为，比如点击事件。</p>
-</li>
-</ol>
-<p><strong>注意：</strong>构造用例的原则是测试用例与函数一对一，实现条件覆盖与路径覆盖。<strong>一个用例只测一个函数，便于维护。</strong></p>
-<p><strong>java单元测试和Android单元测试对比</strong></p>
-<ul>
-<li>在Android中，<strong>单元测试的本质依旧是验证函数的功能</strong>，测试框架也是JUnit。</li>
-<li>在Java中，<strong>编写代码面对的只有类、对象、函数，</strong>编写单元测试时可以在测试工程中创建一个对象出来然后执行其函数进行测试，</li>
-<li>在Android中，<strong>编写代码需要面对的是组件、控件、生命周期、异步任务、消息传递等</strong>，</li>
-<li>虽然本质是SDK主动执行了一些实例的函数，但创建一个Activity<strong>并不能让它执行到resume的状态</strong>，因此需要JUnit之外的框架支持。</li>
-</ul>
-<h4 id="单元测试框架AndroidTest和Robolectric">单元测试框架AndroidTest和Robolectric</h4><blockquote>
-<p><strong>前者需要运行在Android环境上</strong>，<strong>后者可以直接运行在JVM上，速度也更快，可以直接由Jenkins周期性执行，无需准备Android环境</strong>。因此我们的单元测试基于Robolectric。对于一些测试对象依赖度较高而需要解除依赖的场景，我们可以借助Mock框架。</p>
-</blockquote>
-<h3 id="配置使用Robolectric">配置使用<code>Robolectric</code></h3><p>问题错误：</p>
-<ul>
-<li><a href="https://github.com/robolectric/robolectric/issues/1648" target="_blank" rel="external"># AndroidManifest.xml not found in RobolectricGradleTestRunner</a>，选择设置一下环境就好了</li>
-<li><a href="https://github.com/robolectric/robolectric/wiki/2.4-to-3.0-Upgrade-Guide" target="_blank" rel="external"># 2.4 to 3.0 Upgrade Guide</a>，版本问题，只支持到<code>21</code></li>
-<li><p><a href="https://github.com/robolectric/robolectric/issues/1620" target="_blank" rel="external"># Robolectric fails with AnnotationFormatError exception when using @Config annotation</a>，需要输入<code>gradlew test</code></p>
-</li>
-<li><p>错误1</p>
-<blockquote>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.<span class="string">RuntimeException:</span> <span class="regexp">/Users/</span>mtotschnig<span class="regexp">/entwicklung/</span>AndroidStudioAndRobolectric<span class="regexp">/app/</span>build<span class="regexp">/intermediates/</span>bundles<span class="regexp">/debug/</span>res/values is not a directory</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<p>改成：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">dependencies</span> &#123;  </span><br><span class="line">      <span class="title">testCompile</span> <span class="string">"org.robolectric:shadows-multidex:3.0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>即可</p>
-<ul>
-<li>错误2：<blockquote>
-<p>unknown resource ReName{TextAppearance AppCompat Widget Button}</p>
-</blockquote>
-</li>
-</ul>
-<p>归根接地还是资源SDK的问题，他并不支持更高的api。改成下面配置就好了。（<strong>目前能支持最新的api</strong>）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">  compileSdkVersion <span class="number">22</span></span><br><span class="line">  buildToolsVersion <span class="string">"23.0.2"</span></span><br><span class="line"></span><br><span class="line">  defaultConfig &#123;</span><br><span class="line">  applicationId <span class="string">"com.chriszou.testrobolectric"</span><span class="comment">//改成你的包即可</span></span><br><span class="line">  minSdkVersion <span class="number">15</span></span><br><span class="line">  targetSdkVersion <span class="number">22</span></span><br><span class="line">  versionCode <span class="number">1</span></span><br><span class="line">  versionName <span class="string">"1.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">  release &#123;</span><br><span class="line">  <span class="function">minifyEnabled <span class="keyword">false</span></span><br><span class="line">  proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-rules.pro'</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;&#125;</span><br><span class="line"></span><br><span class="line">dependencies </span>&#123;</span><br><span class="line">  <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span><br><span class="line">  compile 'com.android.support:appcompat-v7:22.2.0'</span><br><span class="line">  <span class="comment">//Unit test</span></span><br><span class="line">  testCompile 'junit:junit:4.12'</span><br><span class="line">  <span class="title">testCompile</span><span class="params">(<span class="string">'org.robolectric:robolectric:3.0-rc3'</span>)</span> </span>&#123;</span><br><span class="line">  exclude module: <span class="string">'commons-logging'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个是<code>app</code>的<code>build.gradle</code>的配置。以及下面：<br>在根目录的<code>build.gradle</code>为<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.2.3'</span></span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
-<p>以及：<code>\gradle\wrapper\gradle-wrapper.properties</code>的最后一行设置为：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\<span class="symbol">://services</span>.gradle.org/distributions/gradle-<span class="number">2.4</span>-all.zip</span><br><span class="line">或者更高的版本</span><br></pre></td></tr></table></figure></p>
-<p><strong>目前个人认为最新的教程</strong>：<br><a href="https://segmentfault.com/a/1190000002904944" target="_blank" rel="external">用Robolectric来做Android unit testing</a><br><a href="http://www.jianshu.com/p/dd988aac1b84" target="_blank" rel="external">android studio 1.5 搭建Robolectric 测试环境</a></p>
-<h4 id="Espresso和Robolectric切换使用">Espresso和Robolectric切换使用</h4><p>需要在这里<img src="http://i.imgur.com/twnVGE1.png" alt="Espresso"><br>进行不同的区分，上图为<code>Espresso</code>的配置，而<code>Robolectric</code>则不同的选项。</p>
-<p>两者的使用配置：</p>
-<ul>
-<li><a href="http://guides.codepath.com/android/Unit-Testing-with-Robolectric" target="_blank" rel="external">Unit Testing with Robolectric</a></li>
-<li><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso" target="_blank" rel="external">UI Testing with Espresso</a></li>
-</ul>
-<h3 id="Espresso使用"><code>Espresso</code>使用</h3><p>针对<code>ListView</code>:</p>
-<blockquote>
-<p>ListView is an <code>AdapterView</code>. AdapterViews <strong>present a problem</strong> when doing UI testing<br> AdapterView’s don’t work well with <code>onView(...)</code><br> Espresso provides an <code>onData(...)</code> entry point that makes sure to load the AdapterView item before performing any operations on it</p>
-</blockquote>
-<p>对于<code>listview</code>要使用<code>onData</code>来代替，参考：<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-listview" target="_blank" rel="external">interacting-with-a-listview</a></p>
-<p>还有针对其他的情况，详情查看下列地址:<br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-recyclerview" target="_blank" rel="external">interacting-with-a-recyclerview</a><br><a href="http://guides.codepath.com/android/UI-Testing-with-Espresso#stubbing-out-the-camera" target="_blank" rel="external">stubbing-out-the-camera</a></p>
-<p><strong>学习资料</strong><br><strong><a href="https://github.com/googlesamples/android-testing" target="_blank" rel="external">android-testing</a></strong><br><strong><a href="https://github.com/googlesamples/android-testing-templates" target="_blank" rel="external">android-testing-templates</a></strong><br><strong><a href="https://github.com/vgrec/EspressoExamples" target="_blank" rel="external">EspressoExamples</a></strong></p>
-
+        <p>要讲到<code>mvvm</code>模式的开发，就不得不提<code>DataBinding</code>。两者结合才是一个完整体。<br>关于使用，直接官网：<a href="http://developer.android.com/intl/ko/tools/data-binding/guide.html">Data Binding Guide</a></p>
+<p>对应的中文翻译：<a href="https://segmentfault.com/a/1190000002876984">Data Binding 用户指南（Android）</a></p>
+<p>一个<code>github</code>项目，精通<code>DataBinding</code>的所有用法：<a href="https://github.com/LyndonChin/MasteringAndroidDataBinding">MasteringAndroidDataBinding</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/23/关于Databinding的使用/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/" data-id="cikmr5jfc0023m8js272ozptw" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2016/04/23/关于Databinding的使用/" data-id="cinsxokn2002pw0h16g7qg03p" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2016/01/12/android 单元测试-配置/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2016/04/23/关于Databinding的使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UnitTest/">UnitTest</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Databinding/">Databinding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-MVVM模式开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/20/MVVM模式开发/">MVVM模式开发</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/20/MVVM模式开发/">
+      <time datetime="2016-04-20T13:11:48.000Z" itemprop="datePublished">2016-04-20</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从<code>mvc-&gt;mvp-&gt;mvvm</code>模式开发，就像进化一样，都是为了更好的方便我们进行开发。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/20/MVVM模式开发/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/20/MVVM模式开发/" data-id="cinsxokqc0063w0h1kdngkn5y" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/20/MVVM模式开发/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVVM/">MVVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 第三方登录的集成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/android 第三方登录的集成/">gradle 配置</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/android 第三方登录的集成/">
+      <time datetime="2016-04-16T10:10:59.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>gradle</code>可以理解为一个脚本文件，进行对<code>android studio</code>的<code>ide</code>环境的部署。下面进行相关的介绍，并尝试搭建一个属于自己的环境，而不用系统自动生成的方式。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/android 第三方登录的集成/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/android 第三方登录的集成/" data-id="cinsxoknp003hw0h1u9imhg77" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/android 第三方登录的集成/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-recyclerview-LayoutManager使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/recyclerview-LayoutManager使用/">recyclerview-LayoutManager使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/recyclerview-LayoutManager使用/">
+      <time datetime="2016-04-16T09:51:52.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于recyclerview的layoutmanager的使用，自定义layoutmanager等。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/recyclerview-LayoutManager使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/recyclerview-LayoutManager使用/" data-id="cinsxokn6002uw0h1hcuw0ood" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/recyclerview-LayoutManager使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recyclerview，LayoutManager/">recyclerview，LayoutManager</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-CoordinatorLayout与Behavior" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/CoordinatorLayout与Behavior/">CoordinatorLayout与Behavior</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/CoordinatorLayout与Behavior/">
+      <time datetime="2016-04-16T09:26:21.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从名字上面大家就可以看出来，记录下载时间。<strong>内部：</strong>将<strong>后台线程的创建和<code>Handler</code>队列</strong>封装成一个方便的类调用。所以，我们可以在方法中直接<strong>修改UI</strong>.<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/CoordinatorLayout与Behavior/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/CoordinatorLayout与Behavior/" data-id="cinsxokqq006iw0h1oxozpvts" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/CoordinatorLayout与Behavior/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Behavior/">Behavior</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CoordinatorLayout/">CoordinatorLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-DrawerLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/DrawerLayout使用/">DrawerLayout使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/DrawerLayout使用/">
+      <time datetime="2016-04-16T09:21:02.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>很早之前就使用过了，当时的实现方式已经更现在有很多不同了，之前的侧滑使用的是<code>listview</code>进行布局，而现在使用<code>menu</code>来布局，而且可以使用<code>app:actionLayout</code>来自定义布局。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/DrawerLayout使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/DrawerLayout使用/" data-id="cinsxokql006dw0h1yr5o35fx" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/DrawerLayout使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DrawerLayout/">DrawerLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-TabLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/TabLayout使用/">TabLayout使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/TabLayout使用/">
+      <time datetime="2016-04-16T08:09:20.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>官方提供这个<code>TabLayout</code>真的太爽了，之前实现这个效果是使用<code>SlidingTabLayout</code>，可看我之前写的：<a href="http://hexo.trity.cc/2015/05/01/android-Tab/">android使用Tab效果滑动</a>，部分连接已经失效。没看过就直接看此文吧。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/TabLayout使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/TabLayout使用/" data-id="cinsxokpw005nw0h1fljjfmap" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/TabLayout使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TabLayout/">TabLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 自定义view" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/android 自定义view/">android VelocityTracker计算手势伪瞬时速度</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/16/android 自定义view/">
+      <time datetime="2016-04-16T07:55:31.000Z" itemprop="datePublished">2016-04-16</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>VelocityTracker计算手势伪瞬时速度.不常用的api<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/android 自定义view/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/04/16/android 自定义view/" data-id="cikmr5jdy001am8jsstxqmc5s" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/04/16/android 自定义view/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VelocityTracker/">VelocityTracker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 
     </footer>
   </div>
@@ -1312,7 +700,7 @@
 
     
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -1322,7 +710,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -1331,7 +719,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1376,7 +764,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
     </div>
   </div>
 

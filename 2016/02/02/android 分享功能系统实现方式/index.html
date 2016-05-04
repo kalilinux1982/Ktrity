@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>Android 性能优化综合篇 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="节制地使用Service当我们启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，这样就会导致这个进程变得非常消耗内存。并且，系统可以在LRU cache当中缓存的进程数量也会减少，导致切换应用程序的时候耗费更多性能。
+如果应用程序当中需要使用Service来执行后台任务的话，请一定要注意只有当任务正在执行的时候才应该让Service运行起来。另外，当任务执行完之后去停">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 性能优化综合篇">
+<meta property="og:url" content="http://hexo.trity.cc/2016/02/02/android 分享功能系统实现方式/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="节制地使用Service当我们启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，这样就会导致这个进程变得非常消耗内存。并且，系统可以在LRU cache当中缓存的进程数量也会减少，导致切换应用程序的时候耗费更多性能。
+如果应用程序当中需要使用Service来执行后台任务的话，请一定要注意只有当任务正在执行的时候才应该让Service运行起来。另外，当任务执行完之后去停">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 性能优化综合篇">
+<meta name="twitter:description" content="节制地使用Service当我们启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，这样就会导致这个进程变得非常消耗内存。并且，系统可以在LRU cache当中缓存的进程数量也会减少，导致切换应用程序的时候耗费更多性能。
+如果应用程序当中需要使用Service来执行后台任务的话，请一定要注意只有当任务正在执行的时候才应该让Service运行起来。另外，当任务执行完之后去停">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android 分享功能系统实现方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 性能优化综合篇
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/02/02/android 分享功能系统实现方式/">
+      <time datetime="2016-02-02T05:39:40.000Z" itemprop="datePublished">2016-02-02</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="节制地使用Service">节制地使用Service</h3><p>当我们启动一个Service时，系统会倾向于<strong>将这个Service所依赖的进程进行保留，这样就会导致这个进程变得非常消耗内存</strong>。<br>并且，系统可以在<code>LRU cache</code>当中缓存的进程<strong>数量也会减少</strong>，<strong>导致切换应用程序的时候耗费更多性能</strong>。</p>
+<p>如果应用程序当中需要使用Service来执行后台任务的话，请一定要注意只有当任务正在执行的时候才应该让Service运行起来。另外，<strong>当任务执行完之后去停止Service的时候，要小心Service停止失败导致内存泄漏的情况</strong></p>
+<h3 id="当界面不可见时释放内存">当界面不可见时释放内存</h3><h4 id="我们如何才能知道程序界面是不是已经不可见了呢？">我们如何才能知道程序界面是不是已经不可见了呢？</h4><p>在<code>Activity</code>中重写<code>onTrimMemory()</code>方法，然后在这个方法中监听<code>TRIM_MEMORY_UI_HIDDEN</code>这个级别.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTrimMemory</span><span class="params">(<span class="keyword">int</span> level)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">super</span>.onTrimMemory(level);  </span><br><span class="line">    <span class="keyword">switch</span> (level) &#123;  </span><br><span class="line">    <span class="keyword">case</span> TRIM_MEMORY_UI_HIDDEN:  </span><br><span class="line">        <span class="comment">// 进行资源释放操作  </span></span><br><span class="line">        <span class="keyword">break</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong><br><code>onTrimMemory()</code>方法中的<code>TRIM_MEMORY_UI_HIDDEN</code>回调只有当<strong>我们程序中的所有UI组件全部不可见</strong>的时候才会触发。<br>这和<code>onStop()</code>方法还是有很大区别的，因为onStop()方法只是<strong>当一个Activity完全不可见的时候就会调用</strong>。<br>我们一般在<code>onstop()</code>执行下列操作：</p>
+<blockquote>
+<p>比如说<strong>取消网络连接</strong>或者<strong>注销广播接收器</strong>等.</p>
+</blockquote>
+<h3 id="当内存紧张时释放内存">当内存紧张时释放内存</h3><p>我们接着上面的一点<code>onTrimMemory()</code>的操作。<br>在<strong>手机内存降低的时候及时通知我们</strong>。我们应该<strong>根据回调中传入的级别来去决定如何释放应用程序的资源</strong>。</p>
+<ul>
+<li><strong>TRIM_MEMORY_RUNNING_MODERATE    </strong>表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经有点低了，系统可能会开始根据LRU缓存规则来去杀死进程了。</li>
+<li><strong>TRIM_MEMORY_RUNNING_LOW    </strong>表示应用程序正常运行，并且不会被杀掉。但是目前手机的内存已经非常低了，我们应该去释放掉一些不必要的资源以提升系统的性能，同时这也会直接影响到我们应用程序的性能。</li>
+<li><strong>TRIM_MEMORY_RUNNING_CRITICAL    </strong>表示应用程序仍然正常运行，但是系统已经根据LRU缓存规则杀掉了大部分缓存的进程了。这个时候我们应当尽可能地去释放任何不必要的资源，不然的话系统可能会继续杀掉所有缓存中的进程，并且开始杀掉一些本来应当保持运行的进程，比如说后台运行的服务。</li>
+</ul>
+<p>以上是当我们的应用程序正在运行时的回调，那么<strong>如果我们的程序目前是被缓存的</strong>，则会收到以下几种类型的回调：</p>
+<ul>
+<li><strong>TRIM_MEMORY_BACKGROUND    </strong>表示手机目前内存已经很低了，系统准备开始根据LRU缓存来清理进程。这个时候我们的程序在LRU缓存列表的最近位置，是不太可能被清理掉的，但这时去释放掉一些比较容易恢复的资源能够让手机的内存变得比较充足，从而让我们的程序更长时间地保留在缓存当中，这样当用户返回我们的程序时会感觉非常顺畅，而不是经历了一次重新启动的过程。</li>
+<li><strong>TRIM_MEMORY_MODERATE    </strong>表示手机目前内存已经很低了，并且我们的程序处于LRU缓存列表的中间位置，如果手机内存还得不到进一步释放的话，那么我们的程序就有被系统杀掉的风险了。</li>
+<li><strong>TRIM_MEMORY_COMPLETE    </strong>表示手机目前内存已经很低了，并且我们的程序处于LRU缓存列表的最边缘位置，系统会最优先考虑杀掉我们的应用程序，在这个时候应当尽可能地把一切可以释放的东西都进行释放。</li>
+</ul>
+<h3 id="避免在Bitmap上浪费内存">避免在Bitmap上浪费内存</h3><p>当我们读取一个Bitmap图片的时候，有一点一定要注意，就是<strong>千万不要去加载不需要的分辨率</strong>。因为<code>Bitmap</code>的大小事依靠通过计算像素点宽高的之积。</p>
+<h3 id="使用优化过的数据集合">使用优化过的数据集合</h3><p>Android API当中<strong>提供了一些优化过后的数据集合工具类</strong>，如<code>SparseArray，SparseBooleanArray，以及LongSparseArray</code>等来替换对应<code>HashMap</code>.</p>
+<p><strong>为什么可以达到优化的效果呢</strong>？<br><code>SparseArray</code>就<strong>避免掉了基本数据类型转换成对象数据类型的时间</strong></p>
+<h3 id="知晓内存的开支情况">知晓内存的开支情况</h3><ul>
+<li>使用枚举通常会比使用静态常量要消耗两倍以上的内存，在Android开发当中我们应当尽可能地不使用枚举。</li>
+<li>任何一个Java类，包括内部类、匿名类，都要占用大概500字节的内存空间。</li>
+<li>任何一个类的实例要消耗12-16字节的内存开支，因此频繁创建实例也是会一定程序上影响内存的。</li>
+<li>在使用HashMap时，即使你只设置了一个基本数据类型的键，比如说int，但是也会按照对象的大小来分配内存，大概是32字节，而不是4字节。因此最好的办法就是像上面所说的一样，使用优化过的数据集合。</li>
+</ul>
+<h3 id="谨慎使用抽象编程">谨慎使用抽象编程</h3><p>在Android上使用抽象会带来额外的内存开支，因为抽象的编程方法需要编写额外的代码，虽然这些代码根本执行不到，但是却也要映射到内存当中，不仅占用了更多的内存，在执行效率方面也会有所降低</p>
+<h3 id="尽量避免使用依赖注入框架">尽量避免使用依赖注入框架</h3><p>这些框架为了要搜寻代码中的注解，通常都需要经历较长的初始化过程，并且还可能将一些你用不到的对象也一并加载到内存当中。这些用不到的对象会一直占用着内存空间，可能要过很久之后才会得到释放，相较之下，也许多敲几行看似繁琐的代码才是更好的选择</p>
+<h3 id="使用ProGuard简化代码">使用ProGuard简化代码</h3><p>除了<strong>混淆之外</strong>，它还具有<strong>压缩和优化代码的功能</strong>。ProGuard会对我们的<strong>代码进行检索，删除一些无用的代码</strong>，并且会对类、字段、方法等进行重命名，重命名之后的类、字段和方法名都会比原来简短很多，这样的话也就对内存的占用变得更少了</p>
+<h3 id="使用多个进程">使用多个进程</h3><p>通过对<code>service</code>进行设置。如下：</p>
+<blockquote>
+<p>一个用于<strong>UI展示</strong>，另一个则用于在<strong>后台持续地播放音乐</strong>。</p>
+</blockquote>
+<p>对应<code>service</code>的设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;service android:name=<span class="string">".PlaybackService"</span></span><br><span class="line">         android:process=<span class="string">":background"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="监控app的内存">监控app的内存</h3><p>每个程序都会有可使用的<strong>内存上限</strong>，这被称为<strong>堆大小（Heap Size）</strong>。例如：</p>
+<blockquote>
+<p>堆大小也已经由<strong>Nexus One时的32MB</strong>，变成了<strong>Nexus 5时的192MB</strong></p>
+</blockquote>
+<p>如何检测当前手机允许占用多少内存？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line"><span class="keyword">int</span> heapSize = manager.getMemoryClass();</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong><br>以<strong>MB为单位</strong>进行返回的.当程序超过这个值，将出现<code>OutOfMemoryError</code>.我们可以根据<strong>堆大小来决定缓存数据的容量</strong>.</p>
+<h4 id="怎样才能去监听系统的GC过程呢">怎样才能去监听系统的GC过程呢</h4><p>系统每进行一次GC操作时，都会在LogCat中打印一条日志，我们只要去分析这条日志就可以了，日志的基本格式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D/dalvikvm: &lt;GC_Reason&gt; &lt;Amount_freed&gt;, &lt;Heap_stats&gt;,  &lt;Pause_time&gt;</span><br></pre></td></tr></table></figure></p>
+<p>首先第一部分<strong>GC_Reason</strong>,这个是<strong>触发这次GC操作的原因</strong>：</p>
+<ul>
+<li><strong>GC_CONCURRENT</strong>:   当我们应用程序的堆内存快要满的时候，系统会自动触发GC操作来释放内存。</li>
+<li><strong>GC_FOR_MALLOC</strong>:   当我们的应用程序需要分配更多内存，可是现有内存已经不足的时候，系统会进行GC操作来释放内存。</li>
+<li><strong>GC_HPROF_DUMP_HEAP</strong>:   当生成HPROF文件的时候，系统会进行GC操作，关于HPROF文件我们下面会讲到。</li>
+<li><strong>GC_EXPLICIT</strong>:   这种情况就是我们刚才提到过的，主动通知系统去进行GC操作，比如调用System.gc()方法来通知系统。或者在DDMS中，通过工具按钮也是可以显式地告诉系统进行GC操作的。</li>
+</ul>
+<p>第二部分：<strong>Amount_freed</strong>，表示系统通过这次GC操作<strong>释放了多少内存</strong>:</p>
+<p>第三部分：<strong>Heap_stats</strong>中会<strong>显示当前内存的空闲比例以及使用情况</strong>（活动对象所占内存 / 当前程序总内存）</p>
+<p>最后：<strong>Pause_time</strong>表示这次GC操作<strong>导致应用程序暂停的时间</strong>。</p>
+<blockquote>
+<p><strong>注意：</strong> 2.3之前GC操作是不能并发进行的，后面的版本可以并发。几乎感觉不到<code>GC</code>阻塞程序的时间。</p>
+</blockquote>
+<h3 id="避免创建不必要的对象">避免创建不必要的对象</h3><p>场景：</p>
+<ul>
+<li><p>如果我们有一个<strong>需要拼接的字符串，那么可以优先考虑使用StringBuffer或者StringBuilder来进行拼接</strong>，而不是加号连接符，因为使用加号连接符会创建多余的对象，拼接的字符串越长，加号连接符的性能越低。</p>
+</li>
+<li><p>在没有特殊原因的情况下，尽量使用<strong>基本数据类来代替封装数据类型</strong>，<strong>int比Integer要更加高效</strong>，其它数据类型也是一样。</p>
+</li>
+<li><p>当一个方法的<strong>返回值是String</strong>的时候，通常可以去<strong>判断一下这个String的作用是什么</strong>，如果我们明确地知道调用方会将这个返回的String再进行拼接操作的话，可以考虑<strong>返回一个StringBuffer对象来代替</strong>，<strong>因为这样可以将一个对象的引用进行返回，而返回String的话就是创建了一个短生命周期的临时对象</strong>。</p>
+</li>
+<li><p>正如前面所说，基本数据类型要优于对象数据类型，类似地，基本数据类型的数组也要优于对象数据类型的数组。另外，<strong>两个平行的数组要比一个封装好的对象数组更加高效</strong>，举个例子，<strong>Foo[]和Bar[]这样的两个数组，使用起来要比Custom(Foo,Bar)[]这样的一个数组高效得多</strong>。</p>
+</li>
+</ul>
+<h3 id="静态优于抽象">静态优于抽象</h3><p>如果你并不需要访问一个对象中的某些字段，只是想调用它的某个方法来去完成一项通用的功能，那么可以将这个方法设置成静态方法，这会让调用的速度提升<code>15%-20%</code>。这样就避免去创建一个对象了。</p>
+<h3 id="对常量使用static_final修饰符">对常量使用static final修饰符</h3><p>这种优化方式<strong>只对基本数据类型以及String类型的常量有效</strong>，<strong>对于其它数据类型的常量是无效的</strong>。<br><strong>但是</strong>，对于任何常量都是用static final的关键字来进行声明仍然是<strong>一种非常好的习惯</strong>.</p>
+<h3 id="使用增强型for循环语法">使用增强型for循环语法</h3><ul>
+<li>mArray.length 最慢 这是因为每次比较都需要计算一个<code>length</code></li>
+<li>len 记录数组的长度 最快</li>
+<li>foreach 中间</li>
+</ul>
+<h3 id="多使用系统封装好的API">多使用系统封装好的API</h3><p>我们在编写程序时如果可以<strong>使用系统提供的API就应该尽量使用</strong>，系统提供的<strong>API完成不了我们需要的功能时才应该自己去写</strong>，因为使用系统的API在很多时候比我们自己写的代码要快得多，它们的<strong>很多功能都是通过底层的汇编模式执行的</strong>.<br><strong>例如：</strong></p>
+<blockquote>
+<p>使用循环的方式来对数组中的每一个元素一一进行赋值当然是可行的，但是如果我们直接使用系统中提供的<code>System.arraycopy()</code>方法将会<strong>让执行效率快9倍以上</strong>。</p>
+</blockquote>
+<h3 id="避免在内部调用Getters/Setters方法">避免在内部调用Getters/Setters方法</h3><p>在Android上这个技巧就不再是那么的受推崇了，因为字段搜寻要比方法调用效率高得多，<strong>我们直接访问某个字段可能要比通过getters方法来去访问这个字段快3到7倍</strong>。<strong>不过我们肯定不能仅仅因为效率的原因就将封装这个技巧给抛弃了</strong>，编写代码还是要按照面向对象思维的，但是我们可以在能优化的地方进行优化，<strong>比如说避免在内部调用getters/setters方法</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getOne() + getTwo();</span><br><span class="line">&#125;</span><br><span class="line"># 应该写为这种形式：</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> one + two;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="加快应用的启动速度">加快应用的启动速度</h3><p>参考引用来源：<a href="http://blog.csdn.net/u010687392/article/details/50518343" target="_blank" rel="external">Android性能优化之加快应用启动速度</a></p>
+<h4 id="启动方式">启动方式</h4><ol>
+<li>冷启动：当启动应用时，后台没有该应用的进程，这时系统会重新创建一个新的进程分配给该应用，这个启动方式就是冷启动。</li>
+<li>热启动：当启动应用时，后台已有该应用的进程（例：按back键、home键，应用虽然会退出，但是该应用的进程是依然会保留在后台，可进入任务列表查看），所以在已有进程的情况下，这种启动会从已有的进程中来启动应用，这个方式叫热启动。</li>
+</ol>
+<h5 id="特点：">特点：</h5><ol>
+<li>冷启动：冷启动因为系统会重新创建一个新的进程分配给它，所以会先创建和初始化Application类，再创建和初始化MainActivity类（包括一系列的测量、布局、绘制），最后显示在界面上。</li>
+<li>热启动：热启动因为会从已有的进程中来启动，所以热启动就不会走Application这步了，而是直接走MainActivity（包括一系列的测量、布局、绘制），所以热启动的过程只需要创建和初始化一个MainActivity就行了，而不必创建和初始化Application，因为一个应用从新进程的创建到进程的销毁，Application只会初始化一次</li>
+</ol>
+<h5 id="采取的策略">采取的策略</h5><ol>
+<li>在Application的构造器方法、attachBaseContext()、onCreate()方法中不要进行耗时操作的初始化，一些数据预取放在异步线程中，可以<strong>采取Callable实现</strong>。</li>
+<li>对于<strong>sp的初始化</strong>，因为sp的特性在初始化时候会对数据全部读出来存在内存中，所以这个初始化放在主线程中不合适，反而会延迟应用的启动速度，对于这个还是需要放在异步线程中处理。</li>
+<li>对于MainActivity，<strong>由于在获取到第一帧前</strong>，需要对contentView进行测量布局绘制操作，尽量减少布局的层次，<strong>考虑StubView的延迟加载策略</strong>，当然在onCreate、onStart、onResume方法中避免做耗时操作。</li>
+</ol>
+<h5 id="针对第一帧的处理">针对第一帧的处理</h5><blockquote>
+<p>对于应用的启动时间，只能是尽量的<strong>避免一些耗时的、非必要的操作在主线程中</strong>，这样相对可以缩减一部分启动的耗时，另外一方面在等待第一帧显示的时间里，可以<strong>加入一些配置以增加体验</strong>，比如加入Activity的background，<strong>这个背景会在显示第一帧前提前显示在界面上</strong></p>
+</blockquote>
+<h3 id="针对SplashActivity的优化">针对SplashActivity的优化</h3><p>参考引用资料：<a href="http://blog.csdn.net/u010687392/article/details/50525697" target="_blank" rel="external">Android性能优化之Splash页应该这样设计</a></p>
+<p>将<code>SplashActivity</code>和<code>MainActivity</code>进行合并的方式：</p>
+<blockquote>
+<p>一开始<code>还是显示MainActivity，SplashActivity变为SplashFragment</code>，然后放一个<strong>FrameLayout作为根布局去显示SplashFragment界面</strong>，这样在SplashFragment显示时候<strong>利用显示的2~4s间的空隙时间做网络请求去加载数据</strong>，这样待<strong>SplashFragment显示完后再remove</strong>，这样将看到的是有内容的MainActivity，就不必再去等待网络请求去返回数据了</p>
+</blockquote>
+<p>把<code>load Splash View和ContentView</code>合二为一了一起加载的方式：<br>可能会<strong>影响应用的启动时间</strong>，这时我们可以<strong>用ViewStub延迟加载MainActivity中某些View</strong>从而减去这个影响。<br>即：使用<code>ViewStub</code>，<strong>在SplashFragment显示时再进行加载额外的View</strong></p>
+<h3 id="防止内存抖动">防止内存抖动</h3><blockquote>
+<p>所谓的内存抖动，就是短时间产生大量的对象，导致gc回收率降低，无法回收对象.<strong>很可能会造成界面卡顿.</strong></p>
+</blockquote>
+<p><strong>措施</strong>：<br>1、可以使用对象池来管理对象，减少对象创建的次数，在使用完成之后再手动释放对象池中的对象<br>2、不要在for、while等循环体中执行对象的创建<br>3、避免在onDraw()方法中执行对象的创建<br>4、采用预分配策略来减少一次性创建大量的数据</p>
+<blockquote>
+<p>预分配：就是在程序刚启动的时候就事先创建一些即将要使用到的数据，这样可以在需要使用到这些数据的时候提供更快的加载速度，这种行为就叫做预分配</p>
+</blockquote>
+<p>资料：<a href="http://blog.csdn.net/u010687392/article/details/47813475" target="_blank" rel="external">Android性能优化典例（一）</a></p>
+<h3 id="Toast，常用使用类的优化"><code>Toast</code>，常用使用类的优化</h3><ul>
+<li><p>对于吐司-<code>Toast</code>:</p>
+<blockquote>
+<p>使用<code>getApplicationContext()</code>来代替<strong>当前Activity的Context</strong>.</p>
+</blockquote>
+</li>
+<li><p>属性设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:animateLayoutChanges=<span class="string">"true"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在<code>ViewGroup</code>中设置这个属性。当<strong>视图的添加和删除</strong>就有<strong>默认的动画效果</strong>了，使得<strong>界面变换更加平滑</strong>.</p>
+<ul>
+<li>listview为空时显示默认view<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mListView.setEmptyView(View view);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>资料引用：<a href="http://blog.csdn.net/u010687392/article/details/48263893" target="_blank" rel="external">Android性能优化之界面UI篇</a></p>
+<h3 id="优化工具的使用">优化工具的使用</h3><p>继续查看：<a href="http://blog.csdn.net/guolin_blog/article/details/42238633" target="_blank" rel="external">Android最佳性能实践(二)——分析内存的使用情况</a></p>
+<p>使用<code>Systrace</code>工具进行优化<br><a href="http://android.jobbole.com/81944/" target="_blank" rel="external">给 App 提速：Android 性能优化总结</a></p>
+<p><code>TraceView</code>工具使用：<br><a href="http://bxbxbai.github.io/2014/10/25/use-trace-view/" target="_blank" rel="external">正确使用Android性能分析工具——TraceView</a></p>
+<p><a href="http://blog.csdn.net/zhaokaiqiang1992/article/details/49951095" target="_blank" rel="external">【凯子哥带你学Android】Andriod性能优化之列表卡顿——以“简书”APP为例</a></p>
+<h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/guolin_blog/article/details/42238627" target="_blank" rel="external">Android最佳性能实践(一)——合理管理内存</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/42238633" target="_blank" rel="external">Android最佳性能实践(二)——分析内存的使用情况</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/42318689" target="_blank" rel="external">Android最佳性能实践(三)——高性能编码优化</a></p>
+<p><a href="http://blog.csdn.net/u010687392/article/details/50174271" target="_blank" rel="external">Android之SharedPreferences内部原理浅析</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/02/02/android 分享功能系统实现方式/" data-id="cinsxokot004mw0h1kwuxqcxc" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/02/02/android 分享功能系统实现方式/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/03/java 注解学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java 注解学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/01/android APP研发录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android APP研发录</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/02/02/android 分享功能系统实现方式/" data-title="Android 性能优化综合篇" data-url="http://hexo.trity.cc/2016/02/02/android 分享功能系统实现方式/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

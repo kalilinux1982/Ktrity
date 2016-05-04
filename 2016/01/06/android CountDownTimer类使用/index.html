@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android Http网络获取数据 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文介绍的使用HttpUrlConnection和HttpClient的使用，因为httpClient后面的版本都不建议使用了，所以介绍的少，加上相对于HttpUrlConnection来说,这方面的资料也比较多吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android Http网络获取数据">
+<meta property="og:url" content="http://hexo.trity.cc/2016/01/06/android CountDownTimer类使用/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="本文介绍的使用HttpUrlConnection和HttpClient的使用，因为httpClient后面的版本都不建议使用了，所以介绍的少，加上相对于HttpUrlConnection来说,这方面的资料也比较多吧。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android Http网络获取数据">
+<meta name="twitter:description" content="本文介绍的使用HttpUrlConnection和HttpClient的使用，因为httpClient后面的版本都不建议使用了，所以介绍的少，加上相对于HttpUrlConnection来说,这方面的资料也比较多吧。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android CountDownTimer类使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android Http网络获取数据
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/06/android CountDownTimer类使用/">
+      <time datetime="2016-01-06T04:39:08.000Z" itemprop="datePublished">2016-01-06</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>本文介绍的使用<code>HttpUrlConnection</code>和<code>HttpClient</code>的使用，因为<code>httpClient</code>后面的版本都不建议使用了，所以介绍的少，加上相对于<code>HttpUrlConnection</code>来说,这方面的资料也比较多吧。<br><a id="more"></a></p>
+<h3 id="使用HttpUrlConnecction连接">使用<code>HttpUrlConnecction</code>连接</h3><p>步骤：</p>
+<ol>
+<li>通过<code>URL</code>得到<code>HttpUrlConnecction</code>实例</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">HttpURLConnection connection = (HttpURLConnection) url.openConnection();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置请求方式<br>2.1 <code>Get</code>请求,直接获取数据</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.setRequestMethod(<span class="string">"GET"</span>);</span><br></pre></td></tr></table></figure>
+<p> 2.2 <code>Post</code>请求，发送数据提交给服务器。<strong>注意：</strong>每条数据都要以<strong>键值对的形式</strong>存在，<strong>数据与数据之间用&amp;符号隔开</strong>。<br>注意：必须先设置两个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送POST请求必须设置如下两行  ,需要在connect  之前设定好</span></span><br><span class="line">connection.setRequestMethod(<span class="string">"POST"</span>);</span><br><span class="line">urlConnect.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">urlConnect.setDoInput(<span class="keyword">true</span>);</span><br><span class="line">urlConnect.connect();<span class="comment">//需要连接成功后，才可以post发送数据</span></span><br></pre></td></tr></table></figure>
+<p>这里的<code>connect</code>必须在这两个方法之后，这两个方法的对应解释为：</p>
+<ul>
+<li><strong>URL 连接可用于输入和/或输出</strong>。如果打算使用 URL 连接进行输入,则将 <code>DoInput</code> 标志设置为 <strong>true</strong>；最后进行下面设置进行<code>post</code>请求：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataOutputStream out = <span class="keyword">new</span> DataOutputStream(connection.getOutputStream());</span><br><span class="line">out.writeBytes(<span class="string">"username=admin&amp;password=123456"</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>选项设置：连接超时、读取超时的毫秒数，以及服务器希望得到的一些消息头等</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connection.setConnectTimeout(<span class="number">8000</span>);</span><br><span class="line">connection.setReadTimeout(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获取网络返回的数据流</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream in = connection.getInputStream();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>关闭连接</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connection.disconnect();</span><br></pre></td></tr></table></figure>
+<h4 id="其他设置">其他设置</h4><ul>
+<li><p>返回状态码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnection.getResponseCode()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Post</code>方式，设置非缓存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnection.setUseCaches(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="HttpURLConnection在设置Http_Header"><code>HttpURLConnection</code>在设置<code>Http Header</code></h3><p>都使用同一个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnnection.setRequestProperty(key,value);</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://stackoverflow.com/questions/12732422/adding-header-for-httpurlconnection" target="_blank" rel="external">Adding header for HttpURLConnection</a></p>
+<h5 id="一些问题：">一些问题：</h5><ul>
+<li>设置<code>host</code>的情况：<a href="http://www.cnblogs.com/skyaccross/archive/2012/12/22/2828986.html" target="_blank" rel="external">HttpURLConnection 设置Host 头部无效</a></li>
+</ul>
+<h4 id="HttpURLConnection设置cookie(需要在connect之前)"><code>HttpURLConnection</code>设置<code>cookie</code>(需要在<code>connect</code>之前)</h4><p>代码如下：（<strong>注意<code>key=Cookie</code></strong>）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">httpURLConnnection.setRequestMethod(<span class="string">"POST"</span>);</span><br><span class="line">httpURLConnnection.setRequestProperty(<span class="string">"Cookie"</span>, firstCookie);</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://blog.csdn.net/lfdfhl/article/details/8707891" target="_blank" rel="external">HttpURLConnection重定向,获取及设置cookie</a></p>
+<h5 id="另一种方式：通过自定义CookieStore进行自动设置cookie-">另一种方式：通过自定义<code>CookieStore</code>进行自动设置<code>cookie</code>.</h5><p>引用参考：<a href="http://stackoverflow.com/questions/12349266/how-do-i-persist-cookies-when-using-httpurlconnection" target="_blank" rel="external">How do I persist cookies when using HTTPUrlConnection?</a></p>
+<ul>
+<li>让<code>MyCookieStore</code>是实现<code>CookieStore</code>接口.并在内部使用<code>SharePreference</code>进行存储数据（添加的时候），在生成实例的时候进行获取数据。详细点击链接参考代码。</li>
+<li>通过<code>CookieManager</code>进行设置<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CookieManager cmrCookieMan = <span class="keyword">new</span> CookieManager(<span class="keyword">new</span> MyCookieStore(<span class="keyword">this</span>.objContext), CookiePolicy.ACCEPT_ALL);</span><br><span class="line">CookieHandler.setDefault(cmrCookieMan);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里的<code>MyCookieStore</code>是实现<code>CookieStore</code>接口</p>
+<h4 id="得到Header部分">得到<code>Header</code>部分</h4><p>得到<strong>头部信息很简单</strong>。代码为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, List&lt;String&gt;&gt; map = httpUrlConnection.getHeaderFields();</span><br></pre></td></tr></table></figure></p>
+<h5 id="得到cookie：">得到<code>cookie</code>：</h5><blockquote>
+<p>通过得到<code>http header cookie</code>这种方式，可以得到<code>cookie</code>来作为<strong>登录凭证</strong>。</p>
+</blockquote>
+<p>对应的代码：</p>
+<ul>
+<li>在<code>httpURLConnection.connect()</code>链接之前：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java.net.CookieManager manager = <span class="keyword">new</span> java.net.CookieManager();</span><br><span class="line">manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);</span><br><span class="line">CookieHandler.setDefault(manager);</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">CookieHandler.setDefault(<span class="keyword">new</span> CookieManager(<span class="keyword">null</span>, CookiePolicy.ACCEPT_ALL));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要在<code>httpURLConnection.connect()或者httpURLConnection.getInputStream()</code>执行以后:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"Headers-------start-----"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; (key = conn.getHeaderFieldKey(i)) != <span class="keyword">null</span>; i++) &#123;</span><br><span class="line">    System.out.println(key + <span class="string">":"</span> + conn.getHeaderField(i));</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">"Headers-------end-----"</span>);</span><br></pre></td></tr></table></figure>
+<p>当你获取<code>cookie</code>的时候，是当<code>key=&quot;Set-Cookie&quot;</code>的时候，则<code>value</code>对应的值就是<code>cookie</code>的值。</p>
+<h5 id="另外一种方式,得到cookie">另外一种方式,得到<code>cookie</code></h5><p>结合<code>CookieStore，CookieManager</code>：</p>
+<blockquote>
+<p>参考:<a href="http://blog.5ibc.net/p/571.html" target="_blank" rel="external">android HttpURLConnection ,HttpClient设置Cookie</a>，点击看详细代码。</p>
+</blockquote>
+<p>步骤：</p>
+<ul>
+<li><p>跟前面一样设置<code>cookieManager</code>,再加入<code>CookieHandler.setDefault(cookieManager);</code></p>
+</li>
+<li><p>初始化<code>HttpConnection</code>并<code>connect</code>.最后<code>connection.getHeaderFields();</code>得到头部操作</p>
+</li>
+<li><p>最后通过<code>CookieManager</code>得到<code>CookieStore</code>;</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CookieStore store = manager.getCookieStore();</span><br></pre></td></tr></table></figure>
+<p>接着对<code>store</code>进行处理得到<code>httpCookie</code>即：<code>cookie</code>对应信息的类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">responseUpdateCookieHttpURL</span><span class="params">(CookieStore store)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> needUpdate = <span class="keyword">false</span>;</span><br><span class="line">        List&lt;HttpCookie&gt; cookies = store.getCookies();</span><br><span class="line">        HashMap&lt;String, String&gt; cookieMap = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (cookieMap == <span class="keyword">null</span>) &#123;</span><br><span class="line">            cookieMap = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (HttpCookie cookie : cookies) &#123;</span><br><span class="line">            String key = cookie.getName();</span><br><span class="line">            String value = cookie.getValue();</span><br><span class="line">            <span class="keyword">if</span> (cookieMap.size() == <span class="number">0</span> || !value.equals(cookieMap.get(key))) &#123;</span><br><span class="line">                needUpdate = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            cookieMap.put(key, value);</span><br><span class="line"></span><br><span class="line">            System.out.println(cookie.getName() + <span class="string">"----&gt;"</span> + cookie.getDomain()+ <span class="string">"------&gt;"</span> + cookie.getPath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>你可以通过<code>connection.getHeaderFields()</code>逐个遍历输出，关注<code>Set-Cookie</code>的值，去感受下得到的值是什么。</p>
+<h3 id="开启GZIP压缩">开启<code>GZIP</code>压缩</h3><blockquote>
+<p>对于<strong>文本数据</strong>，特别是json数据或者html网页数据，最好使用gzip进行压缩，理论上文本数据可以<strong>压缩为原来的1/3</strong>，效果很明显，<strong>压缩之后应该使用gzip流进行解压缩！</strong></p>
+</blockquote>
+<p>注意：<code>HttpURLConnection</code>发请求时，<strong>默认</strong>的<code>request hearder</code>里会加上 <code>Accept-Encoding: gzip</code>。但这是<strong>(android 2.3.3) 版本以后才加上</strong>，需要注意。<br>来源：<a href="http://itindex.net/detail/48734-android-httpurlconnection-accept" target="_blank" rel="external">[原]Android HttpURLConnection Accept-Encoding: gzip 版本问题</a></p>
+<h5 id="使用步骤">使用步骤</h5><ul>
+<li><p>在请求头进行设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.setRequestProperty(<span class="string">"Accept-Encoding"</span>, <span class="string">"gzip"</span>); <span class="comment">//设置头参数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对返回的数据流使用<code>GZIPInputStream</code>进行解压</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InputStream is = <span class="keyword">new</span> BufferedInputStream(conn.getInputStream());  </span><br><span class="line">String encoding = conn.getContentEncoding();  </span><br><span class="line"><span class="keyword">if</span>(encoding!=<span class="keyword">null</span> &amp;&amp; encoding.contains(<span class="string">"gzip"</span>))&#123;<span class="comment">//首先判断服务器返回的数据是否支持gzip压缩，  </span></span><br><span class="line">    is = <span class="keyword">new</span> GZIPInputStream(is);   <span class="comment">//如果支持则应该使用GZIPInputStream解压，否则会出现乱码无效数据  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参考来源：<a href="http://blog.csdn.net/zimo2013/article/details/9469543" target="_blank" rel="external">Android_HttpURLConnection_Get和Post请求</a></p>
+<h4 id="错误记录：">错误记录：</h4><p><a href="http://blog.csdn.net/d24244021/article/details/7696688" target="_blank" rel="external">android4.0中HttpURLConnection抛异常java.io.FileNotFoundException</a>，这个是<code>android4</code>的错误，当<code>httpCon.setDoOutput(true)</code>的时候，默认使用<code>post</code>方式，这里应该置为<code>false</code>.</p>
+<p>注意：<code>setDoOutput</code>的使用：</p>
+<blockquote>
+<p>网上查到的解释是，设置<code>true</code>，表示你发送的请求，会把body的内容发送至server端，即<code>POST和PUT</code>才需要使用。<strong>GET完全可以不用设置</strong>。</p>
+</blockquote>
+<h3 id="使用HttpClient连接">使用<code>HttpClient</code>连接</h3><p>步骤：</p>
+<ol>
+<li><code>HttpClient</code>为接口，需要<code>DefaultHttpClient</code>得到</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置请求的方式：(统一使用方法<code>execute</code>请求)<br>2.1 使用<code>get</code>请求，需要通过<code>HttpGet</code>对象进行请求</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpGet httpGet = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">httpClient.execute(httpGet);</span><br></pre></td></tr></table></figure>
+<p> 2.2 使用<code>post</code>请求，需要创建<code>httpPost</code>对象，再使用<code>NameValuePair</code>存放到<code>List</code>集合来<strong>存储键值</strong>。具体如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//存储键值</span></span><br><span class="line">List&lt;NameValuePair&gt; params = <span class="keyword">new</span> ArrayList&lt;NameValuePair&gt;();</span><br><span class="line">params.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"username"</span>, <span class="string">"admin"</span>));</span><br><span class="line">params.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"password"</span>, <span class="string">"123456"</span>));</span><br><span class="line"><span class="comment">//转换编码</span></span><br><span class="line">UrlEncodedFormEntity entity = <span class="keyword">new</span> UrlEncodedFormEntity(params, <span class="string">"utf-8"</span>);</span><br><span class="line"><span class="comment">//设置</span></span><br><span class="line">httpPost.setEntity(entity);</span><br><span class="line">httpClient.execute(httpPost);<span class="comment">//最后一步执行</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过<code>execute()</code>方法之后会返回一个 <code>HttpResponse</code> 对象,当状态码<code>==200</code>说明请求成功</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (httpResponse.getStatusLine().getStatusCode() == <span class="number">200</span>) &#123;</span><br><span class="line"><span class="comment">// 请求和响应都成功了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获取服务器返回的具体内容</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HttpEntity entity = httpResponse.getEntity();<span class="comment">//获取实例</span></span><br><span class="line">String response = EntityUtils.toString(entity, <span class="string">"utf-8"</span>);<span class="comment">//制定编码</span></span><br><span class="line">或者：得到输入流自行处理</span><br><span class="line">InputStram inputStreeam=httpEntity.getContent();</span><br></pre></td></tr></table></figure>
+<h4 id="方法解释：">方法解释：</h4><ul>
+<li>getEntity()：<blockquote>
+<p>用于获取响应的消息实体</p>
+</blockquote>
+</li>
+<li>getStatusLine()<blockquote>
+<p>用于<strong>获取响应的状态行</strong>，在返回结果<strong>StatusLine对象</strong>中<strong>包含了HTTP响应的状态码</strong>，可以使用方法<code>getStatusCode()</code>.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="错误问题">错误问题</h3><ul>
+<li><p>使用<code>HttpUrLConnection</code>抛出错误：<a href="http://stackoverflow.com/questions/11207394/getting-socketexception-connection-reset-by-peer-in-android" target="_blank" rel="external">Getting “SocketException : Connection reset by peer” in Android</a>，是<strong>端口被占用的问题</strong></p>
+</li>
+<li><p><code>multiple requests to the same URL&#39;s does not seem to preserve cookies.</code></p>
+<blockquote>
+<p>原文链接：<a href="http://stackoverflow.com/questions/14860087/should-httpurlconnection-with-cookiemanager-automatically-handle-session-cookies" target="_blank" rel="external">Should HttpURLConnection with CookieManager automatically handle session cookies?</a><br>使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CookieHandler.setDefault( <span class="keyword">new</span> CookieManager( <span class="keyword">null</span>, CookiePolicy.ACCEPT_ALL));</span><br><span class="line">代替</span><br><span class="line">CookieHandler.setDefault( <span class="keyword">new</span> CookieManager());</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h3 id="扩展">扩展</h3><ul>
+<li><a href="http://blog.csdn.net/sbsujjbcy/article/details/46895039" target="_blank" rel="external">Android OkHttp的Cookie自动化管理</a></li>
+<li>当结合<code>WebView</code>,可能会遇到：<a href="http://stackoverflow.com/questions/12731211/pass-cookies-from-httpurlconnection-java-net-cookiemanager-to-webview-android" target="_blank" rel="external">Pass cookies from HttpURLConnection (java.net.CookieManager) to WebView (android.webkit.CookieManager)</a></li>
+</ul>
+<h3 id="资料">资料</h3><p><a href="http://blog.csdn.net/shimiso/article/details/39033353" target="_blank" rel="external">Android持久化保存cookie</a>，这个资料，太老了，讲得是<code>HttpClient</code>获取<code>cookie</code>的方式。</p>
+<p><a href="http://davinci42.github.io/AndroidDeveloperReferenceHttpURLConnection/" target="_blank" rel="external"># Android Developer Reference - HttpURLConnection</a>这篇译文，来自官网：<a href="http://developer.android.com/intl/zh-tw/reference/java/net/HttpURLConnection.html" target="_blank" rel="external">HttpURLConnection</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/06/android CountDownTimer类使用/" data-id="cinsxokpo005ew0h1nymzwzxs" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/06/android CountDownTimer类使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/08/关于贝塞尔曲线问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于贝塞尔曲线问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/05/android 架构搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android_WebView使用</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/01/06/android CountDownTimer类使用/" data-title="android Http网络获取数据" data-url="http://hexo.trity.cc/2016/01/06/android CountDownTimer类使用/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

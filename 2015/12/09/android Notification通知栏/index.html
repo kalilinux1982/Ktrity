@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android viewpager&amp;适配器 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ViewPager介绍：方法：
+
+getItemPosition 保持当前页面处于运行状态。
+
+如何禁止viewPager滑动：需求：为了解决其他滑动的冲突。通过搜索,有两种方式可以解决：(都是通过继承viewpager的方式)
+
+重写：scrollTo：12345@Overridepublic void scrollTo(int x, int y) &amp;#123;  if(isCanscroll)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android viewpager&适配器">
+<meta property="og:url" content="http://hexo.trity.cc/2015/12/09/android Notification通知栏/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="ViewPager介绍：方法：
+
+getItemPosition 保持当前页面处于运行状态。
+
+如何禁止viewPager滑动：需求：为了解决其他滑动的冲突。通过搜索,有两种方式可以解决：(都是通过继承viewpager的方式)
+
+重写：scrollTo：12345@Overridepublic void scrollTo(int x, int y) &amp;#123;  if(isCanscroll)">
+<meta property="og:image" content="http://7xljdj.com1.z0.glb.clouddn.com/%E5%9B%BE11-4-FragmentPagerAdapter%E7%9A%84fragment%E7%AE%A1%E7%90%86-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
+<meta property="og:image" content="http://7xljdj.com1.z0.glb.clouddn.com/%E5%9B%BE11-3FragmentStatePagerAdapter%E7%9A%84fragment%E7%AE%A1%E7%90%86-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android viewpager&适配器">
+<meta name="twitter:description" content="ViewPager介绍：方法：
+
+getItemPosition 保持当前页面处于运行状态。
+
+如何禁止viewPager滑动：需求：为了解决其他滑动的冲突。通过搜索,有两种方式可以解决：(都是通过继承viewpager的方式)
+
+重写：scrollTo：12345@Overridepublic void scrollTo(int x, int y) &amp;#123;  if(isCanscroll)">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android Notification通知栏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android viewpager&amp;适配器
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/09/android Notification通知栏/">
+      <time datetime="2015-12-09T05:05:28.000Z" itemprop="datePublished">2015-12-09</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="ViewPager介绍：">ViewPager介绍：</h3><p><strong>方法</strong>：</p>
+<ul>
+<li>getItemPosition 保持当前页面处于运行状态。</li>
+</ul>
+<h4 id="如何禁止viewPager滑动：">如何禁止<code>viewPager</code>滑动：</h4><p>需求：<strong>为了解决其他滑动的冲突</strong>。<br>通过搜索,有两种方式可以解决：(都是通过继承<code>viewpager</code>的方式)</p>
+<ol>
+<li>重写：<code>scrollTo</code>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scrollTo</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(isCanscroll)</span><br><span class="line">    <span class="keyword">super</span>.scrollTo(x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>通过测试，有时候还是会导致其他的滑动，并不可以画，比如说：图表里面手指滑动的数据显示。</p>
+<ol>
+<li>重写：<code>onTouchEvent</code>和<code>onInterceptTouchEvent</code>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(isCanscroll)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.isCanscroll) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(event);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个能够很好的解决，推荐使用。<br>参考：<a href="http://blog.csdn.net/luohai859/article/details/47153955" target="_blank" rel="external">Android禁止ViewPager的左右滑动</a></p>
+<h3 id="如何关掉ViewPager预加载Fragment的问题">如何关掉<code>ViewPager</code>预加载<code>Fragment</code>的问题</h3><ul>
+<li><h4 id="使用setOffscreenPageLimit">使用<code>setOffscreenPageLimit</code></h4></li>
+</ul>
+<p><code>Viewpager</code>有一个方法<code>setOffscreenPageLimit(int limit)</code>来提前设置<strong>预加载<code>Fragment</code>的数量</strong>，所以，你会很自然的想到把这里设置为<code>0</code>不就解决问题了么？<br>真的是这样么，我们看看此方法的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOffscreenPageLimit</span><span class="params">(<span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(limit &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        Log.w(<span class="string">"ViewPager"</span>, <span class="string">"Requested offscreen page limit "</span> + limit + <span class="string">" too small; defaulting to "</span> + <span class="number">1</span>);</span><br><span class="line">        limit = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(limit != <span class="keyword">this</span>.mOffscreenPageLimit) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mOffscreenPageLimit = limit;</span><br><span class="line">        <span class="keyword">this</span>.populate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从源码中你会发现<code>Viewpager</code>接受最小的预加载是<code>1</code>，默认预加载也是<code>1</code>。那么如何解决问题呢？</p>
+<ul>
+<li><h4 id="使用setUserVisibleHint">使用<code>setUserVisibleHint</code></h4></li>
+</ul>
+<p>使用<code>Fragment</code>自带的方法<code>setUserVisibleHint（isVisibleHint）</code>，这个方法表示为：<strong>当Fragment进行展示在当前屏幕的时候，就会执行它</strong>，需要不能解决预加载<code>fragment</code>的问题，但是我们可以将一些耗时的操作放到这个方法中，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="javadoc">/**</span><br><span class="line"> * 在这里实现Fragment数据的缓加载.</span><br><span class="line"> *<span class="javadoctag"> @param</span> isVisibleToUser</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</span><br><span class="line">    <span class="keyword">if</span>(getUserVisibleHint()) &#123;</span><br><span class="line">        onVisible();<span class="comment">//出现当前界面的操作</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        onInvisible();<span class="comment">//不再当前界面的操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后：值得注意的是<code>setUserVisibleHint</code>是优先于<code>onCreate</code>方法执行。</p>
+<p>参考：<a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1021/1813.html" target="_blank" rel="external">Fragment的setUserVisibleHint方法实现懒加载</a><br><a href="http://www.cnblogs.com/lee0oo0/p/3713391.html" target="_blank" rel="external">Android之取消ViewPage+Fragment的预加载</a></p>
+<p><strong>实战结果：</strong>还是很遗憾的，这个方法居然有sdk版本不同的问题，<code>api21</code>有效，其他低版本不怎么支持，并不会主动的调用，需要手动调用。<br>从下面三篇文章知道：<br><a href="https://github.com/excilys/androidannotations/issues/1305" target="_blank" rel="external"># Android Annotation fragment setUserVisibleHint method don’t invoke ？</a><br><a href="http://www.28im.com/0/a91868.html" target="_blank" rel="external">## Fragment.setUserVisibleHint()调用安卓系统吗?Is Fragment.setUserVisibleHint() called by the android System?</a><br><a href="http://blog.csdn.net/sunnyskybluesea/article/details/46739131" target="_blank" rel="external">Fragment中的setUserVisibleHint()方法调用</a></p>
+<ul>
+<li><h4 id="网上有的说使用onHiddenChanged方法。">网上有的说使用<code>onHiddenChanged</code>方法。</h4></li>
+</ul>
+<p>但不适用于<code>viewpager</code>的情况，而是适用于这种情况添加：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FragmentTransaction ft = getFragmentManager().beginTransaction();</span><br><span class="line">...</span><br><span class="line">ft.commit();</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://www.tuicool.com/articles/VBVb2i6" target="_blank" rel="external">Android开发:Fragment不同操作的生命周期</a></p>
+<ul>
+<li><h4 id="最后使用setOnPageChangeListener解决">最后使用<code>setOnPageChangeListener</code>解决</h4></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mPager.setOnPageChangeListener(<span class="keyword">new</span> ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">float</span> v, <span class="keyword">int</span> i1)</span> </span>&#123;&#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (i)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"> mAdapter.getCurBaseFragment().executeUpdate(BaseFrament.EXE_UPDATE_TASK);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在<code>onPageSelected</code>方法中得到当前显示的<code>fragment</code>后进行执行<strong>对应的方法进行耗时操作</strong>。如何得到<code>Fragment</code>请看下面的解答。</p>
+<h3 id="ViewPager下Fragment的生命周期"><code>ViewPager</code>下<code>Fragment</code>的生命周期</h3><p>接着上面的问题，当使用<code>ViewPager</code>后，被预加载的<code>fragment</code>会执行完成的生命周期：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">setUserVisibleHint</span></span><br><span class="line"><span class="built_in">on</span>Create</span><br><span class="line"><span class="built_in">on</span>CreateView</span><br><span class="line"><span class="built_in">on</span>ActivityCreated</span><br><span class="line"><span class="built_in">on</span>Resume</span><br><span class="line"><span class="built_in">on</span>DestroyView</span><br></pre></td></tr></table></figure></p>
+<p>当切换到<strong>被预加载</strong>的<code>fragment</code>的时候，此时并不会想:正常的生命周期的流程那样，重新从<code>oncreateView-&gt;..</code>开始，而仅仅执行了<code>setUserVisibleHint</code>方法，一种解释的就是<code>ViewPager</code>对<code>fragment</code>的生命周期进行了管理，而不会再进行了重建的操作。<br>参考：<a href="http://blog.csdn.net/tongcpp/article/details/41978751" target="_blank" rel="external">友盟页面统计 - 关于Viewpager中的Fragment的生命周期</a></p>
+<h3 id="ViewPager_如何得到当前的Fragment_（使用FragmentPagerAdapter）"><a href="http://www.cnblogs.com/englefly/p/4222953.html" target="_blank" rel="external">ViewPager 如何得到当前的Fragment （使用FragmentPagerAdapter）</a></h3><p>我们通过继承的方式来得到<strong>当前显示viewpager的fragment</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXPagerAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentPagerAdapter</span></span>&#123;</span><br><span class="line">Fragment currentFragment;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrimaryItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">　　currentFragment = (QipanFragment) object;</span><br><span class="line">　　<span class="keyword">super</span>.setPrimaryItem(container, position, object);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然而，在实际的项目中却仍然有问题，<code>setPrimaryItem</code>不仅仅是切换时调用，而是不断地调用：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">...</span></span><br><span class="line">E/VPFragmentAdapter: setPrimaryItem</span><br><span class="line">E/VPFragmentAdapter: setPrimaryItem</span><br></pre></td></tr></table></figure></p>
+<p>这方面不说，但最重要的是<strong>当你进行切换的时候并不能准确得到切换后的<code>fragment</code></strong>，因为<code>setPrimaryItem</code>是不断地调用，可能你穿进去的时候并不是切换后的<code>fragment</code>，而是前一个<code>fragment</code>，导致错误。</p>
+<p>其他解决方案：<br><a href="http://blog.csdn.net/piglovesula/article/details/12916279" target="_blank" rel="external">获取ViewPager当前展示的Fragment</a>，我这里选择第二种:(改写<code>FragmentPagerAdapter</code>)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Fragment myFragment = MyFragment.newInstance();</span><br><span class="line">    mPageReferenceMap.put(index, myFragment);</span><br><span class="line">    <span class="keyword">return</span> myFragment;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(View container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.destroyItem(container, position, object);</span><br><span class="line">    mPageReferenceMap.remove(position);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> MyFragment <span class="title">getFragment</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mPageReferenceMap.get(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用的时候：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = mViewPager.getCurrentItem();</span><br><span class="line">MyAdapter adapter = ((MyAdapter)mViewPager.getAdapter());</span><br><span class="line">MyFragment fragment = adapter.getFragment(index);</span><br></pre></td></tr></table></figure></p>
+<h3 id="FragmentPagerAdapter介绍">FragmentPagerAdapter介绍</h3><ul>
+<li>缓存策略：<blockquote>
+<p>和ViewPager配合使用的时候，会缓存当前Fragment以及左边一个、右边一个，一共三个Fragment对象。当超出范围的时候，销毁(<code>onDestoryView()</code>)。<strong>注意：</strong>这里保存的是<strong>完整的fragment</strong>实例在内存，不会被销毁。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="FragmentStatePagerAdapter介绍">FragmentStatePagerAdapter介绍</h3><p>也有<code>FragmentPagerAdapter</code>缓存策略，但相对于<code>FragmentPagerAdapter</code>更适合对实现多个Fragment界面的滑动。因为<strong>当Fragment对用户不可见的时候，整个Fragment会被销毁，只会保存Fragment的保存状态,使用<code>saved state</code>保存</strong>。销毁更少的资源。</p>
+<p>下面是两者的图解：<br><img src="http://7xljdj.com1.z0.glb.clouddn.com/%E5%9B%BE11-4-FragmentPagerAdapter%E7%9A%84fragment%E7%AE%A1%E7%90%86-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="FragmentPagerAdapter"><br><img src="http://7xljdj.com1.z0.glb.clouddn.com/%E5%9B%BE11-3FragmentStatePagerAdapter%E7%9A%84fragment%E7%AE%A1%E7%90%86-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="FragmentStatePagerAdapter"><br>以上摘自：<a href="https://segmentfault.com/a/1190000003742057" target="_blank" rel="external">如何更新及替换ViewPager中的Fragment</a></p>
+<p>最后总结两者最本质的区别：<strong>FragmentPagerAdapter</strong>只是销毁了fragment的视图<strong>，但仍将fragment实例保留在FragmentManager中，而<code>FragmentStatePagerAdapter</code>是直接<code>remove</code>卸载</strong></p>
+<p>关于两者的选择可以查看这里：<a href="http://www.cnblogs.com/lianghui66/p/3607091.html" target="_blank" rel="external">FragmentPagerAdapter与FragmentStatePagerAdapter区别</a></p>
+<h3 id="PagerAdapter介绍">PagerAdapter介绍</h3><p><strong>执行过程</strong>：</p>
+<blockquote>
+<ol>
+<li>PagerAdapter中的startUpdate(ViewGroup)方法一旦被执行，就说明ViewPager的内容即将开始改变。</li>
+<li>紧接着，instantiateItem(ViewGroup, int)和/或destroyItem(ViewGroup, int, Object)方法将会被执行，</li>
+<li>然后finishUpdate(ViewGroup)的执行就意味着这一次刷新的完成。</li>
+<li>当finishUpdate(ViewGroup)方法执行完时，与instantiateItem(ViewGroup, int)方法返回的key相对应的视图将会被加入到父ViewGroup中，而与传递给destroyItem(ViewGroup, int, Object)方法的key相对应的视图将会被移除。</li>
+<li>isViewFromObject(View, Object)方法则判断一个视图是否与一个给定的key相对应。</li>
+</ol>
+</blockquote>
+<p>摘自：<a href="http://www.imooc.com/article/2580" target="_blank" rel="external">【Android】ViewPager深入解析（一）</a></p>
+<h3 id="viewpager实现无线循环"><code>viewpager</code>实现无线循环</h3><p>分两种方式：<a href="http://blog.csdn.net/just_sanpark/article/details/17436037" target="_blank" rel="external">用最简单最实用的方式实现ViewPager无限循环两种方式</a>，很明显我们需要的是使用第二种方式。因为第一种的方式，会通过之前的几张回到第一张，这个过渡的体验太差了。<br>关于第二种的方式：<a href="http://flyingcat2013.blog.51cto.com/7061638/1575015" target="_blank" rel="external">Android使用ViewPager实现左右循环滑动及轮播效果</a>，这个比较清楚。注意两点：</p>
+<ul>
+<li>设置<code>getcount()</code>返回<code>Integer.MAX_VALUE</code>，晚上说电池没电就差不多滑动完了。</li>
+<li>对应的<code>return view</code>方法需要<code>%</code>运算处理，地址给的是<code>instantiateItem</code>方法的对应处理。</li>
+</ul>
+<p>但在<code>viewpager+fragment</code>通常是使用<strong>FragmentPagerAdapter</strong>，当然也可以使用<code>PagerAdapter</code>。那么使用<code>fragmentPagerAdapter</code>该怎么使用呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">viewpagerMain.setAdapter(<span class="keyword">new</span> FragmentStatePagerAdapter(<span class="keyword">this</span>.getSupportFragmentManager()) &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;       Log.e(MainActivity.<span class="keyword">this</span>.getLocalClassName(),position+<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">return</span> fragmentList.get(position%fragmentList.size());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>但我结合使用<code>CirclePageIndicator</code>却有一个问题—&gt;<strong>白屏问题</strong>，改怎么解决，需要看<code>CirclePageIndicator</code>源码，发现他是<code>viewpager.getAdapter().getCount()</code>来获取的，那么就无限大了，画图还没有画出来。<br>我们需要改造<code>CirclePageIndicator</code>,重新自定义的方式：<a href="http://tqcto.com/article/mobile/56593.html" target="_blank" rel="external"># 打造无限自动循环viewpager</a>，或者是我们要进行改造<code>CirclePageIndicator</code>的源码：</p>
+<ol>
+<li>将所有的<code>viewpager.getAdapter().getCount()</code>改成<code>viewpagerCount</code>，这个<code>viewpagerCount</code>是全部变量，加多一个方法。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setViewPagerFixedLength</span><span class="params">(ViewPager view,<span class="keyword">int</span> viewpagerCount)</span> </span>&#123;</span><br><span class="line"><span class="keyword">this</span>.viewpagerCount=lenght;</span><br><span class="line">setViewPager(view);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>然后修改<code>onDraw()</code>方法：<br>第一步先注释掉这个方法的判断：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//        if (mCurrentPage &gt;= count) &#123;</span></span><br><span class="line"><span class="comment">//            setCurrentItem(0);</span></span><br><span class="line"><span class="comment">//            return;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第二步：<br>对mSnapPage和mCurrentPage进行<code>%viewpagerCount</code>，因为这个方法是<strong>画实心圆</strong>的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> cx = (mSnap ? mSnapPage%viewpagerCount : mCurrentPage%viewpagerCount) * threeRadius;</span><br><span class="line"><span class="keyword">if</span> (!mSnap) &#123;</span><br><span class="line">    cx += mPageOffset * threeRadius;<span class="comment">//这里导致增加了过渡的效果</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">canvas.drawCircle(dX, dY, mRadius, mPaintFill);</span><br></pre></td></tr></table></figure>
+<p>其中：<br><code>mSnapPage</code>是当<code>mSnap</code>为<code>true</code>的时候取到，此时效果是<strong>实心圆没有过渡的动画效果</strong>，默认<code>false</code>是有的。即：<code>mPageOffset * threeRadius</code>是计算<strong>当前page到下一个page的移动的距离</strong>。</p>
+<ul>
+<li>最后设置<code>snap</code>为<code>true</code><blockquote>
+<p>indicator.setSnap(true);</p>
+</blockquote>
+</li>
+</ul>
+<p>当然，你不需要这么折腾：<br><a href="http://blog.csdn.net/xiaanming/article/details/8966621" target="_blank" rel="external">Android 使用ViewPager实现左右循环滑动图片</a>,这里不用<code>CirclePageIndicator</code>类，自己定义<strong>圆点的情况</strong></p>
+<h4 id="修复fragment只有两个的问题">修复fragment只有两个的问题</h4><blockquote>
+<p>这个耗尽我一个下午+晚上的时间，各种尝试仍然未能解决。谁解决告诉下我。留下几条连接：<br><strong><a href="https://github.com/saiwu-bigkoo/Android-ConvenientBanner" target="_blank" rel="external">Android-ConvenientBanner</a></strong><br><strong><a href="https://github.com/imbryk/LoopingViewPager" target="_blank" rel="external">LoopingViewPager</a></strong>，这个开源库里面都说要把<code>2个变成4个</code>，应该是没办法的了,所以接下来的思路也是把<strong>两个变成四个</strong></p>
+</blockquote>
+<h3 id="资料：">资料：</h3><p><a href="https://segmentfault.com/a/1190000003742057" target="_blank" rel="external">如何更新及替换ViewPager中的Fragment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/09/android Notification通知栏/" data-id="cikmr5jio004bm8jsdxv60awp" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/09/android Notification通知栏/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FragmentPageAdapter/">FragmentPageAdapter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FragmentStateAdapter/">FragmentStateAdapter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewpager/">viewpager</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/12/android 实战技巧/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 实战技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/08/android 线程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android UI-AutoCompleteTextView使用</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/12/09/android Notification通知栏/" data-title="android viewpager&适配器" data-url="http://hexo.trity.cc/2015/12/09/android Notification通知栏/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

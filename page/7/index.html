@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        97
+        131
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        117
+        144
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-android_service" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android TextView使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/10/android_service/">android_service</a>
+      <a class="article-title" href="/2015/11/10/android TextView使用/">android 内存泄漏</a>
     </h1>
   
 
@@ -134,754 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/08/10/android_service/">
-      <time datetime="2015-08-10T02:30:16.000Z" itemprop="datePublished">2015-08-10</time>
-    </a>
-  </div>
-
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="生命周期">生命周期</h3><p><a href="http://coolwhy1.iteye.com/blog/1284405" target="_blank" rel="external">Android Service两种启动启动方式 及 adndroid service生命周期</a></p>
-<h3 id="方法使用：（Service）">方法使用：（Service）</h3><ul>
-<li><p>onBind();</p>
-<blockquote>
-<p>唯一抽象方法,当<code>act与ser</code>进行绑定时才使用,即：<code>context.bindService()</code>的时候调用</p>
-</blockquote>
-</li>
-<li><p>onCreate();</p>
-<blockquote>
-<p>第一次创建的时候调用(<code>startService/bindService</code>的时候)</p>
-</blockquote>
-</li>
-<li><p>onStartCommand(Intent intent, int flags, int startId);</p>
-<blockquote>
-<p>使用<code>startService</code>的执行是将执行此方法，<code>bindService()</code>并不会执行此方法</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>参数介绍：<code>flag</code></strong></p>
-<ul>
-<li>flags = START_STICKY;<blockquote>
-<p>在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。不久后service就会再次尝试重新创建，因为保留在开始状态，在创建     service后将保证调用onstartCommand。</p>
-</blockquote>
-</li>
-<li>flags = START_NOT_STICKY;<blockquote>
-<p>在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。</p>
-</blockquote>
-</li>
-<li>flags = START_REDELIVER_INTENT;<blockquote>
-<p>在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>onDestory();</p>
-<blockquote>
-<p>当使用<code>stopService()/unbindService()</code>的时候。<strong>销毁后还会有一些不再使用的对象仍占用着内存的资源</strong>。</p>
-</blockquote>
-</li>
-<li><p>stopSelf(); //关闭当前的service</p>
-</li>
-</ul>
-<p><strong>关于绑定</strong></p>
-<blockquote>
-<p>service可以与任何act绑定，而且绑定后得到的<strong>实例都是相同</strong>。</p>
-</blockquote>
-<h3 id="前台服务">前台服务</h3><blockquote>
-<p>普通服务在系统内存不足的时候将被回收，使用前台服务则不会，但<strong>它会有正在运行的系统图标在状态栏进行显示</strong>。</p>
-</blockquote>
-<p>如何创建？<br>在<code>service</code>中的<code>oncreate</code>方法。先创建<code>Notification</code>后，再<code>startForeground(1,notification);</code>即可。而这句话相当于<strong>使用<code>notificationManager.notify()</code></strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建前台服务</span></span><br><span class="line">    Intent intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>, MainActivity.class);</span><br><span class="line">    PendingIntent pendingIntent=PendingIntent.getActivity(<span class="keyword">this</span>,<span class="number">0</span>,intent,PendingIntent.FLAG_CANCEL_CURRENT);</span><br><span class="line">    Notification notification=<span class="keyword">new</span> Notification.Builder(<span class="keyword">this</span>)</span><br><span class="line">            .setWhen(System.currentTimeMillis())</span><br><span class="line">            ...</span><br><span class="line">            .build();</span><br><span class="line">    startForeground(<span class="number">1</span>,notification);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意：</strong></p>
-<blockquote>
-<p>在<code>onDestroy</code>里还需要<code>stopForeground(true);</code></p>
-</blockquote>
-<h3 id="IntentService">IntentService</h3><blockquote>
-<p>创建一个异步的、会自动停止的服务</p>
-</blockquote>
-<h3 id="什么使用该使用service">什么使用该使用<code>service</code></h3><h3 id="使用线程和service之间权衡">使用线程和<code>service</code>之间权衡</h3><p>实际上<strong>线程</strong>和<code>service</code>并没有什么关系。因为：<strong>Service其实是运行在主线程里的</strong>，所以编写非常耗时的情况下，一样会<code>ANR</code>。</p>
-<p><code>service</code>不依赖于<code>UI</code>，不必要关心<code>Activity</code>的存在，可以用来保持<strong>心跳</strong>连接。但依然会阻塞<strong>主线程</strong>，但是我们可以<code>在Service中再创建一个子线程</code>，然后在这里去处理耗时逻辑就没问题了。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 开始执行后台任务</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBinder</span> <span class="keyword">extends</span> <span class="title">Binder</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDownload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 执行具体的下载任务</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>那么，<strong>既然在Service里也要创建一个子线程，那为什么不直接在Activity里创建呢？</strong></p>
-<blockquote>
-<p>因为Activity很难对Thread进行控制，当Activity被销毁之后，就没有任何其它的办法可以再重新获取到之前创建的子线程的实例。而且在一个Activity中创建的子线程，另一个Activity无法对其进行操作。但是Service就不同了，所有的Activity都可以与Service进行关联，然后可以很方便地操作其中的方法，即使Activity被销毁了，之后只要重新与Service建立关联，就又能够获取到原有的Service中Binder的实例。因此，使用Service来处理后台任务，Activity就可以放心地finish，完全不需要担心无法对后台任务进行控制的情况。</p>
-</blockquote>
-<h3 id="远程Service用法">远程<code>Service</code>用法</h3><blockquote>
-<p>使用远程Service甚至可以实现Android跨进程通信的功能<br>将一个普通的Service转换成远程Service其实非常简单，只需要在注册Service的时候将它的<code>android:process</code>属性指定成<code>:remote</code>就可以了。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;service</span><br><span class="line">android:name="com.example.servicetest.MyService"</span><br><span class="line">android:process=":remote" &gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p><strong>为什么将MyService转换成远程Service后就不会导致程序ANR了呢？</strong><br>这是由于，使用了远程Service后，MyService已经在另外一个进程当中运行了，所以只会阻塞该进程中的主线程，并不会影响到当前的应用程序</p>
-<p><strong>使用<code>bindService</code>将导致程序奔溃</strong></p>
-<blockquote>
-<p>这是由于在Bind Service按钮的点击事件里面我们会让MainActivity和MyService建立关联，但是目前MyService已经是一个远程Service了，Activity和Service运行在<strong>两个不同的进程当中，这时就不能再使用传统的建立关联的方式，程序也就崩溃了</strong>。</p>
-</blockquote>
-<p><strong>那么如何才能让Activity与一个远程Service建立关联呢？</strong></p>
-<blockquote>
-<p>使用<strong>AIDL来进行跨进程通信了（IPC）</strong>。<br>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于<strong>让某个Service与多个应用程序组件之间进行跨进程通信</strong>，从而可以实现多个应用程序<strong>共享同一个Service的功能</strong>。</p>
-</blockquote>
-<p>引用资料：<br><a href="http://blog.csdn.net/guolin_blog/article/details/11952435" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(上)</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/9797169" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(下)</a></p>
-<h3 id="如何保证service不死">如何保证<code>service</code>不死</h3><p>引用资料：<a href="http://blog.csdn.net/mad1989/article/details/22492519" target="_blank" rel="external">Android开发之如何保证Service不被杀掉（broadcast+system/app）</a></p>
-<ul>
-<li>提升系统进程优先级：</li>
-</ul>
-<ol>
-<li>前台进程( FOREGROUND_APP)</li>
-<li>可视进程(VISIBLE_APP )</li>
-<li>次要服务进程(SECONDARY_SERVER )</li>
-<li>后台进程 (HIDDEN_APP)</li>
-<li>内容供应节点(CONTENT_PROVIDER)</li>
-<li>空进程(EMPTY_APP)</li>
-</ol>
-<p>注意：</p>
-<blockquote>
-<p>在极度极度低内存的压力下，该service还是会被kill掉，并且不一定会restart</p>
-</blockquote>
-<ul>
-<li><p>在<code>onDestroy</code>重启<code>service</code></p>
-</li>
-<li><p>使用：<code>service +broadcast</code>的方式<br>当<strong>service走ondestory的时候</strong>，发送一个<strong>自定义的广播</strong>，<strong>当收到广播的时候，重新启动service</strong>.</p>
-</li>
-</ul>
-<p><strong>注意</strong>：</p>
-<blockquote>
-<p>当使用类似口口管家等第三方应用或是在setting里-应用-强制停止时，APP进程可能就直接被干掉了，onDestroy方法都进不来，所以还是无法保证~.~</p>
-</blockquote>
-<ul>
-<li><p>通过系统的广播，监听并捕获到判断是否要重启<code>service</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;action android:name=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span><br><span class="line">&lt;action android:name=<span class="string">"android.intent.action.USER_PRESENT"</span> /&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在<code>application</code>设置<code>android:persistent=&quot;true&quot;</code></p>
-<blockquote>
-<p>据说这个属性不能乱设置，不过设置后，的确发现优先级提高不少，或许是相当于系统级的进程</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="注意问题：">注意问题：</h3><ol>
-<li>需要在<code>androidManifest.xml</code>进行配置否则没有效果。</li>
-<li>接连调用<code>onstartService()+onBindService()</code>方法后，当你想进行停止<code>service</code>的操作，你就必须同时调用<code>stopService()+onBinService()</code>。<br>另一种情况：使用了前台线程，当<code>app</code>退出后，自动<code>unbindService</code>(因为使用<code>bind</code>的时候<code>act</code>挂掉，<code>service</code>也挂掉)，所以当再次进入程序的时候，只需要<code>stop</code>即可关掉，但执行了<code>unBind</code>将会抛出错误。</li>
-</ol>
-<h3 id="扩展：">扩展：</h3><p><a href="http://blog.csdn.net/mad1989/article/details/22492519" target="_blank" rel="external">Android开发之如何保证Service不被杀掉（broadcast+system/app）</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/08/10/android_service/" data-id="cikmr5jb20008m8js790d4mwd" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/08/10/android_service/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service/">service</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android studio使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/09/android studio使用/">android studio</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/08/09/android studio使用/">
-      <time datetime="2015-08-09T02:48:16.000Z" itemprop="datePublished">2015-08-09</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>android studio的操作提示。
-        
-          <p class="article-more-link">
-            <a href="/2015/08/09/android studio使用/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/08/09/android studio使用/" data-id="cikmqpu4i0007ysjsjb2k9ozy" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/08/09/android studio使用/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/">android studio</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android activity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/09/android activity/">android activity</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/08/09/android activity/">
-      <time datetime="2015-08-09T02:04:16.000Z" itemprop="datePublished">2015-08-09</time>
-    </a>
-  </div>
-
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="activity的启动模式有哪些？">activity的启动模式有哪些？</h3><p>默认四种：</p>
-<ul>
-<li><p><code>standard</code>：</p>
-<blockquote>
-<p>默认的启动模式.<br>无论此<code>activity</code>是否在<strong>栈</strong>里面，每次启动都会创建<br>该活动的一个新的实例。</p>
-</blockquote>
-</li>
-<li><p><code>singleTop</code>：</p>
-<blockquote>
-<p>在启动活动时如果发现返回栈的<strong>栈顶已经是该活动</strong>，则认为可以<strong>直接使用它</strong>，不会再创建新的活动实例.如果不在栈顶的话，还是会继续创建的。</p>
-</blockquote>
-</li>
-<li><p><code>singleTask</code>：</p>
-<blockquote>
-<p>每次启动该活动时系统<br>首先会在返回栈中检查<strong>是否存在该活动的实例</strong>，<br>如果发现<strong>已经存在则直接使用该实例</strong>，<br>并把<strong>在这个活动之上的所有活动统统出栈</strong>，<br>如果没有发现就会<strong>创建一个新的活动实例</strong>。</p>
-</blockquote>
-</li>
-<li><p><code>singleInstance</code>：</p>
-<blockquote>
-<p> <code>singleInstance</code> 模式的活动会启用一个<strong>新的返回栈</strong>来管理这个活动,后退的时候，将<strong>后退完一个栈到另一个栈</strong>。<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151210182659.png" alt=""><br>以上可以使用：<code>getTaskId()</code>进行测试是否在同一个栈中。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="生命周期">生命周期</h3><p><img src="http://hi.csdn.net/attachment/201007/28/0_12803210018q71.gif" alt="activity的生命周期"><br>根据这张生命周期的图片，我们可以进行测试，知道她的完整的生命周期，在不同的场景，方法之间的调用顺序：</p>
-<ul>
-<li>第一次打开应用：<code>onCreate()-&gt;onStart()-&gt;onResume</code></li>
-<li>当点击<code>home</code>键：<code>onPause()-&gt;onStop()</code></li>
-<li>按完<code>home</code>键后，我们再次打开应用：<code>onRestart()-&gt;onStart()-&gt;onResume()</code></li>
-<li>点击弹出窗口<code>AlertDialog</code>。当前的<code>Activity</code>依然可见：<code>onPause()</code></li>
-<li>点击跳转到另一个<code>activity</code>:<code>onPause(当前)-onCreate()-&gt;onStart()-&gt;onResume</code></li>
-<li>在第二个activity的时候，按<code>back</code>:<code>onPause(当前)-onResume（前一个）-onStop（前一个）-onDestroy（前一个）</code></li>
-<li>旋转屏幕：<code>onPause-&gt;onStop-&gt;onDestory-oncreate-onstart-onresume</code>。相当于销毁后进行重建。</li>
-<li>长按<code>home</code>键进行关闭应用，发现并不会调用<code>onDestory</code></li>
-<li><p>使用<code>finish</code>进行关闭应用：<code>onPause-&gt;onStop-&gt;onDestory</code></p>
-<blockquote>
-<p>注意在<code>oncreate</code>方法是不会走上面的流程的，而是直接调用<code>onDestory</code></p>
-</blockquote>
-</li>
-<li><p>使用<code>System.exit(0)</code>进行关闭应用，发现任何方法都不调用</p>
-</li>
-</ul>
-<h3 id="生命周期方法的使用：">生命周期方法的使用：</h3><p>只有<code>onResume</code>和<code>onCreate</code>所停留的时间比较长，其它状态 <code>(Created与Started)</code>都是<strong>短暂</strong>的，系统快速的执行那些回调函数并通过执行下一阶段的回调函数移动到下一个状态。</p>
-<ul>
-<li><code>onPause()</code>方法应该做的处理：<ul>
-<li>停止目前正在执行的任务，如：暂停视频的播放或者保存有可能长期存储的信息。</li>
-<li>停止动画或者是其他正在运行的操作，那些都会导致CPU的浪费.</li>
-<li>提交没有保存的改变，但是仅仅是在用户离开时期待保存的内容(例如邮件草稿)</li>
-<li>释放系统资源，例如<code>broadcast receivers, sensors</code> (比如GPS), 或者是其他任何会影响到电量的资源。如<code>Camera.release()</code></li>
-</ul>
-</li>
-</ul>
-<p><strong>注意</strong>：</p>
-<blockquote>
-<ol>
-<li>通常，你不应该使用onPause()来保存用户改变的数据 (例如填入表格中的个人信息) 到永久存储(File或者DB)上。</li>
-<li>你应该避免在onPause()时执行CPU-intensive 的工作，例如写数据到DB，因为它会导致切换到下一个activity变得缓慢(你应该把那些heavy-load的工作放到onStop()去做)</li>
-<li>那么你应该为了切换的顺畅而减少在OnPause()方法里面的工作量。</li>
-</ol>
-</blockquote>
-<ul>
-<li><p>onResume()</p>
-<ul>
-<li>初始化那些你在onPause方法里面释放掉的组件，并执行那些activity每次进入Resumed state都需要的初始化动作 (例如开始动画与初始化那些只有在获取用户焦点时才需要的组件)</li>
-</ul>
-</li>
-<li><p><code>onstop()和onRestart()</code>当<code>activity</code>停止与重启的时候调用。</p>
-</li>
-</ul>
-<p>什么情况会导致<strong>停止和重启</strong>呢</p>
-<blockquote>
-<ol>
-<li>切换app</li>
-<li>创建新的activity，然后在back</li>
-<li><strong>当接收一个来电通话的时候</strong></li>
-</ol>
-</blockquote>
-<ul>
-<li>onStop()<ul>
-<li>极端情况，不执行<code>onDestory</code>方法，应该再<code>onstop</code>释放资源，避免内存泄露</li>
-<li>onStop()来执行那些CPU intensive的shut-down操作，例如writing information to a database.</li>
-<li>onStop里面做了哪些清除的操作就应该在onStart里面重新把那些清除掉的资源重新创建出来</li>
-<li>onDestory方法则是你最后去清除那些可能导致内存泄漏的地方</li>
-</ul>
-</li>
-</ul>
-<h3 id="回调方法：onActivityResult">回调方法：<code>onActivityResult</code></h3><p>其中有三个参数：</p>
-<ul>
-<li>requestCode</li>
-<li>resultCode</li>
-<li>intent</li>
-</ul>
-<p><strong>如何使用</strong>：<br>先跳转到下一个类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> requestCode1=<span class="number">1</span>;</span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent, requestCode1);</span><br></pre></td></tr></table></figure></p>
-<p>在第二个类使用以下方法进行回调：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello FirstActivity"</span>);</span><br><span class="line">setResult(RESULT_OK, intent);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure></p>
-<p>最后，我们回到第一个类进行处理，第二个类传来的信息：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line"><span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line"><span class="keyword">case</span> requestCode1:</span><br><span class="line"><span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</span><br><span class="line">String returnedData = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">Log.d(<span class="string">"FirstActivity"</span>, returnedData);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="onSaveInstanceState什么时候该调用："><code>onSaveInstanceState</code>什么时候该调用：</h3><ol>
-<li>旋转屏幕导致重建的时候</li>
-<li>在一个activity被杀死前调用，当该activity在将来某个时刻回来时可以恢复其先前状态。（非正常性死亡）例子：<blockquote>
-<p>如果activity B启用后位于activity A的前端，在某个时刻activity A因为系统回收资源的问题要被杀掉，A通过onSaveInstanceState将有机会保存其用户界面状态，使得将来用户返回到activity A时能通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)恢复界面的状态。</p>
-</blockquote>
-</li>
-</ol>
-<p><strong>注意：</strong></p>
-<blockquote>
-<p>不要将这个方法和activity生命周期回调如onPause()或onStop()搞混淆了，onPause()在activtiy被放置到背景或者自行销毁时总会被调用，onStop()在activity被销毁时被调用。一个会调用onPause()和onStop()，但不触发onSaveInstanceState的例子是当用户从activity B返回到activity A时：没有必要调用B的onSaveInstanceState(Bundle)，此时的B实例永远不会被恢复，因此系统会避免调用它。一个调用onPause()但不调用onSaveInstanceState的例子是当activity B启动并处在activity A的前端：如果在B的整个生命周期里A的用户界面状态都没有被破坏的话，系统是不会调用activity A的onSaveInstanceState(Bundle)的。</p>
-</blockquote>
-<p>参考：<a href="http://blog.csdn.net/ddna/article/details/5123482" target="_blank" rel="external">【Android翻译】关于Activity的onSaveInstanceState调用时机的说明</a><br><a href="http://blog.csdn.net/cyp331203/article/details/45313125" target="_blank" rel="external">【Android面试】(二):你不能不知道的view—-加id和不加id的区别？</a></p>
-<p><strong>代码样例：</strong><br>在<code>onSaveInstanceState</code>保存数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">String tempData = <span class="string">"Something you just typed"</span>;</span><br><span class="line">outState.putString(<span class="string">"data_key"</span>, tempData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在<code>onCreate</code>再次得到数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">Log.d(TAG, <span class="string">"onCreate"</span>);</span><br><span class="line">requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">setContentView(R.layout.activity_main);</span><br><span class="line"><span class="keyword">if</span> (savedInstanceState != <span class="keyword">null</span>) &#123;</span><br><span class="line">String tempData = savedInstanceState.getString(<span class="string">"data_key"</span>);</span><br><span class="line">Log.d(TAG, tempData);</span><br><span class="line">&#125;</span><br><span class="line">……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="和onPause的区别">和<code>onPause</code>的区别</h4><p><code>onPause</code>：<br>存储的是用户的<strong>存储那些持久性的数据，比如用户的输入</strong>等。<br>而<code>onSaveInstanceState</code>：<br>一般是能让我们存储一些activity的<strong>动态的状态值到Bundle对象中</strong>，以便在之后调用<code>onCreate(Bundle)</code>方法时用到.</p>
-<h3 id="屏幕旋转onConfigurationChanged">屏幕旋转<code>onConfigurationChanged</code></h3><p>默认没进行设置的时候，是可旋转屏幕，而旋转屏幕将导致<code>Activity</code>的重建，即摧毁在创建。</p>
-<blockquote>
-<p><strong>注意：</strong><code>onConfigurationChanged</code>事件并不是只有屏幕方向改变才可以触发，其他的一些系统设置改变也可以触发，比如<strong>打开或者隐藏键盘</strong>.</p>
-</blockquote>
-<p>不想重建可设置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">activity</span> <span class="attribute">android:name</span>=<span class="value">".app.CustomDialogActivity"</span></span><br><span class="line"><span class="attribute">android:label</span>=<span class="value">"@string/activity_custom_dialog"</span></span><br><span class="line"><span class="attribute">android:configChanges</span>=<span class="value">"orientation|keyboardHidden|screenSize"</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>然后重写<code>Activity</code>中的<code>onConfigurationChanged()</code>方法即可。但我却没有任何效果。还是重建了，<code>onConfigurationChanged</code>并不执行，为什么？<br>查看这里：<a href="http://stackoverflow.com/questions/6359328/android-onconfigurationchanged-is-not-being-called-in-activity" target="_blank" rel="external">Android onConfigurationChanged() is not being called in Activity</a><br>发现原来是版本的问题：</p>
-<blockquote>
-<p>You should use 13 API and set this configuration in your activity’s part of the manifest: <code>android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;</code><br>It works fine. At all Android version.</p>
-</blockquote>
-<p>对比我的<code>manifest</code>返现缺少了<code>screenSize</code>，好了，加上就ok了。<br>生命周期如下：<br><img src="http://my.csdn.net/uploads/201206/06/1338973966_6383.jpg" alt=""></p>
-<p>参考：<a href="http://www.cnblogs.com/andriod-html5/archive/2012/06/06/2539375.html" target="_blank" rel="external">Android屏幕旋转时Activity的生命周期</a></p>
-<h3 id="关于Menu的使用">关于<code>Menu</code>的使用</h3><h4 id="使用onPrepareOptionsMenu决定是否显示menu_item，如下">使用<code>onPrepareOptionsMenu</code>决定是否显示<code>menu_item</code>，如下</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onPrepareOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 是否选择搜索栏    menu.findItem(R.id.action_search).setVisible(isVisibleSearch);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onPrepareOptionsMenu(menu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/08/09/android activity/" data-id="cikmr5jhw003um8jsva1uz5jp" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/08/09/android activity/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/activity/">activity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Java Map 按Key排序和按Value排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/03/Java Map 按Key排序和按Value排序/">java-Map集合--排序</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/08/03/Java Map 按Key排序和按Value排序/">
-      <time datetime="2015-08-03T03:54:16.000Z" itemprop="datePublished">2015-08-03</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当中涉及到<code>TreeMap</code>，比较器<code>Comparable</code>,下面先进行介绍<code>TreeMap</code>。
-        
-          <p class="article-more-link">
-            <a href="/2015/08/03/Java Map 按Key排序和按Value排序/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/" data-id="cikdwadl5004r0ojsc26smuyp" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Comparator/">Comparator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TreeMap/">TreeMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-重写equals和hashCode" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/02/重写equals和hashCode/">重写equals和hashCode</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/08/02/重写equals和hashCode/">
-      <time datetime="2015-08-02T02:48:16.000Z" itemprop="datePublished">2015-08-02</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="为什么要重写？">为什么要重写？</h3><p>通过重写<code>equals</code>和<code>hashCode</code>来保证取值的正确性，相同的进行覆盖，避免因为<code>hashcode</code>不同，而存在二义性。
-        
-          <p class="article-more-link">
-            <a href="/2015/08/02/重写equals和hashCode/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/08/02/重写equals和hashCode/" data-id="cikdwaden00010ojsirtw1iyb" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/08/02/重写equals和hashCode/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/equals/">equals</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashcode/">hashcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-面试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/30/面试/">面试</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/07/30/面试/">
-      <time datetime="2015-07-30T02:07:18.000Z" itemprop="datePublished">2015-07-30</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/面试/">面试</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="怎么回答不考研的问题">怎么回答不考研的问题</h3><ul>
-<li>钱的问题。家里的情况等不起这2~3年的时间。</li>
-<li>我想出来累积一下社会经验，我可以利用工作之余的时间给自己充电补充知识，我相信将学习和工作相结合的方式我才能更快的成长。
-        
-          <p class="article-more-link">
-            <a href="/2015/07/30/面试/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/30/面试/" data-id="cikmrgd0m000950jsu0xuo1zs" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/07/30/面试/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-java-Map集合-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/java-Map集合-HashMap/">java-Map集合-HashMap</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/07/28/java-Map集合-HashMap/">
-      <time datetime="2015-07-28T02:48:16.000Z" itemprop="datePublished">2015-07-28</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Map集合就想是Set集合和List集合的组合。
-        
-          <p class="article-more-link">
-            <a href="/2015/07/28/java-Map集合-HashMap/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/28/java-Map集合-HashMap/" data-id="cikdwadha00190ojspti3qw4m" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/07/28/java-Map集合-HashMap/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hashtable/">Hashtable</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-java 探讨System.out.println(数组);的结果" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/java 探讨System.out.println(数组);的结果/">java-探讨System.out.println(数组);的结果 </a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/07/28/java 探讨System.out.println(数组);的结果/">
-      <time datetime="2015-07-28T02:48:16.000Z" itemprop="datePublished">2015-07-28</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="直接使用System-out-println(数组);会有怎么样的结果呢？为什么字符数组是显示完全部元素呢？_<!-more->">直接使用<code>System.out.println(数组);</code>会有怎么样的结果呢？为什么字符数组是显示完全部元素呢？
-        
-          <p class="article-more-link">
-            <a href="/2015/07/28/java 探讨System.out.println(数组);的结果/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/28/java 探讨System.out.println(数组);的结果/" data-id="cikdwadhp001m0ojsjefdhgcx" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/07/28/java 探讨System.out.println(数组);的结果/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-out-println/">System.out.println();</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-为知笔记使用技巧" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/为知笔记使用技巧/">为知笔记使用技巧</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/07/28/为知笔记使用技巧/">
-      <time datetime="2015-07-28T02:33:03.000Z" itemprop="datePublished">2015-07-28</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为一次误操作，只能放弃<strong>马克飞象</strong>了。转向为知笔记的使用。作为一个<code>markdown</code>的忠实粉丝。肯定需要一个<code>markdown</code>的插件了。幸好也提供了，不是的话就不会成为想在的选择了。
-        
-          <p class="article-more-link">
-            <a href="/2015/07/28/为知笔记使用技巧/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/28/为知笔记使用技巧/" data-id="cikmqpu350000ysjsr9i3lkwj" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/07/28/为知笔记使用技巧/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/为知笔记/">为知笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Android 逆向编程-Dalvik字节码学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/">Android 逆向编程-Dalvik字节码学习</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/">
-      <time datetime="2015-07-20T16:03:40.000Z" itemprop="datePublished">2015-07-21</time>
+    <a href="/2015/11/10/android TextView使用/">
+      <time datetime="2015-11-10T00:48:19.000Z" itemprop="datePublished">2015-11-10</time>
     </a>
   </div>
 
@@ -897,21 +151,988 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Dalvik字节码学习，从而看得到反编译后的未能转换为<code>java</code>文件的代码。了解整个<code>apk</code>的形成过程。<br>
+        <h3 id="什么叫内存泄漏呢？">什么叫内存泄漏呢？</h3><p><strong>gc没有办法回收activity的内存</strong>。<br>
         
           <p class="article-more-link">
-            <a href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/#more">Read More</a>
+            <a href="/2015/11/10/android TextView使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/" data-id="cikmr5j8s0000m8js2s4ssjrl" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/10/android TextView使用/" data-id="cinsxokp4004yw0h1efm6v6d0" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/10/android TextView使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dalvik/">Dalvik</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 单元测试-配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/06/android 单元测试-配置/">android 线程</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/06/android 单元测试-配置/">
+      <time datetime="2015-11-06T01:11:23.000Z" itemprop="datePublished">2015-11-06</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="AsyncTask介绍">AsyncTask介绍</h3><p>参考引用资料：<br><a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a><br><a href="http://www.jianshu.com/p/5f8a535c2c2e#" target="_blank" rel="external"># 异步之AsyncTask(一)</a><br><a href="http://blog.csdn.net/gf771115/article/details/17248037" target="_blank" rel="external">Android 深入解析AsyncTask（doInBackground不工作）</a></p>
+<h4 id="实战：">实战：</h4><p>代码示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意这个泛型的三个参数：String 为execute调用方法传入，为dobackground方法的参数，Integer 一般为这个，进行更新进度 Bitmap 是dobackground的返回值。</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>, <span class="title">Bitmap</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"ImageLoader"</span>;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//在dobackground前进行调用，这里进行设置view不可enable</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Initialize progress and image  </span></span><br><span class="line">        mGetImage.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">true</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.VISIBLE);  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">0</span>);  </span><br><span class="line">        mImageView.setImageResource(R.drawable.icon);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//后台线程，处理网络等，耗时的工作</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(String... url)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">/* </span><br><span class="line">         * Fucking ridiculous thing happened here, to use any Internet connections, either via HttpURLConnection </span><br><span class="line">         * or HttpClient, you must declare INTERNET permission in AndroidManifest.xml. Otherwise you will get </span><br><span class="line">         * "UnknownHostException" when connecting or other tcp/ip/http exceptions rather than "SecurityException" </span><br><span class="line">         * which tells you need to declare INTERNET permission. </span><br><span class="line">         */</span>  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">        URL u;  </span><br><span class="line">        HttpURLConnection conn = <span class="keyword">null</span>;  </span><br><span class="line">        InputStream in = <span class="keyword">null</span>;  </span><br><span class="line">        OutputStream out = <span class="keyword">null</span>;  </span><br><span class="line">        <span class="keyword">final</span> String filename = <span class="string">"local_temp_image"</span>;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            u = <span class="keyword">new</span> URL(url[<span class="number">0</span>]);  </span><br><span class="line">            conn = (HttpURLConnection) u.openConnection();  </span><br><span class="line">            conn.setDoInput(<span class="keyword">true</span>);  </span><br><span class="line">            conn.setDoOutput(<span class="keyword">false</span>);  </span><br><span class="line">            conn.setConnectTimeout(<span class="number">20</span> * <span class="number">1000</span>);  </span><br><span class="line">            in = conn.getInputStream();  </span><br><span class="line">            out = openFileOutput(filename, Context.MODE_PRIVATE);  </span><br><span class="line">            <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8196</span>];  </span><br><span class="line">            <span class="keyword">int</span> seg = <span class="number">0</span>;  </span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">long</span> total = conn.getContentLength();  </span><br><span class="line">            <span class="keyword">long</span> current = <span class="number">0</span>;  </span><br><span class="line">            <span class="comment">/* </span><br><span class="line">             * Without checking isCancelled(), the loop continues until reading whole image done, i.e. the progress </span><br><span class="line">             * continues go up to 100. But onPostExecute() will not be called. </span><br><span class="line">             * By checking isCancelled(), we can stop immediately, i.e. progress stops immediately when cancel() is called. </span><br><span class="line">             */</span>  </span><br><span class="line">            <span class="keyword">while</span> (!isCancelled() &amp;&amp; (seg = in.read(buf)) != -<span class="number">1</span>) &#123;  <span class="comment">//注意这里调用了isCancell的操作</span></span><br><span class="line">            out.write(buf, <span class="number">0</span>, seg);  </span><br><span class="line">            current += seg;  </span><br><span class="line">            <span class="keyword">int</span> progress = (<span class="keyword">int</span>) ((<span class="keyword">float</span>) current / (<span class="keyword">float</span>) total * <span class="number">100f</span>);  </span><br><span class="line">            publishProgress(progress);  </span><br><span class="line">            SystemClock.sleep(<span class="number">1000</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">            <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            conn.disconnect();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            in.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            out.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> BitmapFactory.decodeFile(getFileStreamPath(filename).getAbsolutePath());  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//实时更新进度</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... progress)</span> </span>&#123;  </span><br><span class="line">        mProgressBar.setProgress(progress[<span class="number">0</span>]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//dobackground执行完，则调用此方法，更新view的操作。</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap image)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (image != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        mImageView.setImageBitmap(image);  </span><br><span class="line">        &#125;  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">100</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.GONE);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是调用开始线程的操作：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> ImageLoader loader = <span class="keyword">new</span> ImageLoader();</span><br><span class="line">loader.execute(ImageUrl);</span><br></pre></td></tr></table></figure></p>
+<p>注意事项：</p>
+<ol>
+<li>AsyncTask对象不可重复使用，也就是说一个AsyncTask对象只能execute()一次</li>
+<li><strong>在doInBackground()中要检查isCancelled()的返回值</strong>，判断任务是否要进行取消的操作。</li>
+</ol>
+<blockquote>
+<p><code>2中</code>：<strong>调用cancel方法并不能真正立即把task取消掉</strong>,而只是把task的状态置为Cancel而已,需要配合isCancelled()方法来运用,在doingbackground或其他方法中判断是否被取消,然后做相应的处理.</p>
+</blockquote>
+<h3 id="AsyncTask任务调度问题">AsyncTask任务调度问题</h3><blockquote>
+<p>AsyncTask主要有二个部分：<br>一个是与主线各的交互，<br>另一个就是线程的管理调度。虽然可能多个AsyncTask的子类的实例，但是AsyncTask的<strong>内部Handler和ThreadPoolExecutor都是进程范围内共享的</strong>，其都是<code>static</code>的，也即属于类的，类的属性的作用范围是CLASSPATH，因为<strong>一个进程一个VM，所以是AsyncTask控制着进程范围内所有的子类实例</strong>。</p>
+</blockquote>
+<p>也就是说使用<code>AsyncTask</code>里的线程池是<code>static</code>的，那么他的生命周期是<strong>整一个进程</strong>，不会随<code>Asynctask</code>执行完而消失。<br>源码验证下，是否为<code>static</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">| <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = |</span><br><span class="line"> <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">128</span>); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that can be used to execute tasks in parallel. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor THREAD_POOL_EXECUTOR |</span><br><span class="line"> = <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE, |</span><br><span class="line"> TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that executes tasks one at a time in serial |</span><br><span class="line"> * order. This serialization is global to a particular process. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor SERIAL_EXECUTOR = <span class="keyword">new</span> SerialExecutor(); |</span><br></pre></td></tr></table></figure></p>
+<p>对以上使用的类不了解，需要了解<code>java多线程的知识</code>。</p>
+<p><strong>问题：</strong></p>
+<blockquote>
+<p>doInBackground()未及时执行，也就是它并没有在#execute()调用之后马上执行，而是等待了很久才得以执行.</p>
+</blockquote>
+<p>为什么不能马上执行呢？这里便需要了解<strong>AsyncTask任务调度</strong>问题：</p>
+<blockquote>
+<p>AsyncTask#execute()后，AsyncTask会把任务交给线程池，由线程池来管理创建Thread和运行Therad。</p>
+</blockquote>
+<p>而不同的版本，却有各种不同：</p>
+<ul>
+<li><p>Android2.3以前的版本，也即SDK/API 10和以前的版本</p>
+<blockquote>
+<p>内部的线程池限制是5个，也就是说同时只能有5个线程运行，超过的线程只能等待，等待前面的线程某个执行完了才被调度和运行</p>
+</blockquote>
+</li>
+<li><p>从Android 3.0开始对AsyncTask的API做出了一些调整：</p>
+</li>
+</ul>
+<ol>
+<li>execute()提交的任务(默认)<br>按先后顺序每次只运行一个.完成一个再执行下一个。</li>
+<li><p>新增了接口#executeOnExecutor()<br><strong>自定义的线程池来运行和调度Thread</strong>。</p>
+<blockquote>
+<p>创建一个<strong>没有限制</strong>的线程池(Executors.newCachedThreadPool())</p>
+</blockquote>
+</li>
+<li><p>二个预定义的线程池_SERIAL_EXECUTOR(<strong>相当于2.3,为5个</strong>)和_THREAD_POOL_EXECUTOR（与默认的<code>execute</code>一致，按顺序执行）</p>
+</li>
+</ol>
+<p>讲完理论，要有实例进行巩固下吧：可参考：<a href="http://blog.csdn.net/lichao3459/article/details/17712393" target="_blank" rel="external">AsyncTask引发的问题</a>。连接的是同一个类上执行<code>asyntask</code>的情况，而我要测试的是：在同一个<code>activity</code>下两个<code>fragment</code>分别执行<code>asynctask</code>去完成不同的需求下，也跟上面讲的情况一样。下面是代码：（值截取部分代码）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimesFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Integer</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> prog = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (prog &lt; <span class="number">101</span>) &#123;</span><br><span class="line">                SystemClock.sleep(<span class="number">100</span>);<span class="comment">//使用sleep来模拟实际情况。</span></span><br><span class="line">                publishProgress(prog);</span><br><span class="line">                prog++;</span><br><span class="line">                Log.e(<span class="string">"TimesFragment"</span>, <span class="string">"TimesFragment"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        mContext = getActivity();</span><br><span class="line">        SimpleAsyncTask simpleAsyncTask=<span class="keyword">new</span> SimpleAsyncTask();</span><br><span class="line">        simpleAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);<span class="comment">//注意这里调用执行方法</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>另一个<code>frament</code>也是一样，不再残余。</p>
+<p>总结：</p>
+<ul>
+<li>当有需要大量线程执行任务时，一定要<strong>创建线程池</strong>。</li>
+<li>与主线程有<strong>交互</strong>时用AsyncTask，否则就用Thread</li>
+</ul>
+<p>以上摘自：<a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a></p>
+<h3 id="关于Looper">关于<code>Looper</code></h3><p><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/14/2174255.html" target="_blank" rel="external">android的消息处理机制（图+源码分析）——Looper,Handler,Message</a>，源码分析&amp;图文分析<code>Looper</code></p>
+<p>一个小小的使用案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        Toast.makeText(mContext, <span class="string">"很抱歉,程序出现异常,即将退出."</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">        Looper.loop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p>参见使用错误异常为：</p>
+<blockquote>
+<p>Can’t create handler inside thread that has not called Looper.prepare()</p>
+</blockquote>
+<p>这种情况是：<strong>在Thread中执行更改UI的操作导致的</strong><br>解决方案参考： <a href="http://www.cnblogs.com/sonicit/archive/2013/01/13/2858475.html" target="_blank" rel="external">Can’t create handler inside thread that has not called Looper.prepare()</a>，而我是直接在<code>UI</code>操作放进<code>Handler</code>中就好了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/06/android 单元测试-配置/" data-id="cikmr5jfc0023m8js272ozptw" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/06/android 单元测试-配置/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AsyncTask/">AsyncTask</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android LinearLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/05/android LinearLayout使用/">android SqLite学习</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/05/android LinearLayout使用/">
+      <time datetime="2015-11-05T04:44:34.000Z" itemprop="datePublished">2015-11-05</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="纯Sqlite数据库的学习：">纯Sqlite数据库的学习：</h3><p><a href="http://www.yiibai.com/sqlite/" target="_blank" rel="external">SQLite教程</a></p>
+<h3 id="操作SQLite数据库">操作<code>SQLite</code>数据库</h3><p>导出<code>SQLite</code>数据库：<br>参看资料：<a href="http://blog.csdn.net/ygsyyl/article/details/8144407" target="_blank" rel="external">如何设置Android手机的sqlite3命令环境</a><br><a href="http://www.cnblogs.com/walkingp/archive/2011/03/28/1997437.html" target="_blank" rel="external">在Android中查看和管理sqlite数据库</a></p>
+<p>两种方式：一种是使用<code>DDMS</code>,而另一种是使用<code>adb shell</code></p>
+<p><strong>数据类型：</strong>(5种)</p>
+<blockquote>
+<p>， <code>integer</code> 表示整型，<code>real</code> 表示浮点型，<code>text</code> 表示文本类型，<code>blob</code> 表示二进制类型，<code>NULL</code> 表示空值</p>
+</blockquote>
+<p>但，他属于<strong>弱类型</strong>的数据库，数据类型自己转换。</p>
+<h3 id="修改文件权限（chmod_777_文件）">修改文件权限（<code>chmod 777 文件</code>）</h3><p>操作命令：</p>
+<blockquote>
+<p>adb shell<br>su -<br>chmod 777 文件（需要修改的文件）</p>
+</blockquote>
+<h3 id="SQLiteDatabase讲解">SQLiteDatabase讲解</h3><h4 id="使用">使用</h4><p><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+<p><strong>插入（insert）</strong></p>
+<blockquote>
+<p>三个参数:</p>
+<ul>
+<li>第一个参数是表名，我们希望向哪张表里添加数据，这里就传入该表的名字。</li>
+<li>第二个参数用于在未指定添加数据的情况下给某些可为空的列自动赋值 NULL，一般我们用不到这个功能，直接传入 null 即可。</li>
+<li>第三个参数是一个 <code>ContentValues</code> 对象，它提供了一系列的 put()方法重载，用于向 <code>ContentValues</code> 中添加数据，只需要将表中的<strong>每个列名以及相应的待添加数据传入</strong>即可</li>
+</ul>
+</blockquote>
+<p><strong>更新update()</strong></p>
+<blockquote>
+<p>接收四个参数:</p>
+<ul>
+<li>第一个参数和 insert()方法一样，也是表名，在这里指定去更新哪张表里的数据。</li>
+<li>第二个参数是 ContentValues 对象，要把更新数据在这里组装进去。</li>
+<li>第三个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第四个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"price"</span>, <span class="number">10.99</span>);</span><br><span class="line">db.update(<span class="string">"Book"</span>, values, <span class="string">"name = ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"The Data Vinci Code"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除 delete()</strong></p>
+<blockquote>
+<p>接收三个参数:</p>
+<ul>
+<li>第一个参数仍然是表名，这个已经没什么好说的了，</li>
+<li>第二个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第三个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">db.delete(<span class="string">"Book"</span>, <span class="string">"pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>查询(query)：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy,String limit)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>table:表名称</li>
+<li>columns:列名称数组</li>
+<li>selection:条件字句，相当于where</li>
+<li>selectionArgs:条件字句，参数数组</li>
+<li>groupBy:分组列</li>
+<li>having:分组条件</li>
+<li>orderBy:排序列</li>
+<li>limit:分页查询限制</li>
+<li>Cursor:返回值，相当于结果集ResultSet</li>
+</ul>
+<p>图例：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212182322.png" alt=""></p>
+<p><strong>返回的类型都是<code>Cursor</code>,常用的方法：</strong>:<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/115957-7e7068ef5a687b48.png" alt=""></p>
+<p><strong>直接使用SQL操作数据库</strong>：（<code>execSQL</code>&amp;<code>rawQuery</code>）<br>下面举两个实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.execSQL(<span class="string">"delete from Book where pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br><span class="line">db.rawQuery(<span class="string">"select * from Book"</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出<strong>曾删改</strong>使用<code>execSQL</code>，而查询使用<code>rawQuery</code>即可。这两个方法接收两个参数：</p>
+<ul>
+<li>第一个参数：<strong>sql语句，可包含占位符</strong></li>
+<li>第二个参数：<strong>占位符的内容，没有为null</strong></li>
+</ul>
+<h4 id="事务的简单使用：">事务的简单使用：</h4><p><strong>SQLiteDatabase对事务的使用：</strong></p>
+<blockquote>
+<p>使用SQLiteDatabase的beginTransaction()方法可以开启一个事务，程序执行到endTransaction() 方法时会检查事务的标志是否为成功，如果程序执行到endTransaction()之前调用了setTransactionSuccessful() 方法设置事务的标志为成功则提交事务，如果没有调用setTransactionSuccessful() 方法则回滚事务</p>
+</blockquote>
+<p><strong>概念：</strong><br>什么是<strong>回滚事务</strong></p>
+<blockquote>
+<p><strong>事务</strong>是一组组合成逻辑工作单元的操作，虽然系统中可能会出错，但事务将控制和维护事务中每个操作的一致性和完整性.</p>
+</blockquote>
+<p>如果事务中的某个点发生故障，则所有更新都可以回滚到事务开始之前的状态。</p>
+<p><strong>事务应用在什么方面：</strong></p>
+<blockquote>
+<p>很多时候我们需要批量的向Sqlite中插入大量数据时，单独的使用添加方法导致应用响应缓慢, 因为sqlite插入数据的时候默认一条语句就是一个事务，有多少条数据就有多少次磁盘操作。如初始8000条记录也就是要8000次读写磁盘操作。同时也是为了保证数据的一致性，避免出现数据缺失等情况</p>
+</blockquote>
+<p>代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbOpenHelper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line"><span class="comment">//开启事务</span></span><br><span class="line">db.beginTransaction();</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">//批量处理操作</span></span><br><span class="line"><span class="comment">//do something</span></span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line"><span class="comment">//设置事务标志为成功，当结束事务时就会提交事务</span></span><br><span class="line">db.setTransactionSuccessful();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line"><span class="comment">//结束事务</span></span><br><span class="line">db.endTransaction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码使用到了<code>getWritableDatabase()</code>方法，与之对应还有<code>getReadableDatabase()</code>方法。那么这两者有什么区别呢？<br>参考：<a href="http://blog.csdn.net/dsa63/article/details/16951193" target="_blank" rel="external">getWritableDatabase与getReadableDatabase的用法区别</a><br><strong>两者区别：</strong></p>
+<ul>
+<li>相同点：都具备读写的功能。</li>
+<li>不同点：<ul>
+<li><code>getWritableDatabase</code><blockquote>
+<p>如果打开的数据库磁盘满了，此时<strong>只能读不能写</strong>，此时调用了getWritableDatabase的实例，那么<strong>将会发生错误（异常）</strong></p>
+</blockquote>
+</li>
+<li><code>getReadableDatabase</code><blockquote>
+<p>先调用getWritableDatabase以读写的方式打开数据库，如果数据库的磁盘满了，<strong>此时返回打开失败</strong>，继而用getReadableDatabase的实例<strong>以只读的方式去打开数据库</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>大家留意</strong>：<br>当磁盘满的情况，一个<strong>抛出异常</strong>，一个是以<strong>只读的方式打开</strong>，所以：当执行<strong>增删改</strong>的情况下，最好是调用<code>getWritableDatabase</code>,而执行<strong>查询</strong>的时候，则调用<code>getReadableDatabase</code>更安全。</p>
+<h4 id="源码解析getWritableDatabase和getReadableDatabase：">源码解析<code>getWritableDatabase</code>和<code>getReadableDatabase</code>：</h4><p>参见：<a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a></p>
+<ul>
+<li>getReadableDatabase<blockquote>
+<p>首先判断是否已存在数据库实例并且是打开状态，如果是，则直接返回该实例，否则试图获取一个可读写模式的数据库实例,<strong>注意：调用getWritableDatabase获取实例</strong>，如果遇到磁盘空间已满等情况获取失败的话，再以只读模式打开数据库，获取数据库实例并返回，然后为mDatabase赋值为最新打开的数据库实例</p>
+</blockquote>
+</li>
+<li>getWritableDatabase<blockquote>
+<p>首先判断mDatabase如果不为空已打开并不是只读模式则直接返回，否则如果mDatabase不为空则加锁，然后开始打开或创建数据库，比较版本，根据版本号来调用相应的方法，为数据库设置新版本号，最后释放旧的不为空的mDatabase并解锁，把新打开的数据库实例赋予mDatabase，并返回最新实例</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="升级数据库的最佳方式">升级数据库的最佳方式</h3><p>在<code>onUpgrade</code>使用<code>switch-case</code>语句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span>  </span>&#123;</span><br><span class="line"><span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">db.execSQL(CREATE_CATEGORY);</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意并没有<code>break</code>语句，保证在<strong>跨版本升级</strong>的时候，每一次的数据库修改都<strong>能被全部执<br>行到</strong>。</p>
+<h3 id="如何避免插入重复数据到数据库中">如何避免插入重复数据到数据库中</h3><p><strong>使用：<code>OR IGNORE</code></strong></p>
+<blockquote>
+<p>在INSERT语句中添加<code>OR IGNORE</code>，即可（<strong>重复数据会跳过，且不影响后续数据插入</strong>）<br>示例如下：<br>insert OR IGNORE into PDA_Test (DeviceID,MethodName) values(‘1112’,’测试原有’);</p>
+</blockquote>
+<h3 id="性能优化分析：">性能优化分析：</h3><p>通过sqlite自带的 <a href="http://www.sqlite.org/eqp.html" target="_blank" rel="external">explain query plan</a> 指令，优化了该过程中SQL查询效率不够高的一些语句</p>
+<p><strong>sqlite所有的表</strong>是通过<strong>B+树进行存储</strong>，当整个message表数据量较大的时候，因该表所在的B+树的深度较大</p>
+<p>存在不可避免的损坏机率:</p>
+<blockquote>
+<p>关于损坏的介绍，建议直接看官方介绍 <a href="http://sqlite.org/howtocorrupt.html" target="_blank" rel="external">http://sqlite.org/howtocorrupt.html</a><br>需要作出对数据进行恢复的方案。</p>
+</blockquote>
+<h3 id="性能优化：">性能优化：</h3><p><a href="http://www.cnblogs.com/hustcat/archive/2010/06/23/1762987.html" target="_blank" rel="external">浅谈SQLite——查询处理及优化</a></p>
+<h4 id="删除优化">删除优化</h4><p><a href="http://www.cnblogs.com/panchunting/archive/2013/04/27/SQL_Tech_001.html" target="_blank" rel="external">SQL Server系列之 删除大量数据</a>，总结以下方法：</p>
+<ol>
+<li>保留需要的数据之新表中-&gt;<code>TRUNCATE</code>原表数据-&gt;还原之前保留的数据之原表中(<strong>但SQlite不支持<code>TRUNCATE</code></strong>)</li>
+<li>新建表结构-&gt;批量插入需要保留的数据-&gt;<code>DROP</code>原表-&gt;重命名新表为原表</li>
+</ol>
+<p><a href="http://www.yiibai.com/sqlite/sqlite_truncate_table.html" target="_blank" rel="external">SQLite truncate table命令</a></p>
+<h4 id="遵循规则进行优化搜索">遵循规则进行优化搜索</h4><p><a href="http://blog.csdn.net/wlchen123/article/details/8247424" target="_blank" rel="external">sqllite查询优化</a><br><a href="http://www.cnblogs.com/DxSoft/archive/2011/02/12/1952872.html" target="_blank" rel="external">Sqlite官方的查询优化文档</a></p>
+<p><strong>使用索引进行优化：</strong><br><a href="http://blog.csdn.net/ychw365/article/details/5996776" target="_blank" rel="external">在SQLite中使用索引优化查询速度</a></p>
+<ul>
+<li>如何判断索引是否存在：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> type,tb1_name,name <span class="keyword">as</span> index_num <span class="keyword">FROM</span> sqlite_master <span class="keyword">WHERE</span> type == <span class="string">'index'</span> <span class="keyword">AND</span> tbl_name == <span class="string">'table_name'</span> <span class="keyword">And</span> name=<span class="string">'index_name'</span></span></span><br></pre></td></tr></table></figure>
+<p>从上面的代码可查询到对应的索引有多少个，从而判断索引是否存在。</p>
+<ul>
+<li>创建索引：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">index</span> index_name <span class="keyword">on</span> table_name (column_name)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">index</span> index_commidityid</span></span><br></pre></td></tr></table></figure>
+<h3 id="错误">错误</h3><p>参考解决方案<br><a href="http://blog.sina.com.cn/s/blog_5da93c8f0102v3js.html" target="_blank" rel="external">Android: SQLiteDatabaseLockedException: database is locked</a></p>
+<h3 id="资料">资料</h3><p><a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a><br><a href="http://www.jianshu.com/p/5c33be6ce89d#" target="_blank" rel="external"># Android SQLite详解</a><br><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/05/android LinearLayout使用/" data-id="cinsxokpi005bw0h1051eznu9" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/05/android LinearLayout使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android fragment" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/03/android fragment/">android LinearLayout使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/03/android fragment/">
+      <time datetime="2015-11-03T09:18:17.000Z" itemprop="datePublished">2015-11-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="属性：">属性：</h3><ul>
+<li><code>android:weightSum</code></li>
+</ul>
+<blockquote>
+<p>如果想使用 layout weights，但是却不想填充整个 LinearLayout 的话，就可以用 weightSum 来定义总的 weight 大小</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/03/android fragment/" data-id="cikmr5jh2003gm8jshzb7syjz" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/03/android fragment/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinearLayout/">LinearLayout</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 单元测试-junit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/03/android 单元测试-junit/">android LinearLayout使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/03/android 单元测试-junit/">
+      <time datetime="2015-11-03T09:18:17.000Z" itemprop="datePublished">2015-11-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="属性：">属性：</h3><ul>
+<li><code>android:weightSum</code></li>
+</ul>
+<blockquote>
+<p>如果想使用 layout weights，但是却不想填充整个 LinearLayout 的话，就可以用 weightSum 来定义总的 weight 大小</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/03/android 单元测试-junit/" data-id="cikmr5jfi0028m8jswlyvmo9u" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/03/android 单元测试-junit/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinearLayout/">LinearLayout</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-java 源码解析：ScheduledThreadPoolExecutor和Timer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/28/java 源码解析：ScheduledThreadPoolExecutor和Timer/">java 源码解析：ScheduledThreadPoolExecutor和Timer</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/28/java 源码解析：ScheduledThreadPoolExecutor和Timer/">
+      <time datetime="2015-10-28T08:43:44.000Z" itemprop="datePublished">2015-10-28</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="分析Timer">分析Timer</h3><p>结合：<br><a href="http://victorzhzh.iteye.com/blog/1011061" target="_blank" rel="external">定时且周期性的任务研究I—Timer</a>，进行分析：<br>使用<code>Timer</code>很简单，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line">timer.schedule(<span class="keyword">new</span> TimerTask()&#123;</span><br><span class="line">    run()&#123;实现run方法&#125;</span><br><span class="line">&#125;, <span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<p>那么源码里面做了什么呢？<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Timer() &#123;</span><br><span class="line">        this(<span class="string">"Timer-"</span> <span class="subst">+</span> serialNumber());</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span> Timer(<span class="built_in">String</span> name) &#123;</span><br><span class="line">        <span class="keyword">thread</span><span class="built_in">.</span>setName(name);</span><br><span class="line">        <span class="keyword">thread</span><span class="built_in">.</span>start();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//接着看声明的对象</span></span><br><span class="line"><span class="keyword">private</span> final TaskQueue <span class="built_in">queue</span> <span class="subst">=</span> <span class="literal">new</span> TaskQueue();</span><br><span class="line"><span class="keyword">private</span> final TimerThread <span class="keyword">thread</span> <span class="subst">=</span> <span class="literal">new</span> TimerThread(<span class="built_in">queue</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这里用到了<code>TaskQueue</code>和<code>TimerThread</code>，接下来看这两个类<br>类<code>TaskQueue</code>:(存储了<code>TimerTask</code>的队列)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> TimerTask[] queue = <span class="keyword">new</span> TimerTask[<span class="number">128</span>];</span><br></pre></td></tr></table></figure></p>
+<p>而<code>TimerTask implements Runnable</code>这个就不多说。<br>类：<code>TimerThread</code>是<code>Timer</code>的内部类，也是<strong>继承一个线程</strong>，关注<code>run</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mainLoop();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// Someone killed this Thread, behave as if Timer cancelled</span></span><br><span class="line">            <span class="keyword">synchronized</span>(queue) &#123;</span><br><span class="line">                newTasksMayBeScheduled = <span class="keyword">false</span>;</span><br><span class="line">                queue.clear();  <span class="comment">// Eliminate obsolete references</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//核心方法</span></span><br><span class="line">mainLoop()&#123;...&#125;<span class="comment">//这里就不贴，自行参看</span></span><br></pre></td></tr></table></figure></p>
+<p>看下<code>mainLoop</code>做了什么</p>
+<blockquote>
+<p>TimerThread中的mainLoop方法是核心，它会完成所有的任务执行，在一开始我们的<strong>队列为空</strong>，这时mainLoop方法调用<code>wait()</code>将会使线程进入等待状态，当我们使用<code>schedule</code>提交任务时<strong>会notify这个TimerThread线程</strong>，<strong>若任务的执行未到则在wait相对的时间差</strong>。</p>
+</blockquote>
+<p>好，回到两个重要的调用方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timer.schedule(<span class="keyword">new</span> TimerLongTask(),<span class="number">0</span>, <span class="number">3000</span>);</span><br><span class="line">timer.scheduleAtFixedRate(<span class="keyword">new</span> TimerTask1(), <span class="number">3000</span>, <span class="number">5000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>继续查看源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">schedule</span><span class="params">(TimerTask task, <span class="keyword">long</span> delay)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (delay &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Negative delay."</span>);</span><br><span class="line">        sched(task, System.currentTimeMillis()+delay, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scheduleAtFixedRate</span><span class="params">(TimerTask task, <span class="keyword">long</span> delay, <span class="keyword">long</span> period)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (delay &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Negative delay."</span>);</span><br><span class="line">        <span class="keyword">if</span> (period &lt;= <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Non-positive period."</span>);</span><br><span class="line">        sched(task, System.currentTimeMillis()+delay, period);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>都统一调用了<code>sched</code>的方法，我就看不到区别了(环境JDK7)，从引用的文章里是这么说的：</p>
+<blockquote>
+<p>重复执行scheduleAtFixedRate方法提交任务，<strong>主要是调用rescheduleMin方法对已经调用的任务进行重新设置调度延迟，并调用fixDown方法对队列里的任务根据延迟时间重新排序</strong>。</p>
+</blockquote>
+<p>好吧，看不出在哪里进行调用了。</p>
+<h3 id="分析ScheduledThreadPoolExecutor">分析ScheduledThreadPoolExecutor</h3><p>查看：<a href="http://victorzhzh.iteye.com/blog/1011635" target="_blank" rel="external">定时且周期性的任务研究II—ScheduledThreadPoolExecutor</a>，这里从案例上讲解了<strong>客服了Timer的缺点的问题</strong>。涉及的知识多，日后再分析。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/28/java 源码解析：ScheduledThreadPoolExecutor和Timer/" data-id="cikmrgd2r001b50jsmnttmrh9" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/28/java 源码解析：ScheduledThreadPoolExecutor和Timer/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ScheduledThreadPoolExecutor/">ScheduledThreadPoolExecutor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Timer/">Timer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-java Timer和ScheduledThreadPoolExecutor使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/27/java Timer和ScheduledThreadPoolExecutor使用/">java Timer和ScheduledThreadPoolExecutor使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/27/java Timer和ScheduledThreadPoolExecutor使用/">
+      <time datetime="2015-10-27T08:44:18.000Z" itemprop="datePublished">2015-10-27</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="方法:schedule和scheduleAtFixedRate区别：">方法:<code>schedule</code>和<code>scheduleAtFixedRate</code>区别：</h3><p>两者都可以作为<strong>定时器</strong>，定时的刷新功能，但又有区别：</p>
+<blockquote>
+<p>当计划反复执行的任务时，如果你注重任务执行的平滑度，那么请使用schedule方法，如果你在乎的是任务的执行频度那么使用scheduleAtFixedRate方法。 例如，这里使用了schedule方法，这就意味着所有beep之间的时间间隔至少为1秒，也就是说，<strong>如果有一个beap因为某种原因迟到了（未按计划执行），那么余下的所有beep都要延时执行</strong>。如果我们想让这个程序正好在3秒以后终止，无论哪一个beep因为什么原因被延时，那么我们需要使用scheduleAtFixedRate方法，<strong>这样当第一个beep迟到时，那么后面的beep就会以最快的速度紧密执行（最大限度的压缩间隔时间）</strong>。</p>
+</blockquote>
+<p>简单讲：<br><code>schedule</code>注重时间间隔的稳定性。<br><code>scheduleAtFixedRate</code>更注重保持执行频率的稳定.<br>下面进行图解：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/111950125653376.jpg" alt=""></p>
+<h3 id="注意问题：">注意问题：</h3><ul>
+<li>每一个Timer仅对应唯一一个线程。</li>
+<li>Timer不保证任务执行的十分精确。</li>
+<li>Timer类的线程安全的。</li>
+</ul>
+<h3 id="终止Timer线程">终止Timer线程</h3><ol>
+<li>调用Timer.cancle()方法。可以在程序任何地方调用，甚至在TimerTask中的run方法中调用；</li>
+<li>创建Timer时定义位daemon守护线程(有关守护线程见《<a href="http://www.cnblogs.com/hanganglin/articles/3526174.html" target="_blank" rel="external">Java守护线程</a>》)，使用new Timer(true)语句；</li>
+<li>设置Timer对象为null，其会自动终止；</li>
+<li>调用System.exit方法，整个程序终止。</li>
+</ol>
+<h3 id="Timer线程的缺点">Timer线程的缺点</h3><ol>
+<li>Timer线程不会捕获异常，所以TimerTask抛出的未检查的异常会终止timer线程。如果Timer线程中存在多个计划任务，其中一个计划任务抛出未检查的异常，则会引起整个Timer线程结束，从而导致其他计划任务无法得到继续执行。</li>
+<li>Timer线程时基于绝对时间(如：2014/02/14 16:06:00)，因此计划任务对系统的时间的改变是敏感的。</li>
+<li>Timer是<strong>单线程</strong>，如果某个任务很耗时，可能会影响其他计划任务的执行。</li>
+</ol>
+<h3 id="升级版：ScheduledThreadPoolExecutor">升级版：<code>ScheduledThreadPoolExecutor</code></h3><h4 id="构造方法">构造方法</h4><ol>
+<li>ScheduledThreadPoolExecutor(int corePoolSize) 使用给定核心池大小创建一个新定定时线程池 </li>
+<li>ScheduledThreadPoolExecutor(int corePoolSize, ThreadFactorythreadFactory) 使用给定的初始参数创建一个新对象，可提供线程创建工厂</li>
+</ol>
+<h4 id="调度方法">调度方法</h4><ol>
+<li><p>schedule(Callable callable, long delay, TimeUnit unit);  延迟delay时间后开始执行callable</p>
+</li>
+<li><p>scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit);  延迟initialDelay时间后开始执行command，并且按照period时间周期性重复调用，当任务执行时间大于间隔时间时，之后的任务都会延迟，<strong>此时与Timer中的schedule方法类似</strong>。</p>
+</li>
+<li><p>scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit);  延迟initialDelay时间后开始执行command，并且按照period时间周期性重复调用，这里的间隔时间delay是等上一个任务完全执行完毕才开始计算，<strong>与Timer中scheduleAtFixedRate情况不同</strong>。</p>
+</li>
+</ol>
+<h4 id="方法：scheduleAtFixedRate和scheduleWithFixedDelay区别">方法：<code>scheduleAtFixedRate</code>和<code>scheduleWithFixedDelay</code>区别</h4><p>看图解<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/150904208819429.jpg" alt=""></p>
+<h4 id="与Timer相比，优点有：">与Timer相比，优点有：</h4><ol>
+<li><p>ScheduledThreadPoolExecutor线程会捕获任务重的异常，即使多个计划任务中存在某几个计划任务为捕获异常的情况，也不会影响ScheduledThreadPoolExecutor总线程的工作，不会影响其他计划任务的继续执行。</p>
+</li>
+<li><p>ScheduledThreadPoolExecutor是基于相对时间的，对系统时间的改变不敏感，但是如果执行某一绝对时间(如2014/02/14 17:13:06)执行任务，可能不好执行，此时可使用Timer。</p>
+</li>
+<li>ScheduledThreadPoolExecutor是线程池，如任务数过多或某些任务执行时间较长，可自动分配更多的线程来执行计划任务。</li>
+</ol>
+<h4 id="既然这么好，那么如何使用？">既然这么好，那么如何使用？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestScheduledThreadPoolExecutor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ScheduledThreadPoolExecutor exec=<span class="keyword">new</span> ScheduledThreadPoolExecutor(<span class="number">1</span>);</span><br><span class="line">        exec.scheduleAtFixedRate(<span class="keyword">new</span> Runnable()&#123;<span class="comment">//每隔一段时间就触发异常</span></span><br><span class="line">            <span class="annotation">@Override</span>  </span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">            &#125;&#125;, <span class="number">1000</span>, <span class="number">5000</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">        exec.scheduleAtFixedRate(<span class="keyword">new</span> Runnable()&#123;<span class="comment">//每隔一段时间打印系统时间，证明两者是互不影响的</span></span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(System.nanoTime());</span><br><span class="line">            &#125;&#125;, <span class="number">1000</span>, <span class="number">2000</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如何进行关闭</strong></p>
+<blockquote>
+<p>scheduleTime.shutdown();</p>
+</blockquote>
+<h3 id="以上摘自：">以上摘自：</h3><p><a href="http://www.cnblogs.com/hanganglin/p/3526240.html" target="_blank" rel="external">Java定时任务Timer、TimerTask与ScheduledThreadPoolExecutor详解</a><br><a href="http://blog.csdn.net/ahxu/article/details/249610" target="_blank" rel="external">Timer和TimerTask详解</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/27/java Timer和ScheduledThreadPoolExecutor使用/" data-id="cikmrgd36001m50js2d5pnzxo" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/27/java Timer和ScheduledThreadPoolExecutor使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Timer/">Timer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TimerTask/">TimerTask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android viewpager&amp;适配器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/22/android viewpager&适配器/">android 动画</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/22/android viewpager&适配器/">
+      <time datetime="2015-10-22T07:13:00.000Z" itemprop="datePublished">2015-10-22</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="Animation使用"><code>Animation</code>使用</h3><p>方法使用：</p>
+<ul>
+<li><code>setFillAfter（true）</code><blockquote>
+<p>默认是<code>false</code>.当为<code>true</code>的时候，改<code>view</code>会继续保持动画结束的状态，例如：旋转，移动等，并不会复原。<br>即：<strong>fillAfter是指动画结束是画面停留在此动画的最后一帧</strong></p>
+</blockquote>
+</li>
+<li><strong>fillBefore是指动画结束时画面停留在此动画的第一帧;默认值为true</strong></li>
+<li><code>setInterpolator</code>设置动画的变化速度<blockquote>
+<p>可以实现匀速、正加速、负加速、无规则变加速等，可选参数：<br><code>DecelerateInterpolator</code>-&gt; 在速度先快后慢<br><code>AccelerateInterpolator</code>-&gt; 速度先快后慢</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><code>Animation</code>源码分析</strong><br><a href="http://www.myexception.cn/android/1841678.html" target="_blank" rel="external">android 动画片原理源码分析之Animation</a><br><a href="http://www.cnblogs.com/kissazi2/p/4249213.html" target="_blank" rel="external">Android属性动画源代码解析（超详细）</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/42056859" target="_blank" rel="external">Android 属性动画 源码解析 深入了解其内部实现</a></p>
+<h4 id="xml渲染的形式使用">xml渲染的形式使用</h4><blockquote>
+<p>res-&gt;anim-&gt;xx.xml（自行新建）</p>
+</blockquote>
+<p>属性介绍：</p>
+<ul>
+<li><code>repeatCount</code>当定义为<code>infinite</code>的时候是无穷极的循环。也可以设置为数字，指定循环几次。<blockquote>
+<p>注意问题：<a href="http://blog.csdn.net/feng88724/article/details/7676808" target="_blank" rel="external">android:repeatCount=”infinite”在set中无效</a></p>
+</blockquote>
+</li>
+</ul>
+<p>其他动画：<a href="http://www.mobile-open.com/2015/40254.html" target="_blank" rel="external">Android开发——实现动画的透明度渐变、旋转动画、缩放动画、平移动画</a></p>
+<h3 id="RotateAnimation旋转动画">RotateAnimation旋转动画</h3><p>简单使用代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ImageView imageView = (ImageView) findViewById(R.id.imageView1);</span><br><span class="line">AnimationSet animationSet = <span class="keyword">new</span> AnimationSet(<span class="keyword">true</span>);</span><br><span class="line">RotateAnimation rotateAnimation = <span class="keyword">new</span> RotateAnimation(<span class="number">0</span>, <span class="number">360</span>,</span><br><span class="line">        Animation.RELATIVE_TO_PARENT, <span class="number">0.5f</span>,</span><br><span class="line">        Animation.RELATIVE_TO_PARENT, <span class="number">0.5f</span>);</span><br><span class="line">rotateAnimation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animationSet.addAnimation(rotateAnimation);</span><br><span class="line">imageView.startAnimation(animationSet);</span><br></pre></td></tr></table></figure></p>
+<h3 id="LayoutAnimation使用">LayoutAnimation使用</h3><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0619/3090.html" target="_blank" rel="external">Android LayoutAnimation使用及扩展</a><br><a href="http://gundumw100.iteye.com/blog/1874545" target="_blank" rel="external">ListView,GridView之LayoutAnimation特殊动画的实现</a></p>
+<h3 id="graphics-camera使用">graphics.camera使用</h3><blockquote>
+<p>可用来实现3D转换的效果</p>
+</blockquote>
+<p>想用案例：<a href="http://www.jianshu.com/p/153d9f31288d/comments/1248106#" target="_blank" rel="external"># Android 利用Camera实现中轴3D卡牌翻转效果</a><br>关于优化：<a href="http://stackoverflow.com/questions/11014423/how-to-make-rotate3danimation-more-smoother" target="_blank" rel="external">How to make Rotate3dAnimation more smoother?</a><br>这里使用的是<code>api demo</code>提供的<code>Rotate3dAnimation</code>这个类进行完成。</p>
+<p><strong>相关方法解释：</strong></p>
+<blockquote>
+<ul>
+<li>translate(float x, float y, float z);<br><img src="http://upload-images.jianshu.io/upload_images/1094967-507636ca10a31055.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">。注意：当绕着<code>Y</code>轴旋转的时候是从<strong>屏幕里到品目外的</strong>，并不是绕<code>y</code>轴旋转才是。</li>
+</ul>
+</blockquote>
+<h4 id="实战使用">实战使用</h4><p>实现如图效果：<img src="http://upload-images.jianshu.io/upload_images/1094967-914aaaa0fe4564e0.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<p><strong>步骤：</strong></p>
+<ul>
+<li><code>api demo</code>提供的<code>Rotate3dAnimation</code>这个类</li>
+<li>在布局中使用<code>RelativeLayout</code>,将旋转前的<code>view</code>和选择后的<code>view</code>进行放置，并对应设置为<code>gone</code>.<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;RelativeLayout</span><br><span class="line">    android:id="@+id/weather_icon_rlayout"</span><br><span class="line">    android:layout_width="wrap_content"</span><br><span class="line">    android:layout_height="wrap_content"</span><br><span class="line">    android:layout_centerInParent="true"&gt;</span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id="@+id/img_weather_flag_default"</span><br><span class="line">        android:layout_width="wrap_content"</span><br><span class="line">        android:layout_height="wrap_content"</span><br><span class="line">        android:layout_centerInParent="true"</span><br><span class="line">        android:src="@mipmap/icon_sunny" /&gt;</span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id="@+id/img_weather_flag"</span><br><span class="line">        android:layout_width="wrap_content"</span><br><span class="line">        android:layout_height="wrap_content"</span><br><span class="line">        android:layout_centerInParent="true"</span><br><span class="line">        android:src="@mipmap/icon_sunny"</span><br><span class="line">        android:visibility="gone"/&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>一个默认显示的图片，一个是旋转后的图片（设置为<code>gone</code>）.使用以下方法得到<strong>旋转动画</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="javadoc">/**</span><br><span class="line"> * 仿照相机显示图片的3D显示方式</span><br><span class="line"> *<span class="javadoctag"> @param</span> defaultView 默认view</span><br><span class="line"> *<span class="javadoctag"> @param</span> showView 旋转后显示的view</span><br><span class="line"> *<span class="javadoctag"> @param</span> viewParent 使用动画的view</span><br><span class="line"> *<span class="javadoctag"> @param</span> centerX 旋转中心x轴</span><br><span class="line"> *<span class="javadoctag"> @param</span> centerY 旋转中心y轴</span><br><span class="line"> *<span class="javadoctag"> @param</span> startRotate 开始旋转角度</span><br><span class="line"> *<span class="javadoctag"> @param</span> endRotate 结束旋转角度</span><br><span class="line"> *<span class="javadoctag"> @return</span></span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Rotate3dAnimation <span class="title">getRotate3dAnim</span></span><br><span class="line">        <span class="params">(<span class="keyword">final</span> View defaultView, <span class="keyword">final</span> View showView,<span class="keyword">final</span> ViewGroup viewParent,</span><br><span class="line">         <span class="keyword">final</span> <span class="keyword">int</span> centerX,<span class="keyword">final</span> <span class="keyword">int</span> centerY,</span><br><span class="line">         <span class="keyword">final</span> <span class="keyword">int</span> startRotate, <span class="keyword">final</span> <span class="keyword">int</span> endRotate)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Rotate3dAnimation openAnimation = <span class="keyword">new</span> Rotate3dAnimation</span><br><span class="line">            (startRotate, endRotate, centerX, centerY, depthZ, <span class="keyword">true</span>);</span><br><span class="line">    openAnimation.setDuration(duration);</span><br><span class="line">    openAnimation.setFillAfter(<span class="keyword">true</span>);</span><br><span class="line">    openAnimation.setInterpolator(<span class="keyword">new</span> AccelerateInterpolator());</span><br><span class="line">    openAnimation.setAnimationListener(<span class="keyword">new</span> Animation.AnimationListener() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line">            defaultView.setVisibility(View.GONE);</span><br><span class="line">            showView.setVisibility(View.VISIBLE);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从270到360度，顺时针旋转视图，此时reverse参数为false，达到360度动画结束时视图变得可见</span></span><br><span class="line">            Rotate3dAnimation rotateAnimation = <span class="keyword">new</span> Rotate3dAnimation(<span class="number">360</span>-endRotate, <span class="number">360</span>-startRotate, centerX, centerY, depthZ, <span class="keyword">false</span>);</span><br><span class="line">            rotateAnimation.setDuration(duration);</span><br><span class="line">            rotateAnimation.setFillAfter(<span class="keyword">true</span>);</span><br><span class="line">            rotateAnimation.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line">            viewParent.startAnimation(rotateAnimation);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> openAnimation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后在适当的位置上执行<code>viewParent.startAnimation(rotateAnimatino)</code>即可。</p>
+<h4 id="Camera与Matrix的一些区别如下：">Camera与Matrix的一些区别如下：</h4><ol>
+<li>Camera的rotate()相关方法是指定某一维度上旋转指定的角度。</li>
+<li>Matrix的rotate()相关方法实现的效果是顺时针旋转指定的角度；与Camera指定Z轴旋转效果相同，但方向相反。</li>
+<li>Camera的translate()方法根据某一维度上视点的位移实现图像的缩放，与Matrix的scale()相关方法作用效果相似，只是Matrix的scale()相关方法是直接指定缩放比例。</li>
+<li>Camera不支持倾斜操作，Matrix可以直接实现倾斜操作。</li>
+</ol>
+<p>详细使用参考：<a href="http://www.oschina.net/question/54100_34015" target="_blank" rel="external">android.graphics.Camera实现图像的旋转、缩放，配合Matrix实现图像的倾斜</a></p>
+<h3 id="Material_Design波纹动画"><code>Material Design</code>波纹动画</h3><p><a href="http://android-developers.blogspot.com/2014/10/implementing-material-design-in-your.html" target="_blank" rel="external">Implementing Material Design in Your Android app</a></p>
+<h3 id="RecyclerView动画库"><code>RecyclerView</code>动画库</h3><p><a href="https://github.com/gabrielemariotti/RecyclerViewItemAnimators" target="_blank" rel="external">RecyclerViewItemAnimators</a></p>
+<h3 id="案例参考：">案例参考：</h3><p><a href="http://blog.csdn.net/tianjian4592/article/category/2873607" target="_blank" rel="external">android 动画教程系列</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/22/android viewpager&适配器/" data-id="cikmr5jgv0038m8js1r96x1ho" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/22/android viewpager&适配器/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Animation/">Animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RotateAnimation/">RotateAnimation</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 命名规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/22/android 命名规范/">android 自定义view</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/22/android 命名规范/">
+      <time datetime="2015-10-22T02:53:35.000Z" itemprop="datePublished">2015-10-22</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="自定义view学习">自定义view学习</h3><p><a href="http://blog.csdn.net/guolin_blog/article/details/12921889" target="_blank" rel="external">Android LayoutInflater原理分析，带你一步步深入了解View(一)</a><br>知识点：</p>
+<ul>
+<li><code>LayoutInflater</code> 加载布局。原理:<strong>pull解析方式来解析布局文件</strong><ul>
+<li>动态添加布局<blockquote>
+<p>LayoutInflater.from(context).inflate(R.layout.title, this);</p>
+</blockquote>
+</li>
+<li>源码解析其中的原理</li>
+</ul>
+</li>
+<li>layout_width和layout_height要在<code>布局包裹下才起作用</code>，默认为<code>FrameLayout</code>.</li>
+</ul>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/16330267" target="_blank" rel="external">Android视图绘制流程完全解析，带你一步步深入了解View(二)</a><br>知识点：</p>
+<ul>
+<li>onMeasure 测量视图大小</li>
+<li>onLayout 对子视图进行布局（不同布局如relativeLayout的规则都不同）</li>
+<li>onDraw 绘制view的流程</li>
+</ul>
+<p><strong><code>getMeasureWidth</code>和<code>getWidth</code></strong>的区别：</p>
+<blockquote>
+<p><code>getMeasureWidth()</code>方法:<br>在measure()过程结束后就可以获取到<br>通过setMeasuredDimension()方法来进行设置的.<br><code>getWidth()</code>方法:<br>要在layout()过程结束后才能获取到<br>通过视图右边的坐标减去左边的坐标计算出来的</p>
+</blockquote>
+<p>一般情况下，两者的数据相同。</p>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/17045157" target="_blank" rel="external">Android视图状态及重绘流程分析，带你一步步深入了解View(三)</a><br>知识点：</p>
+<ul>
+<li><p>视图状态：（每个<code>view</code>都拥有）</p>
+<ol>
+<li>enabled 是否可用，响应<code>onTouch</code>事件</li>
+<li>focused 获取焦点，一般只有视图在focusable和focusable in touch mode同时成立，才可以获取焦点。如<code>editText</code></li>
+<li>window_focused 是否处于正在交互的窗口,系统自行决定</li>
+<li>selected 是否处于选中状态</li>
+<li>pressed 是否处于按下状态</li>
+</ol>
+</li>
+<li><p>视图重绘<br>setVisibility()、setEnabled()、setSelected()等方法导致视图重绘，可以手动调用<code>invalidate</code>或者<code>postinvalidate</code>来进行视图重绘，注意只会<strong>重绘draw</strong>流程，而不会重绘<code>meause</code>和<code>layout</code>流程，因为并没有改变大小和布局。<br>但在这篇<a href="http://blog.csdn.net/sk719887916/article/details/48443429" target="_blank" rel="external">Android View 中invalidate() 你所不知道的那些事</a>文章提出了异议。</p>
+<blockquote>
+<p>invalidate()会触发view Layout(),和draw(),但是它不会进行测量。 requestLayout(）方法最终也会执行draw（）的。</p>
+</blockquote>
+</li>
+</ul>
+<p><a href="http://blog.csdn.net/guolin_blog/article/details/17357967" target="_blank" rel="external">Android自定义View的实现方法，带你一步步深入了解View(四)</a><br>知识点：</p>
+<ul>
+<li>自定义view：自动记录点击事件的btn</li>
+<li>组合控件：通过继承布局的view来加载布局以及相关的组件</li>
+<li>继承控件，通过继承view来处理相应的事件，如listview中添加滑动删除的按钮，并实现相关的事件</li>
+</ul>
+<h3 id="postInvalidate和invalidate的区别">postInvalidate和invalidate的区别</h3><ul>
+<li><p><code>invalidate</code>智能在UI线程中直接使用，即：oncreate的时候，其他时候需要<strong>消息机制</strong>（使用<code>Handler</code>或者<code>runOnUiThread</code>）。</p>
+</li>
+<li><p><code>postInvalidate</code>直接封装了<code>handler</code>的消息机制，直接调用即可。</p>
+</li>
+</ul>
+<p>两者：</p>
+<ul>
+<li><strong>在非UI线程中</strong>是建立在<code>Thread</code>异步更新上。（都需要线程进行执行）</li>
+<li>在<code>UI线程中</code>直接执行即可更新。并不需要写线程，handler之类的。</li>
+</ul>
+<p><strong>扩展</strong>（<code>requestLayout</code>）</p>
+<ul>
+<li>当view确定自身已经不再适合现有的区域时，该view本身调用这个方法要求<code>parent view</code>重新调用他的<code>onMeasure</code>和<code>onLayout</code>来对重新设置自己位置。（<strong>特别的当view的layoutparameter发生改变，并且它的值还没能应用到view上</strong>）</li>
+</ul>
+<blockquote>
+<p>用途：有时我们在改变一个view 的内容之后 可能会造成显示出现错误，比如写ListView的时候 重用convertview中的某个TextView 可能因为前后填入的text长度不同而造成显示出错，此时我们可以在改变内容之后调用requestLayout方法加以解决。<br>参考：<a href="http://blog.csdn.net/lonely_fireworks/article/details/28910103" target="_blank" rel="external">view的requestLayout()方法</a></p>
+</blockquote>
+<h3 id="onTouchEvent触摸事件分发机制：">onTouchEvent触摸事件分发机制：</h3><p>参考：</p>
+<ul>
+<li><a href="http://blog.csdn.net/guolin_blog/article/details/9097463" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></li>
+</ul>
+<p>个人一张图理解整个流程：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151126094235.png" alt=""></p>
+<p>另外需要主要讲到的两中情况：</p>
+<ul>
+<li><p>注册了<code>ontouch</code>并返回<code>true</code>：</p>
+<blockquote>
+<p>每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件。这里需要注意，如果你在执行ACTION_DOWN的时候返回了false，后面一系列其它的action就不会再得到执行了.</p>
+</blockquote>
+</li>
+<li><p><code>ontouch</code>没有注册或者返回<code>false</code>:</p>
+<blockquote>
+<p>执行<code>ontouchEvent</code>方法。如果：<code>if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||(viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE))</code>为<code>true</code>的话，照样会有<code>ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件</code>,并且总是<strong>返回true</strong>.</p>
+</blockquote>
+</li>
+<li><p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747" target="_blank" rel="external">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>以上注意几个信息：<br><strong>1. onTouch和onTouchEvent有什么区别，又该如何使用？</strong></p>
+<blockquote>
+<p>从源码中可以看出，这两个方法都是在View的dispatchTouchEvent中调用的，<strong>onTouch优先于onTouchEvent执行</strong>。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。</p>
+</blockquote>
+<p>我们需要关注下面的三个类：</p>
+<ol>
+<li>public boolean dispatchTouchEvent(MotionEvent ev)  这个方法用来分发TouchEvent</li>
+<li>public boolean onInterceptTouchEvent(MotionEvent ev) 这个方法用来拦截TouchEvent</li>
+<li>public boolean onTouchEvent(MotionEvent ev) 这个方法用来处理TouchEvent</li>
+</ol>
+<p>对应的解释为：</p>
+<blockquote>
+<p>当TouchEvent发生时，首先Activity将TouchEvent传递给最顶层的View， TouchEvent最先到达最顶层 view 的 dispatchTouchEvent ，然后由  dispatchTouchEvent 方法进行分发，如果dispatchTouchEvent返回true ，则交给这个view的onTouchEvent处理，如果dispatchTouchEvent返回 false ，则交给这个 view 的 interceptTouchEvent 方法来决定是否要拦截这个事件，如果 interceptTouchEvent 返回 true ，也就是拦截掉了，则交给它的 onTouchEvent 来处理，如果 interceptTouchEvent 返回 false ，那么就传递给子 view ，由子 view 的 dispatchTouchEvent 再来开始这个事件的分发。如果事件传递到某一层的子 view 的 onTouchEvent 上了，这个方法返回了 false ，那么这个事件会从这个 view 往上传递，都是 onTouchEvent 来接收。而如果传递到最上面的 onTouchEvent 也返回 false 的话，这个事件就会“消失”，而且接收不到下一次事件。<br>来自：<a href="http://mobile.51cto.com/abased-374715.htm" target="_blank" rel="external"># Android dispatchTouchEvent介绍</a></p>
+</blockquote>
+<h3 id="自定义属性">自定义属性</h3><h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/cyp331203/article/details/40423727" target="_blank" rel="external">Android自定义控件系列一：Android如何实现老版优酷客户端三级环形菜单</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/22/android 命名规范/" data-id="cikmr5jf80020m8jse8ltmygv" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/22/android 命名规范/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android ListView使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/21/android ListView使用/">android TextView使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/10/21/android ListView使用/">
+      <time datetime="2015-10-21T01:06:40.000Z" itemprop="datePublished">2015-10-21</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="动态修改TextView的颜色">动态修改TextView的颜色</h3><p><a href="http://blog.csdn.net/u010313877/article/details/8878865" target="_blank" rel="external">android动态改变textView字体的颜色</a>，附带点击前和点击后的效果。<br>多种详细使用情况：<br><a href="http://stackoverflow.com/questions/4602902/how-to-set-the-text-color-of-textview-in-code" target="_blank" rel="external">How to set the text color of TextView in code?</a><br>下面进行列出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置文字大小 ，大小只能传像素值</span></span><br><span class="line">textView.setTextSize(<span class="number">67</span>);</span><br><span class="line"><span class="comment">//设置颜色，三种方式。</span></span><br><span class="line">textView.setTextColor(<span class="number">0xff00ff00</span>);</span><br><span class="line">textView.setTextColor(Color.BLUE);</span><br><span class="line">textView.setTextColor(Color.argb(<span class="number">0x99</span>,  <span class="number">0xff</span>,  <span class="number">0x00</span>,  <span class="number">0x00</span>));</span><br><span class="line"><span class="comment">// 通过values中的color中设置的颜色来设定。</span></span><br><span class="line"><span class="keyword">int</span>  color  =  getResources().getColor(R.color.red);</span><br><span class="line">textView.setTextColor(color);</span><br></pre></td></tr></table></figure>
+<h3 id="显示图片并设置图片的间距">显示图片并设置图片的间距</h3><p>在顶部设置添加图片：（上下左右都可以）</p>
+<blockquote>
+<p>android:drawableTop=”@mipmap/communication”</p>
+</blockquote>
+<p>那如何设置图片的间隔呢？</p>
+<blockquote>
+<p>android:drawablePadding=”10sp”</p>
+</blockquote>
+<h3 id="动态添加drawableTop-问题">动态添加<code>drawableTop...</code>问题</h3><p>我们使用<code>TextView</code>提供的<code>setCompoundDrawables</code>来动态设置<code>drawableTop</code>,但遇到以下问题：</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/6590838/calling-setcompounddrawables-doesnt-display-the-compound-drawable" target="_blank" rel="external">Calling setCompoundDrawables() doesn&#39;t display the Compound Drawable</a></p>
+</blockquote>
+<p>通过答案可以知道，使用：<code>setCompoundDrawablesWithIntrinsicBounds</code>来代替：<code>setCompoundDrawables</code>即可解决问题。</p>
+<p>另外使用上面的方法的时候，需要使用<code>drawable</code>作为参数，按着最常见的做法<code>getResurces().getDrawables(R.xx)</code>即可，但出现下列问题：</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/30266971/why-getdrawable-doesnt-work-on-some-android-devices" target="_blank" rel="external">Why getDrawable() doesn&#39;t work on some Android devices?</a></p>
+</blockquote>
+<p>我们需要对<strong>版本进行判断，不同版本使用不同的方法</strong>，判断为<code>android.os.Build.VERSION.SDK_INT &gt;= 21</code></p>
+<h3 id="文本的省略显示">文本的省略显示</h3><p>在TextView中可以设置 <code>android:ellipsize</code> 属性就行修改:</p>
+<ul>
+<li>marquee（滚动显示）</li>
+<li>end（末尾显示······）</li>
+<li>middle（中间显示······）</li>
+<li>none（不显示省略号，多余自动不显示）</li>
+</ul>
+<p>注意当设置<strong>滚动显示</strong>的时候，还需要设置<strong>焦点</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android:ellipsize=<span class="string">"marquee"</span></span><br><span class="line">android:focusable=<span class="string">"true"</span></span><br><span class="line">android:focusableInTouchMode=<span class="string">"true"</span></span><br><span class="line">android:singleLine=<span class="string">"true"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置字体：">设置字体：</h3><p>默认属性设置字体：</p>
+<blockquote>
+<p> <code>Android:typeface=&quot;serif&quot;</code></p>
+</blockquote>
+<p>自定义字体：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将字体文件保存在assets/fonts/目录下，创建Typeface对象</span></span><br><span class="line">Typeface typeFace =Typeface.createFromAsset(getAssets(),<span class="string">"fonts/HandmadeTypewriter.ttf"</span>);</span><br><span class="line"><span class="comment">//使用字体</span></span><br><span class="line">textView.setTypeface(typeFace);</span><br></pre></td></tr></table></figure></p>
+<h3 id="字体加粗">字体加粗</h3><p>在<code>xml文件</code>中使用<code>android:textStyle=”bold”</code></p>
+<p>或者：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TextView tv = (TextView)findViewById(R.id.TextView01); </span><br><span class="line">TextPaint tp = tv.getPaint(); </span><br><span class="line">tp.setFakeBoldText(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="开发注意">开发注意</h3><ul>
+<li><code>setText()</code>两个可选参数,<code>string</code>或者<code>int</code>，当<code>int</code>的时候一定为<code>资源（R.string.demo）</code>，否则报以下错误：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.content.res.Resources$NotFoundException: String resource ID #<span class="number">0xa</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果想输入的返回值为<strong>整型</strong>要注意改成<strong>字符串</strong></p>
+<h3 id="扩展：">扩展：</h3><p><a href="http://blog.csdn.net/myatlantis/article/details/42391115" target="_blank" rel="external">JustifyTextView 解决TextView中英文混排自动换行的问题</a></p>
+<p>等到字体的高度：<a href="http://sd4886656.iteye.com/blog/1200890" target="_blank" rel="external">[Android]Android字体高度的研究</a></p>
+<h3 id="参考引用资料">参考引用资料</h3><p><a href="http://blog.csdn.net/to_be_designer/article/details/47839749" target="_blank" rel="external">Android UI设计——TextView控件</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/10/21/android ListView使用/" data-id="cinsxokpb0056w0h1j5iadej7" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/10/21/android ListView使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/textview/">textview</a></li></ul>
 
     </footer>
   </div>
@@ -922,7 +1143,7 @@
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -932,7 +1153,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -941,7 +1162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -986,7 +1207,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 10px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/CirclePageIndicator/" style="font-size: 10px;">CirclePageIndicator</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/DNS/" style="font-size: 10px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12px;">Dalvik</a><a href="/tags/DatagramPacket/" style="font-size: 10px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 10px;">DatagramSocket</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/FloatingActionButton/" style="font-size: 12px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 12px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 12px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 12px;">Join</a><a href="/tags/Map/" style="font-size: 12px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14px;">Material_Deisign</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PreferenceActivity/" style="font-size: 10px;">PreferenceActivity</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/SOCKS/" style="font-size: 10px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 10px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/ShadowSocks/" style="font-size: 12px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 12px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/UnitTest/" style="font-size: 10px;">UnitTest</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 12px;">ViewPagerIndicator</a><a href="/tags/activity/" style="font-size: 10px;">activity</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18px;">android</a><a href="/tags/android-studio/" style="font-size: 10px;">android studio</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 10px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/git/" style="font-size: 12px;">git</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 12px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/intent/" style="font-size: 10px;">intent</a><a href="/tags/java/" style="font-size: 16px;">java</a><a href="/tags/java-DatagramPacket-DatagramSocket/" style="font-size: 10px;">java - DatagramPacket - DatagramSocket</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 10px;">json</a><a href="/tags/junit/" style="font-size: 10px;">junit</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 10px;">pull</a><a href="/tags/sax/" style="font-size: 10px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/viewpager/" style="font-size: 12px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 10px;">反编译</a><a href="/tags/多线程/" style="font-size: 14px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 10px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 14px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 12px;">随笔</a><a href="/tags/面试/" style="font-size: 12px;">面试</a>
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
     </div>
   </div>
 

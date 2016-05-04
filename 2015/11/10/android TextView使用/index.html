@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android 内存泄漏 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么叫内存泄漏呢？gc没有办法回收activity的内存。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android 内存泄漏">
+<meta property="og:url" content="http://hexo.trity.cc/2015/11/10/android TextView使用/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="什么叫内存泄漏呢？gc没有办法回收activity的内存。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android 内存泄漏">
+<meta name="twitter:description" content="什么叫内存泄漏呢？gc没有办法回收activity的内存。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android TextView使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android 内存泄漏
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/10/android TextView使用/">
+      <time datetime="2015-11-10T00:48:19.000Z" itemprop="datePublished">2015-11-10</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h3 id="什么叫内存泄漏呢？">什么叫内存泄漏呢？</h3><p><strong>gc没有办法回收activity的内存</strong>。<br><a id="more"></a></p>
+<h4 id="那什么情况下会GC呢？">那什么情况下会<code>GC</code>呢？</h4><ul>
+<li>屏幕旋转的时候</li>
+<li>内存不够用的时候。</li>
+</ul>
+<h3 id="什么情况会发生内存泄漏呢？">什么情况会发生内存泄漏呢？</h3><h4 id="静态资源问题">静态资源问题</h4><blockquote>
+<p><strong>静态变量</strong>在整个应用的<strong>内存里只保存一份</strong>，一旦创建就不会释放该变量的内存，<strong>直到整个应用都销毁才会释放</strong>static静态变量的内存.</p>
+</blockquote>
+<p>例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCustomResource</span> </span>&#123;</span><br><span class="line">    <span class="comment">//静态变量drawable</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Drawable drawable;</span><br><span class="line">    <span class="keyword">private</span> View view；</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyCustomResource</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        Resources resources = context.getResources();</span><br><span class="line">        drawable = resources.getDrawable(R.drawable.ic_launcher);</span><br><span class="line">        view = <span class="keyword">new</span> View(context);</span><br><span class="line">        view.setBackgroundDrawable(drawable);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//查看setBackgroundDrawable的源代码：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span>  <span class="keyword">void</span>  <span class="title">setBackgroundDrawable</span><span class="params">(Drawable background)</span> </span>&#123; </span><br><span class="line">..........</span><br><span class="line"><span class="javadoc">/**此处的this就是当前View对象，而View对象又是有Context对象获得 因此，变量background持有View对象的引用，View持有Context的引用， 所有background间接持有Context对象的引用了*/</span></span><br><span class="line">background.setCallback(<span class="keyword">this</span>);</span><br><span class="line">.......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>分析：<br>此处的<code>background.setCallback(this);</code>的<code>this</code>是当前的<code>view</code>的对象。由于<code>background</code>是一个静态变量，<strong>会一直持有View对象的引用</strong>，而然View对象又是由Context对象创建出来的，因此<strong>background会间接持有Context的对象的引用</strong>。<br>所以：<br><strong>该Context对应的Activity退出finish掉的时候其实该Activity是不能完全释放内存的</strong>。<br><strong>值得注意的是：</strong><br>代码是由于静态资源<code>drawable</code>持有<code>View</code>对象的引用导致内存泄漏隐患的，并不是由于<code>context.getResourc</code>e导致内存泄漏，因此如果你想通过<code>context.getApplicaitonContext</code>来获取<code>getResource</code>是解决不了内存泄漏的.<br><strong>另外提一点：</strong>（使用<code>getApplicaitonContext</code>的错误）<br><a href="http://stackoverflow.com/questions/23546303/android-app-application-cannot-be-cast-to-android-app-activity" target="_blank" rel="external">android.app.Application cannot be cast to android.app.Activity</a></p>
+<p><strong>因此：在android 3.0 中：</strong><br>修改了setBackgroundDrawable内部方法中的 background.setCallback(this);方法。<strong>里面的实现使用了弱引用来持有View对象的引用，从而避免了内存泄漏隐患</strong>。</p>
+<p>总结：以后代码中避免使用<strong>静态资源</strong>，或者<strong>使用弱引用来解决</strong>相应的问题也是可以的。</p>
+<h4 id="单例模式导致内存泄漏（单例中的类是静态的，引用context将导致以上的问题）">单例模式导致内存泄漏（单例中的类是静态的，引用context将导致以上的问题）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomManager</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> CustomManager sInstance;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CustomManager <span class="title">getInstance</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            sInstance = <span class="keyword">new</span> CustomManager(context);<span class="comment">//使用context的引用。</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sInstance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context mContext;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">CustomManager</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>单例模式</strong>使用的是<strong>静态类的方式</strong>，让该对象在整个应用的内存中<strong>保持一份该对象</strong>，从而<strong>减少对多次创建对象带来的资源浪费</strong>。<br>同样的问题：<br>在创建该单例的时候<strong>使用了生命周期端的Context对象的引用</strong>，如果你是在Application中创建以上单例的话是木有任何问题的。因为<strong>Application的Context生命周期是整个应用，和单例的生命周期一样</strong>，因此不会导致内存泄漏。但是，如果你是在<strong>Activity中创建以上单例的话</strong>，将一样导致跟上一个一样的内存问题。<br>所以讲以上的代码改成：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123; </span><br><span class="line">sInstance = <span class="keyword">new</span> CustomManager(context.getApplicationContext()); &#125;<span class="comment">//注意这里的不同。</span></span><br><span class="line"><span class="keyword">return</span> sInstance;</span><br></pre></td></tr></table></figure></p>
+<p>以上全摘自：<a href="http://blog.csdn.net/feiduclear_up/article/details/47356289" target="_blank" rel="external">Android Context 是什么？</a></p>
+<p>通过上面大家可能对<code>Context</code>比较模糊。请阅读：<a href="http://blog.csdn.net/feiduclear_up/article/details/47356289" target="_blank" rel="external">Android Context 是什么？</a>。<br>记录几点：</p>
+<ul>
+<li>getApplication和getApplicationContext返回同一个<code>Application</code>对象，只是里面方法调用的成员返回不同。</li>
+<li>所有Context都是在应用的主线程ActivityThread中创建的</li>
+<li>尽量少用Context对象去获取静态变量，静态方法，以及单例对象。以免导致内存泄漏</li>
+<li>在创建与UI相关的地方，比如创建一个Dialog，或者在代码中创建一个TextView，都用Activity的Context去创建。然而在引用静态资源，创建静态方法，单例模式等情况下，使用生命周期更长的Application的Context才不会导致内存泄漏</li>
+</ul>
+<h4 id="内部类Handler类引起内存泄漏">内部类Handler类引起内存泄漏</h4><p>在Activity中定义了一个内部Handler类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  Handler mHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//TODO handle message...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="annotation">@TargetApi</span>(<span class="number">11</span>)</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mHandler.sendMessageDelayed(Message.obtain(), <span class="number">60000</span>);<span class="comment">//延迟一分钟执行</span></span><br><span class="line">        <span class="comment">//just finish this activity</span></span><br><span class="line">        finish();<span class="comment">//关闭activity</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码将会导致内存泄漏的问题（原因）:</p>
+<ul>
+<li>在Java中，<strong>非静态(匿名)内部类会引用外部类对象</strong>。而<strong>静态内部类不会引用外部类对象</strong>。</li>
+</ul>
+<p>当<code>Activity finish</code>后，延时消息会继续<strong>存在主线程消息队列中1分钟，然后处理消息</strong>。而<strong>该消息引用了Activity的Handler对象，然后这个Handler又引用了这个Activity</strong>（从以上原因可知道）。这些引用对象会保持到该消息被处理完，这样就<strong>导致该Activity对象无法被回收</strong>，从而导致了上面说的 Activity泄露。</p>
+<p>修改：将<code>Handler</code>改为<strong>静态类</strong>，并使用<code>WeakReference</code>来保持外部的<code>activity</code>对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Handler mHandler = <span class="keyword">new</span> MyHandler(<span class="keyword">this</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;Activity&gt; mActivity;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyHandler</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">        mActivity = <span class="keyword">new</span> WeakReference&lt;Activity&gt;(activity);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        System.out.println(msg);</span><br><span class="line">        <span class="keyword">if</span>(mActivity.get() == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结论：当你在<strong>Activity中使用内部类</strong>的时候，需要时刻<strong>考虑您是否可以控制该内部类的生命周期</strong>，如果不可以，则<strong>最好定义为静态内部类</strong>。</p>
+<p>以上摘自：<a href="http://blog.chengyunfeng.com/?p=468" target="_blank" rel="external">内部Handler类引起内存泄露</a></p>
+<p><strong>另一种解决的方式：</strong><br>在<code>activty</code>的<code>onDestroy</code>方法对<code>handler</code>的取消：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void onDestroy() &#123;</span><br><span class="line">    mHandler.removeMessages(MESSAGE_1);</span><br><span class="line">    mHandler.removeMessages(MESSAGE_2);</span><br><span class="line">    mHandler.removeMessages(MESSAGE_3);</span><br><span class="line">    mHandler.removeMessages(MESSAGE_4);</span><br><span class="line">    // <span class="keyword">...</span> <span class="keyword">...</span></span><br><span class="line">    mHandler.removeCallbacks(mRunnable);</span><br><span class="line">    // <span class="keyword">...</span> <span class="keyword">...</span></span><br><span class="line">&#125;</span><br><span class="line">或者：</span><br><span class="line">public void onDestroy() &#123;</span><br><span class="line">   mHandler.removeCallbacksAndMessages(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Thread对象">Thread对象</h4><p>同上：Thread的生命周期不一定是和Activity生命周期一致。<br>同上的解决方式为：</p>
+<ul>
+<li>改为静态内部类</li>
+<li>采用弱引用来保存<code>Context</code>引用</li>
+</ul>
+<p>正确的使用为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadAvoidActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        <span class="keyword">new</span> MyThread(<span class="keyword">this</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dosomthing</span><span class="params">()</span> </span>&#123;<span class="comment">//dosomthing是ThreadAvoidActivity的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;ThreadAvoidActivity&gt; mThreadActivityRef;<span class="comment">//弱引用</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span><span class="params">(ThreadAvoidActivity activity)</span> </span>&#123;</span><br><span class="line">            mThreadActivityRef = <span class="keyword">new</span> WeakReference&lt;ThreadAvoidActivity&gt;(</span><br><span class="line">                    activity);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;<span class="comment">//先判断是否为null，回收掉</span></span><br><span class="line">            <span class="keyword">super</span>.run();</span><br><span class="line">            <span class="keyword">if</span> (mThreadActivityRef == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">if</span> (mThreadActivityRef.get() != <span class="keyword">null</span>)</span><br><span class="line">                mThreadActivityRef.get().dosomthing();<span class="comment">//通过弱引用得到外部的activity来调用dosomthing方法</span></span><br><span class="line">            <span class="comment">// dosomthing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上切断两个对象的双向强引用链接</p>
+<ol>
+<li>静态内部类：切断Activity 对于 MyThread的强引用。</li>
+<li>弱引用： 切断MyThread对于Activity 的强引用</li>
+</ol>
+<h4 id="AsynTask_内部类">AsynTask 内部类</h4><p>跟线程一样的原理。<br>AsyncTask内部的实现机制是运用了ThreadPoolExcutor, 该类产生的Thread对象的生命周期是不确定的，是应用程序无法控制的。<br>你可能会说：<code>AsynTask</code>不是有<code>cancel</code>的方法么？对的，是有这个方法，但还是不一定能取消。通过源码可以知道：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(<span class="keyword">boolean</span> mayInterruptIfRunning)</span> </span>&#123;</span><br><span class="line"> mCancelled.set(<span class="keyword">true</span>); </span><br><span class="line"> <span class="keyword">return</span> mFuture.cancel(mayInterruptIfRunning);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>问题归因于<code>mFuture.cancel(mayInterruptIfRunning);</code>是否能取消<strong>正在执行的任务呢？</strong><br>通过<a href="http://ifeve.com/thread-executors-9/#header" target="_blank" rel="external">线程执行者（九）执行者取消一个任务</a>，文章不是重点，重点是<strong>评论</strong>，提出了<strong>是否能真正取消任务的质疑</strong>？<br>查阅：<a href="http://www.cnblogs.com/qianxudetianxia/p/3655475.html" target="_blank" rel="external">Android学习系列(37)—App调试内存泄露之Context篇(下)</a>，这里引用官方的言语：<strong> cancel是不一定成功的。</strong></p>
+<p><strong>总结：</strong>只要是使用线程正在进行执行任务，都不一定能够取消。大多数是使用：<code>Thread.interrupt()</code>进行中断，但不一定成功的。所以最好的使用<strong>静态内存类</strong>或者使用<code>弱引用</code>。</p>
+<p>官方的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">DownloadFilesTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">URL</span>, <span class="title">Integer</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">protected</span> Long <span class="title">doInBackground</span><span class="params">(URL... urls)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> count = urls.length;</span><br><span class="line">         <span class="keyword">long</span> totalSize = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">             totalSize += Downloader.downloadFile(urls[i]);</span><br><span class="line">             publishProgress((<span class="keyword">int</span>) ((i / (<span class="keyword">float</span>) count) * <span class="number">100</span>));</span><br><span class="line">             <span class="comment">// Escape early if cancel() is called</span></span><br><span class="line">             <span class="comment">// 注意下面这行，如果检测到cancel，则及时退出</span></span><br><span class="line">             <span class="keyword">if</span> (isCancelled()) <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> totalSize;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... progress)</span> </span>&#123;</span><br><span class="line">         setProgressPercent(progress[<span class="number">0</span>]);</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Long result)</span> </span>&#123;</span><br><span class="line">         showDialog(<span class="string">"Downloaded "</span> + result + <span class="string">" bytes"</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在后台循环中时刻监听cancel状态，防止没有及时退出。</p>
+<p>所以：使用<code>cancel</code>并不靠谱，那么如何书写呢？跟<code>Thread</code>的思路是一样，差不多:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="javadoc">/**</span><br><span class="line"> *</span><br><span class="line"> * 弱引用</span><br><span class="line"> *<span class="javadoctag"> @version</span> 1.0.0</span><br><span class="line"> *<span class="javadoctag"> @author</span> Abay Zhuang &lt;br/&gt;</span><br><span class="line"> *         Create at 2014-7-17</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">WeakAsyncTask</span>&lt;<span class="title">Params</span>, <span class="title">Progress</span>, <span class="title">Result</span>, <span class="title">WeakTarget</span>&gt;</span><br><span class="line">    <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Params</span>, <span class="title">Progress</span>, <span class="title">Result</span>&gt; </span>&#123;</span><br><span class="line"><span class="keyword">protected</span> WeakReference&lt;WeakTarget&gt; mTarget;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">WeakAsyncTask</span><span class="params">(WeakTarget target)</span> </span>&#123;</span><br><span class="line">    mTarget = <span class="keyword">new</span> WeakReference&lt;WeakTarget&gt;(target);</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WeakTarget target = mTarget.get();</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.onPreExecute(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> Result <span class="title">doInBackground</span><span class="params">(Params... params)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WeakTarget target = mTarget.get();</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.doInBackground(target, params);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Result result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WeakTarget target = mTarget.get();</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.onPostExecute(target, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">(WeakTarget target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nodefaultaction</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> Result <span class="title">doInBackground</span><span class="params">(WeakTarget target,</span><br><span class="line">        Params... params)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(WeakTarget target, Result result)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nodefaultaction</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="BroadcastReceiver对象">BroadcastReceiver对象</h4><p>原因：没有取消注册。<br>直接：<code>getContext().unregisterReceiver(receiver);</code>即可.<br>注册与反注册：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addCallback             <span class="tag">&lt;<span class="title">==</span>&gt;</span>     removeCallback</span><br><span class="line">registerReceiver        <span class="tag">&lt;<span class="title">==</span>&gt;</span>     unregisterReceiver</span><br><span class="line">addObserver             <span class="tag">&lt;<span class="title">==</span>&gt;</span>     deleteObserver</span><br><span class="line">registerContentObserver <span class="tag">&lt;<span class="title">==</span>&gt;</span>     unregisterContentObserver</span><br></pre></td></tr></table></figure></p>
+<h4 id="TimerTask对象">TimerTask对象</h4><p>TimerTask对象在和Timer的schedule()方法配合使用的时候极容易造成内存泄露。<br>要在合适的时候进行<code>Cancel</code>即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">cancelTimer</span><span class="params">()</span></span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (mTimer != <span class="keyword">null</span>) &#123; </span><br><span class="line">            mTimer.cancel(); </span><br><span class="line">            mTimer = <span class="keyword">null</span>; </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span> (mTimerTask != <span class="keyword">null</span>) &#123; </span><br><span class="line">            mTimerTask.cancel(); </span><br><span class="line">            mTimerTask = <span class="keyword">null</span>; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="剩下几个小点：">剩下几个小点：</h4><ul>
+<li>Dialog对象：<strong>使用isFinishing()判断Activity是否退出。</strong>才可以<code>showDialog</code></li>
+<li>Bitmap没调用recycle()</li>
+<li>资源性对象比如（Cursor，File文件等）往往都用了一些缓冲，我们在不使用的时候，应该及时关闭它们</li>
+<li>构造Adapter时，没有使用缓存的 convertView</li>
+<li>集合容器对象没清理造成的内存泄露(尤其是static的集合，需要clear清理)</li>
+<li>WebView对象没有销毁。<strong>它的destory()函数来销毁它</strong></li>
+</ul>
+<h4 id="总结：">总结：</h4><p>泄漏都是有<strong>生命周期和Activity不一定一致</strong>，导致无法进行回收。</p>
+<p><strong>只要是使用线程正在进行执行任务，都不一定能够取消。大多数是使用：<code>Thread.interrupt()</code>进行中断，但不一定成功的。所以最好的使用</strong>静态内存类**或者使用<code>弱引用</code>。</p>
+<h3 id="实战检测定位内存泄露">实战检测定位内存泄露</h3><p><a href="http://www.wisim.me/blog/2015/07/29/MAT.html" target="_blank" rel="external">1.  使用MAT工具定位Android应用内存泄漏</a><br><a href="http://www.jianshu.com/p/c49f778e7acf#" target="_blank" rel="external"># 使用Android studio分析内存泄露</a></p>
+<h3 id="资料：">资料：</h3><p><a href="http://blog.csdn.net/feiduclear_up/article/details/47356289" target="_blank" rel="external">Android Context 是什么？</a><br><a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1122/2039.html" target="_blank" rel="external"># Android内存泄露之Thread</a><br><a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1122/2040.html" target="_blank" rel="external"># Android内存泄露之Handler</a><br><a href="http://blog.csdn.net/zhuanglonghai/article/details/38421253" target="_blank" rel="external">Android App 内存泄露之资源</a><br><a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1122/2042.html" target="_blank" rel="external">Android内存泄露之DDMS –&gt; Heap工具</a>,这个系列的文章。<br><a href="http://www.cnblogs.com/qianxudetianxia/p/3655475.html" target="_blank" rel="external">Android学习系列(37)—App调试内存泄露之Context篇(下)</a><br><a href="http://www.xuebuyuan.com/539037.html" target="_blank" rel="external">Android内存泄露的整理</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/10/android TextView使用/" data-id="cinsxokp4004yw0h1efm6v6d0" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/10/android TextView使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/10/android 内存泄漏/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 内存泄漏
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/06/android 单元测试-配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 线程</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/11/10/android TextView使用/" data-title="android 内存泄漏" data-url="http://hexo.trity.cc/2015/11/10/android TextView使用/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

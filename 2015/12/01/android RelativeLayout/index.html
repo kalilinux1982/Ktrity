@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android xml资源 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Colors.xml资源
+当使用R.color.xx的时候，需要进行转换123// 通过values中的color中设置的颜色来设定。int  color  =  getResources().getColor(R.color.red);view.setTextColor(color);
+
+
+其他情况的解析颜色，不需要转换：123view.setxxColor(0xff00ff00);view.s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android xml资源">
+<meta property="og:url" content="http://hexo.trity.cc/2015/12/01/android RelativeLayout/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="Colors.xml资源
+当使用R.color.xx的时候，需要进行转换123// 通过values中的color中设置的颜色来设定。int  color  =  getResources().getColor(R.color.red);view.setTextColor(color);
+
+
+其他情况的解析颜色，不需要转换：123view.setxxColor(0xff00ff00);view.s">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/283134/2012011216251234.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android xml资源">
+<meta name="twitter:description" content="Colors.xml资源
+当使用R.color.xx的时候，需要进行转换123// 通过values中的color中设置的颜色来设定。int  color  =  getResources().getColor(R.color.red);view.setTextColor(color);
+
+
+其他情况的解析颜色，不需要转换：123view.setxxColor(0xff00ff00);view.s">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android RelativeLayout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android xml资源
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/01/android RelativeLayout/">
+      <time datetime="2015-12-01T15:24:17.000Z" itemprop="datePublished">2015-12-01</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="Colors-xml资源">Colors.xml资源</h3><ul>
+<li>当使用<code>R.color.xx</code>的时候，需要进行转换<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过values中的color中设置的颜色来设定。</span></span><br><span class="line"><span class="keyword">int</span>  color  =  getResources().getColor(R.color.red);</span><br><span class="line">view.setTextColor(color);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其他情况的解析颜色，不需要转换：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setxxColor(<span class="number">0xff00ff00</span>);</span><br><span class="line">view.setxxColor(Color.BLUE);</span><br><span class="line">view.setxxColor(Color.argb(<span class="number">0x99</span>,  <span class="number">0xff</span>,  <span class="number">0x00</span>,  <span class="number">0x00</span>));</span><br></pre></td></tr></table></figure></p>
+<p>注意这个与<code>setBackgroundResurces</code>的区别：（不需要进行转换，因为该方法内部已经进行转换了，看源码即可知道）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setBackgroundResurces(R.drawable.xx);</span><br></pre></td></tr></table></figure></p>
+<h3 id="style-xml和theme-xml设置">style.xml和theme.xml设置</h3><p><a href="http://www.cnblogs.com/qianxudetianxia/p/3996020.html" target="_blank" rel="external">Android学习系列(40)—Android主题和样式之系统篇（下）</a></p>
+<h3 id="arrays-xml使用">arrays.xml使用</h3><p>格式：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;string-array name="languages"&gt;</span><br><span class="line">        &lt;item&gt;c语言&lt;/item&gt;</span><br><span class="line">    &lt;/string-array&gt;</span><br><span class="line">    &lt;integer-array name="reminder_methods_values" translatable="false"&gt;</span><br><span class="line">        &lt;item&gt;1&lt;/item&gt;</span><br><span class="line">    &lt;/integer-array&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意：<code>&lt;string-array&gt;</code>定义的是字符数组，<code>&lt;integer-array&gt;</code>是整数数组。</p>
+<p><strong>在Java代码引用</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Resources res =getResources();</span><br><span class="line">String[] languages = res.getStringArray(R.array.languages)</span><br></pre></td></tr></table></figure></p>
+<p><strong>扩展如何定义drawable数组、id数组</strong></p>
+<blockquote>
+<p>开发有需求，就是想添加每个数字对应一个资源id，而想包资源id写在<code>arrays.xml</code>中，而不是写在代码数组中。依靠这个想法传统的代码并不能解决。<br>参考：<a href="http://www.2cto.com/kf/201409/331829.html" target="_blank" rel="external">[android]在xml文件中定义drawable数组、id数组等</a></p>
+</blockquote>
+<p>我们依旧在<code>arrays.xml</code>这么定义：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">string-array</span> <span class="attribute">name</span>=<span class="value">"actions_images"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil1<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil2<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">string-array</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>但取出的方式有所不同：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TypedArray ar = context.getResources().obtainTypedArray(R.array.actions_images);</span><br><span class="line"><span class="keyword">int</span> len = ar.length();</span><br><span class="line"><span class="keyword">int</span>[] resIds = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    resIds[i] = ar.getResourceId(i, <span class="number">0</span>);</span><br><span class="line">ar.recycle();</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以愉快的使用<code>resIds</code>资源了。</p>
+<h3 id="string-xml转义字符">string.xml转义字符</h3><p>参考：<a href="http://blog.csdn.net/z1074971432/article/details/12753539" target="_blank" rel="external">android string.xml 添加特殊字符</a><br>摄氏度表示：<code>&amp;#176;C</code>在<code>strings.xml</code>定义。<br>然后：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String degreeStr=getResources().getString(R.string.degree);</span><br></pre></td></tr></table></figure></p>
+<p>其他转义字符：<a href="http://blog.csdn.net/rnclcl/article/details/16801779" target="_blank" rel="external">Android string.xml如何输入空格、换行等符号——转义字符</a></p>
+<p>还可以进行格式化字符串等：<a href="http://blog.csdn.net/think_soft/article/details/7518824" target="_blank" rel="external">Android应用资源—-字符串资源类型（String）</a></p>
+<h3 id="ids-xml使用">ids.xml使用</h3><p>主要为两个作用：<br>（1）优化编译效率：</p>
+<blockquote>
+<p>直接使用<code>&quot;@id/name&quot;</code>来引用<code>id</code>，而不是<code>&quot;@+id/name&quot;</code></p>
+</blockquote>
+<p>解释：</p>
+<blockquote>
+<p>如果使用”@+id/name”形式，当R.java中存在名为name变量时，则该组件会使用该变量的值作为标识。如果不存在该变量，则添加一个新的变量，并为该变量赋相应的值（不会重复)<br><strong>所以：使用@id/name形式，预先定义的id已经生成，修改配置文件时，也不会引起系统重新生成</strong></p>
+</blockquote>
+<p>（2）统一管理资源Id</p>
+<blockquote>
+<p><a href="http://blog.csdn.net/jdsjlzx/article/details/42024447" target="_blank" rel="external">android项目中values中ids.xml的作用</a></p>
+</blockquote>
+<h3 id="Shape使用">Shape使用</h3><p>属性指定：<code>android:shape</code>以下可选为：</p>
+<ul>
+<li><strong>rectangle</strong>: 矩形，默认的形状，可以画出直角矩形、圆角矩形、弧形等</li>
+<li><strong>oval</strong>: 椭圆形，用得比较多的是画正圆</li>
+<li><strong>line</strong>: 线形，可以画实线和虚线</li>
+<li><strong>ring</strong>: 环形，可以画环形进度条</li>
+</ul>
+<p>默认的形状：<code>rectangle</code>。</p>
+<p><strong>详细资料</strong>：<a href="http://keeganlee.me/post/android/20150830" target="_blank" rel="external">Android样式的开发:shape篇</a></p>
+<h3 id="selector选择器">selector选择器</h3><h5 id="属性设置：">属性设置：</h5><ul>
+<li><strong>android:state_enabled</strong>: 设置触摸或点击事件是否可用状态，一般只在false时设置该属性，表示不可用状态</li>
+<li><strong>android:state_pressed</strong>: 设置是否按压状态，一般在true时设置该属性，表示已按压状态，默认为false</li>
+<li><strong>android:state_selected</strong>: 设置是否选中状态，true表示已选中，false表示未选中</li>
+<li><strong>android:state_checked</strong>: 设置是否勾选状态，主要用于CheckBox和RadioButton，true表示已被勾选，false表示未被勾选</li>
+<li><strong>android:state_checkable</strong>: 设置勾选是否可用状态，类似state_enabled，只是state_enabled会影响触摸或点击事件，而state_checkable影响勾选事件</li>
+<li><strong>android:state_focused</strong>: 设置是否获得焦点状态，true表示获得焦点，默认为false，表示未获得焦点</li>
+<li><strong>android:state_window_focused</strong>: 设置当前窗口是否获得焦点状态，true表示获得焦点，false表示未获得焦点，例如拉下通知栏或弹出对话框时，当前界面就会失去焦点；另外，ListView的ListItem获得焦点时也会触发true状态，可以理解为当前窗口就是ListItem本身</li>
+<li><strong>android:state_activated</strong>: 设置是否被激活状态，true表示被激活，false表示未激活，API Level 11及以上才支持，可通过代码调用控件的setActivated(boolean)方法设置是否激活该控件</li>
+<li><strong>android:state_hovered</strong>: 设置是否鼠标在上面滑动的状态，true表示鼠标在上面滑动，默认为false，API Level 14及以上才支持</li>
+</ul>
+<h5 id="使用注意点：">使用注意点：</h5><ul>
+<li><p><strong>item是从上往下匹配的（一旦成功就return，不再匹配）</strong>，如果匹配到一个item那它就将采用这个item，而不是采用最佳匹配的规则；所以设置默认的状态，一定要写在最后，如果写在前面，则后面所有的item都不会起作用了。</p>
+</li>
+<li><p>selector作为drawable资源时，item指定android:drawable属性，并放于drawable目录下；</p>
+</li>
+<li><p>selector作为color资源时，item指定android:color属性，并放于color目录(<strong>没有的话需要自己进行新建</strong>)下；</p>
+</li>
+</ul>
+<blockquote>
+<p>注意这种情况下，我们就可以设置<strong>点击前后字体的效果</strong>，设置在<code>android:textColor=&quot;@color/xxx&quot;</code><br>所以会出现这篇文章的<code>bug</code>:<a href="http://www.tuicool.com/articles/VVBJjq2" target="_blank" rel="external">ImageView设置selector遇到的小问题及解决方案记录</a></p>
+</blockquote>
+<h5 id="以下是常见的使用样例：">以下是常见的使用样例：</h5><ul>
+<li>通用模板介绍：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当前窗口失去焦点时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_lost_window_focused"</span> <span class="attribute">android:state_window_focused</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 不可用时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_disable"</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按压时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_pressed"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被选中时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_selected"</span> <span class="attribute">android:state_selected</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被激活时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_activated"</span> <span class="attribute">android:state_activated</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_normal"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>详细资料参考</strong>：<a href="http://keeganlee.me/post/android/20150905" target="_blank" rel="external">Android样式的开发:selector篇</a></p>
+<ul>
+<li>总结使用注意的参见问题</li>
+<li><code>listview</code>上使用的总结</li>
+</ul>
+<h5 id="与shape结合使用">与<code>shape</code>结合使用</h5><p><code>button_selector.xml</code>代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> </span><br><span class="line">    <span class="attribute">android:constantSize</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 获得焦点时的背景图片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_focused</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FFE5CF33"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FFF1E7A2"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设置相应所有事件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF1B1B1B"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF969696"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按钮点击时的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认情况下的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们只需要在<code>view</code>的<code>android:background</code>使用即可。<br>可以实现下图的效果：<br><img src="http://pic002.cnblogs.com/images/2012/283134/2012011216251234.png" alt=""><br>引用文章：<a href="http://www.cnblogs.com/loulijun/archive/2012/03/20/2320838.html" target="_blank" rel="external">Android美工坊—selector选择器的使用</a></p>
+<h3 id="xml属性讲解">xml属性讲解</h3><ul>
+<li><a href="http://www.tuicool.com/articles/32YRJrq" target="_blank" rel="external">android:clipToPadding和android:clipChildre</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1122/3712.html" target="_blank" rel="external"># Android使用fitsSystemWindows属性实现—状态栏【status_bar】各版本适配方案</a></li>
+</ul>
+<h3 id="style与theme资源"><code>style与theme</code>资源</h3><blockquote>
+<p>对于所有可用的样式属性，请参考R.attr类.</p>
+</blockquote>
+<p><strong>当设置不属于改view的样式属性的时候</strong></p>
+<blockquote>
+<p>这个View对象只会使用它们所支持的那些属性，并简单的把不支持的属性忽略</p>
+</blockquote>
+<h4 id="主题的样式属性Theme">主题的样式属性<code>Theme</code></h4><blockquote>
+<p>请参考R.attr类中用<strong>window开始的属性</strong>。<br>详细介绍查看“<code>Providing Resources</code>”文档。<br><a href="http://developer.android.com/guide/topics/resources/providing-resources.html" target="_blank" rel="external">http://developer.android.com/guide/topics/resources/providing-resources.html</a></p>
+</blockquote>
+<p><strong>兼容性</strong>：<br>使用<code>res/values-v11</code>的文件夹下的一个XML文件中放入一个可选的主题声明。来兼容此版本。</p>
+<h3 id="Drawable子类的相关使用">Drawable子类的相关使用</h3><h4 id="RoundedBitmapDrawable转化为圆形">RoundedBitmapDrawable转化为圆形</h4><p>将<code>bitmap</code>转化成<strong>圆形图片资源</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), resource);</span><br><span class="line">roundedBitmapDrawable.setCircular(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"># 对应的imageview进行设置</span><br><span class="line">imageView.setImageDrawable(roundedBitmapDrawable);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/01/android RelativeLayout/" data-id="cinsxokp70051w0h1doh88rli" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/01/android RelativeLayout/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arrays/">arrays</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xml/">xml</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/04/android Camera摄像头使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android catch异常处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/12/android xml资源/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 多点触控</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/12/01/android RelativeLayout/" data-title="android xml资源" data-url="http://hexo.trity.cc/2015/12/01/android RelativeLayout/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

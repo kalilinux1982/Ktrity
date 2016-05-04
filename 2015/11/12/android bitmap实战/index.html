@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android canvas画布 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常用方法使用绘制圆角矩形drawRoundRect：12RectF r2=new RectF(50,400,450,600);//RectF对象canvas.drawRoundRect(r2, 10, 10, paint);//10圆角的弧度
+绘制虚线（DashPathEffect）直接使用Canvas来绘制：123mDashPaint =  new  Paint();mDashPaint.set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android canvas画布">
+<meta property="og:url" content="http://hexo.trity.cc/2015/11/12/android bitmap实战/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="常用方法使用绘制圆角矩形drawRoundRect：12RectF r2=new RectF(50,400,450,600);//RectF对象canvas.drawRoundRect(r2, 10, 10, paint);//10圆角的弧度
+绘制虚线（DashPathEffect）直接使用Canvas来绘制：123mDashPaint =  new  Paint();mDashPaint.set">
+<meta property="og:image" content="http://www.fookwood.com/wp-content/uploads/2014/08/1408964085_thumb.jpeg">
+<meta property="og:image" content="http://img.blog.csdn.net/20140124095041906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVyc2luZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignLeft.png">
+<meta property="og:image" content="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignCenter.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android canvas画布">
+<meta name="twitter:description" content="常用方法使用绘制圆角矩形drawRoundRect：12RectF r2=new RectF(50,400,450,600);//RectF对象canvas.drawRoundRect(r2, 10, 10, paint);//10圆角的弧度
+绘制虚线（DashPathEffect）直接使用Canvas来绘制：123mDashPaint =  new  Paint();mDashPaint.set">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        131
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        144
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android bitmap实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android canvas画布
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/12/android bitmap实战/">
+      <time datetime="2015-11-12T12:17:11.000Z" itemprop="datePublished">2015-11-12</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="常用方法使用">常用方法使用</h3><h4 id="绘制圆角矩形drawRoundRect：">绘制圆角矩形<code>drawRoundRect</code>：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RectF r2=<span class="keyword">new</span> RectF(<span class="number">50</span>,<span class="number">400</span>,<span class="number">450</span>,<span class="number">600</span>);<span class="comment">//RectF对象</span></span><br><span class="line">canvas.drawRoundRect(r2, <span class="number">10</span>, <span class="number">10</span>, paint);<span class="comment">//10圆角的弧度</span></span><br></pre></td></tr></table></figure>
+<h3 id="绘制虚线（DashPathEffect）">绘制虚线（<code>DashPathEffect</code>）</h3><p>直接使用<code>Canvas</code>来绘制：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mDashPaint =  <span class="keyword">new</span>  Paint();</span><br><span class="line">mDashPaint.setPathEffect(<span class="keyword">new</span>  DashPathEffect(<span class="keyword">new</span>  <span class="keyword">float</span>[]  &#123; dashWidth, dashGap &#125;,  <span class="number">0</span>));<span class="comment">// dashGap是虚线的间隔宽度，dashWidth是实线的间隔宽度</span></span><br><span class="line">canvas.drawLine(xStart, yStart, xEnd, yEnd, mDashPaint);</span><br></pre></td></tr></table></figure></p>
+<p>这里使用了<code>DashPathEffect</code>，看看这类是怎么回事，看这个构造函数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DashPathEffect</span><span class="params">(<span class="keyword">float</span> intervals[], <span class="keyword">float</span> phase)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (intervals.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException();</span><br><span class="line">       &#125;</span><br><span class="line">       native_instance = nativeCreate(intervals, phase);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码中的<strong>float数组,必须是偶数长度,且&gt;=2</strong>,指定了多少长度的实线之后再画多少长度的空白.<br>如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PathEffect effects = <span class="keyword">new</span> DashPathEffect(<span class="keyword">new</span> <span class="keyword">float</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>&#125;, <span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>绘制长度1的实线,再绘制长度2的空白,再绘制长度4的实线,再绘制长度8的空白,依次重复.</strong></p>
+<p>当我使用的时候，结果发现<strong>并没有虚线，而是实线</strong>。<br>参考：<a href="http://www.programgo.com/article/86385468904/" target="_blank" rel="external">Android 画虚线显示实线的BUG</a>，原来<strong>在android 4.0以上版本中会有BUG，发现不管dashGap设置多大，显示的都是一条实线。</strong><br>解决方法：</p>
+<blockquote>
+<p>关闭硬件加速。<br>可以在AndroidManifest.xml时的Application标签加上<code>android:hardwareAccelerated=&quot;false&quot;</code>,这样整件应用都关闭了硬件加速，虚线可以正常显示，但是，关闭硬件加速对性能有些影响，会感觉明显比没关卡。</p>
+</blockquote>
+<p>可以给虚线的view单独关闭硬件加速:（这个没试过）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">程序代码：</span><br><span class="line">line.setLayerType(View.LAYER_TYPE_SOFTWARE,<span class="keyword">null</span>);</span><br><span class="line">xml:</span><br><span class="line">android:layerType=<span class="string">"software"</span></span><br></pre></td></tr></table></figure></p>
+<p>继续探讨：<br>另一种方式,使用<code>xml</code>：<a href="https://www.zybuluo.com/linux1s1s/note/203047" target="_blank" rel="external">Android 绘制虚线</a>，这篇有探讨到<strong>在小米1S真机上显示不出来，原因是不支持<code>LAYER_TYPE_SOFTWARE</code></strong>。</p>
+<h3 id="DrawText让字体处于不同的位置"><code>DrawText</code>让字体处于不同的位置</h3><p>首先了解<code>DrawText</code>的原理如图：<br><img src="http://www.fookwood.com/wp-content/uploads/2014/08/1408964085_thumb.jpeg" alt=""><br><strong>注意</strong>：<br>从方法中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(String text, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>当中的<code>y</code>值代表的是<code>BaseLine</code>的<code>y</code>值，也就是上图<strong>黄色五角星</strong>的地方。</p>
+<ul>
+<li>使用<code>Paint.getTextBounds</code>：（描述<strong>字符的边界</strong>）</li>
+</ul>
+<p>来获取<strong>能够包裹文字的最小矩形</strong>的<code>Rect</code>对象并不是以<strong>左上角为基准</strong>，而是以<strong>黄色五角星</strong>为准，那么：</p>
+<blockquote>
+<p><code>r.top</code>就是一个负值了，<code>r.bottom</code>会是一个小一点的正值，<code>r.left和r.right在</code>图中画的都很清楚。通过<code>r.width()和r.height()</code>来获取尺寸</p>
+</blockquote>
+<p>如图<strong>测</strong>子所使用为<code>getTextBounds</code>的边界。<br><img src="http://img.blog.csdn.net/20140124095041906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVyc2luZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<ul>
+<li>使用<code>Paint.getFontMetricsInt()</code>得到字体的边界</li>
+</ul>
+<p>关于：<code>FontMetricsInt</code>的详细使用如下：<br><a href="http://mikewang.blog.51cto.com/3826268/871765" target="_blank" rel="external">Android字符串进阶之三：字体属性及测量（FontMetrics）</a><br>同样是以<code>baseLine</code>为基准，第一张图中的<code>ascent，descent，top,bottom</code>都是从这里获得。测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// baseline  </span></span><br><span class="line">paint.setColor(Color.RED);  </span><br><span class="line">canvas.drawLine(x, y, <span class="number">1024</span>, y, paint);  </span><br><span class="line"><span class="comment">// ascent  </span></span><br><span class="line">paint.setColor(Color.YELLOW);  </span><br><span class="line">canvas.drawLine(x, y+fmi.ascent, <span class="number">1024</span>, y+fmi.ascent, paint);  </span><br><span class="line"><span class="comment">// descent  </span></span><br><span class="line">paint.setColor(Color.BLUE);  </span><br><span class="line">canvas.drawLine(x, y+fmi.descent, <span class="number">1024</span>, y+fmi.descent, paint);  </span><br><span class="line"><span class="comment">// top  </span></span><br><span class="line">paint.setColor(Color.DKGRAY);  </span><br><span class="line">canvas.drawLine(x, y+fmi.top, <span class="number">1024</span>, y+fmi.top, paint);  </span><br><span class="line"><span class="comment">// bottom  </span></span><br><span class="line">paint.setColor(Color.GREEN);  </span><br><span class="line">canvas.drawLine(x, y+fmi.bottom, <span class="number">1024</span>, y+fmi.bottom, paint);</span><br></pre></td></tr></table></figure></p>
+<p>最后的效果如第二张图所示。</p>
+<ul>
+<li><p>如何得到<code>baseLine</code>,字体的基线：</p>
+<blockquote>
+<p>(targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2//targetRect为text所显示的区域</p>
+</blockquote>
+</li>
+<li><p>如何得到将要输入字体的宽度呢？<br>我们看到第一张图的<code>paint.meauseText()</code>进行测量即可。</p>
+</li>
+<li><p>如何设置<code>drawText</code>的第一个字从哪里画起（即：右对齐，做对其，中间对齐），默认为<strong>左对齐</strong><br>通过<code>paint.setTextAlign()</code>进行设置。效果如图<br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignLeft.png" alt=""><br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignCenter.png" alt=""></p>
+</li>
+</ul>
+<p>所以任意位置显示可以为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> textWidth=paint.measureText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>);<span class="comment">//测量将要输入字体的宽度</span></span><br><span class="line"><span class="comment">//字体所显示的区域</span></span><br><span class="line">RectF targetRectF=<span class="keyword">new</span> RectF(UPER_CHART_BORDER_LEFT_Y-textWidth, endWhiteY - DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>, UPER_CHART_BORDER_LEFT_Y, endWhiteY  + DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>);</span><br><span class="line">canvas.drawRect(targetRectF, paint);</span><br><span class="line"><span class="comment">//测量字体的边界,即高度</span></span><br><span class="line">Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();</span><br><span class="line"><span class="comment">//得到字体的基线</span></span><br><span class="line"><span class="keyword">int</span> baseline = (<span class="keyword">int</span>)(targetRectF.bottom + targetRectF.top - fontMetrics.bottom - fontMetrics.top) / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br><span class="line">paint.setTextAlign(Paint.Align.RIGHT);</span><br><span class="line">paint.setColor(Color.WHITE);</span><br><span class="line"></span><br><span class="line">canvas.drawText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>, targetRectF.right, baseline, paint);</span><br></pre></td></tr></table></figure></p>
+<p>在不同对齐方式，只需对应设置即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br></pre></td></tr></table></figure></p>
+<p>引用资料：<br><a href="http://blog.csdn.net/linghu_java/article/details/46404081" target="_blank" rel="external">Android的DrawText详解</a><br><a href="http://blog.csdn.net/hursing/article/details/18703599" target="_blank" rel="external">Android Canvas drawText实现中文垂直居中</a><br><a href="http://www.xyczero.com/blog/article/20/" target="_blank" rel="external">如何“任性”使用Android的drawText()</a><br><a href="http://blog.csdn.net/carrey1989/article/details/10399727" target="_blank" rel="external">Android UI 之居中绘制文本内容的正确方法——实现自定义一个TextView</a></p>
+<h3 id="Path使用：">Path使用：</h3><ol>
+<li><p><code>moveTo</code> 不会进行绘制，只用于移动移动画笔。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mPath.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>lineTo</code> 用于进行直线绘制。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mPath.lineTo(<span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="keyword">canvas</span>.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>quadTo</code> 用于绘制圆滑曲线，即<strong>线性贝塞尔曲线</strong>。<br><code>mPath.quadTo(x1, y1, x2, y2)</code> (x1,y1) 为控制点，(x2,y2)为结束点。</p>
+</li>
+<li><p><code>cubicTo</code> 同样是用来实现贝塞尔曲线的,为<strong>二次方贝塞尔曲线</strong><br><code>mPath.cubicTo(x1, y1, x2, y2, x3, y3)</code> (x1,y1) 为控制点，(x2,y2)为控制点，(x3,y3) 为结束点。</p>
+</li>
+<li><p><code>arcTo</code> 用于绘制弧线（实际是截取圆或椭圆的一部分）。<br><code>mPath.arcTo(ovalRectF, startAngle, sweepAngle)</code> , <code>ovalRectF</code>为椭圆的矩形，<code>startAngle</code> 为开始角度，<code>sweepAngle</code> 为结束角度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mRectF = <span class="keyword">new</span> RectF(<span class="number">10</span>, <span class="number">10</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">mPath.arcTo(mRectF, <span class="number">0</span>, <span class="number">90</span>);</span><br><span class="line">canvas.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上引用参考：<a href="http://segmentfault.com/a/1190000000721127" target="_blank" rel="external">Android中moveTo、lineTo、quadTo、cubicTo、arcTo详解（实例）</a></p>
+<p>关于<strong>贝塞尔曲线</strong>在实际开发曲线中的应用<br><a href="http://tomkeyzhang.duapp.com/?p=88" target="_blank" rel="external"># 在Android中如何绘制光滑曲线（一）</a><br>这里解决的问题是</p>
+<ol>
+<li>如何使两条贝塞尔曲线连接处是光滑的</li>
+<li>曲线经过实际的数据点，而不是总在实际点下方，只有第一和末尾的控制点才被光滑曲线经过。</li>
+</ol>
+<h3 id="资料">资料</h3><p><a href="http://892848153.iteye.com/blog/1906496" target="_blank" rel="external">Android Canvas绘图详解（图文）</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/12/android bitmap实战/" data-id="cikmr5jhp003pm8jso56e32ax" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/12/android bitmap实战/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/12/android xml资源/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android 多点触控
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/10/android 使用ssl通信实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android 安全退出的正确方式</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/11/12/android bitmap实战/" data-title="android canvas画布" data-url="http://hexo.trity.cc/2015/11/12/android bitmap实战/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
