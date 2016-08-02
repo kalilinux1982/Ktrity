@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android-ActionBar的学习 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近喜欢上看英文的，经过几次的搜索中文后，发现中文没看懂，反而英文看懂了，想直接看英文的，不懂在看中文，会发现很多中文的，都是看了英文的，再自己进行转译的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android-ActionBar的学习">
+<meta property="og:url" content="http://hexo.trity.cc/2015/01/24/android-ActionBar的学习/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="最近喜欢上看英文的，经过几次的搜索中文后，发现中文没看懂，反而英文看懂了，想直接看英文的，不懂在看中文，会发现很多中文的，都是看了英文的，再自己进行转译的。">
+<meta property="og:image" content="http://www.androidhive.info/wp-content/uploads/2013/11/android-action-bar-up-back-navigation.png?a942c6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android-ActionBar的学习">
+<meta name="twitter:description" content="最近喜欢上看英文的，经过几次的搜索中文后，发现中文没看懂，反而英文看懂了，想直接看英文的，不懂在看中文，会发现很多中文的，都是看了英文的，再自己进行转译的。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        149
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        142
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android-ActionBar的学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android-ActionBar的学习
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/01/24/android-ActionBar的学习/">
+      <time datetime="2015-01-24T12:30:27.000Z" itemprop="datePublished">2015-01-24</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>最近喜欢上看英文的，经过几次的搜索中文后，发现中文没看懂，反而英文看懂了，想直接看英文的，不懂在看中文，会发现很多中文的，都是看了英文的，再自己进行转译的。<br><a id="more"></a></p>
+<h3 id="参考资料：">参考资料：</h3><ul>
+<li><p><a href="http://www.androidhive.info/2013/11/android-working-with-action-bar/" target="_blank" rel="external">Android Working with Action Bar</a>这篇很详细，主要是<strong>搜索框</strong>，<strong>spinner</strong>，<strong>图标的添加</strong>。<br>注意几点：</p>
+<ul>
+<li>ActionBar的布局文件的设置在<code>res-&gt;menu-&gt;activity_main_actions.xml</code></li>
+<li>主Activity通过<code>onCreateOptionsMenu</code>方法进行初始化。例如：<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">    MenuInflater inflater = getMenuInflater();</span><br><span class="line">    inflater.inflate(R.menu.activity_main_actions, menu);</span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onCreateOptionsMenu</span><span class="params">(menu)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>通过<code>onOptionsItemSelected</code>进行触发子项的点击事件。例如：Mm</p>
+</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Take appropriate action for each action item click</span></span><br><span class="line">    <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">    <span class="keyword">case</span> R.id.action_search:</span><br><span class="line">        // search action</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">case</span> R.id.action_location_found:</span><br><span class="line">        // location found</span><br><span class="line">        LocationFound();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://www.androidhive.info/2013/10/android-tab-layout-with-swipeable-views-1/" target="_blank" rel="external">Android Tab Layout with Swipeable Views</a> <strong>—&gt;</strong>微信前几板块的<code>tabhost</code>的切换</li>
+<li><strong>改变actionbar的整体颜色</strong>：<a href="http://www.jayway.com/2014/06/02/android-theming-the-actionbar/" target="_blank" rel="external">Android – Theming ActionBar and the SearchView within it</a>，这个设置比较漂亮，但是要用上<code>android-support-v7-appcompat</code>，如何使用这个appcompat，情况这里<a href="http://oldgrayduck.blogspot.com/2013/10/android-support-library.html" target="_blank" rel="external">【Android】設定 Support Library</a></li>
+<li>知识点：</li>
+<li><code>1.</code><strong>menu的显示方式</strong><code>boolean android.app.Activity.onCreateOptionsMenu(Menu menu)</code>的方法中，加入</li>
+</ul>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MenuItem</span> actionItem = menu.add(<span class="string">"Action Button"</span>);  </span><br><span class="line">actionItem.setShowAsAction(<span class="keyword">MenuItem</span>.SHOW_AS_ACTION_IF_ROOM);</span><br></pre></td></tr></table></figure>
+<p>一共有<code>5种</code>显示方式：<strong>从不显示;如果有空间就显示;总是显示;显示时跟随文字;默认收缩其action view</strong><br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_AS_ACTION_NEVER = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_AS_ACTION_IF_ROOM = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_AS_ACTION_ALWAYS = <span class="number">2</span>;  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_AS_ACTION_WITH_TEXT = <span class="number">4</span>;  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW = <span class="number">8</span>;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong><br><code>SHOW_AS_ACTION_WITH_TEX</code><strong>竖屏</strong>状态不会显示，只有<strong>横屏</strong>的时候就会显示<br>设置了<code>action view</code>默认是显示的，设置<code>SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW</code>则默认不显示。</p>
+<ul>
+<li><p><code>2.</code><strong>此方法设置后退或者点击的效果</strong><code>setDisplayHomeAsUpEnabled(true)</code></p>
+</li>
+<li><p><code>2.1</code>在<code>actionbar</code>上显示<strong>后退</strong>的按钮。</p>
+</li>
+<li><p>在<code>oncreate</code>方法上加入：</p>
+</li>
+</ul>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get action bar   </span></span><br><span class="line"><span class="constant">ActionBar actionBar</span> = getActionBar();</span><br><span class="line"><span class="comment">// Enabling Up / Back navigation</span></span><br><span class="line">actionBar.setDisplayHomeAsUpEnabled(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>并且：在<code>androidmanifest.xmnl</code>相应的<code>&lt;Activity &gt;</code>加入<code>android:parentActivityName</code>，例如</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:<span class="variable">name=</span><span class="string">"info.androidhive.actionbar.LocationFound"</span></span><br><span class="line">    android:<span class="variable">label=</span><span class="string">"@string/activity_new_message"</span></span><br><span class="line">    android:<span class="variable">parentActivityName=</span><span class="string">"info.androidhive.actionbar.MainActivity"</span> &gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure>
+<p>将会回退到父系的<code>MainActivity</code>上。<img src="http://www.androidhive.info/wp-content/uploads/2013/11/android-action-bar-up-back-navigation.png?a942c6" alt="Alt text"></p>
+<ul>
+<li><code>2.1</code> 如何修改后退按钮的样式<br>详情<a href="http://stackoverflow.com/questions/9252354/how-to-customize-the-back-button-on-actionbar" target="_blank" rel="external">How to customize the back button on ActionBar</a>，只需要在<strong>主题样式的根目录下，而不是<code>单单actionbar的样式中</code></strong>，加入以下</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"Theme.MyFancyTheme"</span> <span class="attribute">parent</span>=<span class="value">"android:Theme.Holo"</span>&gt;</span><span class="css"></span><br><span class="line">&lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:homeAsUpIndicator"</span>&gt;<span class="at_rule">@<span class="keyword">drawable/my_fancy_up_indicator&lt;/item&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>2.2</code>在<code>actionbar</code>有<strong>点击</strong>的效果</li>
+<li><code>oncreate</code>加入：<blockquote>
+<p>actionBar.setDisplayHomeAsUpEnabled(true);</p>
+</blockquote>
+</li>
+<li>在<code>onOptionsItemSelected</code>中的<code>id</code>为：<code>android.R.id.home</code></li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">    <span class="keyword">case</span> android.R.id.home:</span><br><span class="line">        </span><br><span class="line">        toggle(); <span class="comment">//动态判断自动关闭或开启SlidingMenu</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onOptionsItemSelected</span><span class="params">(item)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.修改<code>actionbar</code>的样式，一种静态，一种动态，静态就直接在xml导入<code>style</code>属性，<a href="http://jgilfelt.github.io/android-actionbarstylegenerator/" target="_blank" rel="external">Android Action Bar Style Generator</a>,所有主题的样式都用，包括<code>.9.png</code>图片。动态如下：</p>
+<ul>
+<li><p>修改<strong>背景</strong>：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ActionBar</span> actionBar = getSupportActionBar<span class="literal">()</span>;</span><br><span class="line">actionBar.setBackgroundDrawable(<span class="keyword">new</span> <span class="type">ColorDrawable</span>(<span class="number">0xadf1b1ff</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<strong>actionbar的分割线</strong></p>
+<blockquote>
+<p>item name=”android:actionBarDivider”&gt;@null</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="奇怪的错误">奇怪的错误</h4><ul>
+<li><code>actionbar</code>不见了.</li>
+</ul>
+<p>发现最新的<code>sdk</code>里面用<code>v7</code>包的<code>Theme.Appcompat.Light</code>主题已经默认不带<code>actionbar</code>了，跟以前发生了很大的区别，导致<code>getActionBar()</code>的时候，得到的值为null。</p>
+<ul>
+<li>不能让<code>actionbar</code>的<code>icon</code>的<strong>图标消失</strong>。</li>
+</ul>
+<p>我从几种方式进行修改，如：</p>
+<blockquote>
+<p>getActionBar().setDisplayShowHomeEnabled(false);//隐藏logo和icon</p>
+</blockquote>
+<p>或者<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style <span class="property">name</span>=<span class="string">"ActionBar"</span> parent=<span class="string">"Widget.AppCompat.Light.ActionBar"</span>&gt;</span><br><span class="line">&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:displayOptions"</span>&gt;showTitle&lt;/<span class="property">item</span>&gt;</span><br><span class="line">&lt;!<span class="comment">--&lt;item name="android:displayOptions"&gt;useLogo|showHome|showTitle&lt;/item&gt;默认的情况--&gt;</span></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>但是发现，结果是隐藏了<code>icon</code>但是会出现神奇的<strong>后退按钮</strong>，结果也不是我自己想要的。参考：<a href="http://www.eoeandroid.com/thread-542959-1-1.html" target="_blank" rel="external">[Android界面] 怎样去掉Actionbar左侧的图标啊？</a>。最终要郁闷的是，我在其他的项目中，使用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"ActionBar"</span> <span class="attribute">parent</span>=<span class="value">"Widget.AppCompat.Light.ActionBar"</span>&gt;</span><span class="css"></span><br><span class="line">&lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">android</span><span class="pseudo">:icon"</span>&gt;<span class="at_rule">@<span class="keyword">null&lt;/item&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>或者：</p>
+<blockquote>
+<p>getActionBar().setIcon(null);</p>
+</blockquote>
+<p>便可以解决，将<code>acionbar</code>里面的<code>icon</code>进行隐藏。但是在项目使用<code>DrawerLayout</code>来制作<code>slidingmenu</code>的<strong>侧栏</strong>中，却无法达到隐藏的效果,会显示默认的<code>app</code>图标的<code>logo</code>。很奇怪，百思不得其解。只好自定义来修改图标了。从中，我也发现了原来资源是可以用<code>colors.xml</code>里面的颜色来<strong>代替图标</strong>的，便可以完美解决。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style <span class="property">name</span>=<span class="string">"ActionBar"</span> parent=<span class="string">"Widget.AppCompat.Light.ActionBar"</span>&gt;</span><br><span class="line">&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:background"</span>&gt;@color/actionbar_color_blue&lt;/<span class="property">item</span>&gt;</span><br><span class="line">&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:icon"</span>&gt;@color/actionbar_color_blue&lt;/<span class="property">item</span>&gt;</span><br><span class="line">&lt;!<span class="comment">-- 修复不可以让icon为null，直接跟背景颜色一致 --&gt;</span></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="去掉actionbar的阴影">去掉<code>actionbar</code>的阴影</h4><p><a href="http://stackoverflow.com/questions/18950839/i-want-to-remove-the-divider-under-the-action-bar" target="_blank" rel="external">i-want-to-remove-the-divider-under-the-action-bar</a></p>
+<h4 id="如何动态地改变actionbar的布局，指定图标是否显示">如何动态地改变<code>actionbar</code>的布局，指定图标是否显示</h4><p>其中有一个方法来监听<code>menu</code>的改变</p>
+<blockquote>
+<p><code>public boolean onPrepareOptionsMenu(Menu menu)</code><br>在onCreateOptionsMenu执行后，菜单被显示前调用；如果菜单已经被创建，则在菜单显示前被调用。同样的， 返回true则显示该menu,false 则不显示;（可以通过此方法动态的改变菜单的状态，比如加载不同的菜单等，在onCreateOptionsMenu调用之后调用）</p>
+</blockquote>
+<p>相应的代码为：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onPrepareOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 是否选择搜索栏</span></span><br><span class="line">menu.findItem(R.id.action_search).setVisible(isVisibleSearch);</span><br><span class="line"><span class="comment">// if nav drawer is opened, hide the action items</span></span><br><span class="line"><span class="keyword">boolean</span> drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerrelativeLayout);</span><br><span class="line">menu.findItem(R.id.action_msgs).setVisible(!drawerOpen);</span><br><span class="line"><span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onPrepareOptionsMenu</span><span class="params">(menu)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="http://blog.csdn.net/mobilexu/article/details/9191081" target="_blank" rel="external">如何动态改变Actionbar上的item图标</a></p>
+<h3 id="修改ActionItem字体颜色">修改ActionItem字体颜色</h3><p>在自定义<code>theme</code>中加入</p>
+<blockquote>
+<p><code>&lt;item name=&quot;android:actionMenuTextColor&quot;&gt;#FF4500&lt;/item&gt;</code> //定义ActionItem字体颜色  </p>
+</blockquote>
+<p>参考：<a href="http://blog.csdn.net/klpchan/article/details/10027841" target="_blank" rel="external">ActionBar最近学习整理之二：风格自定义</a></p>
+<h3 id="使Overflow按钮总是显示">使<code>Overflow</code>按钮总是显示</h3><p><strong>原因：</strong></p>
+<blockquote>
+<p>overflow按钮的显示情况和手机的硬件情况是有关系的，如果手机没有物理Menu键的话，overflow按钮就可以显示，如果有物理Menu键的话，overflow按钮就不会显示出来</p>
+</blockquote>
+<p><strong>通过<code>反射</code>让他总是显示</strong>：</p>
+<blockquote>
+<p>在ViewConfiguration这个类中有一个叫做sHasPermanentMenuKey的静态变量，系统就是根据这个变量的值来判断手机有没有物理Menu键的。当然这是一个内部变量，我们无法直接访问它，但是可以通过反射的方式修改它的值，让它永远为false就可以了</p>
+</blockquote>
+<p><strong>对应的代码</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setOverflowShowingAlways</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        ViewConfiguration config = ViewConfiguration.get(<span class="keyword">this</span>);  </span><br><span class="line">        Field menuKeyField = ViewConfiguration.class.getDeclaredField(<span class="string">"sHasPermanentMenuKey"</span>);  </span><br><span class="line">        menuKeyField.setAccessible(<span class="keyword">true</span>);  </span><br><span class="line">        menuKeyField.setBoolean(config, <span class="keyword">false</span>);  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>来源：<a href="http://blog.csdn.net/guolin_blog/article/details/18234477" target="_blank" rel="external">Android ActionBar完全解析，使用官方推荐的最佳导航栏(上)</a></p>
+<h3 id="自定义menu上的布局">自定义<code>menu</code>上的布局</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"</span><br><span class="line">    xmlns:app="http://schemas.android.com/apk/res-auto"&gt;</span><br><span class="line">    &lt;item android:id="@+id/action_submit"</span><br><span class="line">        android:actionLayout="@layout/check"</span><br><span class="line">        app:showAsAction="always"  /&gt;</span><br><span class="line">&lt;/menu&gt;</span><br></pre></td></tr></table></figure>
+<p>在<code>android:actionLayout=&quot;@layout/check&quot;</code>进行加载布局</p>
+<p>来源：<a href="http://stackoverflow.com/questions/23211761/actionlayout-on-menuitem-does-nothing" target="_blank" rel="external">actionlayout on menuitem does nothing</a></p>
+<h3 id="教程：">教程：</h3><p><a href="http://oldgrayduck.blogspot.tw/2013/10/android-support-library-actionbar.html" target="_blank" rel="external">【Android】啟用 Support Library 的 ActionBar</a></p>
+<p><a href="http://www.uml.org.cn/mobiledev/201410245.asp" target="_blank" rel="external">Android ActionBar完全解析，使用官方推荐的最佳导航栏</a></p>
+<p><a href="http://www.tuicool.com/articles/euaiEbb" target="_blank" rel="external">Android ActionBar的基本用法</a></p>
+<p><a href="http://www.cnblogs.com/lqminn/p/3471800.html" target="_blank" rel="external">【Android】Android之Action Bar</a></p>
+<p>修改样式的类型：</p>
+<p><a href="http://www.crifan.com/android_customize_actionbar_background_style/" target="_blank" rel="external">Android中自定义ActionBar的背景色等样式style</a></p>
+<p><a href="http://blog.csdn.net/xy_nyle/article/details/18970211" target="_blank" rel="external">Android 弹无虚发之第三弹：ActionBar 更换背景、颜色、文字，自定义主题Style</a></p>
+<h3 id="扩展知识：-9-png的制作，有强大的在线制作工具">扩展知识：.9.png的制作，<strong>有强大的在线制作工具</strong></h3><p><a href="http://www.crifan.com/android_9_patch_png_picture/" target="_blank" rel="external">研究Android中的9 patch的图片的原理以及如何去生成对应图片</a></p>
+<h3 id="资源：">资源：</h3><p><a href="http://developer.android.com/design/downloads/index.html" target="_blank" rel="external">Google 提供了一整套的 ActionBar 圖示讓開發人員下載使用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/01/24/android-ActionBar的学习/" data-id="cirdiwfel0099fkh19nj6yicy" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/01/24/android-ActionBar的学习/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActionBar/">ActionBar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/24/android-actionbar/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android-ActionBar的学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/24/Android 性能优化综合篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android-ActionBar的学习</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2015/01/24/android-ActionBar的学习/" data-title="android-ActionBar的学习" data-url="http://hexo.trity.cc/2015/01/24/android-ActionBar的学习/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

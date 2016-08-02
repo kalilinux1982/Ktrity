@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        131
+        149
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        144
+        142
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-android 线程" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 架构搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/08/android 线程/">android UI-AutoCompleteTextView使用</a>
+      <a class="article-title" href="/2016/01/05/android 架构搭建/">android_WebView使用</a>
     </h1>
   
 
@@ -134,66 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/12/08/android 线程/">
-      <time datetime="2015-12-08T09:54:16.000Z" itemprop="datePublished">2015-12-08</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自动完成文本框（<a href="http://developer.android.com/reference/android/widget/AutoCompleteTextView.html">AutoCompleteTextView</a>），是<strong>从EditText继承而来</strong>，所以它实际上也是一个文本编辑框，只是多了一个自动提示输入补全的功能<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/08/android 线程/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/08/android 线程/" data-id="cikmr5je5001fm8jsfc14f266" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/08/android 线程/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AutoCompleteTextView/">AutoCompleteTextView</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android activity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/05/android activity/">andoird PopupWindow使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/05/android activity/">
-      <time datetime="2015-12-05T05:27:27.000Z" itemprop="datePublished">2015-12-05</time>
+    <a href="/2016/01/05/android 架构搭建/">
+      <time datetime="2016-01-05T15:23:01.000Z" itemprop="datePublished">2016-01-05</time>
     </a>
   </div>
 
@@ -211,580 +153,68 @@
       
                 
         <a id="more"></a>
-<p><a href="http://www.cnblogs.com/sw926/p/3230659.html" target="_blank" rel="external">Android PopupWindow的使用技巧</a><br><a href="http://developer.android.com/intl/zh-tw/reference/android/widget/PopupWindow.html" target="_blank" rel="external">PopupWindow</a><br><a href="http://ticktick.blog.51cto.com/823160/1332083" target="_blank" rel="external">Android开发实践：用PopupWindow实现自定义Dailog</a><br><a href="http://blog.csdn.net/wangkuifeng0118/article/details/7368157" target="_blank" rel="external">android弹出窗口的实现（PopupWindow）</a></p>
-<h3 id="注意几个方法：">注意几个方法：</h3><ul>
-<li><p>展示<code>popupWindow</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mPopupWindow.setFocusable(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>点击非<code>popupwindow</code>的范围内，则进行消失：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置允许在外点击消失  </span></span><br><span class="line">popupWindow.setOutsideTouchable(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>点击<code>back</code>后退键进行消失：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景  </span></span><br><span class="line">popupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="keyword">null</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置屏幕的中间：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mPopupWindow.showAtLocation(mParent, Gravity.CENTER, Gravity.CENTER, Gravity.CENTER);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置相对应<code>parentView</code>的下方，有点像<code>Spinner</code>的方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半  </span></span><br><span class="line"><span class="keyword">int</span> xPos = windowManager.getDefaultDisplay().getWidth() / <span class="number">2</span>- popupWindow.getWidth() / <span class="number">2</span>;</span><br><span class="line">popupWindow.showAsDropDown(parent, xPos, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/05/android activity/" data-id="cikmr5jhw003um8jsva1uz5jp" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/05/android activity/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PopupWindow/">PopupWindow</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 自适应实战" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/android 自适应实战/">android 自适应实战</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/04/android 自适应实战/">
-      <time datetime="2015-12-04T10:12:18.000Z" itemprop="datePublished">2015-12-04</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="移动view的位置&amp;改变view的大小">移动view的位置&amp;改变view的大小</h3><p>通过写类<code>LayoutParams</code>来改变位置，介绍下类<code>LayoutParams</code>。</p>
-<h5 id="LayoutParams">LayoutParams</h5><p>解释：<strong>用于child view（子视图，如textivew） 向 parent view（父视图，如linearlayout）传达自己的意愿</strong></p>
-<ul>
-<li>动态添加<code>view</code>并设置布局。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mLayout = (LinearLayout) findViewById(R.id.layout);</span><br><span class="line"><span class="comment">//现在我要往mLayout里边添加一个TextView    </span></span><br><span class="line"><span class="comment">//你可能会想直接在布局文件里边配置不就O 了 那是 但是这里为了说明问题我们用代码实现   </span></span><br><span class="line">TextView textView = <span class="keyword">new</span> TextView(Activity01.<span class="keyword">this</span>);</span><br><span class="line">textView.setText(<span class="string">"Text View "</span> );</span><br><span class="line"><span class="comment">//这里请不要困惑这里是设置 这个textView的布局 FILL_PARENT WRAP_CONTENT 和在xml文件里边设置是一样的如   </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//在xml里边怎么配置高宽大家都会的。   </span></span><br><span class="line"><span class="comment">//第一个参数为宽的设置，第二个参数为高的设置。</span></span><br><span class="line">LinearLayout.LayoutParams p = <span class="keyword">new</span> LinearLayout.LayoutParams( LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);</span><br><span class="line"><span class="comment">//调用addView()方法增加一个TextView到线性布局中</span></span><br><span class="line">mLayout.addView(textView, p);</span><br></pre></td></tr></table></figure>
-<h3 id="setLayoutParams报错问题"><a href="http://www.cnblogs.com/newcj/archive/2011/05/11/2043130.html" target="_blank" rel="external">setLayoutParams</a>报错问题</h3><p>为什么会报错，常见的错误是<strong>类型转换错误</strong>。下面看看，我们通过是怎么使用的？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">imgPre=(ImageView)view.findViewById(R.id.img_chart_pre);</span><br><span class="line">RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imgPre.getLayoutParams();</span><br><span class="line">params.leftMargin+= GridChart.UPER_CHART_BORDER_LEFT_Y;</span><br><span class="line">imgPre.setLayoutParams(params);</span><br></pre></td></tr></table></figure></p>
-<p>首先我的<code>ImageView</code>已经在<code>xml</code>中使用了，以上代码是我想通过<code>LayoutParams</code>来获得当前<code>ImageView</code>的所在位置，然后使用<code>leftMargin</code>来改变它所在的位置。<br>那么问题来了，什么时候<code>setLayoutParams</code>会报错呢？<br>那就是<code>getLayoutParams</code>的时候我们进行<strong>强转</strong>了，而强壮的<code>layout</code>必须是<code>xml</code>中的布局，什么意思？看<code>xml</code>：<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;RelativeLayout&gt;</span></span><br><span class="line">   <span class="tag">&lt;ImageView/&gt;</span></span><br><span class="line"><span class="tag">&lt;/RelativeLayout&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如果是以上情况，只能强转成<code>RelativeLayout</code>而不能是其他的<code>layout</code>，否则会出错。</p>
-<p>那么回到标题，其实上面已经回答怎么<br>上面穿插介绍了一种方式，下面是封装好的类。<br><a href="http://blog.csdn.net/tabactivity/article/details/9128271" target="_blank" rel="external">android 获取控件大小和设置调整控件的位置XY</a><br>另一种方式为<br>使用<code>view.layout(left,top,right,bottom)</code>:<br>参考：<a href="http://blog.csdn.net/nupt123456789/article/details/41825597" target="_blank" rel="external">android:View随手指的移动而移动</a><br>使用第二种方式，发现我的并不管用。到底是什么问题呢？<br>参考这里：<a href="http://blog.csdn.net/yuanmingxiang/article/details/10499815" target="_blank" rel="external">Android 动态设置View 的问题</a></p>
-<ul>
-<li>使用view.layout不能再视图为创建处理进行使用，即：<code>onCreate,onResume</code>的方法下使用。</li>
-<li>当<code>layout</code>仍然没效果时，可使用<code>requestLayout</code></li>
-</ul>
-<p><strong>通过<code>linearParams</code>改变view大小</strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) textView.getLayoutParams(); <span class="comment">//取控件textView当前的布局参数</span></span><br><span class="line">linearParams.height = <span class="number">20</span>;<span class="comment">// 控件的高强制设成20</span></span><br><span class="line">linearParams.width = <span class="number">30</span>;<span class="comment">// 控件的宽强制设成30</span></span><br></pre></td></tr></table></figure></p>
-<p>以上介绍了如何修改view的大小和位置，而其中的数字是<strong>以像素为单位的</strong>。不同屏幕分辨率下，修改为同样的数字的效果还是很不同的，那么要怎么修改来适应不同的分辨率呢？<br>个人的思路是<strong>按比例</strong>，通过<strong>占用此控件的几比几</strong>来确定控件的大小和位置。</p>
-<h3 id="如何测量屏幕">如何测量屏幕</h3><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metric = <span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metric);</span><br><span class="line"><span class="comment">//或者：context.getApplicationContext().getResources().getDisplayMetrics();</span></span><br><span class="line"><span class="keyword">int</span> width = metric.widthPixels;  <span class="comment">// 宽度（PX）</span></span><br><span class="line"><span class="keyword">int</span> height = metric.heightPixels;  <span class="comment">// 高度（PX）</span></span><br><span class="line"><span class="keyword">float</span> density = metric.density;  <span class="comment">// 密度（0.75 / 1.0 / 1.5）</span></span><br><span class="line"><span class="keyword">int</span> densityDpi = metric.densityDpi;  <span class="comment">// 密度DPI（120 / 160 / 240）</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>注意的是</strong>：在一个低密度的小屏手机上，仅靠上面的代码是不能获取正确的尺寸的。<br>需要在工程的<code>AndroidManifest.xml</code>文件中，加入<code>supports-screens</code>节点,<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">supports-screens</span> </span><br><span class="line"><span class="attribute">android:smallScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:normalScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:largeScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:resizeable</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:anyDensity</span>=<span class="value">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h5 id="那么如何做到与密度无关呢？">那么如何做到与密度无关呢？</h5><p>即：<code>dp</code>与<code>px</code>的换算公式：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">density=<span class="value">densityDpi/dpi(谷歌定义的基准为<span class="number">160</span>)</span></span></span><br><span class="line"><span class="setting">px=<span class="value">dp*density;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>那么使用代码如何进行转换呢？<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class DensityUtil &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * 根据手机的分辨率从 dp 的单位 转成为 px(像素) </span><br><span class="line">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> dip2px(Context context, <span class="built_in">float</span> dpValue) &#123;  </span><br><span class="line">        <span class="keyword">final</span> <span class="built_in">float</span> <span class="built_in">scale</span> = context.getResources().getDisplayMetrics().density;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (dpValue * <span class="built_in">scale</span> + <span class="number">0.5</span>f);<span class="comment">//这里为什么要加上0.5f呢？设计得比较巧妙，得到小数点四舍五入的办法。</span></span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp </span><br><span class="line">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> px2dip(Context context, <span class="built_in">float</span> pxValue) &#123;  </span><br><span class="line">        <span class="keyword">final</span> <span class="built_in">float</span> <span class="built_in">scale</span> = context.getResources().getDisplayMetrics().density;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (pxValue / <span class="built_in">scale</span> + <span class="number">0.5</span>f);  <span class="comment">//这里为什么要加上0.5f呢？设计得比较巧妙，得到小数点四舍五入的办法。</span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>关于<code>0.5f</code>是如何得到，我们可以查看经常使用的<code>Math.round()</code>源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">round</span><span class="params">(<span class="keyword">float</span> f)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// check for NaN</span></span><br><span class="line">    <span class="keyword">if</span> (f != f) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) floor(f + <span class="number">0.5f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原来也是这么做的。</p>
-<h3 id="兼容平板">兼容平板</h3><p><strong>使用限定符</strong>：<br>如在<code>res</code>添加<code>layout-large</code> 文件夹，大屏幕的时候，将加载此布局文件夹。<br>相关的信息：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212155018.png" alt=""></p>
-<p><strong>使用最小宽度限定符</strong><br>例如：添加以下文件夹<code>layout-sw600dp</code>，则：</p>
-<blockquote>
-<p>当程序运行在<strong>屏幕宽度大于 600dp</strong> 的设备上时，会加载 <code>layout-sw600dp/activity_main</code> 布局，当程序运行在<strong>屏幕宽度小于 600dp 的设备上</strong>时，则仍然加载默认的<code>layout/activity_main</code> 布局</p>
-</blockquote>
-<p>注意在实战中，应在<code>onActivityCreated</code>方法判断<strong>显示双页还是单页</strong>。</p>
-<h3 id="参考资料">参考资料</h3><p><a href="http://blog.csdn.net/liuhaomatou/article/details/22899925" target="_blank" rel="external">Android中LayoutParams总结和用法</a><br><a href="http://blog.sina.com.cn/s/blog_b37dcd970101csln.html" target="_blank" rel="external">怎样获取Android手机屏幕的大小（分辨率、密度）</a><br><a href="http://m.blog.csdn.net/blog/pihaishen/8966092#" target="_blank" rel="external">[原]Android屏幕适配 dp px 之间转换</a><br><a href="http://blog.csdn.net/arui319/article/details/6777133" target="_blank" rel="external">Android中dp和px之间进行转换</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/04/android 自适应实战/" data-id="cikmr5jdr0016m8jsubkjjz72" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/04/android 自适应实战/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andrid/">Andrid</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 多点触控" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/android 多点触控/">android 自适应实战</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/04/android 多点触控/">
-      <time datetime="2015-12-04T10:12:18.000Z" itemprop="datePublished">2015-12-04</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="移动view的位置&amp;改变view的大小">移动view的位置&amp;改变view的大小</h3><p>通过写类<code>LayoutParams</code>来改变位置，介绍下类<code>LayoutParams</code>。</p>
-<h5 id="LayoutParams">LayoutParams</h5><p>解释：<strong>用于child view（子视图，如textivew） 向 parent view（父视图，如linearlayout）传达自己的意愿</strong></p>
-<ul>
-<li>动态添加<code>view</code>并设置布局。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mLayout = (LinearLayout) findViewById(R.id.layout);</span><br><span class="line"><span class="comment">//现在我要往mLayout里边添加一个TextView    </span></span><br><span class="line"><span class="comment">//你可能会想直接在布局文件里边配置不就O 了 那是 但是这里为了说明问题我们用代码实现   </span></span><br><span class="line">TextView textView = <span class="keyword">new</span> TextView(Activity01.<span class="keyword">this</span>);</span><br><span class="line">textView.setText(<span class="string">"Text View "</span> );</span><br><span class="line"><span class="comment">//这里请不要困惑这里是设置 这个textView的布局 FILL_PARENT WRAP_CONTENT 和在xml文件里边设置是一样的如   </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//在xml里边怎么配置高宽大家都会的。   </span></span><br><span class="line"><span class="comment">//第一个参数为宽的设置，第二个参数为高的设置。</span></span><br><span class="line">LinearLayout.LayoutParams p = <span class="keyword">new</span> LinearLayout.LayoutParams( LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);</span><br><span class="line"><span class="comment">//调用addView()方法增加一个TextView到线性布局中</span></span><br><span class="line">mLayout.addView(textView, p);</span><br></pre></td></tr></table></figure>
-<h3 id="setLayoutParams报错问题"><a href="http://www.cnblogs.com/newcj/archive/2011/05/11/2043130.html" target="_blank" rel="external">setLayoutParams</a>报错问题</h3><p>为什么会报错，常见的错误是<strong>类型转换错误</strong>。下面看看，我们通过是怎么使用的？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">imgPre=(ImageView)view.findViewById(R.id.img_chart_pre);</span><br><span class="line">RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imgPre.getLayoutParams();</span><br><span class="line">params.leftMargin+= GridChart.UPER_CHART_BORDER_LEFT_Y;</span><br><span class="line">imgPre.setLayoutParams(params);</span><br></pre></td></tr></table></figure></p>
-<p>首先我的<code>ImageView</code>已经在<code>xml</code>中使用了，以上代码是我想通过<code>LayoutParams</code>来获得当前<code>ImageView</code>的所在位置，然后使用<code>leftMargin</code>来改变它所在的位置。<br>那么问题来了，什么时候<code>setLayoutParams</code>会报错呢？<br>那就是<code>getLayoutParams</code>的时候我们进行<strong>强转</strong>了，而强壮的<code>layout</code>必须是<code>xml</code>中的布局，什么意思？看<code>xml</code>：<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;RelativeLayout&gt;</span></span><br><span class="line">   <span class="tag">&lt;ImageView/&gt;</span></span><br><span class="line"><span class="tag">&lt;/RelativeLayout&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如果是以上情况，只能强转成<code>RelativeLayout</code>而不能是其他的<code>layout</code>，否则会出错。</p>
-<p>那么回到标题，其实上面已经回答怎么<br>上面穿插介绍了一种方式，下面是封装好的类。<br><a href="http://blog.csdn.net/tabactivity/article/details/9128271" target="_blank" rel="external">android 获取控件大小和设置调整控件的位置XY</a><br>另一种方式为<br>使用<code>view.layout(left,top,right,bottom)</code>:<br>参考：<a href="http://blog.csdn.net/nupt123456789/article/details/41825597" target="_blank" rel="external">android:View随手指的移动而移动</a><br>使用第二种方式，发现我的并不管用。到底是什么问题呢？<br>参考这里：<a href="http://blog.csdn.net/yuanmingxiang/article/details/10499815" target="_blank" rel="external">Android 动态设置View 的问题</a></p>
-<ul>
-<li>使用view.layout不能再视图为创建处理进行使用，即：<code>onCreate,onResume</code>的方法下使用。</li>
-<li>当<code>layout</code>仍然没效果时，可使用<code>requestLayout</code></li>
-</ul>
-<p><strong>通过<code>linearParams</code>改变view大小</strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) textView.getLayoutParams(); <span class="comment">//取控件textView当前的布局参数</span></span><br><span class="line">linearParams.height = <span class="number">20</span>;<span class="comment">// 控件的高强制设成20</span></span><br><span class="line">linearParams.width = <span class="number">30</span>;<span class="comment">// 控件的宽强制设成30</span></span><br></pre></td></tr></table></figure></p>
-<p>以上介绍了如何修改view的大小和位置，而其中的数字是<strong>以像素为单位的</strong>。不同屏幕分辨率下，修改为同样的数字的效果还是很不同的，那么要怎么修改来适应不同的分辨率呢？<br>个人的思路是<strong>按比例</strong>，通过<strong>占用此控件的几比几</strong>来确定控件的大小和位置。</p>
-<h3 id="如何测量屏幕">如何测量屏幕</h3><p>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DisplayMetrics metric = <span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">getWindowManager().getDefaultDisplay().getMetrics(metric);</span><br><span class="line"><span class="comment">//或者：context.getApplicationContext().getResources().getDisplayMetrics();</span></span><br><span class="line"><span class="keyword">int</span> width = metric.widthPixels;  <span class="comment">// 宽度（PX）</span></span><br><span class="line"><span class="keyword">int</span> height = metric.heightPixels;  <span class="comment">// 高度（PX）</span></span><br><span class="line"><span class="keyword">float</span> density = metric.density;  <span class="comment">// 密度（0.75 / 1.0 / 1.5）</span></span><br><span class="line"><span class="keyword">int</span> densityDpi = metric.densityDpi;  <span class="comment">// 密度DPI（120 / 160 / 240）</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>注意的是</strong>：在一个低密度的小屏手机上，仅靠上面的代码是不能获取正确的尺寸的。<br>需要在工程的<code>AndroidManifest.xml</code>文件中，加入<code>supports-screens</code>节点,<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">supports-screens</span> </span><br><span class="line"><span class="attribute">android:smallScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:normalScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:largeScreens</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:resizeable</span>=<span class="value">"true"</span></span><br><span class="line"><span class="attribute">android:anyDensity</span>=<span class="value">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h5 id="那么如何做到与密度无关呢？">那么如何做到与密度无关呢？</h5><p>即：<code>dp</code>与<code>px</code>的换算公式：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">density=<span class="value">densityDpi/dpi(谷歌定义的基准为<span class="number">160</span>)</span></span></span><br><span class="line"><span class="setting">px=<span class="value">dp*density;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>那么使用代码如何进行转换呢？<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class DensityUtil &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * 根据手机的分辨率从 dp 的单位 转成为 px(像素) </span><br><span class="line">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> dip2px(Context context, <span class="built_in">float</span> dpValue) &#123;  </span><br><span class="line">        <span class="keyword">final</span> <span class="built_in">float</span> <span class="built_in">scale</span> = context.getResources().getDisplayMetrics().density;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (dpValue * <span class="built_in">scale</span> + <span class="number">0.5</span>f);<span class="comment">//这里为什么要加上0.5f呢？设计得比较巧妙，得到小数点四舍五入的办法。</span></span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp </span><br><span class="line">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> px2dip(Context context, <span class="built_in">float</span> pxValue) &#123;  </span><br><span class="line">        <span class="keyword">final</span> <span class="built_in">float</span> <span class="built_in">scale</span> = context.getResources().getDisplayMetrics().density;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">int</span>) (pxValue / <span class="built_in">scale</span> + <span class="number">0.5</span>f);  <span class="comment">//这里为什么要加上0.5f呢？设计得比较巧妙，得到小数点四舍五入的办法。</span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>关于<code>0.5f</code>是如何得到，我们可以查看经常使用的<code>Math.round()</code>源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">round</span><span class="params">(<span class="keyword">float</span> f)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// check for NaN</span></span><br><span class="line">    <span class="keyword">if</span> (f != f) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) floor(f + <span class="number">0.5f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原来也是这么做的。</p>
-<h3 id="兼容平板">兼容平板</h3><p><strong>使用限定符</strong>：<br>如在<code>res</code>添加<code>layout-large</code> 文件夹，大屏幕的时候，将加载此布局文件夹。<br>相关的信息：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212155018.png" alt=""></p>
-<p><strong>使用最小宽度限定符</strong><br>例如：添加以下文件夹<code>layout-sw600dp</code>，则：</p>
-<blockquote>
-<p>当程序运行在<strong>屏幕宽度大于 600dp</strong> 的设备上时，会加载 <code>layout-sw600dp/activity_main</code> 布局，当程序运行在<strong>屏幕宽度小于 600dp 的设备上</strong>时，则仍然加载默认的<code>layout/activity_main</code> 布局</p>
-</blockquote>
-<p>注意在实战中，应在<code>onActivityCreated</code>方法判断<strong>显示双页还是单页</strong>。</p>
-<h3 id="参考资料">参考资料</h3><p><a href="http://blog.csdn.net/liuhaomatou/article/details/22899925" target="_blank" rel="external">Android中LayoutParams总结和用法</a><br><a href="http://blog.sina.com.cn/s/blog_b37dcd970101csln.html" target="_blank" rel="external">怎样获取Android手机屏幕的大小（分辨率、密度）</a><br><a href="http://m.blog.csdn.net/blog/pihaishen/8966092#" target="_blank" rel="external">[原]Android屏幕适配 dp px 之间转换</a><br><a href="http://blog.csdn.net/arui319/article/details/6777133" target="_blank" rel="external">Android中dp和px之间进行转换</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/04/android 多点触控/" data-id="cikmr5jew001tm8jstjwzo3d8" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/04/android 多点触控/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andrid/">Andrid</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android Camera摄像头使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/android Camera摄像头使用/">android catch异常处理</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/04/android Camera摄像头使用/">
-      <time datetime="2015-12-03T17:00:19.000Z" itemprop="datePublished">2015-12-04</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在<code>android</code>中使用<code>catch</code>直接输出的话并不可以打印出来，而<code>java</code>可以直接使用<code>e.printTrace();</code>便可以打印出来，而<code>android</code>却不可以。下面介绍如何解决这个问题。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/04/android Camera摄像头使用/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/04/android Camera摄像头使用/" data-id="cinsxokpr005hw0h15r7qvp8o" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/04/android Camera摄像头使用/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android RelativeLayout" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/01/android RelativeLayout/">android xml资源</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/01/android RelativeLayout/">
-      <time datetime="2015-12-01T15:24:17.000Z" itemprop="datePublished">2015-12-01</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="Colors-xml资源">Colors.xml资源</h3><ul>
-<li>当使用<code>R.color.xx</code>的时候，需要进行转换<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过values中的color中设置的颜色来设定。</span></span><br><span class="line"><span class="keyword">int</span>  color  =  getResources().getColor(R.color.red);</span><br><span class="line">view.setTextColor(color);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其他情况的解析颜色，不需要转换：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setxxColor(<span class="number">0xff00ff00</span>);</span><br><span class="line">view.setxxColor(Color.BLUE);</span><br><span class="line">view.setxxColor(Color.argb(<span class="number">0x99</span>,  <span class="number">0xff</span>,  <span class="number">0x00</span>,  <span class="number">0x00</span>));</span><br></pre></td></tr></table></figure></p>
-<p>注意这个与<code>setBackgroundResurces</code>的区别：（不需要进行转换，因为该方法内部已经进行转换了，看源码即可知道）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setBackgroundResurces(R.drawable.xx);</span><br></pre></td></tr></table></figure></p>
-<h3 id="style-xml和theme-xml设置">style.xml和theme.xml设置</h3><p><a href="http://www.cnblogs.com/qianxudetianxia/p/3996020.html" target="_blank" rel="external">Android学习系列(40)—Android主题和样式之系统篇（下）</a></p>
-<h3 id="arrays-xml使用">arrays.xml使用</h3><p>格式：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;string-array name="languages"&gt;</span><br><span class="line">        &lt;item&gt;c语言&lt;/item&gt;</span><br><span class="line">    &lt;/string-array&gt;</span><br><span class="line">    &lt;integer-array name="reminder_methods_values" translatable="false"&gt;</span><br><span class="line">        &lt;item&gt;1&lt;/item&gt;</span><br><span class="line">    &lt;/integer-array&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
-<p>注意：<code>&lt;string-array&gt;</code>定义的是字符数组，<code>&lt;integer-array&gt;</code>是整数数组。</p>
-<p><strong>在Java代码引用</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Resources res =getResources();</span><br><span class="line">String[] languages = res.getStringArray(R.array.languages)</span><br></pre></td></tr></table></figure></p>
-<p><strong>扩展如何定义drawable数组、id数组</strong></p>
-<blockquote>
-<p>开发有需求，就是想添加每个数字对应一个资源id，而想包资源id写在<code>arrays.xml</code>中，而不是写在代码数组中。依靠这个想法传统的代码并不能解决。<br>参考：<a href="http://www.2cto.com/kf/201409/331829.html" target="_blank" rel="external">[android]在xml文件中定义drawable数组、id数组等</a></p>
-</blockquote>
-<p>我们依旧在<code>arrays.xml</code>这么定义：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">string-array</span> <span class="attribute">name</span>=<span class="value">"actions_images"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil1<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil2<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">string-array</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>但取出的方式有所不同：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TypedArray ar = context.getResources().obtainTypedArray(R.array.actions_images);</span><br><span class="line"><span class="keyword">int</span> len = ar.length();</span><br><span class="line"><span class="keyword">int</span>[] resIds = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    resIds[i] = ar.getResourceId(i, <span class="number">0</span>);</span><br><span class="line">ar.recycle();</span><br></pre></td></tr></table></figure></p>
-<p>这样我们就可以愉快的使用<code>resIds</code>资源了。</p>
-<h3 id="string-xml转义字符">string.xml转义字符</h3><p>参考：<a href="http://blog.csdn.net/z1074971432/article/details/12753539" target="_blank" rel="external">android string.xml 添加特殊字符</a><br>摄氏度表示：<code>&amp;#176;C</code>在<code>strings.xml</code>定义。<br>然后：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String degreeStr=getResources().getString(R.string.degree);</span><br></pre></td></tr></table></figure></p>
-<p>其他转义字符：<a href="http://blog.csdn.net/rnclcl/article/details/16801779" target="_blank" rel="external">Android string.xml如何输入空格、换行等符号——转义字符</a></p>
-<p>还可以进行格式化字符串等：<a href="http://blog.csdn.net/think_soft/article/details/7518824" target="_blank" rel="external">Android应用资源—-字符串资源类型（String）</a></p>
-<h3 id="ids-xml使用">ids.xml使用</h3><p>主要为两个作用：<br>（1）优化编译效率：</p>
-<blockquote>
-<p>直接使用<code>&quot;@id/name&quot;</code>来引用<code>id</code>，而不是<code>&quot;@+id/name&quot;</code></p>
-</blockquote>
-<p>解释：</p>
-<blockquote>
-<p>如果使用”@+id/name”形式，当R.java中存在名为name变量时，则该组件会使用该变量的值作为标识。如果不存在该变量，则添加一个新的变量，并为该变量赋相应的值（不会重复)<br><strong>所以：使用@id/name形式，预先定义的id已经生成，修改配置文件时，也不会引起系统重新生成</strong></p>
-</blockquote>
-<p>（2）统一管理资源Id</p>
-<blockquote>
-<p><a href="http://blog.csdn.net/jdsjlzx/article/details/42024447" target="_blank" rel="external">android项目中values中ids.xml的作用</a></p>
-</blockquote>
-<h3 id="Shape使用">Shape使用</h3><p>属性指定：<code>android:shape</code>以下可选为：</p>
-<ul>
-<li><strong>rectangle</strong>: 矩形，默认的形状，可以画出直角矩形、圆角矩形、弧形等</li>
-<li><strong>oval</strong>: 椭圆形，用得比较多的是画正圆</li>
-<li><strong>line</strong>: 线形，可以画实线和虚线</li>
-<li><strong>ring</strong>: 环形，可以画环形进度条</li>
-</ul>
-<p>默认的形状：<code>rectangle</code>。</p>
-<p><strong>详细资料</strong>：<a href="http://keeganlee.me/post/android/20150830" target="_blank" rel="external">Android样式的开发:shape篇</a></p>
-<h3 id="selector选择器">selector选择器</h3><h5 id="属性设置：">属性设置：</h5><ul>
-<li><strong>android:state_enabled</strong>: 设置触摸或点击事件是否可用状态，一般只在false时设置该属性，表示不可用状态</li>
-<li><strong>android:state_pressed</strong>: 设置是否按压状态，一般在true时设置该属性，表示已按压状态，默认为false</li>
-<li><strong>android:state_selected</strong>: 设置是否选中状态，true表示已选中，false表示未选中</li>
-<li><strong>android:state_checked</strong>: 设置是否勾选状态，主要用于CheckBox和RadioButton，true表示已被勾选，false表示未被勾选</li>
-<li><strong>android:state_checkable</strong>: 设置勾选是否可用状态，类似state_enabled，只是state_enabled会影响触摸或点击事件，而state_checkable影响勾选事件</li>
-<li><strong>android:state_focused</strong>: 设置是否获得焦点状态，true表示获得焦点，默认为false，表示未获得焦点</li>
-<li><strong>android:state_window_focused</strong>: 设置当前窗口是否获得焦点状态，true表示获得焦点，false表示未获得焦点，例如拉下通知栏或弹出对话框时，当前界面就会失去焦点；另外，ListView的ListItem获得焦点时也会触发true状态，可以理解为当前窗口就是ListItem本身</li>
-<li><strong>android:state_activated</strong>: 设置是否被激活状态，true表示被激活，false表示未激活，API Level 11及以上才支持，可通过代码调用控件的setActivated(boolean)方法设置是否激活该控件</li>
-<li><strong>android:state_hovered</strong>: 设置是否鼠标在上面滑动的状态，true表示鼠标在上面滑动，默认为false，API Level 14及以上才支持</li>
-</ul>
-<h5 id="使用注意点：">使用注意点：</h5><ul>
-<li><p><strong>item是从上往下匹配的（一旦成功就return，不再匹配）</strong>，如果匹配到一个item那它就将采用这个item，而不是采用最佳匹配的规则；所以设置默认的状态，一定要写在最后，如果写在前面，则后面所有的item都不会起作用了。</p>
-</li>
-<li><p>selector作为drawable资源时，item指定android:drawable属性，并放于drawable目录下；</p>
-</li>
-<li><p>selector作为color资源时，item指定android:color属性，并放于color目录(<strong>没有的话需要自己进行新建</strong>)下；</p>
-</li>
-</ul>
-<blockquote>
-<p>注意这种情况下，我们就可以设置<strong>点击前后字体的效果</strong>，设置在<code>android:textColor=&quot;@color/xxx&quot;</code><br>所以会出现这篇文章的<code>bug</code>:<a href="http://www.tuicool.com/articles/VVBJjq2" target="_blank" rel="external">ImageView设置selector遇到的小问题及解决方案记录</a></p>
-</blockquote>
-<h5 id="以下是常见的使用样例：">以下是常见的使用样例：</h5><ul>
-<li>通用模板介绍：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当前窗口失去焦点时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_lost_window_focused"</span> <span class="attribute">android:state_window_focused</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 不可用时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_disable"</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按压时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_pressed"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被选中时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_selected"</span> <span class="attribute">android:state_selected</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被激活时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_activated"</span> <span class="attribute">android:state_activated</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_normal"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>详细资料参考</strong>：<a href="http://keeganlee.me/post/android/20150905" target="_blank" rel="external">Android样式的开发:selector篇</a></p>
-<ul>
-<li>总结使用注意的参见问题</li>
-<li><code>listview</code>上使用的总结</li>
-</ul>
-<h5 id="与shape结合使用">与<code>shape</code>结合使用</h5><p><code>button_selector.xml</code>代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> </span><br><span class="line">    <span class="attribute">android:constantSize</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 获得焦点时的背景图片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_focused</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FFE5CF33"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FFF1E7A2"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设置相应所有事件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF1B1B1B"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF969696"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按钮点击时的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认情况下的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>接下来，我们只需要在<code>view</code>的<code>android:background</code>使用即可。<br>可以实现下图的效果：<br><img src="http://pic002.cnblogs.com/images/2012/283134/2012011216251234.png" alt=""><br>引用文章：<a href="http://www.cnblogs.com/loulijun/archive/2012/03/20/2320838.html" target="_blank" rel="external">Android美工坊—selector选择器的使用</a></p>
-<h3 id="xml属性讲解">xml属性讲解</h3><ul>
-<li><a href="http://www.tuicool.com/articles/32YRJrq" target="_blank" rel="external">android:clipToPadding和android:clipChildre</a></li>
-<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1122/3712.html" target="_blank" rel="external"># Android使用fitsSystemWindows属性实现—状态栏【status_bar】各版本适配方案</a></li>
-</ul>
-<h3 id="style与theme资源"><code>style与theme</code>资源</h3><blockquote>
-<p>对于所有可用的样式属性，请参考R.attr类.</p>
-</blockquote>
-<p><strong>当设置不属于改view的样式属性的时候</strong></p>
-<blockquote>
-<p>这个View对象只会使用它们所支持的那些属性，并简单的把不支持的属性忽略</p>
-</blockquote>
-<h4 id="主题的样式属性Theme">主题的样式属性<code>Theme</code></h4><blockquote>
-<p>请参考R.attr类中用<strong>window开始的属性</strong>。<br>详细介绍查看“<code>Providing Resources</code>”文档。<br><a href="http://developer.android.com/guide/topics/resources/providing-resources.html" target="_blank" rel="external">http://developer.android.com/guide/topics/resources/providing-resources.html</a></p>
-</blockquote>
-<p><strong>兼容性</strong>：<br>使用<code>res/values-v11</code>的文件夹下的一个XML文件中放入一个可选的主题声明。来兼容此版本。</p>
-<h3 id="Drawable子类的相关使用">Drawable子类的相关使用</h3><h4 id="RoundedBitmapDrawable转化为圆形">RoundedBitmapDrawable转化为圆形</h4><p>将<code>bitmap</code>转化成<strong>圆形图片资源</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), resource);</span><br><span class="line">roundedBitmapDrawable.setCircular(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"># 对应的imageview进行设置</span><br><span class="line">imageView.setImageDrawable(roundedBitmapDrawable);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/12/01/android RelativeLayout/" data-id="cinsxokp70051w0h1doh88rli" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/12/01/android RelativeLayout/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arrays/">arrays</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xml/">xml</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android xml资源" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/12/android xml资源/">android 多点触控</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/11/12/android xml资源/">
-      <time datetime="2015-11-12T14:49:10.000Z" itemprop="datePublished">2015-11-12</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>两种方式进行实现多点触控，<br>一种直接重载<code>onTouchEvent</code>方法（view，activity默认实现），<br>另一种实现接口：<code>OnTouchListener</code>,然后实现<code>onTouch(View view, MotionEvent event)</code>的方法。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/11/12/android xml资源/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/11/12/android xml资源/" data-id="cikmr5jga002vm8jsislmtovf" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/11/12/android xml资源/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OnTouchListener/">OnTouchListener</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onTouchEvent/">onTouchEvent</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android bitmap实战" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/12/android bitmap实战/">android canvas画布</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/11/12/android bitmap实战/">
-      <time datetime="2015-11-12T12:17:11.000Z" itemprop="datePublished">2015-11-12</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <a id="more"></a>
-<h3 id="常用方法使用">常用方法使用</h3><h4 id="绘制圆角矩形drawRoundRect：">绘制圆角矩形<code>drawRoundRect</code>：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RectF r2=<span class="keyword">new</span> RectF(<span class="number">50</span>,<span class="number">400</span>,<span class="number">450</span>,<span class="number">600</span>);<span class="comment">//RectF对象</span></span><br><span class="line">canvas.drawRoundRect(r2, <span class="number">10</span>, <span class="number">10</span>, paint);<span class="comment">//10圆角的弧度</span></span><br></pre></td></tr></table></figure>
-<h3 id="绘制虚线（DashPathEffect）">绘制虚线（<code>DashPathEffect</code>）</h3><p>直接使用<code>Canvas</code>来绘制：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mDashPaint =  <span class="keyword">new</span>  Paint();</span><br><span class="line">mDashPaint.setPathEffect(<span class="keyword">new</span>  DashPathEffect(<span class="keyword">new</span>  <span class="keyword">float</span>[]  &#123; dashWidth, dashGap &#125;,  <span class="number">0</span>));<span class="comment">// dashGap是虚线的间隔宽度，dashWidth是实线的间隔宽度</span></span><br><span class="line">canvas.drawLine(xStart, yStart, xEnd, yEnd, mDashPaint);</span><br></pre></td></tr></table></figure></p>
-<p>这里使用了<code>DashPathEffect</code>，看看这类是怎么回事，看这个构造函数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DashPathEffect</span><span class="params">(<span class="keyword">float</span> intervals[], <span class="keyword">float</span> phase)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (intervals.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException();</span><br><span class="line">       &#125;</span><br><span class="line">       native_instance = nativeCreate(intervals, phase);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>代码中的<strong>float数组,必须是偶数长度,且&gt;=2</strong>,指定了多少长度的实线之后再画多少长度的空白.<br>如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PathEffect effects = <span class="keyword">new</span> DashPathEffect(<span class="keyword">new</span> <span class="keyword">float</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>&#125;, <span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
-<p><strong>绘制长度1的实线,再绘制长度2的空白,再绘制长度4的实线,再绘制长度8的空白,依次重复.</strong></p>
-<p>当我使用的时候，结果发现<strong>并没有虚线，而是实线</strong>。<br>参考：<a href="http://www.programgo.com/article/86385468904/" target="_blank" rel="external">Android 画虚线显示实线的BUG</a>，原来<strong>在android 4.0以上版本中会有BUG，发现不管dashGap设置多大，显示的都是一条实线。</strong><br>解决方法：</p>
-<blockquote>
-<p>关闭硬件加速。<br>可以在AndroidManifest.xml时的Application标签加上<code>android:hardwareAccelerated=&quot;false&quot;</code>,这样整件应用都关闭了硬件加速，虚线可以正常显示，但是，关闭硬件加速对性能有些影响，会感觉明显比没关卡。</p>
-</blockquote>
-<p>可以给虚线的view单独关闭硬件加速:（这个没试过）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">程序代码：</span><br><span class="line">line.setLayerType(View.LAYER_TYPE_SOFTWARE,<span class="keyword">null</span>);</span><br><span class="line">xml:</span><br><span class="line">android:layerType=<span class="string">"software"</span></span><br></pre></td></tr></table></figure></p>
-<p>继续探讨：<br>另一种方式,使用<code>xml</code>：<a href="https://www.zybuluo.com/linux1s1s/note/203047" target="_blank" rel="external">Android 绘制虚线</a>，这篇有探讨到<strong>在小米1S真机上显示不出来，原因是不支持<code>LAYER_TYPE_SOFTWARE</code></strong>。</p>
-<h3 id="DrawText让字体处于不同的位置"><code>DrawText</code>让字体处于不同的位置</h3><p>首先了解<code>DrawText</code>的原理如图：<br><img src="http://www.fookwood.com/wp-content/uploads/2014/08/1408964085_thumb.jpeg" alt=""><br><strong>注意</strong>：<br>从方法中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(String text, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br></pre></td></tr></table></figure></p>
-<p>当中的<code>y</code>值代表的是<code>BaseLine</code>的<code>y</code>值，也就是上图<strong>黄色五角星</strong>的地方。</p>
-<ul>
-<li>使用<code>Paint.getTextBounds</code>：（描述<strong>字符的边界</strong>）</li>
-</ul>
-<p>来获取<strong>能够包裹文字的最小矩形</strong>的<code>Rect</code>对象并不是以<strong>左上角为基准</strong>，而是以<strong>黄色五角星</strong>为准，那么：</p>
-<blockquote>
-<p><code>r.top</code>就是一个负值了，<code>r.bottom</code>会是一个小一点的正值，<code>r.left和r.right在</code>图中画的都很清楚。通过<code>r.width()和r.height()</code>来获取尺寸</p>
-</blockquote>
-<p>如图<strong>测</strong>子所使用为<code>getTextBounds</code>的边界。<br><img src="http://img.blog.csdn.net/20140124095041906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVyc2luZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<ul>
-<li>使用<code>Paint.getFontMetricsInt()</code>得到字体的边界</li>
-</ul>
-<p>关于：<code>FontMetricsInt</code>的详细使用如下：<br><a href="http://mikewang.blog.51cto.com/3826268/871765" target="_blank" rel="external">Android字符串进阶之三：字体属性及测量（FontMetrics）</a><br>同样是以<code>baseLine</code>为基准，第一张图中的<code>ascent，descent，top,bottom</code>都是从这里获得。测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// baseline  </span></span><br><span class="line">paint.setColor(Color.RED);  </span><br><span class="line">canvas.drawLine(x, y, <span class="number">1024</span>, y, paint);  </span><br><span class="line"><span class="comment">// ascent  </span></span><br><span class="line">paint.setColor(Color.YELLOW);  </span><br><span class="line">canvas.drawLine(x, y+fmi.ascent, <span class="number">1024</span>, y+fmi.ascent, paint);  </span><br><span class="line"><span class="comment">// descent  </span></span><br><span class="line">paint.setColor(Color.BLUE);  </span><br><span class="line">canvas.drawLine(x, y+fmi.descent, <span class="number">1024</span>, y+fmi.descent, paint);  </span><br><span class="line"><span class="comment">// top  </span></span><br><span class="line">paint.setColor(Color.DKGRAY);  </span><br><span class="line">canvas.drawLine(x, y+fmi.top, <span class="number">1024</span>, y+fmi.top, paint);  </span><br><span class="line"><span class="comment">// bottom  </span></span><br><span class="line">paint.setColor(Color.GREEN);  </span><br><span class="line">canvas.drawLine(x, y+fmi.bottom, <span class="number">1024</span>, y+fmi.bottom, paint);</span><br></pre></td></tr></table></figure></p>
-<p>最后的效果如第二张图所示。</p>
-<ul>
-<li><p>如何得到<code>baseLine</code>,字体的基线：</p>
-<blockquote>
-<p>(targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2//targetRect为text所显示的区域</p>
-</blockquote>
-</li>
-<li><p>如何得到将要输入字体的宽度呢？<br>我们看到第一张图的<code>paint.meauseText()</code>进行测量即可。</p>
-</li>
-<li><p>如何设置<code>drawText</code>的第一个字从哪里画起（即：右对齐，做对其，中间对齐），默认为<strong>左对齐</strong><br>通过<code>paint.setTextAlign()</code>进行设置。效果如图<br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignLeft.png" alt=""><br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignCenter.png" alt=""></p>
-</li>
-</ul>
-<p>所以任意位置显示可以为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> textWidth=paint.measureText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>);<span class="comment">//测量将要输入字体的宽度</span></span><br><span class="line"><span class="comment">//字体所显示的区域</span></span><br><span class="line">RectF targetRectF=<span class="keyword">new</span> RectF(UPER_CHART_BORDER_LEFT_Y-textWidth, endWhiteY - DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>, UPER_CHART_BORDER_LEFT_Y, endWhiteY  + DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>);</span><br><span class="line">canvas.drawRect(targetRectF, paint);</span><br><span class="line"><span class="comment">//测量字体的边界,即高度</span></span><br><span class="line">Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();</span><br><span class="line"><span class="comment">//得到字体的基线</span></span><br><span class="line"><span class="keyword">int</span> baseline = (<span class="keyword">int</span>)(targetRectF.bottom + targetRectF.top - fontMetrics.bottom - fontMetrics.top) / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br><span class="line">paint.setTextAlign(Paint.Align.RIGHT);</span><br><span class="line">paint.setColor(Color.WHITE);</span><br><span class="line"></span><br><span class="line">canvas.drawText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>, targetRectF.right, baseline, paint);</span><br></pre></td></tr></table></figure></p>
-<p>在不同对齐方式，只需对应设置即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br></pre></td></tr></table></figure></p>
-<p>引用资料：<br><a href="http://blog.csdn.net/linghu_java/article/details/46404081" target="_blank" rel="external">Android的DrawText详解</a><br><a href="http://blog.csdn.net/hursing/article/details/18703599" target="_blank" rel="external">Android Canvas drawText实现中文垂直居中</a><br><a href="http://www.xyczero.com/blog/article/20/" target="_blank" rel="external">如何“任性”使用Android的drawText()</a><br><a href="http://blog.csdn.net/carrey1989/article/details/10399727" target="_blank" rel="external">Android UI 之居中绘制文本内容的正确方法——实现自定义一个TextView</a></p>
-<h3 id="Path使用：">Path使用：</h3><ol>
-<li><p><code>moveTo</code> 不会进行绘制，只用于移动移动画笔。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mPath.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>lineTo</code> 用于进行直线绘制。</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mPath.lineTo(<span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="keyword">canvas</span>.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>quadTo</code> 用于绘制圆滑曲线，即<strong>线性贝塞尔曲线</strong>。<br><code>mPath.quadTo(x1, y1, x2, y2)</code> (x1,y1) 为控制点，(x2,y2)为结束点。</p>
-</li>
-<li><p><code>cubicTo</code> 同样是用来实现贝塞尔曲线的,为<strong>二次方贝塞尔曲线</strong><br><code>mPath.cubicTo(x1, y1, x2, y2, x3, y3)</code> (x1,y1) 为控制点，(x2,y2)为控制点，(x3,y3) 为结束点。</p>
-</li>
-<li><p><code>arcTo</code> 用于绘制弧线（实际是截取圆或椭圆的一部分）。<br><code>mPath.arcTo(ovalRectF, startAngle, sweepAngle)</code> , <code>ovalRectF</code>为椭圆的矩形，<code>startAngle</code> 为开始角度，<code>sweepAngle</code> 为结束角度。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mRectF = <span class="keyword">new</span> RectF(<span class="number">10</span>, <span class="number">10</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">mPath.arcTo(mRectF, <span class="number">0</span>, <span class="number">90</span>);</span><br><span class="line">canvas.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="步骤">步骤</h3><ol>
+<li>通过<code>findbyid</code>得到<code>webview</code></li>
+<li><code>websettings＝webview.getSetting()；</code>得到对<code>webView</code>的设置项<br>2.1 支持<code>js</code>：</li>
 </ol>
-<p>以上引用参考：<a href="http://segmentfault.com/a/1190000000721127" target="_blank" rel="external">Android中moveTo、lineTo、quadTo、cubicTo、arcTo详解（实例）</a></p>
-<p>关于<strong>贝塞尔曲线</strong>在实际开发曲线中的应用<br><a href="http://tomkeyzhang.duapp.com/?p=88" target="_blank" rel="external"># 在Android中如何绘制光滑曲线（一）</a><br>这里解决的问题是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">websettings.setJavascriptEnable(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<p> 2.2 支持<code>flash</code>插件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">websettings.setPluginState(WebSettings.PluginState.ON)</span><br></pre></td></tr></table></figure></p>
+<p> 2.3 支持缩放控制和拿捏缩放功能：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.setSupportZoom(<span class="keyword">true</span>);</span><br><span class="line">.setBuildInRoomControls();</span><br></pre></td></tr></table></figure></p>
 <ol>
-<li>如何使两条贝塞尔曲线连接处是光滑的</li>
-<li>曲线经过实际的数据点，而不是总在实际点下方，只有第一和末尾的控制点才被光滑曲线经过。</li>
+<li><p>总是在<code>webView</code>访问<strong>链接，不进行跳转浏览器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient() &#123;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String </span><br><span class="line">url)</span> </span>&#123;</span><br><span class="line">view.loadUrl(url); <span class="comment">// 根据传入的参数再去加载新的网页</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">//  表示当前WebView可以处理打开新网页的请求，不用借助</span></span><br><span class="line">系统浏览器</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后进行访问<strong>连接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadUrl(<span class="string">"http://www.baidu.com"</span>);</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h3 id="资料">资料</h3><p><a href="http://892848153.iteye.com/blog/1906496" target="_blank" rel="external">Android Canvas绘图详解（图文）</a></p>
+<h4 id="载入网页的基本配置">载入网页的基本配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WebSettings mWebSettings = mWebView.getSettings();</span><br><span class="line">        mWebSettings.setSupportZoom(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setLoadWithOverviewMode(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setUseWideViewPort(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setDefaultTextEncodingName(<span class="string">"GBK"</span>);</span><br><span class="line">        mWebSettings.setLoadsImagesAutomatically(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="使用Html5时的配置">使用<code>Html5</code>时的配置</h3><ul>
+<li><p>数据存储(LocalStorage)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mWebSettings.setDomStorageEnabled(<span class="keyword">true</span>);</span><br><span class="line">mWebSettings.setDatabaseEnabled(<span class="keyword">true</span>);</span><br><span class="line">mWebSettings.setAppCacheEnabled(<span class="keyword">true</span>);</span><br><span class="line">String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();</span><br><span class="line">mWebSettings.setAppCachePath(appCachePath);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定位</strong>(获取当前地址)</p>
+</li>
+</ul>
+<ol>
+<li><p>配置权限：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复写<strong>WebChromeClient</strong>的三个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceivedIcon</span><span class="params">(WebView view, Bitmap icon)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onReceivedIcon(view, icon);</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGeolocationPermissionsHidePrompt</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onGeolocationPermissionsHidePrompt();</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGeolocationPermissionsShowPrompt</span><span class="params">(<span class="keyword">final</span> String origin, <span class="keyword">final</span> GeolocationPermissions.Callback callback)</span> </span>&#123;</span><br><span class="line">    callback.invoke(origin, <span class="keyword">true</span>, <span class="keyword">false</span>);<span class="comment">//注意个函数，第二个参数就是是否同意定位权限，第三个是是否希望内核记住</span></span><br><span class="line">    <span class="keyword">super</span>.onGeolocationPermissionsShowPrompt(origin, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3><h4 id="添加@JavascriptInterface注解">添加<code>@JavascriptInterface</code>注解</h4><blockquote>
+<p>安卓版本大于17的时候，需要在JS方法上加上注解，否则无法调用方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@JavascriptInterface</span></span><br></pre></td></tr></table></figure>
+<p>如果不加上注解的话：<code>js</code>是无法调用<code>android</code>上的方法的。注意这个注解是修饰方法，所以使用为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.addJavascriptInterface(<span class="keyword">new</span> MyJavaScriptInterface(),<span class="string">"BRIDGE"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>MyJavaScriptInterface</code>这个类来封装<code>webview</code>调用<code>android</code>的方法时，则需要在每个方法上加入<code>@JavascriptInterface</code>注解。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJavaScriptInterface</span></span>&#123;</span><br><span class="line">    <span class="annotation">@JavascriptInterface</span></span><br><span class="line">    <span class="annotation">@SuppressWarnings</span>(<span class="string">"unused"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       ...</span><br><span class="line">       <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">success</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="添加@JavascriptInterface注解,仍然无法调用方法">添加<code>@JavascriptInterface</code>注解,仍然无法调用方法</h4><p>死活都想不懂，方法为什么不执行，又不报错，反复对照例子的代码，才发现仅仅是<strong>修饰符不同</strong>而已。只要都改成<code>public</code>就好了，我自作多情改成了<code>protected</code>导致不执行。</p>
+<ul>
+<li><p>自定义加载html文本：<code>loadData()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String summary = <span class="string">"&lt;html&gt;&lt;body&gt;You scored &lt;b&gt;192&lt;/b&gt; points.&lt;/body&gt;&lt;/html&gt;"</span>;</span><br><span class="line"> webview.loadData(summary, <span class="string">"text/html"</span>, <span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载<code>assets</code>文件的路径：<code>file:///android_asset/</code></p>
+</li>
+<li><p>多窗口的问题</p>
+</li>
+<li>多页面</li>
+<li>JS调用安卓接口传输JSON格式数据</li>
+<li><code>https</code>加载数据，第三方网络框架</li>
+</ul>
+<p>祥看：<a href="http://frank-zhu.github.io/android/2015/08/19/android-html5-web-view/" target="_blank" rel="external">安卓WebView相关设置</a></p>
+<h3 id="引用资料">引用资料</h3><p><a href="http://frank-zhu.github.io/android/2015/08/19/android-html5-web-view/" target="_blank" rel="external">安卓WebView相关设置</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/11/12/android bitmap实战/" data-id="cikmr5jhp003pm8jso56e32ax" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2016/01/05/android 架构搭建/" data-id="cirdiwfgr00b2fkh18nrx9r6q" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/11/12/android bitmap实战/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2016/01/05/android 架构搭建/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
 
     </footer>
   </div>
@@ -794,7 +224,7 @@
 
 
     
-      <article id="post-android 使用ssl通信实践" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-java IO篇-NIO" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -803,7 +233,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/10/android 使用ssl通信实践/">android 安全退出的正确方式</a>
+      <a class="article-title" href="/2016/01/03/java IO篇-NIO/">java IO篇-NIO</a>
     </h1>
   
 
@@ -811,8 +241,183 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/11/10/android 使用ssl通信实践/">
-      <time datetime="2015-11-10T08:31:02.000Z" itemprop="datePublished">2015-11-10</time>
+    <a href="/2016/01/03/java IO篇-NIO/">
+      <time datetime="2016-01-03T07:00:29.000Z" itemprop="datePublished">2016-01-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>旧的IO系统<strong>一次只能处理一个字节</strong>,使得效率并不高。<br>输入，输出流都是<strong>阻塞式的输入，输出</strong></p>
+<p>新的IO采用内存<strong>映射文件的方式处理输入输出</strong>，将文件的一端区域<strong>映射到内存</strong>中。模拟了<strong>虚拟内存的概念</strong>，系统是<strong>一次处理一块数据</strong>，所以提高了效率。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/01/03/java IO篇-NIO/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/03/java IO篇-NIO/" data-id="cirdiwfbs006hfkh1nc6gswx7" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/03/java IO篇-NIO/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android Toolbar使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/24/android Toolbar使用/">android Toolbar使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/24/android Toolbar使用/">
+      <time datetime="2015-12-24T05:09:52.000Z" itemprop="datePublished">2015-12-24</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>引用资料：<a href="http://guides.codepath.com/android/Using-the-App-ToolBar#overview">Using the App ToolBar</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/24/android Toolbar使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/24/android Toolbar使用/" data-id="cirdiwfl400eyfkh1ycq3dr0j" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/24/android Toolbar使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material_Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Toolbar/">Toolbar</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android Snackbar&amp;Toast使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/23/android Snackbar&Toast使用/">android Snackbar&amp;Toast使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/23/android Snackbar&Toast使用/">
+      <time datetime="2015-12-23T15:46:59.000Z" itemprop="datePublished">2015-12-23</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://guides.codepath.com/android/Displaying-the-Snackbar">Displaying the Snackbar</a><br><a href="https://guides.codepath.com/android/Displaying-Toasts">Displaying Toasts</a><br><code>Snackbar</code>的设计来源于<code>Toasts</code>。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/23/android Snackbar&Toast使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/23/android Snackbar&Toast使用/" data-id="cirdiwflk00fkfkh1xfqkjwnq" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/23/android Snackbar&Toast使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material_Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snackbar/">Snackbar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Toast/">Toast</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 经验总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/21/android 经验总结/">android 经验总结</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/21/android 经验总结/">
+      <time datetime="2015-12-21T13:50:24.000Z" itemprop="datePublished">2015-12-21</time>
     </a>
   </div>
 
@@ -830,20 +435,61 @@
       
                 
         <a id="more"></a>
-<p><a href="http://smallwoniu.blog.51cto.com/3911954/1248643" target="_blank" rel="external">【移动开发】Android应用程序完全退出</a>,这篇记录了多种退出的方式。<br>这里记录下，完美退出的方法：<br>使用<code>Application</code>这个单例并用<code>LinkedList</code>来存储每一个<code>activity</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">//对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList实现了基于动态数组的数据结构，要移动数据。LinkedList基于链表的数据结构,便于增加删除 </span></span><br><span class="line">     <span class="keyword">private</span> List&lt;Activity&gt; activityList = <span class="keyword">new</span> LinkedList&lt;Activity&gt;();</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> MyApplication instance;</span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">MyApplication</span><span class="params">()</span></span>&#123; &#125;</span><br><span class="line"> <span class="comment">//单例模式中获取唯一的MyApplication实例</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyApplication <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">        instance = <span class="keyword">new</span> MyApplication();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> instance;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//添加Activity到容器中</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addActivity</span><span class="params">(Activity activity)</span>  </span>&#123;</span><br><span class="line">    activityList.add(activity);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//遍历所有Activity并finish</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">for</span>(Activity activity:activityList) &#123;</span><br><span class="line">      activity.finish();</span><br><span class="line"> &#125;</span><br><span class="line"> System.exit(<span class="number">0</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在每个<code>Activity</code>的<code>onCreate()</code>方法里进行添加。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication.getInstance().addActivity(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure></p>
-<p>当退出应用程序的时候：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication.getInstance().exit();</span><br></pre></td></tr></table></figure></p>
+<h3 id="注入框架：ButterKnife">注入框架：ButterKnife</h3><p>介绍地址：<a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">ButterKnife</a><br>项目地址只需要在<code>Github</code>中进行搜索即可：<a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external">butterknife</a></p>
+<h3 id="没有得到预期的数据进行debug">没有得到预期的数据进行debug</h3><ol>
+<li>使用<code>Log.e();</code></li>
+<li>注意<code>Log</code>是否异常。</li>
+<li>加上<code>try-catch</code>检测是否其他异常，但不会出现<strong>强制关闭</strong>的情况。</li>
+</ol>
+<h3 id="常用的工具类：">常用的工具类：</h3><p><strong><a href="https://github.com/jingle1267/android-utils" target="_blank" rel="external">android-utils</a></strong></p>
+<h4 id="android自带的工具类：">android自带的工具类：</h4><ul>
+<li><code>TextUtils.isEmpty()</code>检测<code>null和length==0</code>的情况</li>
+</ul>
+<h3 id="开发工具">开发工具</h3><ul>
+<li>谷歌插件，自定义服务器的数据：<a href="http://www.cnblogs.com/jifeng/p/4429123.html" target="_blank" rel="external">Rest Client(Rest接口调试工具，有保存功配置功能) chrome浏览器插件</a></li>
+</ul>
+<h3 id="开发常见问题">开发常见问题</h3><ul>
+<li><a href="https://github.com/android-cn/android-discuss/issues/123#issuecomment-185844157" target="_blank" rel="external">在用户离开（按Home键）应用界面一段较长的时间后，之后再回到应用，很容易出现崩溃的现象。大部分情况都是应用被系统回收了内存，当然现场保护是一种手段。另外顺带提个问题，当应用的内存被回收后，Application类里面的变量是否也会别回收？</a></li>
+<li><a href="https://github.com/android-cn/android-discuss/issues/370" target="_blank" rel="external">AS编译运行一次需要三到四分钟，求教如何去分析和优化这个时间</a><blockquote>
+<p>将这个module打包成aar或者jar，这样处理之后你的编译会很快</p>
+</blockquote>
+</li>
+<li><a href="https://github.com/android-cn/android-discuss/issues/65" target="_blank" rel="external"># 声明ViewHolder内部类时，为什么建议使用static关键字#65</a><blockquote>
+<p><strong>考静态内部类和非静态内部类的主要区别之一</strong>。非静态内部类会隐式持有外部类的引用，就像大家经常将自定义的adapter在Activity类里，然后在adapter类里面是可以随意调用外部activity的方法的。当你将内部类定义为static时，你就调用不了外部类的实例方法了，<strong>因为这时候静态内部类是不持有外部类的引用的</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：如果不这么使用，会导致<strong>内存泄露的问题</strong></p>
+<ul>
+<li><a href="https://github.com/android-cn/android-discuss/issues/254" target="_blank" rel="external"># android 项目里面的性能优化（线程池，数据库等）你们是怎么进行优化的，大家可否分享下自己的经验？ #254</a></li>
+<li><a href="https://github.com/android-cn/android-discuss/issues/49" target="_blank" rel="external"># [问答] Android应用中，如何保证服务常驻内存？</a></li>
+<li><a href="http://blog.csdn.net/u011974987/article/details/49887027" target="_blank" rel="external">Android虚拟按键 Recent键屏蔽（隐藏）</a></li>
+</ul>
+<ul>
+<li><p><a href="https://github.com/android-cn/android-discuss/issues/398" target="_blank" rel="external">【问答】怎么获取android手机里所有的视频文件</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/7814017/is-it-possible-to-disable-scrolling-on-a-viewpager" target="_blank" rel="external">Is it possible to disable scrolling on a ViewPager</a>，解决源码中无法控制滑动的功能。</p>
+</li>
+<li><a href="https://github.com/android-cn/android-discuss/issues/219" target="_blank" rel="external"># [分享]关于知乎上出现的Android开发中，有哪些让你觉得相见恨晚的方法、类或接口？感觉很不错，大家在这里总结下吧！</a></li>
+<li><p><a href="https://medium.com/@duhroach/reducing-png-file-size-8473480d0476#.lhaki371b" target="_blank" rel="external">Reducing PNG file Size</a></p>
+</li>
+<li><p><a href="http://mp.weixin.qq.com/s?__biz=MzA3MDMyMjkzNg==&amp;mid=2652261648&amp;idx=1&amp;sn=3ebc40011e0af36436c1a4f2997565f5&amp;scene=23&amp;srcid=042416SxVRP8AzETQnJUqgJ4#rd" target="_blank" rel="external">Android开发中，那些让你相见恨晚的方法、类或接口</a></p>
+</li>
+<li><p><a href="https://github.com/android-cn/android-discuss/issues/264" target="_blank" rel="external">浮动窗口如何显示在输入法界面之下，所有应用界面之上。</a></p>
+</li>
+<li><p><a href="https://github.com/android-cn/android-discuss/issues/394" target="_blank" rel="external">[问答]如何屏蔽recent键</a></p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/11/10/android 使用ssl通信实践/" data-id="cikmr5jg5002qm8js1a79g2iz" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/21/android 经验总结/" data-id="cirdiwffp00affkh1s32406et" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/11/10/android 使用ssl通信实践/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/21/android 经验总结/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android开发/">Android开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/butterknife/">butterknife</a></li></ul>
 
     </footer>
   </div>
@@ -853,7 +499,7 @@
 
 
     
-      <article id="post-android 内存泄漏" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android SwipeRefreshLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -862,7 +508,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/10/android 内存泄漏/">android 内存泄漏</a>
+      <a class="article-title" href="/2015/12/21/android SwipeRefreshLayout使用/">android SwipeRefreshLayout使用</a>
     </h1>
   
 
@@ -870,8 +516,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/11/10/android 内存泄漏/">
-      <time datetime="2015-11-10T00:48:19.000Z" itemprop="datePublished">2015-11-10</time>
+    <a href="/2015/12/21/android SwipeRefreshLayout使用/">
+      <time datetime="2015-12-21T13:40:01.000Z" itemprop="datePublished">2015-12-21</time>
     </a>
   </div>
 
@@ -887,21 +533,254 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么叫内存泄漏呢？">什么叫内存泄漏呢？</h3><p><strong>gc没有办法回收activity的内存</strong>。<br>
+        <p><a href="https://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide#recyclerview-with-swiperefreshlayout">Implementing Pull to Refresh Guide</a><br>
         
           <p class="article-more-link">
-            <a href="/2015/11/10/android 内存泄漏/#more">Read More</a>
+            <a href="/2015/12/21/android SwipeRefreshLayout使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/11/10/android 内存泄漏/" data-id="cikmr5jg0002nm8jspn124uds" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/21/android SwipeRefreshLayout使用/" data-id="cirdiwflb00f8fkh1efcb47z2" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/11/10/android 内存泄漏/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/21/android SwipeRefreshLayout使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android RecyclerView使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/17/android RecyclerView使用/">android RecyclerView使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/17/android RecyclerView使用/">
+      <time datetime="2015-12-17T03:38:23.000Z" itemprop="datePublished">2015-12-17</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://guides.codepath.com/android/Using-the-RecyclerView#compared-to-listview"># Using the RecyclerView</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/17/android RecyclerView使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/" data-id="cirdiwflw00fyfkh123aydjm0" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/17/android RecyclerView使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RecyclerView/">RecyclerView</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android FloatingActionButton使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/17/android FloatingActionButton使用/">android FloatingActionButton使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/17/android FloatingActionButton使用/">
+      <time datetime="2015-12-17T03:25:57.000Z" itemprop="datePublished">2015-12-17</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Google made available during Google I/O 2015 a support library to create floating action buttons library. In the past, third-party libraries such as <a href="https://github.com/makovkastar/FloatingActionButton">makovkastar/FloatingActionButton</a> and <a href="https://github.com/futuresimple/android-floating-action-button">futuresimple/android-floating-action-button</a> had to be used.<br>即：在发布会上继承上面两个<code>github</code>地址效果的浮动按钮。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/17/android FloatingActionButton使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/17/android FloatingActionButton使用/" data-id="cirdiwfms00gwfkh1y03cjl4o" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/17/android FloatingActionButton使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FloatingActionButton/">FloatingActionButton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Deisign/">Material_Deisign</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-java IO篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/15/java IO篇/">java IO篇</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/15/java IO篇/">
+      <time datetime="2015-12-15T05:11:53.000Z" itemprop="datePublished">2015-12-15</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.zhihu.com/question/29351698">java中为什么BufferedReader，BufferedWriter 要比 FileReader 和 FileWriter高效？</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/15/java IO篇/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/15/java IO篇/" data-id="cirdiwfbo006cfkh1tq1eeq4f" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/15/java IO篇/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/InputStream/">InputStream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android Http网络获取数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/14/android Http网络获取数据/">android PendingIntent使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/12/14/android Http网络获取数据/">
+      <time datetime="2015-12-14T05:32:54.000Z" itemprop="datePublished">2015-12-14</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 类似<code>Intent</code>。<code>PendingIntent</code> 更加倾向于在<strong>某个合适的时机去执行某个动作</strong>。所以，也可以把 <code>PendingIntent</code> 简单地理解为<strong>延迟执</strong>行的 <code>Intent</code>。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/14/android Http网络获取数据/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/12/14/android Http网络获取数据/" data-id="cirdiwfmo00grfkh17b0n4bng" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/12/14/android Http网络获取数据/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PendingIntent/">PendingIntent</a></li></ul>
 
     </footer>
   </div>
@@ -912,7 +791,7 @@
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -922,7 +801,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -931,7 +810,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -976,7 +855,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
     </div>
   </div>
 

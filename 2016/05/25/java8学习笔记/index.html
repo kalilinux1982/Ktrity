@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>java8学习笔记 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考：Java 8 Tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java8学习笔记">
+<meta property="og:url" content="http://hexo.trity.cc/2016/05/25/java8学习笔记/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="参考：Java 8 Tutorial">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java8学习笔记">
+<meta name="twitter:description" content="参考：Java 8 Tutorial">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        149
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        142
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-java8学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java8学习笔记
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/05/25/java8学习笔记/">
+      <time datetime="2016-05-25T13:42:06.000Z" itemprop="datePublished">2016-05-25</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>参考：<a href="http://winterbe.com/posts/2014/03/16/java-8-tutorial/" target="_blank" rel="external">Java 8 Tutorial</a><br><a id="more"></a></p>
+<blockquote>
+<ul>
+<li>how to use default interface methods, lambda expressions, method references and repeatable annotations.</li>
+<li>most recent API changes like streams, functional interfaces, map extensions and the new Date API.</li>
+</ul>
+</blockquote>
+<h3 id="Interfaces">Interfaces</h3><blockquote>
+<p>提供<code>default</code>来扩展接口的方法，不再仅仅可以使用<code>abstract method</code>的形式。</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Formula formula = <span class="keyword">new</span> Formula() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sqrt(a * <span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">formula.calculate(<span class="number">100</span>);     <span class="comment">// 100.0</span></span><br><span class="line">formula.sqrt(<span class="number">16</span>);           <span class="comment">// 4.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="Lambda表达式">Lambda表达式</h3><p>查看一下代码的演变：</p>
+<p>正常的写法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = Arrays.asList(<span class="string">"peter"</span>, <span class="string">"anna"</span>, <span class="string">"mike"</span>, <span class="string">"xenia"</span>);</span><br><span class="line"></span><br><span class="line">Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>Lambda方式的写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 演变一</span><br><span class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">&#125;);</span><br><span class="line"># 演变二</span><br><span class="line">Collections.sort(names, (String a, String b) -&gt; b.compareTo(a));</span><br><span class="line"># 演变二</span><br><span class="line">Collections.sort(names, (a, b) -&gt; b.compareTo(a));</span><br></pre></td></tr></table></figure>
+<h2 id="@FunctionalInterface注解">@FunctionalInterface注解</h2><blockquote>
+<p> exactly one abstract method declaration。<br> 必须有且一个抽象方法。方便lambda表达式进行匹配。</p>
+</blockquote>
+<p>如一下的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Converter</span>&lt;<span class="title">F</span>, <span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">Converter&lt;String, Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">"123"</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<h3 id="Method_and_Constructor_References">Method and Constructor References</h3><blockquote>
+<p>pass references of methods or constructors via the <code>::</code> keyword<br>即：使用<code>::</code>来代替<strong>方法和构造函数</strong>的声明。</p>
+</blockquote>
+<ul>
+<li>静态方法的使用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Converter&lt;String, Integer&gt; converter = Integer::valueOf;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>普通的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">startsWith</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Something something = <span class="keyword">new</span> Something();</span><br><span class="line">Converter&lt;String, String&gt; converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(<span class="string">"Java"</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// "J"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>代替构造函数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String firstName;</span><br><span class="line">    String lastName;</span><br><span class="line">    Person(String firstName, String lastName) &#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">        <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">"Peter"</span>, <span class="string">"Parker"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Accessing_Default_Interface_Methods">Accessing Default Interface Methods</h3><blockquote>
+<p>Default methods cannot be accessed from within lambda expressions<br>即：interface声明的default方法并不能使用lambda表达式</p>
+</blockquote>
+<p>下面并不能通过编译：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Formula formula = (a) -&gt; sqrt( a * <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="stream">stream</h3><blockquote>
+<p>感觉跟<code>rxjava</code>一样，找到影子啊。同样使用流式的方式和思想</p>
+</blockquote>
+<p>介绍：</p>
+<blockquote>
+<p>A <code>java.util.Stream</code> represents a sequence of elements on which one or more operations can be performed. Stream operations are either intermediate or terminal. </p>
+</blockquote>
+<p>对<code>java.util.Collection</code>进行扩展，提供了对应的获取<code>stream</code>的操作：</p>
+<blockquote>
+<p>Collection.stream() or Collection.parallelStream()</p>
+</blockquote>
+<p>下面用到的集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; stringCollection = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">stringCollection.add(<span class="string">"ddd2"</span>);</span><br></pre></td></tr></table></figure>
+<p>下面是对应操作符的介绍：</p>
+<h4 id="Filter_过滤操作">Filter 过滤操作</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stringCollection</span><br><span class="line">    .stream()</span><br><span class="line">    .filter((s) -&gt; s.startsWith(<span class="string">"a"</span>))</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">// "aaa2", "aaa1"</span></span><br></pre></td></tr></table></figure>
+<p>当中的<code>forEach</code>将一个个数据输出，学过<code>rxjava</code>的人肯定很熟悉这个<code>filter</code>的操作符,感觉一模一样啊。</p>
+<h4 id="Sorted_排序">Sorted 排序</h4><blockquote>
+<p>默认升序排序，当然可以自定义使用<code>Comparator</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stringCollection</span><br><span class="line">    .stream()</span><br><span class="line">    .sorted()</span><br><span class="line">    .filter((s) -&gt; s.startsWith(<span class="string">"a"</span>))</span><br><span class="line">    .forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<h4 id="Map_转换操作符">Map 转换操作符</h4><p>用理解<code>rxjava</code>来理解就好。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">stringCollection</span><br><span class="line">    .stream()</span><br><span class="line">    .map(String::toUpperCase)</span><br><span class="line">    .sorted((a, b) -&gt; b.compareTo(a))</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">// "DDD2", "DDD1", "CCC", "BBB3", "BBB2", "AAA2", "AAA1"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Match_匹配">Match 匹配</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> anyStartsWithA =</span><br><span class="line">    stringCollection</span><br><span class="line">        .stream()</span><br><span class="line">        .anyMatch((s) -&gt; s.startsWith(<span class="string">"a"</span>));</span><br><span class="line">System.out.println(anyStartsWithA);      <span class="comment">// true</span></span><br><span class="line"><span class="keyword">boolean</span> allStartsWithA =</span><br><span class="line">    stringCollection</span><br><span class="line">        .stream()</span><br><span class="line">        .allMatch((s) -&gt; s.startsWith(<span class="string">"a"</span>));</span><br><span class="line">System.out.println(allStartsWithA);      <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> noneStartsWithZ =</span><br><span class="line">    stringCollection</span><br><span class="line">        .stream()</span><br><span class="line">        .noneMatch((s) -&gt; s.startsWith(<span class="string">"z"</span>));</span><br><span class="line">System.out.println(noneStartsWithZ);      <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="Count_数量">Count 数量</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> startsWithB =</span><br><span class="line">    stringCollection</span><br><span class="line">        .stream()</span><br><span class="line">        .filter((s) -&gt; s.startsWith(<span class="string">"b"</span>))</span><br><span class="line">        .count();</span><br><span class="line">System.out.println(startsWithB);    <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<h4 id="Reduce_更改格式">Reduce 更改格式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;String&gt; reduced =</span><br><span class="line">    stringCollection</span><br><span class="line">        .stream()</span><br><span class="line">        .sorted()</span><br><span class="line">        .reduce((s1, s2) -&gt; s1 + <span class="string">"#"</span> + s2);</span><br><span class="line">reduced.ifPresent(System.out::println);</span><br><span class="line"><span class="comment">// "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Parallel_Streams_平行流">Parallel Streams 平行流</h3><blockquote>
+<p>Operations on sequential streams are performed on a single thread while operations on parallel streams are performed concurrent on multiple threads.<br>即：跟<code>stream</code>的区别是：<strong><code>stream</code>为单线程,<code>Parallel Streams</code>为多线程</strong>.</p>
+</blockquote>
+<p>使用<code>Parallel Stream</code>可以提高效率。</p>
+<p>示例：<strong>排序<code>sort</code>耗时的比较</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">1000000</span>;</span><br><span class="line">List&lt;String&gt; values = <span class="keyword">new</span> ArrayList&lt;&gt;(max);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; max; i++) &#123;</span><br><span class="line">    UUID uuid = UUID.randomUUID();</span><br><span class="line">    values.add(uuid.toString());</span><br><span class="line">&#125;</span><br><span class="line"># sort 耗时对比</span><br><span class="line"><span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> count = values.stream().sorted().count();  <span class="comment">//Sequential sort</span></span><br><span class="line"><span class="comment">//long count = values.parallelStream().sorted().count(); //Parallel sort</span></span><br><span class="line">System.out.println(count);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);</span><br><span class="line">System.out.println(String.format(<span class="string">"sort took: %d ms"</span>, millis));</span><br><span class="line"></span><br><span class="line"># 两者的耗时：</span><br><span class="line"><span class="comment">// sequential sort took: 899 ms</span></span><br><span class="line"><span class="comment">// parallel sort took: 472 ms</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>parallel sort</code>快了将近<code>50%</code>.</p>
+<h3 id="Map集合扩展">Map集合扩展</h3><blockquote>
+<p>As already mentioned maps don’t support streams. Instead maps now support various new and useful methods for doing common tasks.<br>由于map不支持stream，使用下面方法来做相同的事情</p>
+</blockquote>
+<h4 id="方法：">方法：</h4><ul>
+<li>putIfAbsent 如果为<code>null</code>，将不被写入</li>
+<li>forEach 对<code>map</code>集合每个元素的值进行操作。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    map.putIfAbsent(i, <span class="string">"val"</span> + i);</span><br><span class="line">&#125;</span><br><span class="line">map.forEach((id, val) -&gt; System.out.println(val));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>remove (暂时这个不是很理解)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map.remove(<span class="number">3</span>, <span class="string">"val3"</span>);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></span><br><span class="line"></span><br><span class="line">map.remove(<span class="number">3</span>, <span class="string">"val33"</span>);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>getOrDefault 取不到的时候返回默认的值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.getOrDefault(<span class="number">42</span>, <span class="string">"not found"</span>);  <span class="comment">// not found</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Merge 合并：<ul>
+<li>一种是存在key但没有对应的value时，</li>
+<li>另一种是存在key-value，通过第三个参数方法进行对value进行连接合并操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map.merge(<span class="number">9</span>, <span class="string">"val9"</span>, (value, newValue) -&gt; value.concat(newValue));</span><br><span class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9</span></span><br><span class="line"></span><br><span class="line">map.merge(<span class="number">9</span>, <span class="string">"concat"</span>, (value, newValue) -&gt; value.concat(newValue));</span><br><span class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9concat</span></span><br></pre></td></tr></table></figure>
+<h3 id="Date_API">Date API</h3><p>介绍看原文吧。</p>
+<h3 id="Annotations">Annotations</h3><blockquote>
+<p><code>@Repeatable</code>注解的介绍，没明白是来干什么的。</p>
+</blockquote>
+<h3 id="最后：">最后：</h3><p>对应的代码实例：<a href="https://github.com/winterbe/java8-tutorial" target="_blank" rel="external">java8-tutorial</a></p>
+<p>深入扩展：<br><a href="http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/" target="_blank" rel="external">Java 8 Stream Tutorial</a><br><a href="http://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/" target="_blank" rel="external">Java 8 Nashorn Tutorial</a><br><a href="http://winterbe.com/posts/2014/03/29/jdk8-api-explorer/" target="_blank" rel="external">Explore the JDK 8 API</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/05/25/java8学习笔记/" data-id="cirdiwf8r003tfkh1xiomb1ug" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/05/25/java8学习笔记/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/31/关于view的visible和gone动画的坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于view的visible和gone动画的坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/25/属性动画学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">属性动画学习笔记</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/05/25/java8学习笔记/" data-title="java8学习笔记" data-url="http://hexo.trity.cc/2016/05/25/java8学习笔记/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

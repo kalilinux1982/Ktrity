@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        131
+        149
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        144
+        142
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-Android 逆向编程-Dalvik字节码学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 知识补漏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/">Android 逆向编程-Dalvik字节码学习</a>
+      <a class="article-title" href="/2015/08/18/android 知识补漏/">android 知识补漏</a>
     </h1>
   
 
@@ -134,38 +134,96 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/">
-      <time datetime="2015-07-20T16:03:40.000Z" itemprop="datePublished">2015-07-21</time>
+    <a href="/2015/08/18/android 知识补漏/">
+      <time datetime="2015-08-18T02:05:54.000Z" itemprop="datePublished">2015-08-18</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Dalvik字节码学习，从而看得到反编译后的未能转换为<code>java</code>文件的代码。了解整个<code>apk</code>的形成过程。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/07/21/Android 逆向编程-Dalvik字节码学习/#more">Read More</a>
-          </p>
-        
+                
+        <a id="more"></a>
+<h3 id="对NDK的理解">对NDK的理解</h3><p><a href="http://weizhulin.blog.51cto.com/1556324/311489" target="_blank" rel="external">Android面试之—-谈谈你对Android NDK的理解</a></p>
+<h3 id="android_assets的理解">android assets的理解</h3><blockquote>
+<p><code>assets</code>:<strong>用于存放需要打包到应用程序的静态文件，以便部署到设备中</strong>。与res/raw不同点在于，<strong>ASSETS支持任意深度的子目录</strong>。这些文件<strong>不会生成任何资源ID，必须使用/assets开始（不包含它）的相对路径名</strong>。</p>
+</blockquote>
+<p>总结为几点：</p>
+<ul>
+<li>不会被编译成二进制形式</li>
+<li>访问方式是通过文件名，而不是资源ID</li>
+<li>任意的建立子目录</li>
+</ul>
+<p><strong>进行使用</strong>：（使用<code>open</code>进行打开,返回<code>InputStream</code>）</p>
+<blockquote>
+<p>InputStream is =  paramActivity.getResources().getAssets().open(fileName);</p>
+</blockquote>
+<h3 id="android_res/raw">android res/raw</h3><blockquote>
+<p>:存放通用的文件， 该文件夹内的文件将<strong>不会被编译成二进制文件</strong>，按原样复制到设备上。</p>
+</blockquote>
+<p>总结几点：</p>
+<ul>
+<li>不会被编译成二进制文件</li>
+<li>通过资源ID进行访问：<code>R.raw.test</code></li>
+</ul>
+<h3 id="android线程回收问题">android线程回收问题</h3><p>参考：<a href="http://www.iteye.com/problems/67052" target="_blank" rel="external">一个关于Android程序退出后，线程停止的问题</a>，并没有一个很明确的答案。从中可以知道使用<code>Finnish（）</code>并不能让<strong>线程回收</strong>，还需要进行手动的回收。<br>如：在<code>while(true)</code>中设置为<code>false</code>。<br>对线程管理得不好，将带来<strong>内存泄露的风险</strong>。参考如下：<a href="http://www.codeceo.com/article/activitys-threads-memory.html" title="Android中的Activitys, Threads和内存泄露 - 码农网" target="_blank" rel="external">Android中的Activitys, Threads和内存泄露</a>，进行解决</p>
+<h3 id="android中ContentValue与Hashtable和HashMap的区别">android中<code>ContentValue</code>与<code>Hashtable</code>和<code>HashMap</code>的区别</h3><blockquote>
+<p>ContentValues <strong>和HashTable类似都是一种存储的机制</strong>.<br>两者最大的区别：<br><code>contenvalues</code>的<code>Key</code>只能是<code>String</code>类型，<code>values</code>只能存储<strong>基本类型的数据</strong>，像string，int之类的，不能存储对象这种东西。</p>
+</blockquote>
+<h3 id="android中的动画有哪几类，它们的特点和区别是什么">android中的动画有哪几类，它们的特点和区别是什么</h3><blockquote>
+<p>两种，一种是<code>Tween</code>动画、还有一种是<code>Frame</code>动画。Tween动画，这种实现方式可以<strong>使视图组件移动、放大、缩小以及产生透明度的变化</strong>;另一种Frame动画，传统的动画方法，<strong>通过顺序的播放排列好的图片来实现</strong>，类似电影。</p>
+</blockquote>
+<h3 id="android解析XML的几种方式">android解析XML的几种方式</h3><ol>
+<li>使用<code>DOM</code>的方式：<blockquote>
+<p><strong>将XML文档解析成树状模型并将其放入内存</strong>来完成解析工作的.<br><strong>好处</strong>：结构清除、操作方便。但耗费系统资源</p>
+</blockquote>
+</li>
+<li>使用<code>SAX</code>的方式：<blockquote>
+<p>采用的是事件驱动，也就是说，它并<code>不需要解析完整个文档</code>，<strong>在按内容顺序解析文档的过程中，SAX会判断当前读到的字符是否合法XML语法中的某部分，如果符合就会触发事件</strong>。所谓事件，其实就是一些回调（callback）方法，这些方法(事件)定义在ContentHandler接口。</p>
+</blockquote>
+</li>
+<li>使用<code>PULL</code>的方式：(Android提供了支持，不需要第三方的包)<blockquote>
+<p>允许你的应用程序代码<strong>主动</strong>从解析器中获取事件，正因为是<strong>主动获取事件</strong>，因此可以在<strong>满足了需要的条件后不再获取事件，结束解析</strong>.即：可以控制想解析到哪里就可以停止解析。<br>而<code>SAX</code>并<strong>不能控制事件的处理主动结束</strong>。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Serializable和Parcelable区别">Serializable和Parcelable区别</h3><ul>
+<li>内存间数据传输时推荐使用Parcelable，如activity间传输数据</li>
+<li>Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable</li>
+</ul>
+<h3 id="SystemClock-sleep()_vs-_Thread-sleep()_while_waiting_for_a_semaphore_loop"><a href="http://stackoverflow.com/questions/5837910/systemclock-sleep-vs-thread-sleep-while-waiting-for-a-semaphore-loop" target="_blank" rel="external">SystemClock.sleep() vs. Thread.sleep() while waiting for a semaphore loop</a></h3><p>即：<code>SystemClock.sleep()</code>封装了<code>Thread.sleep()</code>，进行<code>try-catch</code>来捕获异常。可以看源码</p>
+<p><code>SystemClock</code>与<code>System</code>所涉及方法对比<br><a href="http://www.tuicool.com/articles/UbAbu2" target="_blank" rel="external">Android中的时间：currentTimeMillis，uptimeMillis，elapsedRealtime</a><br><a href="http://www.xuebuyuan.com/1554125.html" target="_blank" rel="external">Android.os.SystemClock</a></p>
+<blockquote>
+<p><code>currentTimeMillis</code> 可以被设置。是距离1970年1月1号有多长时间.<strong>计算深度睡眠时间</strong><br><code>uptimeMillis，elapsedRealtime</code> 从操作系统被引导后开始计算的,不计算深度睡眠时间（关机）。<br><code>elapsedRealtime</code> 包括<strong>手机睡眠时间</strong><br><code>uptimeMillis</code> 不包括<strong>手机睡眠时间</strong></p>
+</blockquote>
+<p>计算查看<code>currentTimeMillis</code>的文档：当下列情况下，不被建议而是使用<code>nanoTime</code>代替</p>
+<blockquote>
+<p>This method shouldn’t be used for measuring timeouts（超时） or other elapsed（运行） time measurements, as changing the system time can affect the results. Use {@link #nanoTime} for that.</p>
+</blockquote>
+<h3 id="ProgressDialog使用"><code>ProgressDialog</code>使用</h3><p>注意：<code>setCancelable</code>方法，当参数为<code>false</code>的时候，是不能通过<code>Back</code>键进行取消的。</p>
+<h3 id="Nine-Patch_即-9-png图片制作"><code>Nine-Patch</code> 即<code>.9.png</code>图片制作</h3><ul>
+<li>在<code>Android sdk</code>目录下有一个<code>tools</code>文件夹，在这个文件夹中找到 <code>draw9patch.bat</code> 文件</li>
+<li><code>File→Open 9-patch</code>将 <code>message_left.png</code>加载进来</li>
+<li>接下来是画黑点：<ul>
+<li>在<strong>上边框和左边框</strong>绘制的部分就表示当图片<strong>需要拉伸时就拉伸黑点标记的区域</strong></li>
+<li>在<strong>下边框和右边框</strong>绘制的部分则<strong>表示内容会被放置的区域</strong>。</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/" data-id="cikmr5j8s0000m8js2s4ssjrl" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/18/android 知识补漏/" data-id="cirdiwfgd00b0fkh1f2o3iv8c" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/07/21/Android 逆向编程-Dalvik字节码学习/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/18/android 知识补漏/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dalvik/">Dalvik</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 
     </footer>
   </div>
@@ -175,7 +233,7 @@
 
 
     
-      <article id="post-C++_sizeof" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-java 知识补漏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -184,7 +242,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/13/C++_sizeof/">C/C++ sizeof用法</a>
+      <a class="article-title" href="/2015/08/14/java 知识补漏/">java 知识补漏</a>
     </h1>
   
 
@@ -192,38 +250,33 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/07/13/C++_sizeof/">
-      <time datetime="2015-07-13T04:01:16.000Z" itemprop="datePublished">2015-07-13</time>
+    <a href="/2015/08/14/java 知识补漏/">
+      <time datetime="2015-08-14T08:20:42.000Z" itemprop="datePublished">2015-08-14</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/其他编程语言/">其他编程语言</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="SIZEOF用法">SIZEOF用法</h3><p>计算数据（包括数组、变量、类型、结构体等）<strong>所占内存空间，用字节数表示</strong>。
+        <p>记录java遗漏的知识。<br>
         
           <p class="article-more-link">
-            <a href="/2015/07/13/C++_sizeof/#more">Read More</a>
+            <a href="/2015/08/14/java 知识补漏/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/13/C++_sizeof/" data-id="cikdwadlo00580ojsxidf9ur1" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/14/java 知识补漏/" data-id="cirdiwfa0004sfkh15elf7264" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/07/13/C++_sizeof/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/14/java 知识补漏/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sizeof/">sizeof</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -233,7 +286,7 @@
 
 
     
-      <article id="post-java 多线程-ForkJoin框架" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-java_网络编程_代理服务器_基础知识" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -242,7 +295,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/03/java 多线程-ForkJoin框架/">java 多线程--Fork/Join 框架</a>
+      <a class="article-title" href="/2015/08/12/java_网络编程_代理服务器_基础知识/">网络编程 代理服务器(一) 基础知识</a>
     </h1>
   
 
@@ -250,8 +303,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/07/03/java 多线程-ForkJoin框架/">
-      <time datetime="2015-07-03T06:10:16.000Z" itemprop="datePublished">2015-07-03</time>
+    <a href="/2015/08/12/java_网络编程_代理服务器_基础知识/">
+      <time datetime="2015-08-12T02:48:16.000Z" itemprop="datePublished">2015-08-12</time>
     </a>
   </div>
 
@@ -259,7 +312,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/计算机网络-系统/">计算机网络&系统</a>
   </div>
 
         </div>
@@ -267,21 +320,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过这篇<a href="http://it.deepinmind.com/%E5%B9%B6%E5%8F%91/2015/01/22/forkjoin-framework-vs-parallel-streams-vs-executorservice-the-ultimate-benchmark.html">Java中不同的并发实现的性能比较</a>，可以知道<code>Fork/Join</code>框架的性能不错，所以特意进行学习。
+        <h3 id="什么是代理服务器？">什么是代理服务器？</h3><blockquote>
+<p>代理服务器（Proxy Server）是网上提供转接功能的服务器，在一般情况下，我们使用网络浏览器<strong>直接去连接其他Internet站点取得网络信息</strong>时，是直接联系到目的站点服务器，然后由目的站点服务器把信息传送回来。<strong>代理服务器是介于客户端和Web服务器之间的另一台服务器</strong>，有了它之后，<strong>浏览器不是直接到Web服务器去取回网页而是向代理服务器发出请求</strong>，信号会先送到代理服务器，由代理服务器来取回浏览器所需要的信息并传送给你的浏览器。<br>
         
           <p class="article-more-link">
-            <a href="/2015/07/03/java 多线程-ForkJoin框架/#more">Read More</a>
+            <a href="/2015/08/12/java_网络编程_代理服务器_基础知识/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/07/03/java 多线程-ForkJoin框架/" data-id="cikdwadhv001r0ojs12vcyaom" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/12/java_网络编程_代理服务器_基础知识/" data-id="cirdiwf8g003mfkh1aevmcotp" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/07/03/java 多线程-ForkJoin框架/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/12/java_网络编程_代理服务器_基础知识/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fork/">Fork</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Join/">Join</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SOCKS/">SOCKS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShadowSocks/">ShadowSocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -291,7 +345,7 @@
 
 
     
-      <article id="post-java-Thread–Callable和Future" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-网络编程_代理服务器_基础知识" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -300,7 +354,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/28/java-Thread–Callable和Future/">java 多线程 Callable和Future</a>
+      <a class="article-title" href="/2015/08/12/网络编程_代理服务器_基础知识/">网络编程 代理服务器(一) 基础知识</a>
     </h1>
   
 
@@ -308,8 +362,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/06/28/java-Thread–Callable和Future/">
-      <time datetime="2015-06-28T05:41:16.000Z" itemprop="datePublished">2015-06-28</time>
+    <a href="/2015/08/12/网络编程_代理服务器_基础知识/">
+      <time datetime="2015-08-12T02:48:16.000Z" itemprop="datePublished">2015-08-12</time>
     </a>
   </div>
 
@@ -317,7 +371,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/计算机网络-系统/">计算机网络&系统</a>
   </div>
 
         </div>
@@ -325,21 +379,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="使用Callable和Future创建线程">使用<code>Callable</code>和<code>Future</code>创建线程</h3><p><code>Callable</code>接口 提供了一个<code>call()</code>方法作为线程执行体，<code>call</code>方法比<code>run</code>方法强大，因为：<strong>有返回值，并且可以返回异常</strong>，但是，返回值并<strong>不能直接调用</strong>。
+        <h3 id="什么是代理服务器？">什么是代理服务器？</h3><blockquote>
+<p>代理服务器（Proxy Server）是网上提供转接功能的服务器，在一般情况下，我们使用网络浏览器<strong>直接去连接其他Internet站点取得网络信息</strong>时，是直接联系到目的站点服务器，然后由目的站点服务器把信息传送回来。<strong>代理服务器是介于客户端和Web服务器之间的另一台服务器</strong>，有了它之后，<strong>浏览器不是直接到Web服务器去取回网页而是向代理服务器发出请求</strong>，信号会先送到代理服务器，由代理服务器来取回浏览器所需要的信息并传送给你的浏览器。<br>
         
           <p class="article-more-link">
-            <a href="/2015/06/28/java-Thread–Callable和Future/#more">Read More</a>
+            <a href="/2015/08/12/网络编程_代理服务器_基础知识/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/" data-id="cikdwadh200100ojsdq6ejqs5" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/12/网络编程_代理服务器_基础知识/" data-id="cirdiwf4f000sfkh1u4xght0d" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/06/28/java-Thread–Callable和Future/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/12/网络编程_代理服务器_基础知识/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Executor/">Executor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Future/">Future</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SOCKS/">SOCKS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShadowSocks/">ShadowSocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -349,7 +404,7 @@
 
 
     
-      <article id="post-多臂匪徒问题 UCB策略" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android_intent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -358,7 +413,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/28/多臂匪徒问题 UCB策略/">多臂匪徒问题 UCB策略</a>
+      <a class="article-title" href="/2015/08/10/android_intent/">android_intent</a>
     </h1>
   
 
@@ -366,38 +421,94 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/06/28/多臂匪徒问题 UCB策略/">
-      <time datetime="2015-06-28T02:26:16.000Z" itemprop="datePublished">2015-06-28</time>
+    <a href="/2015/08/10/android_intent/">
+      <time datetime="2015-08-10T08:02:23.000Z" itemprop="datePublished">2015-08-10</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/不围棋/">不围棋</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天是第三天了。今天才发现一个<code>bug</code>，就是判断胜负后，弹出的<code>bug</code>。原来，我并不能打败师兄最渣的版本。伤心…..
-        
-          <p class="article-more-link">
-            <a href="/2015/06/28/多臂匪徒问题 UCB策略/#more">Read More</a>
-          </p>
-        
+                
+        <a id="more"></a>
+<h3 id="显式intent和隐式intent">显式intent和隐式intent</h3><h4 id="隐式Intent:">隐式<code>Intent</code>:</h4><p>在<code>AndroidManifest.xml</code>中添加如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">activity</span> <span class="attribute">android:name</span>=<span class="value">".SecondActivity"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.ACTION_START"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">activity</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>只有<code>&lt;action&gt;</code>和<code>&lt;category&gt;</code>中的内容<strong>同时能够匹配</strong>上 <code>Intent</code> 中指定的 <code>action</code> 和 <code>category</code> 时，这个活动才能响应该 <code>Intent</code>。上面代码<code>android.intent.category.DEFAULT</code>是<code>category</code>的默认值，可以不显示调用,如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>每个 <code>Intent</code> 中只能指定一个 <code>action</code>，但却能指定多个 <code>category</code></strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">intent.addCategory(<span class="string">"com.example.activitytest.MY_CATEGORY"</span>);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>对应的xml：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.ACTION_START"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.MY_CATEGORY"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>那么会有疑问，为何用得如此复杂，直接显示调用就可以啦，干嘛还弄多一个<strong>隐式的</strong>。<br>关键在于：<strong>使用隐式 <code>Intent</code>，我们不仅可以启动自己程序内的活动，还可以启动其他程序的活动</strong>。例如：打开浏览器，打电话等。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"http://www.baidu.com"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>其中的方法<code>setData</code>：</p>
+<blockquote>
+<p>它接收一个 Uri 对象，主要用于指定当前 Intent 正在操作的数据，而<br>这些数据通常都是以字符串的形式传入到 Uri.parse()方法中解析产生的</p>
+</blockquote>
+<p>我们还可以在<code>&lt;intent-filter&gt;</code>标签中再配置一个<code>&lt;data&gt;</code>标签.以下是可配置的内容：</p>
+<ol>
+<li><code>android:scheme</code><br>用于指定数据的协议部分，如上例中的 http 部分。</li>
+<li><code>android:host</code><br>用于指定数据的主机名部分，如上例中的 <code>www.baidu.com</code> 部分。</li>
+<li><code>android:port</code><br>用于指定数据的端口部分，一般紧随在主机名之后。</li>
+<li><code>android:path</code><br>用于指定主机名和端口之后的部分，如一段网址中跟在域名之后的内容。</li>
+<li><code>android:mimeType</code><br>用于指定可以处理的数据类型，允许使用通配符的方式进行指定。</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>上面浏览器示例中，其实只<br>需要指定 <code>android:scheme</code> 为 <code>http</code>，就可以响应所有的 <code>http</code> 协议的 <code>Intent</code> 了</p>
+</blockquote>
+<h5 id="发送自定义广播（BroadcastReceiver进行接收）：">发送自定义广播（BroadcastReceiver进行接收）：</h5><p>无序&amp;有序<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent("com.example.broadcasttest.</span><br><span class="line">MY_BROADCAST");//此构造函数的值为action值</span><br><span class="line">sendBroadcast(intent);</span><br></pre></td></tr></table></figure></p>
+<h3 id="与Notification结合使用设置setFlags()">与<code>Notification</code>结合使用设置<code>setFlags()</code></h3><ul>
+<li><code>Intent.FLAG_ACTIVITY_CLEAR_TOP</code><blockquote>
+<p>如果在当前Task中，有要启动的Activity，那么把该Acitivity之前的所有Activity都关掉，并把此Activity置前以避免创建Activity的实例</p>
+</blockquote>
+</li>
+<li><code>.FLAG_ACTIVITY_NEW_TASK</code><blockquote>
+<p>系统会检查当前所有已创建的Task中是否有该要启动的Activity的Task，若有，则在该Task上创建Activity，若没有则新建具有该Activity属性的Task，并在该新建的Task上创建Activity</p>
+</blockquote>
+</li>
+<li><code>FLAG_ACTIVITY_NO_HISTORY</code> 不会压栈。<blockquote>
+<p>A B C。C通过intent跳转到D 界面显示D的内容，但是它并不会压入栈中。如果按返回键，返回到C，栈的情况还是：A B C。如果此时D中又跳转到E，栈的情况变为：A B C E，此时按返回键会回到C</p>
+</blockquote>
+</li>
+<li><code>FLAG_ACTIVITY_SINGLE_TOP</code>检测是否有<code>activity</code>，没有创建，有置为栈顶。</li>
+</ul>
+<p>参考：<a href="http://blog.csdn.net/jaycee110905/article/details/8686802" target="_blank" rel="external">Android中intent启动Activity中intent.setFlags()的作用</a></p>
+<h3 id="什么时候是用Bundle">什么时候是用<code>Bundle</code></h3><h3 id="如何传递对象">如何传递对象</h3><p>参考：<a href="http://android.jobbole.com/80941/" target="_blank" rel="external">Android系统中Parcelable和Serializable的区别</a></p>
+<p>继承<code>ParceLable</code>需要实现的步骤：</p>
+<ol>
+<li><code>implements ParceLable</code>操作</li>
+<li>现实对应的方法<code>describeContents() 和 writeToParcel()</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">    dest.writeString(weatherDetail);</span><br><span class="line">    dest.writeString(weatherTemp);</span><br><span class="line">    dest.writeString(airQuality);</span><br><span class="line">    dest.writeInt(airQualityImg);</span><br><span class="line">    dest.writeInt(weatherImage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一个返回<code>0</code>，第二个直接<code>write</code>对应的数据类型；</p>
+<ol>
+<li>单单实现这两个方法是不够，编译器会提示你实现<code>Create</code>方法。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Parcelable.Creator&lt;WeatherMsg&gt; CREATOR</span><br><span class="line">        =<span class="keyword">new</span> Parcelable.Creator&lt;WeatherMsg()&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeatherMsg <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WeatherMsg(source);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="keyword">public</span> WeatherMsg[] newArray(<span class="keyword">int</span> size) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WeatherMsg[size];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>即：创建对应的<strong>实例和实例数组</strong>。<br>当然还需要一个<strong>构造函数</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WeatherMsg(Parcel source)&#123;</span><br><span class="line"><span class="keyword">this</span>.weatherDetail=source.readString();</span><br><span class="line"><span class="keyword">this</span>.weatherTemp=source.readString();</span><br><span class="line"><span class="keyword">this</span>.airQuality=source.readString();</span><br><span class="line"><span class="keyword">this</span>.weatherImage=source.readInt();</span><br><span class="line"><span class="keyword">this</span>.airQualityImg=source.readInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应<code>read</code>进行读取对应的数据类型。<br><strong>注意</strong>：当中的<code>createFromParcel</code>方法要跟<code>构造函数：WeatherMsg(source){}</code>进行相对应，否将报以下错误：</p>
+<blockquote>
+<p>Parcelable protocol requires a Parcelable.Creator object called  CREATOR on</p>
+</blockquote>
+<p>另外一点：<br>我们不可以直接用<strong>构造函数<code>WeatherMsg（a,b,c,d）</code></strong>来实例化对象，否则会有不知名的<code>bug</code>，我的情况是<code>int会变成-1</code>，所以，要使用<strong>无参数的构造函数，再set方法进行赋值</strong></p>
+<p>最后一点：函数<code>writeToParcel（）</code>依次<code>write</code>的顺序和构造函数<code>WeatherMsg</code>元素赋值的顺序要一致。否则又有另外一个<code>bug</code>,数据总是不对。想想也是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># write</span><br><span class="line">dest.writeString(weatherDetail);</span><br><span class="line"># read</span><br><span class="line"><span class="keyword">this</span>.weatherDetail=source.readString();</span><br></pre></td></tr></table></figure></p>
+<p>通过代码可以看到两者间<code>write和read</code>并没有任何标志，只能靠顺序来维持。</p>
+<h3 id="常见错误：">常见错误：</h3><ul>
+<li><code>an Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?</code><br>解决方法：<a href="http://blog.csdn.net/debuglog/article/details/7249444" target="_blank" rel="external">Content的startActivity方法需添加FLAG_ACTIVITY_NEW_TASK flag</a><br>即使用：<code>intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</code></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/" data-id="cikdwadg8000t0ojs3m71o4b4" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/10/android_intent/" data-id="cirdiwfdc007yfkh1s54hh946" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/06/28/多臂匪徒问题 UCB策略/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/10/android_intent/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UCB策略/">UCB策略</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多臂匪徒问题/">多臂匪徒问题</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intent/">intent</a></li></ul>
 
     </footer>
   </div>
@@ -407,7 +518,7 @@
 
 
     
-      <article id="post-蒙特卡洛算法" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 插件_热修复_瘦身" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -416,7 +527,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/24/蒙特卡洛算法/">蒙特卡洛算法</a>
+      <a class="article-title" href="/2015/08/10/android 插件_热修复_瘦身/">android_intent</a>
     </h1>
   
 
@@ -424,38 +535,93 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/06/24/蒙特卡洛算法/">
-      <time datetime="2015-06-24T01:02:16.000Z" itemprop="datePublished">2015-06-24</time>
+    <a href="/2015/08/10/android 插件_热修复_瘦身/">
+      <time datetime="2015-08-10T08:02:23.000Z" itemprop="datePublished">2015-08-10</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/不围棋/">不围棋</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天是第一天，想到7月7号，就要进行校内的比赛的时候，就有淡淡的忧伤，快马加鞭，放下手头的所有工作，全部精力放在不围棋上面。
-        
-          <p class="article-more-link">
-            <a href="/2015/06/24/蒙特卡洛算法/#more">Read More</a>
-          </p>
-        
+                
+        <a id="more"></a>
+<h3 id="显式intent和隐式intent">显式intent和隐式intent</h3><h4 id="隐式Intent:">隐式<code>Intent</code>:</h4><p>在<code>AndroidManifest.xml</code>中添加如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">activity</span> <span class="attribute">android:name</span>=<span class="value">".SecondActivity"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.ACTION_START"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">activity</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>只有<code>&lt;action&gt;</code>和<code>&lt;category&gt;</code>中的内容<strong>同时能够匹配</strong>上 <code>Intent</code> 中指定的 <code>action</code> 和 <code>category</code> 时，这个活动才能响应该 <code>Intent</code>。上面代码<code>android.intent.category.DEFAULT</code>是<code>category</code>的默认值，可以不显示调用,如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>每个 <code>Intent</code> 中只能指定一个 <code>action</code>，但却能指定多个 <code>category</code></strong>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">intent.addCategory(<span class="string">"com.example.activitytest.MY_CATEGORY"</span>);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>对应的xml：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.ACTION_START"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">category</span> <span class="attribute">android:name</span>=<span class="value">"com.example.activitytest.MY_CATEGORY"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>那么会有疑问，为何用得如此复杂，直接显示调用就可以啦，干嘛还弄多一个<strong>隐式的</strong>。<br>关键在于：<strong>使用隐式 <code>Intent</code>，我们不仅可以启动自己程序内的活动，还可以启动其他程序的活动</strong>。例如：打开浏览器，打电话等。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"http://www.baidu.com"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>其中的方法<code>setData</code>：</p>
+<blockquote>
+<p>它接收一个 Uri 对象，主要用于指定当前 Intent 正在操作的数据，而<br>这些数据通常都是以字符串的形式传入到 Uri.parse()方法中解析产生的</p>
+</blockquote>
+<p>我们还可以在<code>&lt;intent-filter&gt;</code>标签中再配置一个<code>&lt;data&gt;</code>标签.以下是可配置的内容：</p>
+<ol>
+<li><code>android:scheme</code><br>用于指定数据的协议部分，如上例中的 http 部分。</li>
+<li><code>android:host</code><br>用于指定数据的主机名部分，如上例中的 <code>www.baidu.com</code> 部分。</li>
+<li><code>android:port</code><br>用于指定数据的端口部分，一般紧随在主机名之后。</li>
+<li><code>android:path</code><br>用于指定主机名和端口之后的部分，如一段网址中跟在域名之后的内容。</li>
+<li><code>android:mimeType</code><br>用于指定可以处理的数据类型，允许使用通配符的方式进行指定。</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>上面浏览器示例中，其实只<br>需要指定 <code>android:scheme</code> 为 <code>http</code>，就可以响应所有的 <code>http</code> 协议的 <code>Intent</code> 了</p>
+</blockquote>
+<h5 id="发送自定义广播（BroadcastReceiver进行接收）：">发送自定义广播（BroadcastReceiver进行接收）：</h5><p>无序&amp;有序<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent("com.example.broadcasttest.</span><br><span class="line">MY_BROADCAST");//此构造函数的值为action值</span><br><span class="line">sendBroadcast(intent);</span><br></pre></td></tr></table></figure></p>
+<h3 id="与Notification结合使用设置setFlags()">与<code>Notification</code>结合使用设置<code>setFlags()</code></h3><ul>
+<li><code>Intent.FLAG_ACTIVITY_CLEAR_TOP</code><blockquote>
+<p>如果在当前Task中，有要启动的Activity，那么把该Acitivity之前的所有Activity都关掉，并把此Activity置前以避免创建Activity的实例</p>
+</blockquote>
+</li>
+<li><code>.FLAG_ACTIVITY_NEW_TASK</code></li>
+</ul>
+<blockquote>
+<p>系统会检查当前所有已创建的Task中是否有该要启动的Activity的Task，若有，则在该Task上创建Activity，若没有则新建具有该Activity属性的Task，并在该新建的Task上创建Activity</p>
+<p>另一种情况：在<code>activity</code>的跳转中，如果<code>Context</code>来自<code>Application</code>，则需要设置此选项，否则会报错。其错误代码:<code>Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?</code> - <code>FLAG_ACTIVITY_NO_HISTORY</code> 不会压栈。<br>A B C。C通过intent跳转到D 界面显示D的内容，但是它并不会压入栈中。如果按返回键，返回到C，栈的情况还是：A B C。如果此时D中又跳转到E，栈的情况变为：A B C E，此时按返回键会回到C</p>
+<ul>
+<li><code>FLAG_ACTIVITY_SINGLE_TOP</code>检测是否有<code>activity</code>，没有创建，有置为栈顶。</li>
+</ul>
+</blockquote>
+<p>参考：<a href="http://blog.csdn.net/jaycee110905/article/details/8686802" target="_blank" rel="external">Android中intent启动Activity中intent.setFlags()的作用</a></p>
+<h3 id="什么时候是用Bundle">什么时候是用<code>Bundle</code></h3><h3 id="如何传递对象">如何传递对象</h3><p>参考：<a href="http://android.jobbole.com/80941/" target="_blank" rel="external">Android系统中Parcelable和Serializable的区别</a></p>
+<p>继承<code>ParceLable</code>需要实现的步骤：</p>
+<ol>
+<li><code>implements ParceLable</code>操作</li>
+<li>现实对应的方法<code>describeContents() 和 writeToParcel()</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">    dest.writeString(weatherDetail);</span><br><span class="line">    dest.writeString(weatherTemp);</span><br><span class="line">    dest.writeString(airQuality);</span><br><span class="line">    dest.writeInt(airQualityImg);</span><br><span class="line">    dest.writeInt(weatherImage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一个返回<code>0</code>，第二个直接<code>write</code>对应的数据类型；</p>
+<ol>
+<li>单单实现这两个方法是不够，编译器会提示你实现<code>Create</code>方法。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Parcelable.Creator&lt;WeatherMsg&gt; CREATOR</span><br><span class="line">        =<span class="keyword">new</span> Parcelable.Creator&lt;WeatherMsg()&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeatherMsg <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WeatherMsg(source);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="keyword">public</span> WeatherMsg[] newArray(<span class="keyword">int</span> size) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WeatherMsg[size];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>即：创建对应的<strong>实例和实例数组</strong>。<br>当然还需要一个<strong>构造函数</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WeatherMsg(Parcel source)&#123;</span><br><span class="line"><span class="keyword">this</span>.weatherDetail=source.readString();</span><br><span class="line"><span class="keyword">this</span>.weatherTemp=source.readString();</span><br><span class="line"><span class="keyword">this</span>.airQuality=source.readString();</span><br><span class="line"><span class="keyword">this</span>.weatherImage=source.readInt();</span><br><span class="line"><span class="keyword">this</span>.airQualityImg=source.readInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应<code>read</code>进行读取对应的数据类型。<br><strong>注意</strong>：当中的<code>createFromParcel</code>方法要跟<code>构造函数：WeatherMsg(source){}</code>进行相对应，否将报以下错误：</p>
+<blockquote>
+<p>Parcelable protocol requires a Parcelable.Creator object called  CREATOR on</p>
+</blockquote>
+<p>另外一点：<br>我们不可以直接用<strong>构造函数<code>WeatherMsg（a,b,c,d）</code></strong>来实例化对象，否则会有不知名的<code>bug</code>，我的情况是<code>int会变成-1</code>，所以，要使用<strong>无参数的构造函数，再set方法进行赋值</strong></p>
+<p>最后一点：函数<code>writeToParcel（）</code>依次<code>write</code>的顺序和构造函数<code>WeatherMsg</code>元素赋值的顺序要一致。否则又有另外一个<code>bug</code>,数据总是不对。想想也是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># write</span><br><span class="line">dest.writeString(weatherDetail);</span><br><span class="line"># read</span><br><span class="line"><span class="keyword">this</span>.weatherDetail=source.readString();</span><br></pre></td></tr></table></figure></p>
+<p>通过代码可以看到两者间<code>write和read</code>并没有任何标志，只能靠顺序来维持。</p>
+<h3 id="常见错误：">常见错误：</h3><ul>
+<li><code>an Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?</code><br>解决方法：<a href="http://blog.csdn.net/debuglog/article/details/7249444" target="_blank" rel="external">Content的startActivity方法需添加FLAG_ACTIVITY_NEW_TASK flag</a><br>即使用：<code>intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</code></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/06/24/蒙特卡洛算法/" data-id="cikdwadfc000a0ojskfqfk36w" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/10/android 插件_热修复_瘦身/" data-id="cirdiwfh500bafkh188yjddht" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/06/24/蒙特卡洛算法/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/10/android 插件_热修复_瘦身/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/不围棋/">不围棋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蒙特卡洛算法/">蒙特卡洛算法</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intent/">intent</a></li></ul>
 
     </footer>
   </div>
@@ -465,7 +631,7 @@
 
 
     
-      <article id="post-android-cache" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 文件存储数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -474,7 +640,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/28/android-cache/">android 缓存</a>
+      <a class="article-title" href="/2015/08/10/android 文件存储数据/">android_service</a>
     </h1>
   
 
@@ -482,39 +648,165 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/28/android-cache/">
-      <time datetime="2015-05-28T13:59:27.000Z" itemprop="datePublished">2015-05-28</time>
+    <a href="/2015/08/10/android 文件存储数据/">
+      <time datetime="2015-08-10T02:30:16.000Z" itemprop="datePublished">2015-08-10</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="学习资料：">学习资料：</h3><p><a href="http://blog.csdn.net/lnb333666/article/details/8460159">产品设计：Android应用-开发技术【数据缓存】
-</a>，倾向于使用文件缓存<br>介绍：<br><a href="http://www.cnblogs.com/qianxudetianxia/archive/2012/02/20/2112128.html">Android学习系列(27)—App缓存管理</a><br>以下是通过使用<code>file.lastModified()</code>来达到修改最新文件修改时间的效果<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/05/28/android-cache/#more">Read More</a>
-          </p>
-        
+                
+        <a id="more"></a>
+<h3 id="生命周期">生命周期</h3><p><a href="http://coolwhy1.iteye.com/blog/1284405" target="_blank" rel="external">Android Service两种启动启动方式 及 adndroid service生命周期</a></p>
+<h3 id="方法使用：（Service）">方法使用：（Service）</h3><ul>
+<li><p>onBind();</p>
+<blockquote>
+<p>唯一抽象方法,当<code>act与ser</code>进行绑定时才使用,即：<code>context.bindService()</code>的时候调用</p>
+</blockquote>
+</li>
+<li><p>onCreate();</p>
+<blockquote>
+<p>第一次创建的时候调用(<code>startService/bindService</code>的时候)</p>
+</blockquote>
+</li>
+<li><p>onStartCommand(Intent intent, int flags, int startId);</p>
+<blockquote>
+<p>使用<code>startService</code>的执行是将执行此方法，<code>bindService()</code>并不会执行此方法</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>参数介绍：<code>flag</code></strong></p>
+<ul>
+<li>flags = START_STICKY;<blockquote>
+<p>在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。不久后service就会再次尝试重新创建，因为保留在开始状态，在创建     service后将保证调用onstartCommand。</p>
+</blockquote>
+</li>
+<li>flags = START_NOT_STICKY;<blockquote>
+<p>在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。</p>
+</blockquote>
+</li>
+<li>flags = START_REDELIVER_INTENT;<blockquote>
+<p>在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>onDestory();</p>
+<blockquote>
+<p>当使用<code>stopService()/unbindService()</code>的时候。<strong>销毁后还会有一些不再使用的对象仍占用着内存的资源</strong>。</p>
+</blockquote>
+</li>
+<li><p>stopSelf(); //关闭当前的service</p>
+</li>
+</ul>
+<p><strong>关于绑定</strong></p>
+<blockquote>
+<p>service可以与任何act绑定，而且绑定后得到的<strong>实例都是相同</strong>。</p>
+</blockquote>
+<h3 id="前台服务">前台服务</h3><blockquote>
+<p>普通服务在系统内存不足的时候将被回收，使用前台服务则不会，但<strong>它会有正在运行的系统图标在状态栏进行显示</strong>。</p>
+</blockquote>
+<p>如何创建？<br>在<code>service</code>中的<code>oncreate</code>方法。先创建<code>Notification</code>后，再<code>startForeground(1,notification);</code>即可。而这句话相当于<strong>使用<code>notificationManager.notify()</code></strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建前台服务</span></span><br><span class="line">    Intent intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>, MainActivity.class);</span><br><span class="line">    PendingIntent pendingIntent=PendingIntent.getActivity(<span class="keyword">this</span>,<span class="number">0</span>,intent,PendingIntent.FLAG_CANCEL_CURRENT);</span><br><span class="line">    Notification notification=<span class="keyword">new</span> Notification.Builder(<span class="keyword">this</span>)</span><br><span class="line">            .setWhen(System.currentTimeMillis())</span><br><span class="line">            ...</span><br><span class="line">            .build();</span><br><span class="line">    startForeground(<span class="number">1</span>,notification);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>在<code>onDestroy</code>里还需要<code>stopForeground(true);</code></p>
+</blockquote>
+<h3 id="IntentService">IntentService</h3><blockquote>
+<p>创建一个异步的、会自动停止的服务</p>
+</blockquote>
+<h3 id="什么使用该使用service">什么使用该使用<code>service</code></h3><h3 id="使用线程和service之间权衡">使用线程和<code>service</code>之间权衡</h3><p>实际上<strong>线程</strong>和<code>service</code>并没有什么关系。因为：<strong>Service其实是运行在主线程里的</strong>，所以编写非常耗时的情况下，一样会<code>ANR</code>。</p>
+<p><code>service</code>不依赖于<code>UI</code>，不必要关心<code>Activity</code>的存在，可以用来保持<strong>心跳</strong>连接。但依然会阻塞<strong>主线程</strong>，但是我们可以<code>在Service中再创建一个子线程</code>，然后在这里去处理耗时逻辑就没问题了。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 开始执行后台任务</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBinder</span> <span class="keyword">extends</span> <span class="title">Binder</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDownload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 执行具体的下载任务</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么，<strong>既然在Service里也要创建一个子线程，那为什么不直接在Activity里创建呢？</strong></p>
+<blockquote>
+<p>因为Activity很难对Thread进行控制，当Activity被销毁之后，就没有任何其它的办法可以再重新获取到之前创建的子线程的实例。而且在一个Activity中创建的子线程，另一个Activity无法对其进行操作。但是Service就不同了，所有的Activity都可以与Service进行关联，然后可以很方便地操作其中的方法，即使Activity被销毁了，之后只要重新与Service建立关联，就又能够获取到原有的Service中Binder的实例。因此，使用Service来处理后台任务，Activity就可以放心地finish，完全不需要担心无法对后台任务进行控制的情况。</p>
+</blockquote>
+<h3 id="远程Service用法">远程<code>Service</code>用法</h3><blockquote>
+<p>使用远程Service甚至可以实现Android跨进程通信的功能<br>将一个普通的Service转换成远程Service其实非常简单，只需要在注册Service的时候将它的<code>android:process</code>属性指定成<code>:remote</code>就可以了。如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;service</span><br><span class="line">android:name="com.example.servicetest.MyService"</span><br><span class="line">android:process=":remote" &gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>为什么将MyService转换成远程Service后就不会导致程序ANR了呢？</strong><br>这是由于，使用了远程Service后，MyService已经在另外一个进程当中运行了，所以只会阻塞该进程中的主线程，并不会影响到当前的应用程序</p>
+<p><strong>使用<code>bindService</code>将导致程序奔溃</strong></p>
+<blockquote>
+<p>这是由于在Bind Service按钮的点击事件里面我们会让MainActivity和MyService建立关联，但是目前MyService已经是一个远程Service了，Activity和Service运行在<strong>两个不同的进程当中，这时就不能再使用传统的建立关联的方式，程序也就崩溃了</strong>。</p>
+</blockquote>
+<p><strong>那么如何才能让Activity与一个远程Service建立关联呢？</strong></p>
+<blockquote>
+<p>使用<strong>AIDL来进行跨进程通信了（IPC）</strong>。<br>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于<strong>让某个Service与多个应用程序组件之间进行跨进程通信</strong>，从而可以实现多个应用程序<strong>共享同一个Service的功能</strong>。</p>
+</blockquote>
+<p>引用资料：<br><a href="http://blog.csdn.net/guolin_blog/article/details/11952435" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(上)</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/9797169" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切(下)</a></p>
+<h3 id="如何保证service不死">如何保证<code>service</code>不死</h3><p>引用资料：<a href="http://blog.csdn.net/mad1989/article/details/22492519" target="_blank" rel="external">Android开发之如何保证Service不被杀掉（broadcast+system/app）</a></p>
+<ul>
+<li>提升系统进程优先级：</li>
+</ul>
+<ol>
+<li>前台进程( FOREGROUND_APP)</li>
+<li>可视进程(VISIBLE_APP )</li>
+<li>次要服务进程(SECONDARY_SERVER )</li>
+<li>后台进程 (HIDDEN_APP)</li>
+<li>内容供应节点(CONTENT_PROVIDER)</li>
+<li>空进程(EMPTY_APP)</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>在极度极度低内存的压力下，该service还是会被kill掉，并且不一定会restart</p>
+</blockquote>
+<ul>
+<li><p>在<code>onDestroy</code>重启<code>service</code></p>
+</li>
+<li><p>使用：<code>service +broadcast</code>的方式<br>当<strong>service走ondestory的时候</strong>，发送一个<strong>自定义的广播</strong>，<strong>当收到广播的时候，重新启动service</strong>.</p>
+</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>当使用类似口口管家等第三方应用或是在setting里-应用-强制停止时，APP进程可能就直接被干掉了，onDestroy方法都进不来，所以还是无法保证~.~</p>
+</blockquote>
+<ul>
+<li><p>通过系统的广播，监听并捕获到判断是否要重启<code>service</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;action android:name=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span><br><span class="line">&lt;action android:name=<span class="string">"android.intent.action.USER_PRESENT"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>application</code>设置<code>android:persistent=&quot;true&quot;</code></p>
+<blockquote>
+<p>据说这个属性不能乱设置，不过设置后，的确发现优先级提高不少，或许是相当于系统级的进程</p>
+</blockquote>
+</li>
+</ul>
+<p>另外的资料：<a href="http://www.jianshu.com/p/63aafe3c12af" target="_blank" rel="external">关于 Android 进程保活，你所需要知道的一切</a></p>
+<h3 id="锁屏情况下service依然执行">锁屏情况下<code>service</code>依然执行</h3><blockquote>
+<p>在锁屏状态乃至系统进入休眠后，仍然保持系统的网络状态以及通过程序唤醒手机呢？</p>
+</blockquote>
+<p><strong>答案</strong>就是<code>Android</code>中的<code>WakeLock</code>机制。<br>可以<strong>实现锁屏情况下仍然进行轮寻操作</strong>，<strong>注意：前台线程</strong>也不可实现。</p>
+<p>通过得到电源服务后，获取对应的锁进行实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">WakeLock wakeLock = <span class="keyword">null</span>;  </span><br><span class="line"><span class="comment">//获取电源锁，保持该服务在屏幕熄灭时仍然获取CPU时，保持运行  </span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">acquireWakeLock</span><span class="params">()</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == wakeLock)  </span><br><span class="line">    &#123;  </span><br><span class="line">        PowerManager pm = (PowerManager)<span class="keyword">this</span>.getSystemService(Context.POWER_SERVICE);  </span><br><span class="line">        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK|PowerManager.ON_AFTER_RELEASE, <span class="string">"PostLocationService"</span>);  </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != wakeLock)  </span><br><span class="line">        &#123;</span><br><span class="line">            wakeLock.acquire();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//释放设备电源锁  </span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">releaseWakeLock</span><span class="params">()</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != wakeLock)  </span><br><span class="line">    &#123;  </span><br><span class="line">        wakeLock.release();  </span><br><span class="line">        wakeLock = <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一旦获取锁后，即使屏幕在熄灭或锁屏长时间后，系统后台一直可以保持获取到锁的应用程序运行</p>
+<h4 id="关于：pm-newWakeLock方法解释：">关于：<code>pm.newWakeLock</code>方法解释：</h4><p><strong>第二个参数</strong>是自定义名称<br><strong>第一个参数</strong>是指定要获取哪种类型的锁，不同的锁对系统CPU、屏幕和键盘有不同的影响.</p>
+<ul>
+<li>PARTIAL_WAKE_LOCK:保持CPU 运转，屏幕和键盘灯有可能是关闭的。</li>
+<li>SCREEN_DIM_WAKE_LOCK：保持CPU 运转，允许保持屏幕显示但有可能是灰的，允许关闭键盘灯</li>
+<li>SCREEN_BRIGHT_WAKE_LOCK：保持CPU 运转，允许保持屏幕高亮显示，允许关闭键盘灯</li>
+<li>FULL_WAKE_LOCK：保持CPU 运转，保持屏幕高亮显示，键盘灯也保持亮度</li>
+<li>ACQUIRE_CAUSES_WAKEUP：强制使屏幕亮起，这种锁主要针对一些必须通知用户的操作.</li>
+<li>ON_AFTER_RELEASE：当锁被释放时，保持屏幕亮起一段时间</li>
+</ul>
+<p><strong>最后把权限加上</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.WAKE_LOCK"</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.DEVICE_POWER"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>引用摘录资料：<a href="http://blog.csdn.net/ryantang03/article/details/8628753" target="_blank" rel="external">使用WakeLock使Android应用程序保持后台唤醒</a></p>
+<h3 id="注意问题：">注意问题：</h3><ol>
+<li>需要在<code>androidManifest.xml</code>进行配置否则没有效果。</li>
+<li>接连调用<code>onstartService()+onBindService()</code>方法后，当你想进行停止<code>service</code>的操作，你就必须同时调用<code>stopService()+onBinService()</code>。<br>另一种情况：使用了前台线程，当<code>app</code>退出后，自动<code>unbindService</code>(因为使用<code>bind</code>的时候<code>act</code>挂掉，<code>service</code>也挂掉)，所以当再次进入程序的时候，只需要<code>stop</code>即可关掉，但执行了<code>unBind</code>将会抛出错误。</li>
+</ol>
+<h3 id="扩展：">扩展：</h3><p><a href="http://blog.csdn.net/mad1989/article/details/22492519" target="_blank" rel="external">Android开发之如何保证Service不被杀掉（broadcast+system/app）</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/28/android-cache/" data-id="cikdwadjk003a0ojs7dq8tp89" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/10/android 文件存储数据/" data-id="cirdiwfgx00b6fkh1vz47i088" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/28/android-cache/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/10/android 文件存储数据/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service/">service</a></li></ul>
 
     </footer>
   </div>
@@ -524,7 +816,7 @@
 
 
     
-      <article id="post-Gradle-JCenter" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android studio使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -533,7 +825,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/13/Gradle-JCenter/">使用Gradle发布项目到JCenter仓库</a>
+      <a class="article-title" href="/2015/08/09/android studio使用/">android studio使用</a>
     </h1>
   
 
@@ -541,8 +833,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/13/Gradle-JCenter/">
-      <time datetime="2015-05-13T05:59:27.000Z" itemprop="datePublished">2015-05-13</time>
+    <a href="/2015/08/09/android studio使用/">
+      <time datetime="2015-08-09T02:48:16.000Z" itemprop="datePublished">2015-08-09</time>
     </a>
   </div>
 
@@ -558,21 +850,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>有没有想过，自己的类库能像开源项目那样，一句话进行导入，方便他人使用你的类库呢？？
+        <p>android studio的操作提示。
         
           <p class="article-more-link">
-            <a href="/2015/05/13/Gradle-JCenter/#more">Read More</a>
+            <a href="/2015/08/09/android studio使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/" data-id="cikdwadlh00510ojslvj93yb7" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/09/android studio使用/" data-id="cirdiwfk500dwfkh1h3e9izml" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/13/Gradle-JCenter/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/09/android studio使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/">android studio</a></li></ul>
 
     </footer>
   </div>
@@ -582,7 +874,7 @@
 
 
     
-      <article id="post-android–Retrofit" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-Arrays.sort和Collections.sort区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -591,7 +883,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/12/android–Retrofit/">android网络开发框架--Retrofit</a>
+      <a class="article-title" href="/2015/08/05/Arrays.sort和Collections.sort区别/">Arrays.sort和Collections.sort区别</a>
     </h1>
   
 
@@ -599,39 +891,33 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/12/android–Retrofit/">
-      <time datetime="2015-05-12T10:33:16.000Z" itemprop="datePublished">2015-05-12</time>
+    <a href="/2015/08/05/Arrays.sort和Collections.sort区别/">
+      <time datetime="2015-08-05T02:58:16.000Z" itemprop="datePublished">2015-08-05</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目地址：<a href="https://github.com/square/retrofit">square/retrofit</a></p>
-<h3 id="实战一：依据IP进行get请求">实战一：依据IP进行get请求</h3><p>谷歌了很多的资料，大多是直接讲知识点，没有结合实例，让人做不出的感觉，而我偏向有做出的实例后，再去探讨，知道找到简书这篇：<a href="http://www.jianshu.com/p/87c36d8dabce">Retrofit 解析 JSON 数据</a>，
+        <p><code>Collections</code>是集合的工具类，可用于<strong>集合的同步</strong>。而<code>Collections.sort</code>用于<strong>对象集合</strong>按用户自定义规则排序。常用于<code>List</code>集合进行排序。<br><code>Arrays.sort</code>方法用于<strong>对象数组</strong>按用户自定义规则排序。<br>
         
           <p class="article-more-link">
-            <a href="/2015/05/12/android–Retrofit/#more">Read More</a>
+            <a href="/2015/08/05/Arrays.sort和Collections.sort区别/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/12/android–Retrofit/" data-id="cikdwadj1002r0ojs9p13zamn" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/05/Arrays.sort和Collections.sort区别/" data-id="cirdiwfqy00jzfkh135pl4c6h" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/12/android–Retrofit/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/05/Arrays.sort和Collections.sort区别/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arrays/">Arrays</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Collections/">Collections</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -641,7 +927,7 @@
 
 
     
-      <article id="post-Material Design-FloatingActionButton" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-Java Map 按Key排序和按Value排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -650,7 +936,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/Material Design-FloatingActionButton/">Material Design --FloatingActionButton</a>
+      <a class="article-title" href="/2015/08/03/Java Map 按Key排序和按Value排序/">java-Map集合--排序</a>
     </h1>
   
 
@@ -658,38 +944,33 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/05/09/Material Design-FloatingActionButton/">
-      <time datetime="2015-05-09T02:11:27.000Z" itemprop="datePublished">2015-05-09</time>
+    <a href="/2015/08/03/Java Map 按Key排序和按Value排序/">
+      <time datetime="2015-08-03T03:54:16.000Z" itemprop="datePublished">2015-08-03</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="配置">配置</h3><h3 id="使用android_studio导入">使用android studio导入</h3><p><code>Github</code>地址: <a href="https://github.com/futuresimple/android-floating-action-button">futuresimple/android-floating-action-button</a><br>
+        <p>当中涉及到<code>TreeMap</code>，比较器<code>Comparable</code>,下面先进行介绍<code>TreeMap</code>。
         
           <p class="article-more-link">
-            <a href="/2015/05/09/Material Design-FloatingActionButton/#more">Read More</a>
+            <a href="/2015/08/03/Java Map 按Key排序和按Value排序/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/05/09/Material Design-FloatingActionButton/" data-id="cikdwadkz004k0ojs9gqeb2wi" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/" data-id="cirdiwfpg00ixfkh1hw5jkhly" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/05/09/Material Design-FloatingActionButton/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/08/03/Java Map 按Key排序和按Value排序/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FloatingActionButton/">FloatingActionButton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material-Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Comparator/">Comparator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TreeMap/">TreeMap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
 
     </footer>
   </div>
@@ -700,7 +981,7 @@
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -710,7 +991,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -719,7 +1000,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -764,7 +1045,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
     </div>
   </div>
 

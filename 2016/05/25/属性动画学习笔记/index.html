@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>属性动画学习笔记 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="传统动画：Drawable，Property，View只能支持简单的缩放、平移、旋转、透明度基本的动画无法做到带颜色的切换动画，3d旋转动画，停留在动画停止的位置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="属性动画学习笔记">
+<meta property="og:url" content="http://hexo.trity.cc/2016/05/25/属性动画学习笔记/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="传统动画：Drawable，Property，View只能支持简单的缩放、平移、旋转、透明度基本的动画无法做到带颜色的切换动画，3d旋转动画，停留在动画停止的位置。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="属性动画学习笔记">
+<meta name="twitter:description" content="传统动画：Drawable，Property，View只能支持简单的缩放、平移、旋转、透明度基本的动画无法做到带颜色的切换动画，3d旋转动画，停留在动画停止的位置。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        149
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        142
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-属性动画学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      属性动画学习笔记
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/05/25/属性动画学习笔记/">
+      <time datetime="2016-05-25T13:39:34.000Z" itemprop="datePublished">2016-05-25</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>传统动画：Drawable，Property，View<br>只能支持简单的缩放、平移、旋转、透明度基本的动画<br>无法做到带颜色的切换动画，3d旋转动画，停留在动画停止的位置。<br><a id="more"></a></p>
+<p>引用参考来源：<br><a href="http://blog.csdn.net/lmj623565791/article/details/38092093" target="_blank" rel="external">Android 属性动画（Property Animation） 完全解析 （下）</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/38067475" target="_blank" rel="external">Android 属性动画（Property Animation） 完全解析 （上）</a></p>
+<h2 id="Property_Animation_属性动画">Property Animation 属性动画</h2><blockquote>
+<p>通过动画的方式改变对象的属性了</p>
+</blockquote>
+<p>了解几个属性：</p>
+<ul>
+<li>Duration 动画持续时间.默认300ms</li>
+<li>Time interpolation 时间差，定义动画的变化率。如：<code>LinearInterpolator、AccelerateDecelerateInterpolator</code></li>
+<li>Repeat count and behavior：重复次数、以及重复模式；</li>
+<li>Animator sets: 动画集合，定义一组动画</li>
+</ul>
+<h3 id="ObjectAnimator">ObjectAnimator</h3><blockquote>
+<p>提供了<code>ofInt、ofFloat、ofObject</code>，这几个方法都是设置<strong>动画作用的元素、作用的属性、动画开始、结束、以及中间的任意个属性值</strong>。</p>
+</blockquote>
+<p>使用实例：<br>360旋转效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator<span class="comment">//  </span></span><br><span class="line">.ofFloat(view, <span class="string">"rotationX"</span>, <span class="number">0.0F</span>, <span class="number">360.0F</span>)<span class="comment">//  </span></span><br><span class="line">.setDuration(<span class="number">500</span>)<span class="comment">//  </span></span><br><span class="line">.start();</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>：默认中心缩放，和中间对称线为反转线。当我们设置为<strong>左上角为中心点</strong>时，需要以下设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">view.setPivotX(<span class="number">0</span>);  </span><br><span class="line">view.setPivotY(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>若内部没有调用view的重绘，需要手动调用，添加<code>AnimatorUpdateListener</code>进行监听</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">anim.addUpdateListener(<span class="keyword">new</span> AnimatorUpdateListener()&#123;  </span><br><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span></span>&#123;  </span><br><span class="line">view.postInvalidate();  </span><br><span class="line">view.invalidate();  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>扩展：通过使用<code>addUpdateListener</code>的思想，我们可以做更多的效果，而不局限与<code>ObjectAnimator</code>提供的几个动画效果的方法。</p>
+<p>如：让View既可以缩小、又能够淡出（3个属性scaleX,scaleY,alpha）：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">anim.addUpdateListener(<span class="keyword">new</span> AnimatorUpdateListener()  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span>  </span><br><span class="line">    </span>&#123;  </span><br><span class="line">        <span class="keyword">float</span> cVal = (Float) animation.getAnimatedValue();  </span><br><span class="line">        view.setAlpha(cVal);  </span><br><span class="line">        view.setScaleX(cVal);  </span><br><span class="line">        view.setScaleY(cVal);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>另一种方式：使用<code>propertyValuesHolder</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">propertyValuesHolder</span><span class="params">(View view)</span>  </span>&#123;  </span><br><span class="line">PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(<span class="string">"alpha"</span>, <span class="number">1f</span>,  </span><br><span class="line">        <span class="number">0f</span>, <span class="number">1f</span>);  </span><br><span class="line">PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(<span class="string">"scaleX"</span>, <span class="number">1f</span>,  </span><br><span class="line">        <span class="number">0</span>, <span class="number">1f</span>);  </span><br><span class="line">PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat(<span class="string">"scaleY"</span>, <span class="number">1f</span>,  </span><br><span class="line">        <span class="number">0</span>, <span class="number">1f</span>);  </span><br><span class="line">ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY,pvhZ).setDuration(<span class="number">1000</span>).start();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ValueAnimator">ValueAnimator</h3><blockquote>
+<p>主要用以移动的动画<br>提供的方法与<code>ObjectAnimator</code>相似：ofFloat<br>需要手动设置，进行<code>addUpdateListener</code>监听，否则无任何效果。这个跟<code>ObjectAnimator</code>很不同。</p>
+</blockquote>
+<p>例子：<br>自由落体</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">verticalRun</span><span class="params">( View view)</span>  </span>&#123;  </span><br><span class="line">   ValueAnimator animator = ValueAnimator.ofFloat(<span class="number">0</span>, mScreenHeight  </span><br><span class="line">           - mBlueBall.getHeight());  </span><br><span class="line">   animator.setTarget(mBlueBall);  </span><br><span class="line">   animator.setDuration(<span class="number">1000</span>).start();  </span><br><span class="line"><span class="comment">//      animator.setInterpolator(value)  </span></span><br><span class="line">   animator.addUpdateListener(<span class="keyword">new</span> AnimatorUpdateListener()  </span><br><span class="line">   &#123;  </span><br><span class="line">       <span class="annotation">@Override</span>  </span><br><span class="line">       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span>  </span><br><span class="line">       </span>&#123;  </span><br><span class="line">           mBlueBall.setTranslationY((Float) animation.getAnimatedValue());  </span><br><span class="line">       &#125;  </span><br><span class="line">   &#125;);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抛物线(关键代码，需要重写：<code>TypeEvaluator</code>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">valueAnimator.setEvaluator(<span class="keyword">new</span> TypeEvaluator&lt;PointF&gt;()  &#123;  </span><br><span class="line">    <span class="comment">// fraction = t / duration  </span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> PointF <span class="title">evaluate</span><span class="params">(<span class="keyword">float</span> fraction, PointF startValue,  </span><br><span class="line">            PointF endValue)</span>  </span><br><span class="line">    </span>&#123;  </span><br><span class="line">        Log.e(TAG, fraction * <span class="number">3</span> + <span class="string">""</span>);  </span><br><span class="line">        <span class="comment">// x方向200px/s ，则y方向0.5 * 10 * t  </span></span><br><span class="line">        PointF point = <span class="keyword">new</span> PointF();  </span><br><span class="line">        point.x = <span class="number">200</span> * fraction * <span class="number">3</span>;  </span><br><span class="line">        point.y = <span class="number">0.5f</span> * <span class="number">200</span> * (fraction * <span class="number">3</span>) * (fraction * <span class="number">3</span>);  </span><br><span class="line">        <span class="keyword">return</span> point;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;);  </span><br><span class="line"># 使用 进行更改x,y的坐标</span><br><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span>  </span>&#123;  </span><br><span class="line">    PointF point = (PointF) animation.getAnimatedValue();  </span><br><span class="line">    mBlueBall.setX(point.x);  </span><br><span class="line">    mBlueBall.setY(point.y);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>监听动画的开始、结束、被取消、重复等事件:</p>
+<blockquote>
+<p>Animator.AnimatorListener,Animator.AnimatorPauseListener</p>
+</blockquote>
+<h3 id="AnimatorSet的使用">AnimatorSet的使用</h3><blockquote>
+<p>将动画进行组合，进行有顺序执行。</p>
+</blockquote>
+<p>同时执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator anim1 = ObjectAnimator.ofFloat(mBlueBall, <span class="string">"scaleX"</span>,  </span><br><span class="line">        <span class="number">1.0f</span>, <span class="number">2f</span>);  </span><br><span class="line">ObjectAnimator anim2 = ObjectAnimator.ofFloat(mBlueBall, <span class="string">"scaleY"</span>,  </span><br><span class="line">        <span class="number">1.0f</span>, <span class="number">2f</span>);  </span><br><span class="line">AnimatorSet animSet = <span class="keyword">new</span> AnimatorSet();  </span><br><span class="line">animSet.setDuration(<span class="number">2000</span>);  </span><br><span class="line">animSet.setInterpolator(<span class="keyword">new</span> LinearInterpolator());  </span><br><span class="line"><span class="comment">//两个动画同时执行  </span></span><br><span class="line">animSet.playTogether(anim1, anim2);</span><br></pre></td></tr></table></figure>
+<p>顺序执行：（anim1，anim2,anim3同时执行 anim4接着执行 ）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AnimatorSet animSet = <span class="keyword">new</span> AnimatorSet();  </span><br><span class="line">animSet.play(anim1).with(anim2);  </span><br><span class="line">animSet.play(anim2).with(anim3);  </span><br><span class="line">animSet.play(anim4).after(anim3);</span><br></pre></td></tr></table></figure>
+<h3 id="使用xml文件来创建属性动画">使用xml文件来创建属性动画</h3><p>xml布局<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;objectAnimator xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>  </span><br><span class="line">    android:<span class="variable">duration=</span><span class="string">"1000"</span>  </span><br><span class="line">    android:<span class="variable">propertyName=</span><span class="string">"scaleX"</span>  </span><br><span class="line">    android:<span class="variable">valueFrom=</span><span class="string">"1.0"</span>  </span><br><span class="line">    android:<span class="variable">valueTo=</span><span class="string">"2.0"</span>  </span><br><span class="line">    android:<span class="variable">valueType=</span><span class="string">"floatType"</span> &gt;  </span><br><span class="line">&lt;/objectAnimator&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当然可以使用<code>&lt;set&gt;</code>代表<code>AnimatorSet</code>同样是<strong>将动画进行组合</strong>。<br>对应的属性：</p>
+<ul>
+<li>orderring 为together 同时执行（默认） sequentially 代表一个接一个</li>
+</ul>
+<p>使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载动画  </span></span><br><span class="line">Animator anim = AnimatorInflater.loadAnimator(<span class="keyword">this</span>, R.animator.scalex);  </span><br><span class="line">anim.setTarget(mMv);  </span><br><span class="line">anim.start();</span><br></pre></td></tr></table></figure>
+<h3 id="Layout_Animations_布局动画">Layout Animations 布局动画</h3><blockquote>
+<p>当容器中的视图层次发生变化时存在过渡的动画效果。</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LayoutTransition transition = new LayoutTransition();  </span><br><span class="line">transition.setAnimator(LayoutTransition.CHANGE_APPEARING,  </span><br><span class="line">        transition.getAnimator(LayoutTransition.CHANGE_APPEARING));  </span><br><span class="line">transition.setAnimator(LayoutTransition.APPEARING,  </span><br><span class="line">        null);  </span><br><span class="line">        <span class="keyword">...</span></span><br><span class="line">mGridLayout.setLayoutTransition(transition); //作用在viewgroup上</span><br></pre></td></tr></table></figure>
+<p>过渡的类型一共有四种:</p>
+<ul>
+<li>LayoutTransition.APPEARING 当一个View在ViewGroup中出现时，对此View设置的动画</li>
+<li>LayoutTransition.CHANGE_APPEARING 当一个View在ViewGroup中出现时，对此View对其他View位置造成影响，对其他View设置的动画</li>
+<li>LayoutTransition.DISAPPEARING  当一个View在ViewGroup中消失时，对此View设置的动画</li>
+<li>LayoutTransition.CHANGE_DISAPPEARING 当一个View在ViewGroup中消失时，对此View对其他View位置造成影响，对其他View设置的动画</li>
+<li>LayoutTransition.CHANGE 不是由于View出现或消失造成对其他View位置造成影响，然后对其他View设置的动画</li>
+</ul>
+<p><strong>注意</strong>:动画到底设置在谁身上，<strong>此View还是其他View</strong>。</p>
+<h3 id="版本升级添加的方法">版本升级添加的方法</h3><ul>
+<li>在<code>SDK11</code>的时候，给View添加了<code>animate</code>方法</li>
+<li>SDK12 添加 withStartAction</li>
+<li>SDK16 添加 withEndAction</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need API12  </span></span><br><span class="line">mBlueBall.animate()<span class="comment">//  </span></span><br><span class="line">.alpha(<span class="number">0</span>)<span class="comment">//  </span></span><br><span class="line">.y(mScreenHeight / <span class="number">2</span>).setDuration(<span class="number">1000</span>)  </span><br><span class="line"><span class="comment">// need API 12  </span></span><br><span class="line">.withStartAction(<span class="keyword">new</span> Runnable()  &#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>  </span>&#123;  </span><br><span class="line">        Log.e(TAG, <span class="string">"START"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// need API 16  </span></span><br><span class="line">&#125;).withEndAction(<span class="keyword">new</span> Runnable()  &#123;  </span><br><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>  </span>&#123;  </span><br><span class="line">    Log.e(TAG, <span class="string">"END"</span>);  </span><br><span class="line">    runOnUiThread(<span class="keyword">new</span> Runnable()  &#123;  </span><br><span class="line">        <span class="annotation">@Override</span>  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>   </span>&#123;  </span><br><span class="line">            mBlueBall.setY(<span class="number">0</span>);  </span><br><span class="line">            mBlueBall.setAlpha(<span class="number">1.0f</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
+<h3 id="学习资料：">学习资料：</h3><p><a href="http://www.jianshu.com/p/73da3d31b4ad" target="_blank" rel="external">[Android] 开发资料收集：动画</a><br><a href="http://www.jianshu.com/p/b7aa2a4a9787" target="_blank" rel="external">Android动画，一篇就够</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/05/25/属性动画学习笔记/" data-id="cirdiwf59001ffkh1ke209nm2" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/05/25/属性动画学习笔记/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/25/java8学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java8学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/15/retrofit2.0 网络请求/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">retrofit2.0 网络请求</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/05/25/属性动画学习笔记/" data-title="属性动画学习笔记" data-url="http://hexo.trity.cc/2016/05/25/属性动画学习笔记/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

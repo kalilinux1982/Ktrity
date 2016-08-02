@@ -90,11 +90,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        131
+        149
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        144
+        142
         <span>tags</span>
       </div>
     </div>
@@ -117,7 +117,7 @@
 
       
       <section id="main">
-      <article id="post-android viewpager切换动画-pageTransformer" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android Camera摄像头使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/15/android viewpager切换动画-pageTransformer/">android EditText使用</a>
+      <a class="article-title" href="/2015/12/04/android Camera摄像头使用/">android catch异常处理</a>
     </h1>
   
 
@@ -134,8 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/15/android viewpager切换动画-pageTransformer/">
-      <time datetime="2015-10-15T06:25:52.000Z" itemprop="datePublished">2015-10-15</time>
+    <a href="/2015/12/04/android Camera摄像头使用/">
+      <time datetime="2015-12-03T17:00:19.000Z" itemprop="datePublished">2015-12-04</time>
     </a>
   </div>
 
@@ -151,21 +151,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用教程：<a href="http://guides.codepath.com/android/Working-with-the-EditText">EditText</a>，已经扩展到最新的用法了。
+        <p>在<code>android</code>中使用<code>catch</code>直接输出的话并不可以打印出来，而<code>java</code>可以直接使用<code>e.printTrace();</code>便可以打印出来，而<code>android</code>却不可以。下面介绍如何解决这个问题。<br>
         
           <p class="article-more-link">
-            <a href="/2015/10/15/android viewpager切换动画-pageTransformer/#more">Read More</a>
+            <a href="/2015/12/04/android Camera摄像头使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/15/android viewpager切换动画-pageTransformer/" data-id="cikmr5jgk0031m8jsg5oidih1" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/04/android Camera摄像头使用/" data-id="cirdiwfn100h5fkh1rndvorhf" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/10/15/android viewpager切换动画-pageTransformer/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/04/android Camera摄像头使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EditText/">EditText</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -175,7 +175,7 @@
 
 
     
-      <article id="post-android SqLite学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android RelativeLayout" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -184,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/14/android SqLite学习/">android 使用ssl通信实践</a>
+      <a class="article-title" href="/2015/12/01/android RelativeLayout/">android xml资源</a>
     </h1>
   
 
@@ -192,8 +192,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/14/android SqLite学习/">
-      <time datetime="2015-10-14T07:37:28.000Z" itemprop="datePublished">2015-10-14</time>
+    <a href="/2015/12/01/android RelativeLayout/">
+      <time datetime="2015-12-01T15:24:17.000Z" itemprop="datePublished">2015-12-01</time>
     </a>
   </div>
 
@@ -211,69 +211,107 @@
       
                 
         <a id="more"></a>
-<h3 id="如何在java中配置BC库（BouncyCastle）">如何在java中配置BC库（BouncyCastle）</h3><p>问题：</p>
+<h3 id="Colors-xml资源">Colors.xml资源</h3><ul>
+<li>当使用<code>R.color.xx</code>的时候，需要进行转换<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过values中的color中设置的颜色来设定。</span></span><br><span class="line"><span class="keyword">int</span>  color  =  getResources().getColor(R.color.red);</span><br><span class="line">view.setTextColor(color);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其他情况的解析颜色，不需要转换：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.setxxColor(<span class="number">0xff00ff00</span>);</span><br><span class="line">view.setxxColor(Color.BLUE);</span><br><span class="line">view.setxxColor(Color.argb(<span class="number">0x99</span>,  <span class="number">0xff</span>,  <span class="number">0x00</span>,  <span class="number">0x00</span>));</span><br></pre></td></tr></table></figure></p>
+<p>注意这个与<code>setBackgroundResurces</code>的区别：（不需要进行转换，因为该方法内部已经进行转换了，看源码即可知道）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setBackgroundResurces(R.drawable.xx);</span><br></pre></td></tr></table></figure></p>
+<h3 id="style-xml和theme-xml设置">style.xml和theme.xml设置</h3><p><a href="http://www.cnblogs.com/qianxudetianxia/p/3996020.html" target="_blank" rel="external">Android学习系列(40)—Android主题和样式之系统篇（下）</a></p>
+<h3 id="arrays-xml使用">arrays.xml使用</h3><p>格式：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;string-array name="languages"&gt;</span><br><span class="line">        &lt;item&gt;c语言&lt;/item&gt;</span><br><span class="line">    &lt;/string-array&gt;</span><br><span class="line">    &lt;integer-array name="reminder_methods_values" translatable="false"&gt;</span><br><span class="line">        &lt;item&gt;1&lt;/item&gt;</span><br><span class="line">    &lt;/integer-array&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意：<code>&lt;string-array&gt;</code>定义的是字符数组，<code>&lt;integer-array&gt;</code>是整数数组。</p>
+<p><strong>在Java代码引用</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Resources res =getResources();</span><br><span class="line">String[] languages = res.getStringArray(R.array.languages)</span><br></pre></td></tr></table></figure></p>
+<p><strong>扩展如何定义drawable数组、id数组</strong></p>
 <blockquote>
-<p>Java平台默认识别jks格式的证书文件，但是android平台只识别bks格式的证书文件，</p>
+<p>开发有需求，就是想添加每个数字对应一个资源id，而想包资源id写在<code>arrays.xml</code>中，而不是写在代码数组中。依靠这个想法传统的代码并不能解决。<br>参考：<a href="http://www.2cto.com/kf/201409/331829.html" target="_blank" rel="external">[android]在xml文件中定义drawable数组、id数组等</a></p>
 </blockquote>
-<p>所以需要自己配置BC库。在<code>stackoverflow</code>找到答案<br><a href="http://stackoverflow.com/questions/4065379/how-to-create-a-bks-bouncycastle-format-java-keystore-that-contains-a-client-c" target="_blank" rel="external">How to create a BKS (BouncyCastle) format Java Keystore that contains a client certificate chain</a>，在这里进行引用。（答案是android与tomcat的配置）</p>
-<ol>
-<li>首先下载资源：<a href="http://repo2.maven.org/maven2/org/bouncycastle/bcprov-ext-jdk15on/1.46/bcprov-ext-jdk15on-1.46.jar" target="_blank" rel="external">bcprov-ext-jdk15on-1.46.jar</a></li>
-<li><p>将<code>bcprov-ext-jdk15on-1.46.jar</code>复制到以下路径中。（每个对应的路径都不同）</p>
+<p>我们依旧在<code>arrays.xml</code>这么定义：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">string-array</span> <span class="attribute">name</span>=<span class="value">"actions_images"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil1<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span>@drawable/pencil2<span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">string-array</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>但取出的方式有所不同：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TypedArray ar = context.getResources().obtainTypedArray(R.array.actions_images);</span><br><span class="line"><span class="keyword">int</span> len = ar.length();</span><br><span class="line"><span class="keyword">int</span>[] resIds = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    resIds[i] = ar.getResourceId(i, <span class="number">0</span>);</span><br><span class="line">ar.recycle();</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以愉快的使用<code>resIds</code>资源了。</p>
+<h3 id="string-xml转义字符">string.xml转义字符</h3><p>参考：<a href="http://blog.csdn.net/z1074971432/article/details/12753539" target="_blank" rel="external">android string.xml 添加特殊字符</a><br>摄氏度表示：<code>&amp;#176;C</code>在<code>strings.xml</code>定义。<br>然后：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String degreeStr=getResources().getString(R.string.degree);</span><br></pre></td></tr></table></figure></p>
+<p>其他转义字符：<a href="http://blog.csdn.net/rnclcl/article/details/16801779" target="_blank" rel="external">Android string.xml如何输入空格、换行等符号——转义字符</a></p>
+<p>还可以进行格式化字符串等：<a href="http://blog.csdn.net/think_soft/article/details/7518824" target="_blank" rel="external">Android应用资源—-字符串资源类型（String）</a></p>
+<h3 id="ids-xml使用">ids.xml使用</h3><p>主要为两个作用：<br>（1）优化编译效率：</p>
 <blockquote>
-<p>D:\tools\jdk1.5.0_09\jre\lib\ext (JDK (bundled JRE)<br>D:\tools\jre1.5.0_09\lib\ext (JRE)<br>C:\ (为了加入到<strong>环境变量中</strong>，可以改路径)</p>
+<p>直接使用<code>&quot;@id/name&quot;</code>来引用<code>id</code>，而不是<code>&quot;@+id/name&quot;</code></p>
 </blockquote>
-</li>
-<li><p>进行修改<code>java.security</code>路径如下：</p>
+<p>解释：</p>
 <blockquote>
-<p>D:\tools\jdk1.5.0_09\jre\lib\security<br>D:\tools\jre1.5.0_09\lib\security</p>
+<p>如果使用”@+id/name”形式，当R.java中存在名为name变量时，则该组件会使用该变量的值作为标识。如果不存在该变量，则添加一个新的变量，并为该变量赋相应的值（不会重复)<br><strong>所以：使用@id/name形式，预先定义的id已经生成，修改配置文件时，也不会引起系统重新生成</strong></p>
 </blockquote>
-</li>
-</ol>
-<p>在此文件中加入：<code>security.provider.11=org.bouncycastle.jce.provider.BouncyCastleProvider</code>，其中<code>11</code>是因人而异，按着文件中的顺序来的。</p>
-<ol>
-<li>加入到环境变量中：<code>CLASSPATH=%CLASSPATH%;c:\bcprov-ext-jdk15on-1.46.jar</code></li>
-<li><p>将<code>bcprov-ext-jdk15on-1.46.jar</code>加入到你的工程中，并使用以下代码进行测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Security.addProvider(<span class="keyword">new</span> BouncyCastleProvider());</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>现在我们便可以使用<code>keytool</code>生成<code>bks</code>格式的了</p>
+<p>（2）统一管理资源Id</p>
 <blockquote>
-<p>keytool -genkey -alias myproject -keystore C:/myproject.keystore -storepass myproject -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider</p>
+<p><a href="http://blog.csdn.net/jdsjlzx/article/details/42024447" target="_blank" rel="external">android项目中values中ids.xml的作用</a></p>
 </blockquote>
+<h3 id="Shape使用">Shape使用</h3><p>属性指定：<code>android:shape</code>以下可选为：</p>
+<ul>
+<li><strong>rectangle</strong>: 矩形，默认的形状，可以画出直角矩形、圆角矩形、弧形等</li>
+<li><strong>oval</strong>: 椭圆形，用得比较多的是画正圆</li>
+<li><strong>line</strong>: 线形，可以画实线和虚线</li>
+<li><strong>ring</strong>: 环形，可以画环形进度条</li>
+</ul>
+<p>默认的形状：<code>rectangle</code>。</p>
+<p><strong>详细资料</strong>：<a href="http://keeganlee.me/post/android/20150830" target="_blank" rel="external">Android样式的开发:shape篇</a></p>
+<h3 id="selector选择器">selector选择器</h3><h5 id="属性设置：">属性设置：</h5><ul>
+<li><strong>android:state_enabled</strong>: 设置触摸或点击事件是否可用状态，一般只在false时设置该属性，表示不可用状态</li>
+<li><strong>android:state_pressed</strong>: 设置是否按压状态，一般在true时设置该属性，表示已按压状态，默认为false</li>
+<li><strong>android:state_selected</strong>: 设置是否选中状态，true表示已选中，false表示未选中</li>
+<li><strong>android:state_checked</strong>: 设置是否勾选状态，主要用于CheckBox和RadioButton，true表示已被勾选，false表示未被勾选</li>
+<li><strong>android:state_checkable</strong>: 设置勾选是否可用状态，类似state_enabled，只是state_enabled会影响触摸或点击事件，而state_checkable影响勾选事件</li>
+<li><strong>android:state_focused</strong>: 设置是否获得焦点状态，true表示获得焦点，默认为false，表示未获得焦点</li>
+<li><strong>android:state_window_focused</strong>: 设置当前窗口是否获得焦点状态，true表示获得焦点，false表示未获得焦点，例如拉下通知栏或弹出对话框时，当前界面就会失去焦点；另外，ListView的ListItem获得焦点时也会触发true状态，可以理解为当前窗口就是ListItem本身</li>
+<li><strong>android:state_activated</strong>: 设置是否被激活状态，true表示被激活，false表示未激活，API Level 11及以上才支持，可通过代码调用控件的setActivated(boolean)方法设置是否激活该控件</li>
+<li><strong>android:state_hovered</strong>: 设置是否鼠标在上面滑动的状态，true表示鼠标在上面滑动，默认为false，API Level 14及以上才支持</li>
+</ul>
+<h5 id="使用注意点：">使用注意点：</h5><ul>
+<li><p><strong>item是从上往下匹配的（一旦成功就return，不再匹配）</strong>，如果匹配到一个item那它就将采用这个item，而不是采用最佳匹配的规则；所以设置默认的状态，一定要写在最后，如果写在前面，则后面所有的item都不会起作用了。</p>
 </li>
-</ol>
-<p>这时候会抛出以下错误（回答也遇到了）：<code>java.security.InvalidKeyException: Illegal key size or default parameters</code>。<strong>如何修改呢</strong>？<br>首先下载资源：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html" target="_blank" rel="external">Link to files for Java 7</a>，以后进行替换。<br><strong>在什么地方替换呢</strong>？<br>参考：<a href="http://blog.csdn.net/shangpusp/article/details/7416603" target="_blank" rel="external">AES加密时抛出java.security.InvalidKeyException: Illegal key size or default parameters</a></p>
+<li><p>selector作为drawable资源时，item指定android:drawable属性，并放于drawable目录下；</p>
+</li>
+<li><p>selector作为color资源时，item指定android:color属性，并放于color目录(<strong>没有的话需要自己进行新建</strong>)下；</p>
+</li>
+</ul>
 <blockquote>
-<p>{java_home}/jre/lib/security/<br>替换相关的类</p>
+<p>注意这种情况下，我们就可以设置<strong>点击前后字体的效果</strong>，设置在<code>android:textColor=&quot;@color/xxx&quot;</code><br>所以会出现这篇文章的<code>bug</code>:<a href="http://www.tuicool.com/articles/VVBJjq2" target="_blank" rel="external">ImageView设置selector遇到的小问题及解决方案记录</a></p>
 </blockquote>
-<p>以上完成了BouncyCastle的配置和测试，但又会有一个问题，当你是使用<code>android studio</code>来编译客户端的时候，将会报这个错误：<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:app:packageDebug FAILED</span><br><span class="line">Error:Execution failed <span class="keyword">for</span> task <span class="string">':app:packageDebug'</span>.</span><br><span class="line">&gt; <span class="keyword">class</span> org.bouncycastle.asn1.ASN1Primitive overrides <span class="keyword">final</span> <span class="function"><span class="keyword">method</span> <span class="title">equals</span>.<span class="params">(Ljava/lang/Object;)</span><span class="title">Z</span></span><br><span class="line"><span class="title">Information</span>:</span>BUILD FAILED</span><br></pre></td></tr></table></figure></p>
-<p>从<br><a href="http://stackoverflow.com/questions/27692024/android-studio-app-executing-error" target="_blank" rel="external">Android studio App executing error</a><br><a href="http://stackoverflow.com/questions/16579372/problems-launching-error-in-android-studio-when-packagedebug-at-max-os-x" target="_blank" rel="external">Problems launching error in Android Studio when packageDebug at Max OS X</a><br>的两个答案中告诉我们，之前我们在<code>D:\tools\jdk1.5.0_09\jre\lib\ext</code>加入<code>bcprov-jdk15on-1.48.jar</code>和<code>android studio</code>自带的<code>jar</code>产生冲突了，所以我们需要之前配置加入的<code>bcprov-jdk15on-1.48.jar</code>删去。</p>
-<p>所以，最佳的方式为（不需要以上的配置步骤，当需要生成<code>bks</code>格式的使用便使用<code>bcprov-jdk15on-1.48.jar</code>即可）</p>
-<ol>
-<li>在<code>bcprov-jdk15on-1.48.jar</code>同一个文件夹下</li>
-<li>用 keytool 生成 keysotre 文件<blockquote>
-<p>$ keytool -genkey -alias codeproject -keystore codeprojectssl.keystore -validity 365<br>需要注意：当要求你录入 Common name 的时候, 要填你的主机名. 本文例子用的是: codeproject.com （在web对应配置下）</p>
-</blockquote>
+<h5 id="以下是常见的使用样例：">以下是常见的使用样例：</h5><ul>
+<li>通用模板介绍：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 当前窗口失去焦点时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_lost_window_focused"</span> <span class="attribute">android:state_window_focused</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 不可用时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_disable"</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按压时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_pressed"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被选中时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_selected"</span> <span class="attribute">android:state_selected</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 被激活时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_activated"</span> <span class="attribute">android:state_activated</span>=<span class="value">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认时 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/bg_btn_normal"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>将密钥(key)从 .keystore 文件导入 .cer 文件<blockquote>
-<p>$ keytool -export -alias codeproject -keystore codeprojectssl.keystore -file codeprojectsslcert.cer</p>
+</ul>
+<p><strong>详细资料参考</strong>：<a href="http://keeganlee.me/post/android/20150905" target="_blank" rel="external">Android样式的开发:selector篇</a></p>
+<ul>
+<li>总结使用注意的参见问题</li>
+<li><code>listview</code>上使用的总结</li>
+</ul>
+<h5 id="与shape结合使用">与<code>shape</code>结合使用</h5><p><code>button_selector.xml</code>代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> </span><br><span class="line">    <span class="attribute">android:constantSize</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 获得焦点时的背景图片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_focused</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FFE5CF33"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FFF1E7A2"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设置相应所有事件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF1B1B1B"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF969696"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 按钮点击时的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"true"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_enabled</span>=<span class="value">"false"</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认情况下的背景 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">gradient</span> </span><br><span class="line">                <span class="attribute">android:startColor</span>=<span class="value">"#FF000000"</span></span><br><span class="line">                <span class="attribute">android:endColor</span>=<span class="value">"#FF474747"</span></span><br><span class="line">                <span class="attribute">android:angle</span>=<span class="value">"90.0"</span></span><br><span class="line">                /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们只需要在<code>view</code>的<code>android:background</code>使用即可。<br>可以实现下图的效果：<br><img src="http://pic002.cnblogs.com/images/2012/283134/2012011216251234.png" alt=""><br>引用文章：<a href="http://www.cnblogs.com/loulijun/archive/2012/03/20/2320838.html" target="_blank" rel="external">Android美工坊—selector选择器的使用</a></p>
+<h3 id="xml属性讲解">xml属性讲解</h3><ul>
+<li><a href="http://www.tuicool.com/articles/32YRJrq" target="_blank" rel="external">android:clipToPadding和android:clipChildre</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1122/3712.html" target="_blank" rel="external"># Android使用fitsSystemWindows属性实现—状态栏【status_bar】各版本适配方案</a></li>
+</ul>
+<h3 id="style与theme资源"><code>style与theme</code>资源</h3><blockquote>
+<p>对于所有可用的样式属性，请参考R.attr类.</p>
 </blockquote>
-</li>
-<li>最后是关键，生成<code>.bks</code>格式的文件<blockquote>
-<p>$ keytool -import -alias codeproject -file codeprojectsslcert.cer -keystore codeprojectssl.bks -storetype BKS -providerClass org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath bcprov-jdk15on-146.jar</p>
+<p><strong>当设置不属于改view的样式属性的时候</strong></p>
+<blockquote>
+<p>这个View对象只会使用它们所支持的那些属性，并简单的把不支持的属性忽略</p>
 </blockquote>
-</li>
-</ol>
-<p>使用<code>-providerpath</code>来执行<code>bcprov-jdk15on-146.jar</code>的路径。</p>
+<h4 id="主题的样式属性Theme">主题的样式属性<code>Theme</code></h4><blockquote>
+<p>请参考R.attr类中用<strong>window开始的属性</strong>。<br>详细介绍查看“<code>Providing Resources</code>”文档。<br><a href="http://developer.android.com/guide/topics/resources/providing-resources.html" target="_blank" rel="external">http://developer.android.com/guide/topics/resources/providing-resources.html</a></p>
+</blockquote>
+<p><strong>兼容性</strong>：<br>使用<code>res/values-v11</code>的文件夹下的一个XML文件中放入一个可选的主题声明。来兼容此版本。</p>
+<h3 id="Drawable子类的相关使用">Drawable子类的相关使用</h3><h4 id="RoundedBitmapDrawable转化为圆形">RoundedBitmapDrawable转化为圆形</h4><p>将<code>bitmap</code>转化成<strong>圆形图片资源</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), resource);</span><br><span class="line">roundedBitmapDrawable.setCircular(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"># 对应的imageview进行设置</span><br><span class="line">imageView.setImageDrawable(roundedBitmapDrawable);</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/14/android SqLite学习/" data-id="cikmr5jib0043m8jszng5z3gx" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/12/01/android RelativeLayout/" data-id="cirdiwflp00fsfkh1u8zy3lsx" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/10/14/android SqLite学习/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/12/01/android RelativeLayout/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSL/">SSL</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arrays/">arrays</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xml/">xml</a></li></ul>
 
     </footer>
   </div>
@@ -283,7 +321,7 @@
 
 
     
-      <article id="post-java安全通讯协议SSLSocket" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android xml资源" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -292,7 +330,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/13/java安全通讯协议SSLSocket/">java安全通讯协议SSLSocket</a>
+      <a class="article-title" href="/2015/11/12/android xml资源/">android 多点触控</a>
     </h1>
   
 
@@ -300,8 +338,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/13/java安全通讯协议SSLSocket/">
-      <time datetime="2015-10-13T07:30:42.000Z" itemprop="datePublished">2015-10-13</time>
+    <a href="/2015/11/12/android xml资源/">
+      <time datetime="2015-11-12T14:49:10.000Z" itemprop="datePublished">2015-11-12</time>
     </a>
   </div>
 
@@ -309,7 +347,65 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>两种方式进行实现多点触控，<br>一种直接重载<code>onTouchEvent</code>方法（view，activity默认实现），<br>另一种实现接口：<code>OnTouchListener</code>,然后实现<code>onTouch(View view, MotionEvent event)</code>的方法。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/12/android xml资源/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/12/android xml资源/" data-id="cirdiwfjc00d9fkh1vn24jr2h" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/12/android xml资源/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OnTouchListener/">OnTouchListener</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/onTouchEvent/">onTouchEvent</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android bitmap实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/12/android bitmap实战/">android canvas画布</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/12/android bitmap实战/">
+      <time datetime="2015-11-12T12:17:11.000Z" itemprop="datePublished">2015-11-12</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
 
         </div>
@@ -319,61 +415,78 @@
       
                 
         <a id="more"></a>
-<h3 id="Java安全通信：HTTPS与SSL"><a href="http://www.cnblogs.com/devinzhang/archive/2012/02/28/2371631.html" target="_blank" rel="external">Java安全通信：HTTPS与SSL</a></h3><h3 id="打开日志进行调试SSL/TSL_程序">打开日志进行调试<code>SSL/TSL</code> 程序</h3><blockquote>
-<p>打开日志开关的方法同样是通过设定系统属性，可以从命令行添加虚拟机参数：</p>
-<p>-Djavax.net.debug=ssl,handshake</p>
-<p>当然也可以使用 System.setProperty() 方法在代码中打开该开关。</p>
+<h3 id="常用方法使用">常用方法使用</h3><h4 id="绘制圆角矩形drawRoundRect：">绘制圆角矩形<code>drawRoundRect</code>：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RectF r2=<span class="keyword">new</span> RectF(<span class="number">50</span>,<span class="number">400</span>,<span class="number">450</span>,<span class="number">600</span>);<span class="comment">//RectF对象</span></span><br><span class="line">canvas.drawRoundRect(r2, <span class="number">10</span>, <span class="number">10</span>, paint);<span class="comment">//10圆角的弧度</span></span><br></pre></td></tr></table></figure>
+<h3 id="绘制虚线（DashPathEffect）">绘制虚线（<code>DashPathEffect</code>）</h3><p>直接使用<code>Canvas</code>来绘制：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mDashPaint =  <span class="keyword">new</span>  Paint();</span><br><span class="line">mDashPaint.setPathEffect(<span class="keyword">new</span>  DashPathEffect(<span class="keyword">new</span>  <span class="keyword">float</span>[]  &#123; dashWidth, dashGap &#125;,  <span class="number">0</span>));<span class="comment">// dashGap是虚线的间隔宽度，dashWidth是实线的间隔宽度</span></span><br><span class="line">canvas.drawLine(xStart, yStart, xEnd, yEnd, mDashPaint);</span><br></pre></td></tr></table></figure></p>
+<p>这里使用了<code>DashPathEffect</code>，看看这类是怎么回事，看这个构造函数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DashPathEffect</span><span class="params">(<span class="keyword">float</span> intervals[], <span class="keyword">float</span> phase)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (intervals.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException();</span><br><span class="line">       &#125;</span><br><span class="line">       native_instance = nativeCreate(intervals, phase);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码中的<strong>float数组,必须是偶数长度,且&gt;=2</strong>,指定了多少长度的实线之后再画多少长度的空白.<br>如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PathEffect effects = <span class="keyword">new</span> DashPathEffect(<span class="keyword">new</span> <span class="keyword">float</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>&#125;, <span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>绘制长度1的实线,再绘制长度2的空白,再绘制长度4的实线,再绘制长度8的空白,依次重复.</strong></p>
+<p>当我使用的时候，结果发现<strong>并没有虚线，而是实线</strong>。<br>参考：<a href="http://www.programgo.com/article/86385468904/" target="_blank" rel="external">Android 画虚线显示实线的BUG</a>，原来<strong>在android 4.0以上版本中会有BUG，发现不管dashGap设置多大，显示的都是一条实线。</strong><br>解决方法：</p>
+<blockquote>
+<p>关闭硬件加速。<br>可以在AndroidManifest.xml时的Application标签加上<code>android:hardwareAccelerated=&quot;false&quot;</code>,这样整件应用都关闭了硬件加速，虚线可以正常显示，但是，关闭硬件加速对性能有些影响，会感觉明显比没关卡。</p>
 </blockquote>
-<h3 id="连接步骤：">连接步骤：</h3><ul>
-<li>取得SSL的SSLContext实例</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSLContext sslContext = SSLContext</span><br><span class="line">        .getInstance(CLIENT_AGREEMENT);</span><br></pre></td></tr></table></figure>
-<p>其中这里的参数<code>CLIENT_AGREEMENT</code>是使用什么协议，该协议为<code>&quot;TLS&quot;</code></p>
+<p>可以给虚线的view单独关闭硬件加速:（这个没试过）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">程序代码：</span><br><span class="line">line.setLayerType(View.LAYER_TYPE_SOFTWARE,<span class="keyword">null</span>);</span><br><span class="line">xml:</span><br><span class="line">android:layerType=<span class="string">"software"</span></span><br></pre></td></tr></table></figure></p>
+<p>继续探讨：<br>另一种方式,使用<code>xml</code>：<a href="https://www.zybuluo.com/linux1s1s/note/203047" target="_blank" rel="external">Android 绘制虚线</a>，这篇有探讨到<strong>在小米1S真机上显示不出来，原因是不支持<code>LAYER_TYPE_SOFTWARE</code></strong>。</p>
+<h3 id="DrawText让字体处于不同的位置"><code>DrawText</code>让字体处于不同的位置</h3><p>首先了解<code>DrawText</code>的原理如图：<br><img src="http://www.fookwood.com/wp-content/uploads/2014/08/1408964085_thumb.jpeg" alt=""><br><strong>注意</strong>：<br>从方法中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(String text, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>当中的<code>y</code>值代表的是<code>BaseLine</code>的<code>y</code>值，也就是上图<strong>黄色五角星</strong>的地方。</p>
 <ul>
-<li>加载<strong>密钥管理器</strong></li>
+<li>使用<code>Paint.getTextBounds</code>：（描述<strong>字符的边界</strong>）</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得KeyManagerFactory和TrustManagerFactory的X509密钥管理器实例</span></span><br><span class="line">KeyManagerFactory keyManager = KeyManagerFactory.getInstance(CLIENT_KEY_MANAGER);</span><br><span class="line">TrustManagerFactory trustManager = TrustManagerFactory.getInstance(CLIENT_TRUST_MANAGER);</span><br></pre></td></tr></table></figure>
-<p>参数<code>CLIENT_TRUST_MANAGER</code>为使用什么算法，值为<code>X509</code></p>
+<p>来获取<strong>能够包裹文字的最小矩形</strong>的<code>Rect</code>对象并不是以<strong>左上角为基准</strong>，而是以<strong>黄色五角星</strong>为准，那么：</p>
+<blockquote>
+<p><code>r.top</code>就是一个负值了，<code>r.bottom</code>会是一个小一点的正值，<code>r.left和r.right在</code>图中画的都很清楚。通过<code>r.width()和r.height()</code>来获取尺寸</p>
+</blockquote>
+<p>如图<strong>测</strong>子所使用为<code>getTextBounds</code>的边界。<br><img src="http://img.blog.csdn.net/20140124095041906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVyc2luZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
 <ul>
-<li>取得BKS密库实例,因为参数<code>CLIENT_KEY_KEYSTORE</code>对应<code>BKS</code>，可以选择其他。</li>
+<li>使用<code>Paint.getFontMetricsInt()</code>得到字体的边界</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KeyStore kks = KeyStore.getInstance(CLIENT_KEY_KEYSTORE);</span><br><span class="line">KeyStore tks = KeyStore.getInstance(CLIENT_TRUST_KEYSTORE);</span><br></pre></td></tr></table></figure>
+<p>关于：<code>FontMetricsInt</code>的详细使用如下：<br><a href="http://mikewang.blog.51cto.com/3826268/871765" target="_blank" rel="external">Android字符串进阶之三：字体属性及测量（FontMetrics）</a><br>同样是以<code>baseLine</code>为基准，第一张图中的<code>ascent，descent，top,bottom</code>都是从这里获得。测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// baseline  </span></span><br><span class="line">paint.setColor(Color.RED);  </span><br><span class="line">canvas.drawLine(x, y, <span class="number">1024</span>, y, paint);  </span><br><span class="line"><span class="comment">// ascent  </span></span><br><span class="line">paint.setColor(Color.YELLOW);  </span><br><span class="line">canvas.drawLine(x, y+fmi.ascent, <span class="number">1024</span>, y+fmi.ascent, paint);  </span><br><span class="line"><span class="comment">// descent  </span></span><br><span class="line">paint.setColor(Color.BLUE);  </span><br><span class="line">canvas.drawLine(x, y+fmi.descent, <span class="number">1024</span>, y+fmi.descent, paint);  </span><br><span class="line"><span class="comment">// top  </span></span><br><span class="line">paint.setColor(Color.DKGRAY);  </span><br><span class="line">canvas.drawLine(x, y+fmi.top, <span class="number">1024</span>, y+fmi.top, paint);  </span><br><span class="line"><span class="comment">// bottom  </span></span><br><span class="line">paint.setColor(Color.GREEN);  </span><br><span class="line">canvas.drawLine(x, y+fmi.bottom, <span class="number">1024</span>, y+fmi.bottom, paint);</span><br></pre></td></tr></table></figure></p>
+<p>最后的效果如第二张图所示。</p>
 <ul>
-<li>加客户端载证书和私钥,通过读取资源文件<code>assets</code>的方式读取密钥和信任证书,并输入对应的密码进行认证</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//加载密钥</span></span><br><span class="line">kks.load(context.getResources().getAssets().open(KEYSTORE),SocketService.CLIENT_KET_PASSWORD.toCharArray());</span><br><span class="line"><span class="comment">//加载信任证书</span></span><br><span class="line">tks.load(context.getResources().getAssets().open(TRUSTSTORE),SocketService.CLIENT_KET_PASSWORD.toCharArray());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>初始化密钥管理器，上面已经得到实例，执行到这里，相应的数据已经准备好，进行初始化</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keyManager.init(kks, SocketService.CLIENT_KET_PASSWORD.toCharArray());</span><br><span class="line">trustManager.init(tks);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>初始化SSLContext</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslContext.init(keyManager.getKeyManagers(),trustManager.getTrustManagers(), <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>生成SSLSocket</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clientSslSocket = (SSLSocket) sslContext</span><br><span class="line">.getSocketFactory().createSocket(server_ip,server_port);</span><br></pre></td></tr></table></figure>
+<li><p>如何得到<code>baseLine</code>,字体的基线：</p>
+<blockquote>
+<p>(targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2//targetRect为text所显示的区域</p>
+</blockquote>
 </li>
-<li><p>连接进行握手</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clientSslSocket.startHandshake();</span><br></pre></td></tr></table></figure>
+<li><p>如何得到将要输入字体的宽度呢？<br>我们看到第一张图的<code>paint.meauseText()</code>进行测量即可。</p>
 </li>
-<li><p>可用选项设置：</p>
+<li><p>如何设置<code>drawText</code>的第一个字从哪里画起（即：右对齐，做对其，中间对齐），默认为<strong>左对齐</strong><br>通过<code>paint.setTextAlign()</code>进行设置。效果如图<br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignLeft.png" alt=""><br><img src="http://xyczero.qiniudn.com/Bolg_%E5%A6%82%E4%BD%95%E2%80%9C%E4%BB%BB%E6%80%A7%E2%80%9D%E4%BD%BF%E7%94%A8Android%E7%9A%84drawText%28%29_alignCenter.png" alt=""></p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关闭Socket的缓冲，确保数据及时发送</span></span><br><span class="line">clientSslSocket.setTcpNoDelay(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="教程：">教程：</h3><p>初级使用入门：<br><a href="http://blog.csdn.net/cyl937/article/details/10285761" target="_blank" rel="external">Java SSL/TLS 安全通讯协议(SSLSocket)</a><br><a href="http://www.ibm.com/developerworks/cn/java/j-lo-socketkeytool/#ibm-pcon" target="_blank" rel="external">Java 安全套接字编程以及 keytool 使用最佳实践</a>，比上一条更加详细。<br><a href="http://blog.csdn.net/hfeng101/article/details/10163627" target="_blank" rel="external">android平台ssl单双向验证</a></p>
-<p>最详细的教程：<br><a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/JSSERefGuide.html" target="_blank" rel="external">Java™ Secure Socket Extension (JSSE)<br>Reference Guide</a></p>
-<p>系列教程：<a href="http://blog.csdn.net/a19881029/article/details/11742361" target="_blank" rel="external">Java网络编程二：Java Secure(SSL/TLS) Socket实现</a></p>
+<p>所以任意位置显示可以为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> textWidth=paint.measureText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>);<span class="comment">//测量将要输入字体的宽度</span></span><br><span class="line"><span class="comment">//字体所显示的区域</span></span><br><span class="line">RectF targetRectF=<span class="keyword">new</span> RectF(UPER_CHART_BORDER_LEFT_Y-textWidth, endWhiteY - DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>, UPER_CHART_BORDER_LEFT_Y, endWhiteY  + DEFAULT_AXIS_TITLE_SIZE/<span class="number">2</span>);</span><br><span class="line">canvas.drawRect(targetRectF, paint);</span><br><span class="line"><span class="comment">//测量字体的边界,即高度</span></span><br><span class="line">Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();</span><br><span class="line"><span class="comment">//得到字体的基线</span></span><br><span class="line"><span class="keyword">int</span> baseline = (<span class="keyword">int</span>)(targetRectF.bottom + targetRectF.top - fontMetrics.bottom - fontMetrics.top) / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br><span class="line">paint.setTextAlign(Paint.Align.RIGHT);</span><br><span class="line">paint.setColor(Color.WHITE);</span><br><span class="line"></span><br><span class="line">canvas.drawText(fenshiDataX.getWeightedIndex() + <span class="string">""</span>, targetRectF.right, baseline, paint);</span><br></pre></td></tr></table></figure></p>
+<p>在不同对齐方式，只需对应设置即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()</span></span><br><span class="line"><span class="comment">// 下面这行是实现右对齐，drawText对应改为传入targetRect.right</span></span><br></pre></td></tr></table></figure></p>
+<p>引用资料：<br><a href="http://blog.csdn.net/linghu_java/article/details/46404081" target="_blank" rel="external">Android的DrawText详解</a><br><a href="http://blog.csdn.net/hursing/article/details/18703599" target="_blank" rel="external">Android Canvas drawText实现中文垂直居中</a><br><a href="http://www.xyczero.com/blog/article/20/" target="_blank" rel="external">如何“任性”使用Android的drawText()</a><br><a href="http://blog.csdn.net/carrey1989/article/details/10399727" target="_blank" rel="external">Android UI 之居中绘制文本内容的正确方法——实现自定义一个TextView</a></p>
+<h3 id="Path使用：">Path使用：</h3><ol>
+<li><p><code>moveTo</code> 不会进行绘制，只用于移动移动画笔。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mPath.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>lineTo</code> 用于进行直线绘制。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mPath.lineTo(<span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="keyword">canvas</span>.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>quadTo</code> 用于绘制圆滑曲线，即<strong>线性贝塞尔曲线</strong>。<br><code>mPath.quadTo(x1, y1, x2, y2)</code> (x1,y1) 为控制点，(x2,y2)为结束点。</p>
+</li>
+<li><p><code>cubicTo</code> 同样是用来实现贝塞尔曲线的,为<strong>二次方贝塞尔曲线</strong><br><code>mPath.cubicTo(x1, y1, x2, y2, x3, y3)</code> (x1,y1) 为控制点，(x2,y2)为控制点，(x3,y3) 为结束点。</p>
+</li>
+<li><p><code>arcTo</code> 用于绘制弧线（实际是截取圆或椭圆的一部分）。<br><code>mPath.arcTo(ovalRectF, startAngle, sweepAngle)</code> , <code>ovalRectF</code>为椭圆的矩形，<code>startAngle</code> 为开始角度，<code>sweepAngle</code> 为结束角度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mRectF = <span class="keyword">new</span> RectF(<span class="number">10</span>, <span class="number">10</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">mPath.arcTo(mRectF, <span class="number">0</span>, <span class="number">90</span>);</span><br><span class="line">canvas.drawPath(mPath, mPaint);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上引用参考：<a href="http://segmentfault.com/a/1190000000721127" target="_blank" rel="external">Android中moveTo、lineTo、quadTo、cubicTo、arcTo详解（实例）</a></p>
+<p>关于<strong>贝塞尔曲线</strong>在实际开发曲线中的应用<br><a href="http://tomkeyzhang.duapp.com/?p=88" target="_blank" rel="external"># 在Android中如何绘制光滑曲线（一）</a><br>这里解决的问题是</p>
+<ol>
+<li>如何使两条贝塞尔曲线连接处是光滑的</li>
+<li>曲线经过实际的数据点，而不是总在实际点下方，只有第一和末尾的控制点才被光滑曲线经过。</li>
+</ol>
+<h3 id="资料">资料</h3><p><a href="http://892848153.iteye.com/blog/1906496" target="_blank" rel="external">Android Canvas绘图详解（图文）</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/13/java安全通讯协议SSLSocket/" data-id="cikmrgd1s000v50jscxff9rcd" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/12/android bitmap实战/" data-id="cirdiwfks00enfkh1yhyf891m" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/10/13/java安全通讯协议SSLSocket/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/12/android bitmap实战/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSLSocket/">SSLSocket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -383,7 +496,7 @@
 
 
     
-      <article id="post-java JDBC编程" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 使用ssl通信实践" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -392,7 +505,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/11/java JDBC编程/">java JDBC编程</a>
+      <a class="article-title" href="/2015/11/10/android 使用ssl通信实践/">android 安全退出的正确方式</a>
     </h1>
   
 
@@ -400,8 +513,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/11/java JDBC编程/">
-      <time datetime="2015-10-11T01:30:06.000Z" itemprop="datePublished">2015-10-11</time>
+    <a href="/2015/11/10/android 使用ssl通信实践/">
+      <time datetime="2015-11-10T08:31:02.000Z" itemprop="datePublished">2015-11-10</time>
     </a>
   </div>
 
@@ -409,7 +522,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
 
         </div>
@@ -419,42 +532,20 @@
       
                 
         <a id="more"></a>
-<h3 id="ResultSet获取数据">ResultSet获取数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">    <span class="keyword">int</span> int_value = resultSet.getInt(<span class="number">1</span>);</span><br><span class="line">    String string_value =resultSet.getString(<span class="number">2</span>);</span><br><span class="line">    String a = resultSet.getString(<span class="number">3</span>);</span><br><span class="line">    String b = resultSet.getString(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//从数据库中以两种不同的方式取得数据。</span></span><br><span class="line">    System.out.println(int_value + <span class="string">"  "</span> + string_value + <span class="string">"  "</span> + a + <span class="string">"   "</span> +</span><br><span class="line">                           b);</span><br><span class="line"><span class="comment">//将检索结果在用户浏览器上输出。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：是从得到数据是从<code>1</code>开始。</p>
-<h3 id="ResultSet_如何判断结果集为空">ResultSet 如何判断结果集为空</h3><p>之前，经常以为当<code>ResultSet</code>等于<code>null</code>的时候就说明<strong>结果集为空</strong>，实际上并不是这样的，因为即使结果集为空的情况，<code>resultset</code>也包含了<strong>列表名等</strong>，只有当程序报错时，才会产生<code>null</code>的情况，所以要怎么检测<strong>结果集为空</strong>的情况呢？<br>参考：<a href="http://bbs.csdn.net/topics/10222366" target="_blank" rel="external">如何判断一ResultSet结果集是否为空？在线等待</a><br>第一种：</p>
-<blockquote>
-<p>你只要判断<code>rs.first()</code>是否true就可以</p>
-</blockquote>
-<p>第二种：使用<code>next</code>，最容易想到<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">testRs</span><span class="params">(ResultSet rs)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(rs.next())</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="错误：ResultSet对象中没有更新这个功能">错误：ResultSet对象中没有更新这个功能</h3><blockquote>
-<p>Result Set not updatable.This result set must come from a statement that was created with a result set type of ResultSet.CONCUR_UPDATABLE, </p>
-</blockquote>
-<p>解决：<br>在得到<code>prepareStatement</code>的时候，设置<code>ResultSet</code>的属性。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps = conn.prepareStatement</span><br><span class="line">(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,</span><br><span class="line">ResultSet.CONCUR_UPDATABLE);</span><br></pre></td></tr></table></figure></p>
-<h3 id="如何循环地取出每一个值">如何循环地取出每一个值</h3><p>不知道为什么<code>resultset.next()</code>的方法，不能循环地得到每个值，取出第一行就跳出了。最后使用以下的方式解决：（将rs进行移动到最后last,然后rs.getRow得到行数，在用for循环+absolute进行取出）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>(ResultSet rs1 = adminManager.queryTableData(tableName)) &#123;</span><br><span class="line">rs1.last();</span><br><span class="line"><span class="keyword">int</span> length=rs1.getRow();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=length;i++)&#123;</span><br><span class="line">rs1.absolute(i);</span><br><span class="line">jcbServiceMan.addItem(rs1.getString(<span class="string">"Name"</span>));</span><br><span class="line">&#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"><span class="comment">// TODO: handle exception</span></span><br><span class="line">e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="PreparedStatement_使用like_模糊查询"><a href="http://www.blogjava.net/agun/archive/2008/03/03/183364.html" target="_blank" rel="external">PreparedStatement 使用like 模糊查询</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String expr = <span class="string">"select * from  table where url like ?"</span>;</span><br><span class="line">pstmt = con.prepareStatement(expr);</span><br><span class="line">String a=<span class="string">"a"</span>;</span><br><span class="line">pstmt.setString(<span class="number">1</span>, <span class="string">"%"</span>+a+<span class="string">"%"</span>);<span class="comment">//自动添加单引号 （包装后的参数）</span></span><br></pre></td></tr></table></figure>
-<h3 id="错误：">错误：</h3><blockquote>
-<p>错误1： Exception in thread “main” com.witbridge.service.exception.ProductException: java.sql.SQLException: No value specified for parameter 1</p>
-</blockquote>
-<p>没有指定赋值的参数。即：<code>String sql = &quot;select * from product where name=?&quot;;</code>中的<code>?</code>没有进行赋值，常见是少了参数。</p>
-<blockquote>
-<p>错误2: Illegal operation on empty result set.</p>
-</blockquote>
-<p>原因是<strong>不合法使用</strong><code>ResultSet</code>，我们应该先<code>resultset.next()</code>后（进行移动后），再进行取出数据：<code>resultset.getString(1)</code></p>
-<blockquote>
-<p>错误3：java Cannot add or update a child row: a foreign key constraint fails</p>
-</blockquote>
-<p>原因是对应插入的数据不正确，检测里面的数据是否得到正确。</p>
-<p>参考：<br><a href="http://stackoverflow.com/questions/28124427/resultset-update-row-is-not-working" target="_blank" rel="external">ResultSet update row is not working</a><br><a href="http://blog.csdn.net/wo3002807/article/details/11021251" target="_blank" rel="external">JDBC中的一些问题！</a></p>
+<p><a href="http://smallwoniu.blog.51cto.com/3911954/1248643" target="_blank" rel="external">【移动开发】Android应用程序完全退出</a>,这篇记录了多种退出的方式。<br>这里记录下，完美退出的方法：<br>使用<code>Application</code>这个单例并用<code>LinkedList</code>来存储每一个<code>activity</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">//对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList实现了基于动态数组的数据结构，要移动数据。LinkedList基于链表的数据结构,便于增加删除 </span></span><br><span class="line">     <span class="keyword">private</span> List&lt;Activity&gt; activityList = <span class="keyword">new</span> LinkedList&lt;Activity&gt;();</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> MyApplication instance;</span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">MyApplication</span><span class="params">()</span></span>&#123; &#125;</span><br><span class="line"> <span class="comment">//单例模式中获取唯一的MyApplication实例</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyApplication <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(<span class="keyword">null</span> == instance) &#123;</span><br><span class="line">        instance = <span class="keyword">new</span> MyApplication();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> instance;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//添加Activity到容器中</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addActivity</span><span class="params">(Activity activity)</span>  </span>&#123;</span><br><span class="line">    activityList.add(activity);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//遍历所有Activity并finish</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">for</span>(Activity activity:activityList) &#123;</span><br><span class="line">      activity.finish();</span><br><span class="line"> &#125;</span><br><span class="line"> System.exit(<span class="number">0</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在每个<code>Activity</code>的<code>onCreate()</code>方法里进行添加。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication.getInstance().addActivity(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure></p>
+<p>当退出应用程序的时候：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication.getInstance().exit();</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/11/java JDBC编程/" data-id="cikmrgd3s002150jsd884eiz0" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/10/android 使用ssl通信实践/" data-id="cirdiwfj500d3fkh1ujg7hrta" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/10/11/java JDBC编程/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/10/android 使用ssl通信实践/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDBC/">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -464,7 +555,7 @@
 
 
     
-      <article id="post-java界面编程" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 内存泄漏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -473,7 +564,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/04/java界面编程/">java界面编程</a>
+      <a class="article-title" href="/2015/11/10/android 内存泄漏/">android 内存泄漏</a>
     </h1>
   
 
@@ -481,182 +572,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/04/java界面编程/">
-      <time datetime="2015-10-04T04:01:18.000Z" itemprop="datePublished">2015-10-04</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虽然很少使用java来完成桌面程序，但是为了毕业设计，就不得不去了解了，以下都是关于<code>awt和swing</code>编程，偏向于<code>swing</code><br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/04/java界面编程/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/04/java界面编程/" data-id="cikmrgd1e000o50jsw5xb7ee8" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/10/04/java界面编程/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awt/">awt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swing/">swing</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-mysql命令及sql语句" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/03/mysql命令及sql语句/">mysql命令及sql语句</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/03/mysql命令及sql语句/">
-      <time datetime="2015-10-03T09:03:28.000Z" itemprop="datePublished">2015-10-03</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/mysql/">mysql</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>收集开发常见的<code>mysql</code>命令。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/03/mysql命令及sql语句/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/" data-id="cikmrgd12000i50jsj24gxlut" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/10/03/mysql命令及sql语句/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-数据库的基础知识" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/数据库的基础知识/">数据库的基础知识</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/01/数据库的基础知识/">
-      <time datetime="2015-10-01T02:05:11.000Z" itemprop="datePublished">2015-10-01</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/mysql/">mysql</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>关于数据库范式中，来源于知乎。</strong>仅为学习所用，侵权即删。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/01/数据库的基础知识/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/10/01/数据库的基础知识/" data-id="cikmrgd0q000a50js7heslqc9" class="article-share-link">Share</a>
-      
-        <a href="http://hexo.trity.cc/2015/10/01/数据库的基础知识/#ds-thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-android 逆向编程-Dalvik虚拟机" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/06/android 逆向编程-Dalvik虚拟机/">android 逆向编程-Dalvik虚拟机</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/09/06/android 逆向编程-Dalvik虚拟机/">
-      <time datetime="2015-09-06T15:56:37.000Z" itemprop="datePublished">2015-09-06</time>
+    <a href="/2015/11/10/android 内存泄漏/">
+      <time datetime="2015-11-10T00:48:19.000Z" itemprop="datePublished">2015-11-10</time>
     </a>
   </div>
 
@@ -672,21 +589,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>解释android应用的运行机制—系统是如何运行一个安卓应用的。<br>
+        <h3 id="什么叫内存泄漏呢？">什么叫内存泄漏呢？</h3><p><strong>gc没有办法回收activity的内存</strong>。<br>
         
           <p class="article-more-link">
-            <a href="/2015/09/06/android 逆向编程-Dalvik虚拟机/#more">Read More</a>
+            <a href="/2015/11/10/android 内存泄漏/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/09/06/android 逆向编程-Dalvik虚拟机/" data-id="cikmr5jd5000om8jsd8nkpcbb" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/10/android 内存泄漏/" data-id="cirdiwfj200d0fkh1kcfoqgao" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/09/06/android 逆向编程-Dalvik虚拟机/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/10/android 内存泄漏/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dalvik/">Dalvik</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -696,7 +613,7 @@
 
 
     
-      <article id="post-android 布局" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android TextView使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -705,7 +622,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/06/android 布局/">android 逆向编程-反编译工具使用</a>
+      <a class="article-title" href="/2015/11/10/android TextView使用/">android 内存泄漏</a>
     </h1>
   
 
@@ -713,8 +630,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/09/06/android 布局/">
-      <time datetime="2015-09-06T08:27:29.000Z" itemprop="datePublished">2015-09-06</time>
+    <a href="/2015/11/10/android TextView使用/">
+      <time datetime="2015-11-10T00:48:19.000Z" itemprop="datePublished">2015-11-10</time>
     </a>
   </div>
 
@@ -730,21 +647,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>开发过程中有些时候会遇到一些功能，自己不知道该怎么做，然而别的软件里面已经有。就想进行反编译来解决此时用到的问题，或者得到相关的资源文件。</p>
+        <h3 id="什么叫内存泄漏呢？">什么叫内存泄漏呢？</h3><p><strong>gc没有办法回收activity的内存</strong>。<br>
         
           <p class="article-more-link">
-            <a href="/2015/09/06/android 布局/#more">Read More</a>
+            <a href="/2015/11/10/android TextView使用/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/09/06/android 布局/" data-id="cinsxoko8003xw0h18g1qz21v" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/10/android TextView使用/" data-id="cirdiwfl800f5fkh1bwpe837e" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/09/06/android 布局/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/10/android TextView使用/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/反编译/">反编译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -754,7 +671,7 @@
 
 
     
-      <article id="post-android 逆向编程-反编译工具使用" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-android 单元测试-配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -763,7 +680,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/06/android 逆向编程-反编译工具使用/">android 逆向编程-反编译工具使用</a>
+      <a class="article-title" href="/2015/11/06/android 单元测试-配置/">android 线程</a>
     </h1>
   
 
@@ -771,8 +688,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/09/06/android 逆向编程-反编译工具使用/">
-      <time datetime="2015-09-06T08:27:29.000Z" itemprop="datePublished">2015-09-06</time>
+    <a href="/2015/11/06/android 单元测试-配置/">
+      <time datetime="2015-11-06T01:11:23.000Z" itemprop="datePublished">2015-11-06</time>
     </a>
   </div>
 
@@ -788,21 +705,333 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>开发过程中有些时候会遇到一些功能，自己不知道该怎么做，然而别的软件里面已经有。就想进行反编译来解决此时用到的问题，或者得到相关的资源文件。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/09/06/android 逆向编程-反编译工具使用/#more">Read More</a>
-          </p>
-        
+                
+        <a id="more"></a>
+<h3 id="AsyncTask介绍">AsyncTask介绍</h3><p>参考引用资料：<br><a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a><br><a href="http://www.jianshu.com/p/5f8a535c2c2e#" target="_blank" rel="external"># 异步之AsyncTask(一)</a><br><a href="http://blog.csdn.net/gf771115/article/details/17248037" target="_blank" rel="external">Android 深入解析AsyncTask（doInBackground不工作）</a></p>
+<h4 id="实战：">实战：</h4><p>代码示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意这个泛型的三个参数：String 为execute调用方法传入，为dobackground方法的参数，Integer 一般为这个，进行更新进度 Bitmap 是dobackground的返回值。</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>, <span class="title">Bitmap</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"ImageLoader"</span>;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//在dobackground前进行调用，这里进行设置view不可enable</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Initialize progress and image  </span></span><br><span class="line">        mGetImage.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">true</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.VISIBLE);  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">0</span>);  </span><br><span class="line">        mImageView.setImageResource(R.drawable.icon);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//后台线程，处理网络等，耗时的工作</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(String... url)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">/* </span><br><span class="line">         * Fucking ridiculous thing happened here, to use any Internet connections, either via HttpURLConnection </span><br><span class="line">         * or HttpClient, you must declare INTERNET permission in AndroidManifest.xml. Otherwise you will get </span><br><span class="line">         * "UnknownHostException" when connecting or other tcp/ip/http exceptions rather than "SecurityException" </span><br><span class="line">         * which tells you need to declare INTERNET permission. </span><br><span class="line">         */</span>  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">        URL u;  </span><br><span class="line">        HttpURLConnection conn = <span class="keyword">null</span>;  </span><br><span class="line">        InputStream in = <span class="keyword">null</span>;  </span><br><span class="line">        OutputStream out = <span class="keyword">null</span>;  </span><br><span class="line">        <span class="keyword">final</span> String filename = <span class="string">"local_temp_image"</span>;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            u = <span class="keyword">new</span> URL(url[<span class="number">0</span>]);  </span><br><span class="line">            conn = (HttpURLConnection) u.openConnection();  </span><br><span class="line">            conn.setDoInput(<span class="keyword">true</span>);  </span><br><span class="line">            conn.setDoOutput(<span class="keyword">false</span>);  </span><br><span class="line">            conn.setConnectTimeout(<span class="number">20</span> * <span class="number">1000</span>);  </span><br><span class="line">            in = conn.getInputStream();  </span><br><span class="line">            out = openFileOutput(filename, Context.MODE_PRIVATE);  </span><br><span class="line">            <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8196</span>];  </span><br><span class="line">            <span class="keyword">int</span> seg = <span class="number">0</span>;  </span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">long</span> total = conn.getContentLength();  </span><br><span class="line">            <span class="keyword">long</span> current = <span class="number">0</span>;  </span><br><span class="line">            <span class="comment">/* </span><br><span class="line">             * Without checking isCancelled(), the loop continues until reading whole image done, i.e. the progress </span><br><span class="line">             * continues go up to 100. But onPostExecute() will not be called. </span><br><span class="line">             * By checking isCancelled(), we can stop immediately, i.e. progress stops immediately when cancel() is called. </span><br><span class="line">             */</span>  </span><br><span class="line">            <span class="keyword">while</span> (!isCancelled() &amp;&amp; (seg = in.read(buf)) != -<span class="number">1</span>) &#123;  <span class="comment">//注意这里调用了isCancell的操作</span></span><br><span class="line">            out.write(buf, <span class="number">0</span>, seg);  </span><br><span class="line">            current += seg;  </span><br><span class="line">            <span class="keyword">int</span> progress = (<span class="keyword">int</span>) ((<span class="keyword">float</span>) current / (<span class="keyword">float</span>) total * <span class="number">100f</span>);  </span><br><span class="line">            publishProgress(progress);  </span><br><span class="line">            SystemClock.sleep(<span class="number">1000</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">            <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            conn.disconnect();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            in.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            out.close();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> BitmapFactory.decodeFile(getFileStreamPath(filename).getAbsolutePath());  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">        e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//实时更新进度</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... progress)</span> </span>&#123;  </span><br><span class="line">        mProgressBar.setProgress(progress[<span class="number">0</span>]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//dobackground执行完，则调用此方法，更新view的操作。</span></span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap image)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (image != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        mImageView.setImageBitmap(image);  </span><br><span class="line">        &#125;  </span><br><span class="line">        mProgressBar.setProgress(<span class="number">100</span>);  </span><br><span class="line">        mProgressBar.setVisibility(View.GONE);  </span><br><span class="line">        mAbort.setEnabled(<span class="keyword">false</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是调用开始线程的操作：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> ImageLoader loader = <span class="keyword">new</span> ImageLoader();</span><br><span class="line">loader.execute(ImageUrl);</span><br></pre></td></tr></table></figure></p>
+<p>注意事项：</p>
+<ol>
+<li>AsyncTask对象不可重复使用，也就是说一个AsyncTask对象只能execute()一次</li>
+<li><strong>在doInBackground()中要检查isCancelled()的返回值</strong>，判断任务是否要进行取消的操作。</li>
+</ol>
+<blockquote>
+<p><code>2中</code>：<strong>调用cancel方法并不能真正立即把task取消掉</strong>,而只是把task的状态置为Cancel而已,需要配合isCancelled()方法来运用,在doingbackground或其他方法中判断是否被取消,然后做相应的处理.</p>
+</blockquote>
+<h3 id="AsyncTask任务调度问题">AsyncTask任务调度问题</h3><blockquote>
+<p>AsyncTask主要有二个部分：<br>一个是与主线各的交互，<br>另一个就是线程的管理调度。虽然可能多个AsyncTask的子类的实例，但是AsyncTask的<strong>内部Handler和ThreadPoolExecutor都是进程范围内共享的</strong>，其都是<code>static</code>的，也即属于类的，类的属性的作用范围是CLASSPATH，因为<strong>一个进程一个VM，所以是AsyncTask控制着进程范围内所有的子类实例</strong>。</p>
+</blockquote>
+<p>也就是说使用<code>AsyncTask</code>里的线程池是<code>static</code>的，那么他的生命周期是<strong>整一个进程</strong>，不会随<code>Asynctask</code>执行完而消失。<br>源码验证下，是否为<code>static</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">| <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = |</span><br><span class="line"> <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">128</span>); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that can be used to execute tasks in parallel. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor THREAD_POOL_EXECUTOR |</span><br><span class="line"> = <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE, |</span><br><span class="line"> TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory); |</span><br><span class="line"> <span class="javadoc">/** |</span><br><span class="line"> * An &#123;@link Executor&#125; that executes tasks one at a time in serial |</span><br><span class="line"> * order. This serialization is global to a particular process. |</span><br><span class="line"> */</span> |</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor SERIAL_EXECUTOR = <span class="keyword">new</span> SerialExecutor(); |</span><br></pre></td></tr></table></figure></p>
+<p>对以上使用的类不了解，需要了解<code>java多线程的知识</code>。</p>
+<p><strong>问题：</strong></p>
+<blockquote>
+<p>doInBackground()未及时执行，也就是它并没有在#execute()调用之后马上执行，而是等待了很久才得以执行.</p>
+</blockquote>
+<p>为什么不能马上执行呢？这里便需要了解<strong>AsyncTask任务调度</strong>问题：</p>
+<blockquote>
+<p>AsyncTask#execute()后，AsyncTask会把任务交给线程池，由线程池来管理创建Thread和运行Therad。</p>
+</blockquote>
+<p>而不同的版本，却有各种不同：</p>
+<ul>
+<li><p>Android2.3以前的版本，也即SDK/API 10和以前的版本</p>
+<blockquote>
+<p>内部的线程池限制是5个，也就是说同时只能有5个线程运行，超过的线程只能等待，等待前面的线程某个执行完了才被调度和运行</p>
+</blockquote>
+</li>
+<li><p>从Android 3.0开始对AsyncTask的API做出了一些调整：</p>
+</li>
+</ul>
+<ol>
+<li>execute()提交的任务(默认)<br>按先后顺序每次只运行一个.完成一个再执行下一个。</li>
+<li><p>新增了接口#executeOnExecutor()<br><strong>自定义的线程池来运行和调度Thread</strong>。</p>
+<blockquote>
+<p>创建一个<strong>没有限制</strong>的线程池(Executors.newCachedThreadPool())</p>
+</blockquote>
+</li>
+<li><p>二个预定义的线程池_SERIAL_EXECUTOR(<strong>相当于2.3,为5个</strong>)和_THREAD_POOL_EXECUTOR（与默认的<code>execute</code>一致，按顺序执行）</p>
+</li>
+</ol>
+<p>讲完理论，要有实例进行巩固下吧：可参考：<a href="http://blog.csdn.net/lichao3459/article/details/17712393" target="_blank" rel="external">AsyncTask引发的问题</a>。连接的是同一个类上执行<code>asyntask</code>的情况，而我要测试的是：在同一个<code>activity</code>下两个<code>fragment</code>分别执行<code>asynctask</code>去完成不同的需求下，也跟上面讲的情况一样。下面是代码：（值截取部分代码）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimesFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Integer</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> prog = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (prog &lt; <span class="number">101</span>) &#123;</span><br><span class="line">                SystemClock.sleep(<span class="number">100</span>);<span class="comment">//使用sleep来模拟实际情况。</span></span><br><span class="line">                publishProgress(prog);</span><br><span class="line">                prog++;</span><br><span class="line">                Log.e(<span class="string">"TimesFragment"</span>, <span class="string">"TimesFragment"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        mContext = getActivity();</span><br><span class="line">        SimpleAsyncTask simpleAsyncTask=<span class="keyword">new</span> SimpleAsyncTask();</span><br><span class="line">        simpleAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);<span class="comment">//注意这里调用执行方法</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>另一个<code>frament</code>也是一样，不再残余。</p>
+<p>总结：</p>
+<ul>
+<li>当有需要大量线程执行任务时，一定要<strong>创建线程池</strong>。</li>
+<li>与主线程有<strong>交互</strong>时用AsyncTask，否则就用Thread</li>
+</ul>
+<p>以上摘自：<a href="http://blog.csdn.net/hitlion2008/article/details/7983449" target="_blank" rel="external">Android实战技巧：深入解析AsyncTask</a></p>
+<h3 id="关于Looper">关于<code>Looper</code></h3><p><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/14/2174255.html" target="_blank" rel="external">android的消息处理机制（图+源码分析）——Looper,Handler,Message</a>，源码分析&amp;图文分析<code>Looper</code></p>
+<p>一个小小的使用案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        Toast.makeText(mContext, <span class="string">"很抱歉,程序出现异常,即将退出."</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">        Looper.loop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p>参见使用错误异常为：</p>
+<blockquote>
+<p>Can’t create handler inside thread that has not called Looper.prepare()</p>
+</blockquote>
+<p>这种情况是：<strong>在Thread中执行更改UI的操作导致的</strong><br>解决方案参考： <a href="http://www.cnblogs.com/sonicit/archive/2013/01/13/2858475.html" target="_blank" rel="external">Can’t create handler inside thread that has not called Looper.prepare()</a>，而我是直接在<code>UI</code>操作放进<code>Handler</code>中就好了。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hexo.trity.cc/2015/09/06/android 逆向编程-反编译工具使用/" data-id="cikmr5jcx000im8jsg2wj5rd8" class="article-share-link">Share</a>
+      <a data-url="http://hexo.trity.cc/2015/11/06/android 单元测试-配置/" data-id="cirdiwfif00ccfkh12pa8jd3q" class="article-share-link">Share</a>
       
-        <a href="http://hexo.trity.cc/2015/09/06/android 逆向编程-反编译工具使用/#ds-thread" class="article-comment-link">Comments</a>
+        <a href="http://hexo.trity.cc/2015/11/06/android 单元测试-配置/#ds-thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/反编译/">反编译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向编程/">逆向编程</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AsyncTask/">AsyncTask</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android LinearLayout使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/05/android LinearLayout使用/">android SqLite学习</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/05/android LinearLayout使用/">
+      <time datetime="2015-11-05T04:44:34.000Z" itemprop="datePublished">2015-11-05</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="纯Sqlite数据库的学习：">纯Sqlite数据库的学习：</h3><p><a href="http://www.yiibai.com/sqlite/" target="_blank" rel="external">SQLite教程</a></p>
+<h3 id="操作SQLite数据库">操作<code>SQLite</code>数据库</h3><p>导出<code>SQLite</code>数据库：<br>参看资料：<a href="http://blog.csdn.net/ygsyyl/article/details/8144407" target="_blank" rel="external">如何设置Android手机的sqlite3命令环境</a><br><a href="http://www.cnblogs.com/walkingp/archive/2011/03/28/1997437.html" target="_blank" rel="external">在Android中查看和管理sqlite数据库</a></p>
+<p>两种方式：一种是使用<code>DDMS</code>,而另一种是使用<code>adb shell</code></p>
+<p><strong>数据类型：</strong>(5种)</p>
+<blockquote>
+<p>， <code>integer</code> 表示整型，<code>real</code> 表示浮点型，<code>text</code> 表示文本类型，<code>blob</code> 表示二进制类型，<code>NULL</code> 表示空值</p>
+</blockquote>
+<p>但，他属于<strong>弱类型</strong>的数据库，数据类型自己转换。</p>
+<h3 id="修改文件权限（chmod_777_文件）">修改文件权限（<code>chmod 777 文件</code>）</h3><p>操作命令：</p>
+<blockquote>
+<p>adb shell<br>su -<br>chmod 777 文件（需要修改的文件）</p>
+</blockquote>
+<h3 id="SQLiteDatabase讲解">SQLiteDatabase讲解</h3><h4 id="使用">使用</h4><p><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+<p><strong>插入（insert）</strong></p>
+<blockquote>
+<p>三个参数:</p>
+<ul>
+<li>第一个参数是表名，我们希望向哪张表里添加数据，这里就传入该表的名字。</li>
+<li>第二个参数用于在未指定添加数据的情况下给某些可为空的列自动赋值 NULL，一般我们用不到这个功能，直接传入 null 即可。</li>
+<li>第三个参数是一个 <code>ContentValues</code> 对象，它提供了一系列的 put()方法重载，用于向 <code>ContentValues</code> 中添加数据，只需要将表中的<strong>每个列名以及相应的待添加数据传入</strong>即可</li>
+</ul>
+</blockquote>
+<p><strong>更新update()</strong></p>
+<blockquote>
+<p>接收四个参数:</p>
+<ul>
+<li>第一个参数和 insert()方法一样，也是表名，在这里指定去更新哪张表里的数据。</li>
+<li>第二个参数是 ContentValues 对象，要把更新数据在这里组装进去。</li>
+<li>第三个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第四个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"price"</span>, <span class="number">10.99</span>);</span><br><span class="line">db.update(<span class="string">"Book"</span>, values, <span class="string">"name = ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"The Data Vinci Code"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除 delete()</strong></p>
+<blockquote>
+<p>接收三个参数:</p>
+<ul>
+<li>第一个参数仍然是表名，这个已经没什么好说的了，</li>
+<li>第二个参数是 SQL 语句的 <code>where</code> 部分，如 <code>name=?</code>的行，而<code>?</code>是一个<strong>占位符</strong>。</li>
+<li>第三个参数提供的一个字符串数组为第三个参数中的每<br>个<strong>占位符指定相应的内容</strong></li>
+</ul>
+</blockquote>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">db.delete(<span class="string">"Book"</span>, <span class="string">"pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>查询(query)：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy,String limit)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>table:表名称</li>
+<li>columns:列名称数组</li>
+<li>selection:条件字句，相当于where</li>
+<li>selectionArgs:条件字句，参数数组</li>
+<li>groupBy:分组列</li>
+<li>having:分组条件</li>
+<li>orderBy:排序列</li>
+<li>limit:分页查询限制</li>
+<li>Cursor:返回值，相当于结果集ResultSet</li>
+</ul>
+<p>图例：<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/QQ截图20151212182322.png" alt=""></p>
+<p><strong>返回的类型都是<code>Cursor</code>,常用的方法：</strong>:<br><img src="http://7tebhw.com1.z0.glb.clouddn.com/115957-7e7068ef5a687b48.png" alt=""></p>
+<p><strong>直接使用SQL操作数据库</strong>：（<code>execSQL</code>&amp;<code>rawQuery</code>）<br>下面举两个实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.execSQL(<span class="string">"delete from Book where pages &gt; ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"500"</span> &#125;);</span><br><span class="line">db.rawQuery(<span class="string">"select * from Book"</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出<strong>曾删改</strong>使用<code>execSQL</code>，而查询使用<code>rawQuery</code>即可。这两个方法接收两个参数：</p>
+<ul>
+<li>第一个参数：<strong>sql语句，可包含占位符</strong></li>
+<li>第二个参数：<strong>占位符的内容，没有为null</strong></li>
+</ul>
+<h4 id="事务的简单使用：">事务的简单使用：</h4><p><strong>SQLiteDatabase对事务的使用：</strong></p>
+<blockquote>
+<p>使用SQLiteDatabase的beginTransaction()方法可以开启一个事务，程序执行到endTransaction() 方法时会检查事务的标志是否为成功，如果程序执行到endTransaction()之前调用了setTransactionSuccessful() 方法设置事务的标志为成功则提交事务，如果没有调用setTransactionSuccessful() 方法则回滚事务</p>
+</blockquote>
+<p><strong>概念：</strong><br>什么是<strong>回滚事务</strong></p>
+<blockquote>
+<p><strong>事务</strong>是一组组合成逻辑工作单元的操作，虽然系统中可能会出错，但事务将控制和维护事务中每个操作的一致性和完整性.</p>
+</blockquote>
+<p>如果事务中的某个点发生故障，则所有更新都可以回滚到事务开始之前的状态。</p>
+<p><strong>事务应用在什么方面：</strong></p>
+<blockquote>
+<p>很多时候我们需要批量的向Sqlite中插入大量数据时，单独的使用添加方法导致应用响应缓慢, 因为sqlite插入数据的时候默认一条语句就是一个事务，有多少条数据就有多少次磁盘操作。如初始8000条记录也就是要8000次读写磁盘操作。同时也是为了保证数据的一致性，避免出现数据缺失等情况</p>
+</blockquote>
+<p>代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbOpenHelper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line"><span class="comment">//开启事务</span></span><br><span class="line">db.beginTransaction();</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">//批量处理操作</span></span><br><span class="line"><span class="comment">//do something</span></span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line">db.execSQL(<span class="string">"SQL语句"</span>, <span class="keyword">new</span> Object[]&#123;&#125;);</span><br><span class="line"><span class="comment">//设置事务标志为成功，当结束事务时就会提交事务</span></span><br><span class="line">db.setTransactionSuccessful();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line"><span class="comment">//结束事务</span></span><br><span class="line">db.endTransaction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码使用到了<code>getWritableDatabase()</code>方法，与之对应还有<code>getReadableDatabase()</code>方法。那么这两者有什么区别呢？<br>参考：<a href="http://blog.csdn.net/dsa63/article/details/16951193" target="_blank" rel="external">getWritableDatabase与getReadableDatabase的用法区别</a><br><strong>两者区别：</strong></p>
+<ul>
+<li>相同点：都具备读写的功能。</li>
+<li>不同点：<ul>
+<li><code>getWritableDatabase</code><blockquote>
+<p>如果打开的数据库磁盘满了，此时<strong>只能读不能写</strong>，此时调用了getWritableDatabase的实例，那么<strong>将会发生错误（异常）</strong></p>
+</blockquote>
+</li>
+<li><code>getReadableDatabase</code><blockquote>
+<p>先调用getWritableDatabase以读写的方式打开数据库，如果数据库的磁盘满了，<strong>此时返回打开失败</strong>，继而用getReadableDatabase的实例<strong>以只读的方式去打开数据库</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>大家留意</strong>：<br>当磁盘满的情况，一个<strong>抛出异常</strong>，一个是以<strong>只读的方式打开</strong>，所以：当执行<strong>增删改</strong>的情况下，最好是调用<code>getWritableDatabase</code>,而执行<strong>查询</strong>的时候，则调用<code>getReadableDatabase</code>更安全。</p>
+<h4 id="源码解析getWritableDatabase和getReadableDatabase：">源码解析<code>getWritableDatabase</code>和<code>getReadableDatabase</code>：</h4><p>参见：<a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a></p>
+<ul>
+<li>getReadableDatabase<blockquote>
+<p>首先判断是否已存在数据库实例并且是打开状态，如果是，则直接返回该实例，否则试图获取一个可读写模式的数据库实例,<strong>注意：调用getWritableDatabase获取实例</strong>，如果遇到磁盘空间已满等情况获取失败的话，再以只读模式打开数据库，获取数据库实例并返回，然后为mDatabase赋值为最新打开的数据库实例</p>
+</blockquote>
+</li>
+<li>getWritableDatabase<blockquote>
+<p>首先判断mDatabase如果不为空已打开并不是只读模式则直接返回，否则如果mDatabase不为空则加锁，然后开始打开或创建数据库，比较版本，根据版本号来调用相应的方法，为数据库设置新版本号，最后释放旧的不为空的mDatabase并解锁，把新打开的数据库实例赋予mDatabase，并返回最新实例</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="升级数据库的最佳方式">升级数据库的最佳方式</h3><p>在<code>onUpgrade</code>使用<code>switch-case</code>语句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span>  </span>&#123;</span><br><span class="line"><span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">db.execSQL(CREATE_CATEGORY);</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意并没有<code>break</code>语句，保证在<strong>跨版本升级</strong>的时候，每一次的数据库修改都<strong>能被全部执<br>行到</strong>。</p>
+<h3 id="如何避免插入重复数据到数据库中">如何避免插入重复数据到数据库中</h3><p><strong>使用：<code>OR IGNORE</code></strong></p>
+<blockquote>
+<p>在INSERT语句中添加<code>OR IGNORE</code>，即可（<strong>重复数据会跳过，且不影响后续数据插入</strong>）<br>示例如下：<br>insert OR IGNORE into PDA_Test (DeviceID,MethodName) values(‘1112’,’测试原有’);</p>
+</blockquote>
+<h3 id="性能优化分析：">性能优化分析：</h3><p>通过sqlite自带的 <a href="http://www.sqlite.org/eqp.html" target="_blank" rel="external">explain query plan</a> 指令，优化了该过程中SQL查询效率不够高的一些语句</p>
+<p><strong>sqlite所有的表</strong>是通过<strong>B+树进行存储</strong>，当整个message表数据量较大的时候，因该表所在的B+树的深度较大</p>
+<p>存在不可避免的损坏机率:</p>
+<blockquote>
+<p>关于损坏的介绍，建议直接看官方介绍 <a href="http://sqlite.org/howtocorrupt.html" target="_blank" rel="external">http://sqlite.org/howtocorrupt.html</a><br>需要作出对数据进行恢复的方案。</p>
+</blockquote>
+<h3 id="性能优化：">性能优化：</h3><p><a href="http://www.cnblogs.com/hustcat/archive/2010/06/23/1762987.html" target="_blank" rel="external">浅谈SQLite——查询处理及优化</a></p>
+<h4 id="删除优化">删除优化</h4><p><a href="http://www.cnblogs.com/panchunting/archive/2013/04/27/SQL_Tech_001.html" target="_blank" rel="external">SQL Server系列之 删除大量数据</a>，总结以下方法：</p>
+<ol>
+<li>保留需要的数据之新表中-&gt;<code>TRUNCATE</code>原表数据-&gt;还原之前保留的数据之原表中(<strong>但SQlite不支持<code>TRUNCATE</code></strong>)</li>
+<li>新建表结构-&gt;批量插入需要保留的数据-&gt;<code>DROP</code>原表-&gt;重命名新表为原表</li>
+</ol>
+<p><a href="http://www.yiibai.com/sqlite/sqlite_truncate_table.html" target="_blank" rel="external">SQLite truncate table命令</a></p>
+<h4 id="遵循规则进行优化搜索">遵循规则进行优化搜索</h4><p><a href="http://blog.csdn.net/wlchen123/article/details/8247424" target="_blank" rel="external">sqllite查询优化</a><br><a href="http://www.cnblogs.com/DxSoft/archive/2011/02/12/1952872.html" target="_blank" rel="external">Sqlite官方的查询优化文档</a></p>
+<p><strong>使用索引进行优化：</strong><br><a href="http://blog.csdn.net/ychw365/article/details/5996776" target="_blank" rel="external">在SQLite中使用索引优化查询速度</a></p>
+<ul>
+<li>如何判断索引是否存在：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> type,tb1_name,name <span class="keyword">as</span> index_num <span class="keyword">FROM</span> sqlite_master <span class="keyword">WHERE</span> type == <span class="string">'index'</span> <span class="keyword">AND</span> tbl_name == <span class="string">'table_name'</span> <span class="keyword">And</span> name=<span class="string">'index_name'</span></span></span><br></pre></td></tr></table></figure>
+<p>从上面的代码可查询到对应的索引有多少个，从而判断索引是否存在。</p>
+<ul>
+<li>创建索引：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">index</span> index_name <span class="keyword">on</span> table_name (column_name)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">index</span> index_commidityid</span></span><br></pre></td></tr></table></figure>
+<h3 id="错误">错误</h3><p>参考解决方案<br><a href="http://blog.sina.com.cn/s/blog_5da93c8f0102v3js.html" target="_blank" rel="external">Android: SQLiteDatabaseLockedException: database is locked</a></p>
+<h3 id="资料">资料</h3><p><a href="http://blog.csdn.net/liuhe688/article/details/6715983" target="_blank" rel="external">Android中SQLite应用详解</a><br><a href="http://www.jianshu.com/p/5c33be6ce89d#" target="_blank" rel="external"># Android SQLite详解</a><br><a href="http://blog.csdn.net/xiaanming/article/details/8679521" target="_blank" rel="external">Android SQLiteDatabase帮助类SQLiteOpenHelper的使用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/05/android LinearLayout使用/" data-id="cirdiwfmk00gofkh1ii9v8241" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/05/android LinearLayout使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-android 单元测试-junit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/03/android 单元测试-junit/">android LinearLayout使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/11/03/android 单元测试-junit/">
+      <time datetime="2015-11-03T09:18:17.000Z" itemprop="datePublished">2015-11-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="属性：">属性：</h3><ul>
+<li><code>android:weightSum</code></li>
+</ul>
+<blockquote>
+<p>如果想使用 layout weights，但是却不想填充整个 LinearLayout 的话，就可以用 weightSum 来定义总的 weight 大小</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2015/11/03/android 单元测试-junit/" data-id="cirdiwfij00chfkh1jwxm0iyv" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2015/11/03/android 单元测试-junit/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinearLayout/">LinearLayout</a></li></ul>
 
     </footer>
   </div>
@@ -813,7 +1042,7 @@
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -823,7 +1052,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -832,7 +1061,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -877,7 +1106,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActionBar/" style="font-size: 12.86px;">ActionBar</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 12.86px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 10px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android开发/" style="font-size: 14.29px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 11.43px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
     </div>
   </div>
 

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="tqvy7RDErf" />
+  <meta name="google-site-verification" content="hjN29-PO_KfE-dgow-7hcz75xJj0qzZ6G2OkXZ3FVd8" />
+  <meta charset="utf-8">
+  
+  <title>android_WebView使用 | Trity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="步骤
+通过findbyid得到webview
+websettings＝webview.getSetting()；得到对webView的设置项2.1 支持js：
+
+1websettings.setJavascriptEnable(true);
+ 2.2 支持flash插件1websettings.setPluginState(WebSettings.PluginState.ON)
+ 2.3 支持缩放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android_WebView使用">
+<meta property="og:url" content="http://hexo.trity.cc/2016/01/05/android_WebView使用/index.html">
+<meta property="og:site_name" content="Trity">
+<meta property="og:description" content="步骤
+通过findbyid得到webview
+websettings＝webview.getSetting()；得到对webView的设置项2.1 支持js：
+
+1websettings.setJavascriptEnable(true);
+ 2.2 支持flash插件1websettings.setPluginState(WebSettings.PluginState.ON)
+ 2.3 支持缩放">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android_WebView使用">
+<meta name="twitter:description" content="步骤
+通过findbyid得到webview
+websettings＝webview.getSetting()；得到对webView的设置项2.1 支持js：
+
+1websettings.setJavascriptEnable(true);
+ 2.2 支持flash插件1websettings.setPluginState(WebSettings.PluginState.ON)
+ 2.3 支持缩放">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Trity</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://hexo.trity.cc"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/avatar.png">
+      <h2 id="name">Trity</h2>
+      <h3 id="title">Android Developer &amp; Writer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Guangdong, China</span>
+      <a id="follow" href="https://github.com/trity93/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        149
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        142
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/trity93" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-android_WebView使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android_WebView使用
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/05/android_WebView使用/">
+      <time datetime="2016-01-05T15:23:01.000Z" itemprop="datePublished">2016-01-05</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <a id="more"></a>
+<h3 id="步骤">步骤</h3><ol>
+<li>通过<code>findbyid</code>得到<code>webview</code></li>
+<li><code>websettings＝webview.getSetting()；</code>得到对<code>webView</code>的设置项<br>2.1 支持<code>js</code>：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">websettings.setJavascriptEnable(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<p> 2.2 支持<code>flash</code>插件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">websettings.setPluginState(WebSettings.PluginState.ON)</span><br></pre></td></tr></table></figure></p>
+<p> 2.3 支持缩放控制和拿捏缩放功能：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.setSupportZoom(<span class="keyword">true</span>);</span><br><span class="line">.setBuildInRoomControls();</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>总是在<code>webView</code>访问<strong>链接，不进行跳转浏览器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient() &#123;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String </span><br><span class="line">url)</span> </span>&#123;</span><br><span class="line">view.loadUrl(url); <span class="comment">// 根据传入的参数再去加载新的网页</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">//  表示当前WebView可以处理打开新网页的请求，不用借助</span></span><br><span class="line">系统浏览器</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后进行访问<strong>连接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadUrl(<span class="string">"http://www.baidu.com"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="载入网页的基本配置">载入网页的基本配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WebSettings mWebSettings = mWebView.getSettings();</span><br><span class="line">        mWebSettings.setSupportZoom(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setLoadWithOverviewMode(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setUseWideViewPort(<span class="keyword">true</span>);</span><br><span class="line">        mWebSettings.setDefaultTextEncodingName(<span class="string">"GBK"</span>);</span><br><span class="line">        mWebSettings.setLoadsImagesAutomatically(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="使用Html5时的配置">使用<code>Html5</code>时的配置</h3><ul>
+<li>数据缓存(LocalStorage)<br>参考：<a href="http://blog.csdn.net/moubenmao_jun/article/details/9076917" target="_blank" rel="external">Android webView 缓存 Cache + HTML5离线功能 解决</a></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mWebSettings.setDomStorageEnabled(<span class="keyword">true</span>);</span><br><span class="line">mWebSettings.setDatabaseEnabled(<span class="keyword">true</span>);</span><br><span class="line">mWebSettings.setAppCacheEnabled(<span class="keyword">true</span>);</span><br><span class="line">webseting.setAppCacheMaxSize(<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">8</span>);<span class="comment">//设置缓冲大小，我设的是8M</span></span><br><span class="line">String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();</span><br><span class="line">mWebSettings.setAppCachePath(appCachePath);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>定位</strong>(获取当前地址)</li>
+</ul>
+<ol>
+<li><p>配置权限：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复写<strong>WebChromeClient</strong>的三个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceivedIcon</span><span class="params">(WebView view, Bitmap icon)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onReceivedIcon(view, icon);</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGeolocationPermissionsHidePrompt</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onGeolocationPermissionsHidePrompt();</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGeolocationPermissionsShowPrompt</span><span class="params">(<span class="keyword">final</span> String origin, <span class="keyword">final</span> GeolocationPermissions.Callback callback)</span> </span>&#123;</span><br><span class="line">    callback.invoke(origin, <span class="keyword">true</span>, <span class="keyword">false</span>);<span class="comment">//注意个函数，第二个参数就是是否同意定位权限，第三个是是否希望内核记住</span></span><br><span class="line">    <span class="keyword">super</span>.onGeolocationPermissionsShowPrompt(origin, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="遇到的问题">遇到的问题</h3><h4 id="添加@JavascriptInterface注解">添加<code>@JavascriptInterface</code>注解</h4><blockquote>
+<p>安卓版本大于17的时候，需要在JS方法上加上注解，否则无法调用方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@JavascriptInterface</span></span><br></pre></td></tr></table></figure>
+<p>如果不加上注解的话：<code>js</code>是无法调用<code>android</code>上的方法的。注意这个注解是修饰方法，所以使用为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.addJavascriptInterface(<span class="keyword">new</span> MyJavaScriptInterface(),<span class="string">"BRIDGE"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>MyJavaScriptInterface</code>这个类来封装<code>webview</code>调用<code>android</code>的方法时，则需要在每个方法上加入<code>@JavascriptInterface</code>注解。如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJavaScriptInterface</span></span>&#123;</span><br><span class="line">    <span class="annotation">@JavascriptInterface</span></span><br><span class="line">    <span class="annotation">@SuppressWarnings</span>(<span class="string">"unused"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       ...</span><br><span class="line">       <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>对应web的html为：</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Say hello"</span> <span class="attribute">onClick</span>=<span class="value">"showAndroidToast('Hello Android!')"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showAndroidToast</span><span class="params">(toast)</span> </span>&#123;</span><br><span class="line">        Android.showToast(toast);</span><br><span class="line">    &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="添加@JavascriptInterface注解,仍然无法调用方法">添加<code>@JavascriptInterface</code>注解,仍然无法调用方法</h4><p>死活都想不懂，方法为什么不执行，又不报错，反复对照例子的代码，才发现仅仅是<strong>修饰符不同</strong>而已。只要都改成<code>public</code>就好了，我自作多情改成了<code>protected</code>导致不执行。</p>
+<ul>
+<li><p>自定义加载html文本：<code>loadData()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String summary = <span class="string">"&lt;html&gt;&lt;body&gt;You scored &lt;b&gt;192&lt;/b&gt; points.&lt;/body&gt;&lt;/html&gt;"</span>;</span><br><span class="line"> webview.loadData(summary, <span class="string">"text/html"</span>, <span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载<code>assets</code>文件的路径：<code>file:///android_asset/</code></p>
+</li>
+<li><p>多窗口的问题</p>
+</li>
+<li>多页面</li>
+<li>JS调用安卓接口传输JSON格式数据</li>
+<li><code>https</code>加载数据，第三方网络框架</li>
+</ul>
+<p>祥看：<a href="http://frank-zhu.github.io/android/2015/08/19/android-html5-web-view/" target="_blank" rel="external">安卓WebView相关设置</a></p>
+<h3 id="回退浏览历史直到不可回退为止">回退浏览历史直到不可回退为止</h3><blockquote>
+<p><code>webview</code>的<code>canGoBack</code>方法将会判断历史记录中是否还有页面，<strong>如果还有上一级页面，将会返回true</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Check if the key event was the Back button and if there&amp;#39;s history</span></span><br><span class="line">    <span class="keyword">if</span> ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; myWebView.canGoBack()) &#123;</span><br><span class="line">        myWebView.goBack();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// If it wasn&amp;#39;t the Back key or there&amp;#39;s no web page history, bubble up to the default</span></span><br><span class="line">    <span class="comment">// system behavior (probably exit the activity)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode, event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="设置缓存">设置缓存</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//优先使用缓存:</span></span><br><span class="line">WebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);</span><br><span class="line"><span class="comment">//不使用缓存:</span></span><br><span class="line">WebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);</span><br></pre></td></tr></table></figure>
+<p>该缓存的地方：</p>
+<blockquote>
+<p>请求的 <code>url</code> 记录是保存在 <code>WebViewCache.db</code>,而 <code>url</code> 的<strong>内容是保存在 <code>WebViewCache</code> 文件夹下</strong>. 大家可以自己动手试一下,定义一个html文件,在里面显示一张图片,用WebView加载出来,然后再试着从缓存里把这张图片读取出来并显示 .</p>
+</blockquote>
+<p>即：该路径为：</p>
+<blockquote>
+<p>他们的索引存放在<code>/data/data/package_name/databases</code>下。他们的文件存放在<code>/data/data/package_name/cache/xxxwebviewcachexxx</code>下</p>
+</blockquote>
+<p>参考：<a href="http://www.kymjs.com/code/2015/05/03/01" target="_blank" rel="external">深入讲解WebView——上</a>，注意文章所说的清理缓存的方法，最新的api已经没有，而webview直接提供好了<code>webview.clearCache(true);</code>，不需要自己手动写方法完成。</p>
+<h3 id="停止js的解析">停止js的解析</h3><ul>
+<li>pauseTimers, onPause 停止解析,javascript执行等操作.<strong>区别是</strong> <code>onPause</code> 只作用于<strong>调用它的WebView</strong>,而 <code>pauseTimers</code> 作用于<strong>当前应用中所有的WebView</strong></li>
+<li>resumeTimers, onResume 恢复解析,javascript执行等操作.<strong>区别是</strong> <code>onResume</code> 只作用于调用它的WebView,而 <code>resumeTimers</code> 作用于当前应用中所有的WebView</li>
+</ul>
+<p>来源：<a href="http://my.oschina.net/fengheju/blog/673030" target="_blank" rel="external">Android WebView(一) 基本使用</a></p>
+<h3 id="对webview的优化">对<code>webview</code>的优化</h3><p><a href="https://github.com/android-cn/android-discuss/issues/458" target="_blank" rel="external">android 应用基本都是与网页交互，导致WebView内存泄漏厉害，一直得不到回收，怎么处理才好</a>,从论述中注意几个问题：</p>
+<ul>
+<li><p>如何将<code>webview</code>放在其他进程中，降低内存占用率</p>
+<blockquote>
+<p><code>android:process</code>并使用<code>System.exit(0);</code>进行退出</p>
+</blockquote>
+</li>
+<li><p>onPageFinished不靠谱，面对重定向，多次跳转的情况，会被多次调用</p>
+</li>
+</ul>
+<h3 id="webview实战各种坑">webview实战各种坑</h3><p><strong>安全性问题</strong>：<br><a href="http://jiajixin.cn/2014/09/16/webview-js-safety/" title="Android Webview Java和Javascript安全交互" target="_blank" rel="external">Android Webview Java和Javascript安全交互</a></p>
+<p><a href="https://www.zhihu.com/question/31316646" target="_blank" rel="external">Android WebView 在开发过程中有哪些坑？</a></p>
+<ul>
+<li>onPageFinished不靠谱，面对重定向，多次跳转的情况，会被多次调用</li>
+<li>webview开启一个线程，无法销毁</li>
+<li>调用clearCache()是否无法清除webview的cache.</li>
+<li>后台中js一直跑，耗电量加重<blockquote>
+<p>webView耗电的问题 请问怎么解决呢？ 怎么停止js一直在跑？<br>webView.pauseTimers(); webView.resumeTimers()</p>
+</blockquote>
+</li>
+<li>混淆问题（各个版本的兼容）</li>
+</ul>
+<h3 id="引用资料">引用资料</h3><p><a href="http://frank-zhu.github.io/android/2015/08/19/android-html5-web-view/" target="_blank" rel="external">安卓WebView相关设置</a><br><a href="http://www.kymjs.com/code/2015/05/04/01" target="_blank" rel="external">深入讲解WebView——下</a></p>
+<ul>
+<li>判断 WebView 是否已经滚动到页面底端,使用<code>getScrollY</code></li>
+<li>WebView获取服务器中的 <code>session</code> 问题,使用<code>CookieManager</code></li>
+<li>WebView清除本地cookies</li>
+<li>调用摄像头（开源中国）</li>
+</ul>
+<p><a href="http://developer.android.com/guide/webapps/migrating.html" target="_blank" rel="external">Migrating to WebView in Android 4.4</a><br><a href="http://my.oschina.net/zhibuji/blog/100580?fromerr=D38DnROU" target="_blank" rel="external"># Android WebView Memory Leak WebView内存泄漏</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hexo.trity.cc/2016/01/05/android_WebView使用/" data-id="cirdiwfdg0082fkh1jr1k0bvn" class="article-share-link">Share</a>
+      
+        <a href="http://hexo.trity.cc/2016/01/05/android_WebView使用/#ds-thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/06/android CountDownTimer类使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android Http网络获取数据
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/05/android 架构搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">android_WebView使用</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://hexo.trity.cc/2016/01/05/android_WebView使用/" data-title="android_WebView使用" data-url="http://hexo.trity.cc/2016/01/05/android_WebView使用/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">63</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android开发/">android开发</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo博客/">hexo博客</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/不围棋/">不围棋</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他编程语言/">其他编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-系统/">计算机网络&系统</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+          <li>
+            <a href="http://zoufeng.net/">foam | 我一直在找寻有你的世界</a>
+          </li>
+        
+          <li>
+            <a href="http://www.luojiawei.me/">getNway的博客</a>
+          </li>
+        
+          <li>
+            <a href="http://hclab.cn/hclab/index.php/">HCLAB-环宇创意电脑工作室</a>
+          </li>
+        
+          <li>
+            <a href="http://json.parser.online.fr/">Json在线解析工具</a>
+          </li>
+        
+          <li>
+            <a href="http://appiconsizes.com/">在线转换规格工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActionBar/" style="font-size: 14.29px;">ActionBar</a><a href="/tags/ActivityOptionsCompat/" style="font-size: 10px;">ActivityOptionsCompat</a><a href="/tags/Andrid/" style="font-size: 11.43px;">Andrid</a><a href="/tags/Andriod/" style="font-size: 10px;">Andriod</a><a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Android开发/" style="font-size: 10px;">Android开发</a><a href="/tags/Animation/" style="font-size: 10px;">Animation</a><a href="/tags/Animator/" style="font-size: 10px;">Animator</a><a href="/tags/Application/" style="font-size: 10px;">Application</a><a href="/tags/Arrays/" style="font-size: 10px;">Arrays</a><a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a><a href="/tags/AutoCompleteTextView/" style="font-size: 10px;">AutoCompleteTextView</a><a href="/tags/Behavior/" style="font-size: 10px;">Behavior</a><a href="/tags/C-C/" style="font-size: 10px;">C/C++</a><a href="/tags/Collections/" style="font-size: 10px;">Collections</a><a href="/tags/Comparator/" style="font-size: 10px;">Comparator</a><a href="/tags/CoordinatorLayout/" style="font-size: 10px;">CoordinatorLayout</a><a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a><a href="/tags/DNS/" style="font-size: 11.43px;">DNS</a><a href="/tags/Dalvik/" style="font-size: 12.86px;">Dalvik</a><a href="/tags/Databinding/" style="font-size: 10px;">Databinding</a><a href="/tags/DatagramPacket/" style="font-size: 11.43px;">DatagramPacket</a><a href="/tags/DatagramSocket/" style="font-size: 11.43px;">DatagramSocket</a><a href="/tags/DrawerLayout/" style="font-size: 10px;">DrawerLayout</a><a href="/tags/EditText/" style="font-size: 10px;">EditText</a><a href="/tags/Executor/" style="font-size: 10px;">Executor</a><a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a><a href="/tags/FloatingActionButton/" style="font-size: 11.43px;">FloatingActionButton</a><a href="/tags/Fork/" style="font-size: 10px;">Fork</a><a href="/tags/FragmentPageAdapter/" style="font-size: 10px;">FragmentPageAdapter</a><a href="/tags/FragmentStateAdapter/" style="font-size: 10px;">FragmentStateAdapter</a><a href="/tags/Future/" style="font-size: 10px;">Future</a><a href="/tags/Git/" style="font-size: 11.43px;">Git</a><a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a><a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a><a href="/tags/Hashtable/" style="font-size: 10px;">Hashtable</a><a href="/tags/InputStream/" style="font-size: 10px;">InputStream</a><a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a><a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a><a href="/tags/Join/" style="font-size: 10px;">Join</a><a href="/tags/LinearLayout/" style="font-size: 11.43px;">LinearLayout</a><a href="/tags/ListView/" style="font-size: 10px;">ListView</a><a href="/tags/MAC/" style="font-size: 10px;">MAC</a><a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a><a href="/tags/Map/" style="font-size: 11.43px;">Map</a><a href="/tags/Material-Deisign/" style="font-size: 10px;">Material-Deisign</a><a href="/tags/Material-Design/" style="font-size: 10px;">Material-Design</a><a href="/tags/Material-Deisign/" style="font-size: 14.29px;">Material_Deisign</a><a href="/tags/Material-Design/" style="font-size: 12.86px;">Material_Design</a><a href="/tags/OnTouchListener/" style="font-size: 10px;">OnTouchListener</a><a href="/tags/PendingIntent/" style="font-size: 10px;">PendingIntent</a><a href="/tags/PopupWindow/" style="font-size: 10px;">PopupWindow</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a><a href="/tags/RotateAnimation/" style="font-size: 10px;">RotateAnimation</a><a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a><a href="/tags/Rxjava/" style="font-size: 10px;">Rxjava</a><a href="/tags/SOCKS/" style="font-size: 11.43px;">SOCKS</a><a href="/tags/SSH/" style="font-size: 11.43px;">SSH</a><a href="/tags/SSL/" style="font-size: 10px;">SSL</a><a href="/tags/SSLSocket/" style="font-size: 10px;">SSLSocket</a><a href="/tags/ScheduledThreadPoolExecutor/" style="font-size: 10px;">ScheduledThreadPoolExecutor</a><a href="/tags/SearchView/" style="font-size: 10px;">SearchView</a><a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a><a href="/tags/ShadowSocks/" style="font-size: 12.86px;">ShadowSocks</a><a href="/tags/SimpleDateFormat/" style="font-size: 10px;">SimpleDateFormat</a><a href="/tags/Snackbar/" style="font-size: 10px;">Snackbar</a><a href="/tags/SwipeRefreshLayout/" style="font-size: 10px;">SwipeRefreshLayout</a><a href="/tags/System-out-println/" style="font-size: 10px;">System.out.println();</a><a href="/tags/Tab/" style="font-size: 10px;">Tab</a><a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a><a href="/tags/TabPageIndicator浅析/" style="font-size: 10px;">TabPageIndicator浅析</a><a href="/tags/Timer/" style="font-size: 11.43px;">Timer</a><a href="/tags/TimerTask/" style="font-size: 10px;">TimerTask</a><a href="/tags/Toast/" style="font-size: 10px;">Toast</a><a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a><a href="/tags/TreeMap/" style="font-size: 10px;">TreeMap</a><a href="/tags/UCB策略/" style="font-size: 10px;">UCB策略</a><a href="/tags/VelocityTracker/" style="font-size: 10px;">VelocityTracker</a><a href="/tags/View/" style="font-size: 10px;">View</a><a href="/tags/ViewPagerIndicator/" style="font-size: 10px;">ViewPagerIndicator</a><a href="/tags/WebView/" style="font-size: 11.43px;">WebView</a><a href="/tags/adb/" style="font-size: 10px;">adb</a><a href="/tags/android/" style="font-size: 18.57px;">android</a><a href="/tags/android-studio/" style="font-size: 12.86px;">android studio</a><a href="/tags/android-studio，template/" style="font-size: 10px;">android studio，template</a><a href="/tags/android开发/" style="font-size: 15.71px;">android开发</a><a href="/tags/application/" style="font-size: 10px;">application</a><a href="/tags/arrays/" style="font-size: 10px;">arrays</a><a href="/tags/awt/" style="font-size: 10px;">awt</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/butterknife/" style="font-size: 10px;">butterknife</a><a href="/tags/cache/" style="font-size: 10px;">cache</a><a href="/tags/dom/" style="font-size: 11.43px;">dom</a><a href="/tags/equals/" style="font-size: 10px;">equals</a><a href="/tags/git/" style="font-size: 11.43px;">git</a><a href="/tags/gradle/" style="font-size: 12.86px;">gradle</a><a href="/tags/hashcode/" style="font-size: 10px;">hashcode</a><a href="/tags/hexo/" style="font-size: 11.43px;">hexo</a><a href="/tags/ignore/" style="font-size: 10px;">ignore</a><a href="/tags/instant-Run/" style="font-size: 10px;">instant Run</a><a href="/tags/intent/" style="font-size: 11.43px;">intent</a><a href="/tags/io/" style="font-size: 10px;">io</a><a href="/tags/java/" style="font-size: 17.14px;">java</a><a href="/tags/java，ObjectInputstream/" style="font-size: 10px;">java，ObjectInputstream</a><a href="/tags/java，anotation/" style="font-size: 10px;">java，anotation</a><a href="/tags/java，map/" style="font-size: 10px;">java，map</a><a href="/tags/json/" style="font-size: 11.43px;">json</a><a href="/tags/lambda/" style="font-size: 10px;">lambda</a><a href="/tags/list/" style="font-size: 10px;">list</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/onTouchEvent/" style="font-size: 10px;">onTouchEvent</a><a href="/tags/pageTransformer/" style="font-size: 10px;">pageTransformer</a><a href="/tags/pull/" style="font-size: 11.43px;">pull</a><a href="/tags/recyclerview，LayoutManager/" style="font-size: 10px;">recyclerview，LayoutManager</a><a href="/tags/retrofit2/" style="font-size: 10px;">retrofit2</a><a href="/tags/sax/" style="font-size: 11.43px;">sax</a><a href="/tags/service/" style="font-size: 10px;">service</a><a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a><a href="/tags/sldingTabLayout/" style="font-size: 10px;">sldingTabLayout</a><a href="/tags/sql/" style="font-size: 10px;">sql</a><a href="/tags/swing/" style="font-size: 10px;">swing</a><a href="/tags/swipeback/" style="font-size: 10px;">swipeback</a><a href="/tags/tab/" style="font-size: 10px;">tab</a><a href="/tags/textview/" style="font-size: 10px;">textview</a><a href="/tags/viewpager/" style="font-size: 11.43px;">viewpager</a><a href="/tags/wifi/" style="font-size: 10px;">wifi</a><a href="/tags/xml/" style="font-size: 12.86px;">xml</a><a href="/tags/不围棋/" style="font-size: 10px;">不围棋</a><a href="/tags/为知笔记/" style="font-size: 10px;">为知笔记</a><a href="/tags/反编译/" style="font-size: 11.43px;">反编译</a><a href="/tags/多线程/" style="font-size: 11.43px;">多线程</a><a href="/tags/多臂匪徒问题/" style="font-size: 10px;">多臂匪徒问题</a><a href="/tags/工具/" style="font-size: 11.43px;">工具</a><a href="/tags/排序/" style="font-size: 10px;">排序</a><a href="/tags/数据库/" style="font-size: 10px;">数据库</a><a href="/tags/笔试题/" style="font-size: 10px;">笔试题</a><a href="/tags/蒙特卡洛算法/" style="font-size: 10px;">蒙特卡洛算法</a><a href="/tags/贝塞尔曲线/" style="font-size: 10px;">贝塞尔曲线</a><a href="/tags/逆向编程/" style="font-size: 15.71px;">逆向编程</a><a href="/tags/随笔/" style="font-size: 11.43px;">随笔</a><a href="/tags/面试/" style="font-size: 11.43px;">面试</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2000 - 2016 Trity<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+Analyse with <script src="http://s23.cnzz.com/z_stat.php?id=1256169913&web_id=1256169913" language="JavaScript"></script>
+ 
+
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"trity"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
